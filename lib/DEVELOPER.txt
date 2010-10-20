@@ -1,0 +1,5 @@
+This framework is meant to be extra light and flexible. To achieve this, the following conventions
+have to be followed:
+
+- Everything in UTF8
+- 
