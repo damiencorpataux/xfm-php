@@ -75,7 +75,7 @@ class xRouter {
         // Finds the best matching route
         foreach ($this->fragments as $ip => $part) {
             foreach ($this->routes as $ir => $route) {
-                if (@$route['pattern'][$ip]{0} == ':') continue;
+                if (@substr($route['pattern'][$ip], 0, 1)  == ':') continue;
                 if (@$route['pattern'][$ip] != $part) {
                     unset($this->routes[$ir]);
                     continue;
@@ -92,7 +92,7 @@ class xRouter {
         $routeargs = array();
         foreach ($this->fragments as $i => $part) {
             $var = $route['pattern'][$i];
-            if (@$var{0} != ':') continue;
+            if (@substr($var, 0, 1) != ':') continue;
             $var = substr($var, 1);
             $routeargs[$var] = $part;
         }
