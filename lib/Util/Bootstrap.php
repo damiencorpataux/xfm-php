@@ -8,6 +8,10 @@
  *
 **/
 
+class xDummyLogger {
+    function __call($m, $a) {}
+}
+
 /**
  * This class creates the application context and launches the router.
  * @package xFreemwork
@@ -30,13 +34,20 @@ class xBootstrap {
         $status = @$exception->status ? $exception->status : 500;
         header(xException::$statuses[$status]);
         // Calls specific front error handler
-        xFront::load(xContext::$router->params['xfront'], xContext::$router->params)->handle_error($exception);
+        try {
+            $error_front = xFront::load(xContext::$router->params['xfront'], xContext::$router->params)->handle_error($exception);
+        } catch (Exception $e) {
+            null;
+        }
+        if (@$error_front) $error_front->handle_error($exception);
+        else print_r($exception);
     }
 
     function setup($profile) {
         $this->setup_includes();
         if ($profile) xContext::$profile = $profile;
-        xContext::$basepath = substr(dirname(__file__), 0, -strlen('/lib/xfreemwork/lib/Util'));
+        $this->setup_dummy_log();
+        xContext::$basepath = substr($_SERVER[DOCUMENT_ROOT], 0, -strlen('/public'));
         xContext::$baseuri = substr($_SERVER['SCRIPT_NAME'], 0, -strlen('/index.php'));
         xContext::$baseurl = xUtil::url(xContext::$baseuri, true);
         $this->setup_includes_externals();
@@ -80,6 +91,10 @@ class xBootstrap {
         // Helpers
         require_once('Helpers/FormHelper.php');
         require_once('Helpers/ValidatorHelper.php');
+    }
+
+    function setup_dummy_log() {
+        xContext::$log = new xDummyLogger();
     }
 
     function setup_includes_externals() {
@@ -160,6 +175,7 @@ class xBootstrap {
     }
 
     function setup_db() {
+        if (!@xContext::$config->db) return;
         xContext::$log->log("Setting up database link on host ".xContext::$config->db->host, $this);
         xContext::$db = mysql_connect(
             xContext::$config->db->host,
