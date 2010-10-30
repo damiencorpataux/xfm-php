@@ -15,7 +15,6 @@
  *       returning a unique concatenated and minified stream
  * @package xFreemwork
 **/
-require_once(dirname(__file__).'/../../../Minify/lib/JSMin.php');
 
 class xJsFront extends xFront {
 
@@ -50,11 +49,7 @@ class xJsFront extends xFront {
         if (!$allowed) throw new xException("Unauthorized file", 401);
         if (!file_exists($file)) throw new xException("File not found", 404);
         $this->set_header($extension);
-        print $this->minify(file_get_contents($file));
-    }
-
-    function minify($code) {
-        return xContext::$profile=='development' ? $code : JSMin::minify($code);
+        print file_get_contents($file);
     }
 
     /**
