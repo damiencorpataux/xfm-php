@@ -451,11 +451,29 @@ class xUtil {
                 break;
         }
     }
-    
-    static function generatePsw($size)
-     {
+
+    /**
+     * @deprecated
+     */
+    static function generatePsw($size) {
         return substr(md5(microtime()+'this is a secret salt'), 0, $size);
-     }
+    }
+
+    /**
+     * Redefines the mail php function with encoding.
+     * @param string Recipient email address.
+     * @param string Mail subject.
+     * @param string Mail body.
+     * @param string Sender email address.
+     * @param string Encoding (eg. UTF-8, iso-8859-1).
+     * @param string 
+     * @return bool The PHP mail function return value.
+     */
+    static function mail($to, $subject , $message, $from, $encoding='UTF-8') {
+        $mime = "MIME-Version: 1.0\r\nContent-type: text/plain; charset={$encoding}\r\n";
+        return mail($to, $subject, $message, $mime.$from);
+    }
+
 }
 
 ?>
