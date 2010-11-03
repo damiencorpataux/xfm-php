@@ -39,7 +39,7 @@ class xJsFront extends xFront {
     function get() {
         if ($this->params['view']=='context.js') {
             header('Content-type: application/javascript');
-            print $this->minify($this->get_context_js());
+            print $this->get_context_js();
             return;
         }
         $file = xContext::$basepath."/views/{$this->params['view']}/{$this->params['jsfile']}";
