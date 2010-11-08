@@ -146,6 +146,7 @@ abstract class xModel extends xController {
         if (isset($this->params['xorder'])) $this->order = $this->params['xorder'];
         if (isset($this->params['xorder_by'])) $this->order_by = $this->params['xorder_by'];
         if (isset($this->params['xgroup_by'])) $this->group_by = $this->params['xgroup_by'];
+        if (isset($this->params['xreturn'])) $this->return = $this->params['xreturn'];
     }
 
     /**
