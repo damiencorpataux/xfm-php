@@ -36,26 +36,6 @@ class xRestFront extends xFront {
         }
     }
 
-    function get() {
-        $r = xModel::load(@$this->params['xmodel'], $this->params)->get();
-        print $this->encode($r);
-    }
-
-    function post() {
-        $r = xModel::load(@$this->params['xmodel'], $this->params)->post();
-        print $this->encode($r);
-    }
-
-    function put() {
-        $r = xModel::load(@$this->params['xmodel'], $this->params)->put();
-        print $this->encode($r);
-    }
-
-    function delete() {
-        $r = xModel::load(@$this->params['xmodel'], $this->params)->delete();
-        print $this->encode($r);
-    }
-
     /**
      * @param mixed PHP variable to encode
      */

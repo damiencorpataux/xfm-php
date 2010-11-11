@@ -16,10 +16,6 @@
 **/
 class xApiFront extends xRestFront {
 
-    var $params = array(
-        'xformat' => 'php'
-    );
-
     // TODO: shall the role check be done here or in controller->method() ?
     /**
      * Contains allowed methods for each role.
