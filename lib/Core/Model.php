@@ -91,7 +91,7 @@ abstract class xModel extends xController {
      * @var string
      */
     var $order = null;
-    
+
     /**
      * Result group by.
      * Contains model fields name(s).
@@ -99,7 +99,7 @@ abstract class xModel extends xController {
      * @var string|array
      */
     var $group_by = null;
-  
+
     /**
      * SQL joins.
      * Array example:
@@ -172,141 +172,6 @@ abstract class xModel extends xController {
     }
 
     /**
-     * Checks given params values and returns an array containing
-     * the invalid params (fields) as key, and true as value.
-     * @return array
-     */
-    function invalids() {
-        return array();
-    }
-
-    /**
-     * Implements the REST get method to access data.
-     * Issues a SELECT and returns the result
-     * as an associative array.
-     * @see xModel::query()
-     * @return array
-     */
-    function get() {
-        $sql = implode(' ', array(
-            $this->sql_select(),
-            $this->sql_from(),
-            $this->sql_join(),
-            $this->sql_where(),
-            $this->sql_group(),
-            $this->sql_order(),
-            $this->sql_limit()
-        ));
-        return $this->query($sql);
-    }
-
-    /**
-     * Implements the REST post method to access data.
-     * Issues a UPDATE and returns the result
-     * as an associative array.
-     * @see xModel::query()
-     * @return array
-     */
-    function post() {
-        // Ensures for mandatory fields presence, even if no validation implemented
-        if (array_intersect($this->post, array_keys($this->params)) != $this->post)
-            throw new Exception('Missing mandatory params for post action: '.implode(',', $this->post), 400);
-        // Validates params
-        $invalids = array_intersect_key($this->invalids(), $this->params);
-        // Ignore invalids for fields that are not mandatory and not given
-        if ($this->post)
-            foreach($invalids as $key => $value)
-                if (!isset($this->params[$key]) && !in_array($key, $this->post))
-                    unset($invalids[$key]);
-        // Prevents updating an item with invalid data
-        if ($invalids) throw new xException("Invalid item data", 400, array(
-            'invalids' => $invalids,
-            'params' => $this->params
-        ));
-        // Starts sql generation
-        $updates = array();
-        foreach ($this->fields_values(true) as $field => $value) {
-            $updates[] = "{$field} = ".$this->escape($value, $this->modelfield($field));
-        }
-        // Creates final sql
-        $sql = implode(' ', array(
-            "UPDATE `{$this->maintable}` SET ",
-            implode(', ', $updates),
-            $this->sql_where(true)
-        ));
-        return $this->query($sql);
-    }
-
-    /**
-     * Implements the REST put method to access data.
-     * Issues a INSERT and returns the result
-     * as an associative array.
-     * @see xModel::query()
-     * @return array
-     */
-    function put() {
-        // 201 Created or 304 Not Modified or 409 Conflict
-        // Ensures for mandatory fields presence, even if no validation implemented
-        if (array_intersect($this->put, array_keys($this->params)) != $this->put)
-            throw new Exception('Missing mandatory params for put action: '.implode(',', $this->put), 400);
-        // Validates params
-        $invalids = $this->invalids();
-        // Ignore invalids for fields that are not mandatory and not given
-        if ($this->put)
-            foreach($invalids as $key => $value)
-                if (!isset($this->params['$key']) && !in_array($key, $this->put))
-                    unset($invalids[$key]);
-        // Prevents inserting an invalid item
-        if ($invalids) throw new xException("Invalid item data", 400, array(
-            'invalids' => $invalids,
-            'params' => $this->params
-        ));
-        // Starts sql generation
-        $sqlF = $sqlV = array();
-        foreach ($this->fields_values(true) as $field => $value) {
-            $sqlF[] = $field;
-            $sqlV[] = $this->escape($value, $this->modelfield($field));
-        }
-        // Creates final sql
-        $sql = "INSERT INTO `{$this->maintable}`".
-            " (".implode(', ', $sqlF).") VALUES (".implode(', ', $sqlV).")";
-        return $this->query($sql);
-    }
-
-    /**
-     * Implements the REST delete method to access data.
-     * Issues a DELETE and returns the result
-     * as an associative array.
-     * @see xModel::query()
-     * @return array
-     */
-    function delete() {
-        // 404 Not Found or 200 OK (default)
-        // Ensures mandatory fields presence
-        if (array_intersect($this->delete, array_keys($this->params)) != $this->delete)
-            throw new Exception('Missing mandatory params for delete action: '.implode(',', $this->delete), 400);
-        // Starts sql generation
-        $sql = "DELETE FROM {$this->maintable}".$this->sql_where(false, true);
-        return $this->query($sql);
-    }
-
-    /**
-     * Issues a COUNT and returns the result
-     * @see xModel::query()
-     * @return int
-     */
-    function count() {
-        $sql = implode(' ', array(
-            "SELECT count(*) as count",
-            $this->sql_from(),
-            $this->sql_join(),
-            $this->sql_where()
-        ));
-        $count = array_shift($this->query($sql));
-        return $count['count'];
-    }
-
-    /**
      * Returns the model field name from the given database field name.
      * @param string The model field name.
      * @return string The databse field name.
@@ -363,6 +228,68 @@ abstract class xModel extends xController {
     }
 
     /**
+     * Checks given params values and returns an array containing
+     * the invalid params (fields) as key, and true as value.
+     * @return array
+     */
+    function invalids() {
+        return array();
+    }
+
+    /**
+     * Implements the REST get method to access data.
+     * Issues a SELECT and returns the result
+     * as an associative array.
+     * @see xModel::query()
+     * @return array
+     */
+    function get() {
+        return parent::get();
+    }
+
+    /**
+     * Implements the REST post method to access data.
+     * Issues a UPDATE and returns the result
+     * as an associative array.
+     * @see xModel::query()
+     * @return array
+     */
+    function post() {
+        return parent::posts();
+    }
+
+    /**
+     * Implements the REST put method to access data.
+     * Issues a INSERT and returns the result
+     * as an associative array.
+     * @see xModel::query()
+     * @return array
+     */
+    function put() {
+        return parent::put();
+    }
+
+    /**
+     * Implements the REST delete method to access data.
+     * Issues a DELETE and returns the result
+     * as an associative array.
+     * @see xModel::query()
+     * @return array
+     */
+    function delete() {
+        return parent::delete();
+    }
+
+    /**
+     * Issues a COUNT and returns the result
+     * @see xModel::query()
+     * @return int
+     */
+    function count() {
+        throw new xException('Not implemented', 501);
+    }
+
+    /**
      * Return the given value, escaped and quoted.
      * If the field name (modelfield) is given and the
      * field is listed in self::constants array,
@@ -372,166 +299,50 @@ abstract class xModel extends xController {
      * @param string Optional field name (modelfield)
      * @return string
      */
-    function escape($value, $field = null) {
-        if (is_null($value)) {
-            return 'NULL';
-        } else if ((!$this->constants || in_array($field, $this->constants)) && in_array($value, $this->sql_constants())) {
-            return $value;
-        }
-        return "'".mysql_real_escape_string($value)."'";
-    }
-    function sql_constants() {
-        // TODO: to be completed with all mysql constants
-        return array(
-            'CURRENT_TIMESTAMP',
-            'NULL',
-            'NOT NULL'
-        );
-    }
+    abstract function escape($value, $field = null);
+    abstract function sql_constants();
 
     /**
      * Returns a default SQL SELECT clause.
      * @return string
      */
-    function sql_select() {
-        $fragments = xUtil::arrize($this->return);
-        // Replaces * with all fields
-        foreach ($fragments as $key => $fragment) {
-            if ($fragment != '*') continue;
-            unset($fragments[$key]);
-            foreach ($this->mapping as $model_field => $db_field) {
-                $fragments[] = "`{$this->maintable}`.`{$db_field}` AS `{$model_field}`";
-            }
-        }
-        // Replaces model fields names with db fields names
-        // TODO: the regexp to be able to replace some and somefield without trouble
-        /*
-        foreach ($this->mapping as $modelfield => $dbfield) {
-            $fragments = preg_replace("/($modelfield)/", "{$dbfield}", $fragments);
-        }
-        */
-        // Replaces joined tables db fields name with model fields names
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize(@$this->params['xjoin']));
-        foreach ($joins as $model_name => $join) {
-            $model = xModel::load($model_name);
-            foreach($model->mapping as $model_field => $db_field) {
-                $fragments[] = "`{$model->maintable}`.`{$db_field}` AS `{$model_name}_{$model_field}`";
-            }
-        }
-        return " SELECT ".implode(', ', $fragments);
-    }
+    abstract function sql_select();
 
     /**
      * Returns a default SQL FROM clause.
      * @return string
      */
-    function sql_from() {
-        return " FROM `{$this->maintable}`";
-    }
+    abstract function sql_from();
 
     /**
      * Returns a default SQL WHERE clause.
      * @return string
      */
-    function sql_where($primary_only = false) {
-        $fields_values = $this->fields_values();
-        // Sets WHERE 1=0 if the 1st where clause is OR
-        $sql = @$this->params[array_shift(array_keys($fields_values)).'_operator'] == 'OR' ?  ' WHERE 1=0' : ' WHERE 1=1';
-        // Adds where clause conditions
-        foreach ($fields_values as $field => $value) {
-            $modelfield = $this->modelfield($field);
-            // If applicable, skips field if not a primary key field
-            if ($primary_only && !in_array($modelfield, $this->primary)) continue;
-            // Adds the condition operator to the where clause
-            if(@$this->params["{$modelfield}_operator"]) {
-                $operator = $this->params["{$modelfield}_operator"];
-                // Check if operator is allowed
-                $allowed_operators = array('AND', 'OR');
-                if (!in_array(strtoupper($operator), $allowed_operators))
-                    throw new xException("Operator not allowed: {$operator}", 400);
-                $sql .= " {$operator} ";
-            } else {
-                // Default operator
-                $sql .= ' AND ';
-            }
-            // Adds the condition field to the where clause
-            $sql .= " {$field}";
-            // Adds the condition comparator to the where clause
-            if (@$this->params["{$modelfield}_comparator"]) {
-                $comparator = $this->params["{$modelfield}_comparator"];
-                // Check if comparator is allowed
-                $allowed_comparators = array('=', '!=', '<', '>', '<=', '>=', 'LIKE', 'IS', 'IS NOT');
-                if (!in_array(strtoupper($comparator), $allowed_comparators))
-                    throw new xException("Comparator not allowed: {$comparator}", 400);
-                $sql .= " {$comparator} ";
-            } elseif (is_array($value)) {
-                $sql .= ' IN ';
-            } elseif (is_null($value)) {
-                $sql .= ' IS ';
-            } else {
-                // Default comparator
-                $sql .= ' = ';
-            }
-            // Adds the condition value to the where clause
-            if (is_array($value)) {
-                $values = array();
-                foreach ($value as $val) $values[] = $this->escape($val, $this->modelfield($field));
-                $sql .= ' ('.implode(',', $values).')';
-            } else {
-                // Adds condition value to the where clause
-                $sql .= $this->escape($value, $this->modelfield($field));
-            }
-        }
-        return $sql;
-    }
+    abstract function sql_where($primary_only = false);
 
     /**
      * Returns a default SQL JOIN clause to be used as a join.
      * @return string
      */
-    function sql_join() {
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize(@$this->params['xjoin']));
-        return implode($joins, ' ');
-    }
+    abstract function sql_join();
 
     /**
      * Returns a default SQL ORDER clause.
      * @return string
      */
-    function sql_order() {
-        $sql = '';
-        if ($this->order && $this->order_by) {
-            $fields = array();
-            foreach(xUtil::arrize($this->order_by) as $field) $fields[] = $this->dbfield($field);
-            $sql = ' ORDER BY '.implode(',', $fields)." {$this->order}";
-        }
-        return $sql;
-    }
-    
+    abstract function sql_order();
+
     /**
      * Returns a default SQL GROUP BY clause.
      * @return string
      */
-    function sql_group() {
-        $sql = '';
-        if ($this->group_by) {
-            $fields = array();
-            foreach(xUtil::arrize($this->group_by) as $field) $fields[] = $this->dbfield($field);
-            $sql = ' GROUP BY '.implode(',', $fields);
-        }
-        return $sql;
-    }
-    
+    abstract function sql_group();
+
     /**
      * Returns default SQL LIMIT and/or OFFSET clause(s).
      * @return string
      */
-    function sql_limit() {
-        $sql = '';
-        if (@$this->params['xlimit']) $sql .= " LIMIT {$this->params['xlimit']}";
-        if (@$this->params['xoffset']) $sql .= " OFFSET {$this->params['xoffset']}";
-        return $sql;
-    }
+    abstract function sql_limit();
 
     /**
      * Exectues the given sql and returns its query result.
@@ -548,39 +359,7 @@ abstract class xModel extends xController {
      * @param string The SQL statement to execute.
      * @return array
      */
-    function query($sql) {
-        $db = xContext::$db;
-        // Executes query
-        xContext::$log->log("Executing query: \n{$sql}", $this);
-        $qr = mysql_query($sql, $db);
-        if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db));
-        // Creates an array of results
-        if (is_resource($qr)) {
-            // Returns an empty array if no row was retrieved
-            if (mysql_num_rows($qr) < 1) return array();
-            // Translates db fields into model fields,
-            // keeping the result field name if not found in mapping
-            $fields = array();
-            foreach(array_keys(mysql_fetch_assoc($qr)) as $dbfield) {
-                $fields[] = $this->modelfield($dbfield);
-            }
-            mysql_data_seek($qr, 0);
-            // Creates the result array
-            $result = array();
-            while ($row = mysql_fetch_assoc($qr)) {
-                $result[] = array_combine($fields, $row);;
-            }
-        } else {
-            $result = array(
-                'insertid' => mysql_insert_id($db),
-                'affectedrows' => mysql_affected_rows($db),
-                'info' => mysql_info($db),
-                'raw' => $qr
-            );
-        }
-        if (is_resource($qr)) mysql_free_result($qr);
-        return $result;
-    }
+    abstract function query($sql);
 }
 
 ?>

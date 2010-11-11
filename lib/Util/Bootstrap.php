@@ -83,6 +83,8 @@ class xBootstrap {
         require_once('Util/Router.php');
         require_once('Core/Controller.php');
         require_once('Core/Model.php');
+        require_once('Core/ModelMysql.php');
+        require_once('Core/ModelPostgres.php');
         require_once('Core/WebController.php');
         require_once('Core/View.php');
         require_once('Core/Front.php');
@@ -179,6 +181,15 @@ class xBootstrap {
     function setup_db() {
         if (!@xContext::$config->db) return;
         xContext::$log->log("Setting up database link on host ".xContext::$config->db->host, $this);
+        // Forks based on database driver
+        $driver = @xContext::$config->db->driver ? xContext::$config->db->driver : 'mysql';
+        xContext::$log->log("Using database driver: {$driver}", $this);
+        $setup_function = "setup_db_{$driver}";
+        $this->$setup_function();
+        if (!xContext::$db) throw new xException('Could not setup database: '.print_r(xContext::$config->db->toArray(), true));
+    }
+
+    function setup_db_mysql() {
         xContext::$db = mysql_connect(
             xContext::$config->db->host,
             xContext::$config->db->user,
@@ -189,6 +200,17 @@ class xBootstrap {
         if (!mysql_select_db(xContext::$config->db->database, xContext::$db)) {
             throw new xException('Could not select database ('.mysql_error(xContext::$db).'): '.print_r(xContext::$config->db->toArray(), true));
         }
+    }
+
+    function setup_db_postgres() {
+        xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
+        $host = xContext::$config->db->host;
+        $user = xContext::$config->db->user;
+        $password = xContext::$config->db->password;
+        $database = xContext::$config->db->database;
+        xContext::$db = pg_connect(
+            "host=$host port=5432 dbname=$database user=$user password=$password options='--client_encoding=UTF8'"
+        );
     }
 
     function setup_auth() {
