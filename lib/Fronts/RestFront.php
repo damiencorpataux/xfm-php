@@ -15,12 +15,16 @@
 **/
 class xRestFront extends xFront {
 
+    var $encoding = 'UTF-8';
+
     var $params = array(
         'xformat' => 'php'
     );
 
     protected function __construct($params = null) {
         parent::__construct($params);
+        // Switches encoding if applicable
+        if (@$this->params['xencoding']) $this->encoding = $this->params['xencoding'];
     }
 
     function handle_error($exception) {
@@ -42,7 +46,12 @@ class xRestFront extends xFront {
     function encode($data) {
         $format_method = "encode_{$this->params['xformat']}";
         if (!method_exists($this, $format_method)) throw new xException("REST format output not available: {$this->params['xformat']}", 501);
-        return $this->$format_method($data);
+        $output = $this->$format_method($data);
+        // Recodes output stream if necessary
+        if ($this->encoding != 'UTF-8') {
+            $output = iconv('UTF-8', "{$this->encoding}//TRANSLIT", $output);
+        }
+        return $output;
     }
 
     function encode_php($data) {
@@ -56,7 +65,7 @@ class xRestFront extends xFront {
 
     function encode_xml($data) {
         $result = $this->encode_xml_nodes($data);
-        return '<?xml version="1.0" encoding="UTF-8"?>'."\n"."<resultset>{$result}</resultset>";
+        return '<?xml version="1.0" encoding="'.$this->encoding.'"?>'."\n"."<resultset>{$result}</resultset>";
     }
     function encode_xml_nodes($data) {
         if (!is_array($data)) return $data;

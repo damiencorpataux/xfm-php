@@ -65,7 +65,6 @@ class xApiFront extends xRestFront {
     }
 
     function get() {
-        // TODO: role check?
         print $this->encode($this->call_method());
     }
 
