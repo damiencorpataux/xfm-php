@@ -17,7 +17,7 @@ class xForm {
      *    )
      * )
      * </code>
-     * @see fields_options().
+     * @see fields_options()
      * @var array
      */
     var $fields_options;
@@ -31,7 +31,7 @@ class xForm {
      *    'method' => 'post or get'
      * )
      * </code>
-     * @see form_options().
+     * @see form_options()
      * @var array
      */
     var $form_options;
@@ -45,7 +45,7 @@ class xForm {
     /**
      * Singleton for generated form validator
      * @see validator()
-     * @var null|xFormValidator
+     * @var null|xValidatorStore
      */
     var $validator;
 
@@ -65,7 +65,7 @@ class xForm {
      * HTML Form mandatory template (sprintf format)
      * @var string
      */
-    var $template_mandatory = '*';
+    //var $template_mandatory = '*';
 
     function __construct() {
         $this->form_options = xUtil::array_merge($this->form_options, $this->form_options());
@@ -113,8 +113,8 @@ class xForm {
     }
 
     /**
-     * Creates a xFormValidator from fields 'validator' option.
-     * @return xFormValidator
+     * Creates a xValidatorStore from fields 'validator' option.
+     * @return xValidatorStore
      */
     function validator() {
         if ($this->validator) return $this->validator;
@@ -123,7 +123,7 @@ class xForm {
             if (!@$field_options['validation']) continue;
             $form_options[$field] = $field_options['validation'];
         }
-        return $this->validator = new xFormValidator($form_options);
+        return $this->validator = new xValidatorStore($form_options);
     }
 
     function validate() {
@@ -217,6 +217,10 @@ class xFormField {
     }
 
     function init() {}
+
+    static function create($options) {
+
+    }
 
     function render_label() {
         return vsprintf($this->template_label, $this->options);

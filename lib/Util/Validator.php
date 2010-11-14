@@ -1,11 +1,35 @@
 <?php
 
-class xFormValidator {
+class xValidatorStore {
 
     var $validators = array();
 
-    function __construct($options) {
-        //$this->messages = $this->messages();
+    /**
+     * Parameters (values) to validate
+     * @var array
+     */
+    var $params = array();
+
+    /**
+     * Instanciate a new xValidatorStore,
+     * creating xValidator instances from the given $options
+     * @param array An array containing validators ids => options:
+     * <code>
+     * array(
+     *     'name' => array(
+     *         'mandatory',
+     *         'string' => array(2, 50)
+     *     ),
+     *     'birthyear' => array(
+     *         'integer' => array(1900, 2012)
+     *     )
+     * )
+     * </code>
+     */
+    function __construct($options, $params = array()) {
+        // Stores params (values)
+        $this->params = $params;
+        // Creates validators
         foreach ($options as $field => $validators) {
             foreach ($validators as $validator => $options) {
                 // Validators without options can be passed as a simple key
@@ -13,25 +37,23 @@ class xFormValidator {
                     $validator = $options;
                     $options = array();
                 }
-                // Creates validators instances
-                $validator_class = "xValidator{$validator}";
-                $this->validators[$field][$validator] = new $validator_class($options);
+                // Creates and stores validator instance
+                $this->validators[$field][$validator] = xValidator::create($validator, $options);
             }
         }
     }
 
+    /**
+     * Returns an array containing field => message for each invalid field.
+     * @return array
+     */
     function invalids() {
         $messages = array();
         foreach ($this->validators as $field => $validators) {
-            foreach ($validators as $validator => $options) {
-                // Validators without options can be passed as a simple key
-                if (is_int($validator)) {
-                    $validator = $options;
-                    $options = array();
-                }
+            foreach ($validators as $validator) {
+                $value = @$this->params[$field];
                 // Validates the field if not already invalided, and saves message if applicable
-                $value = @$_REQUEST[$field];
-                if (@!$messages[$field] && $message = $this->validators[$field][$validator]->invalid($value)) {
+                if (@!$messages[$field] && $message = $validator->invalid($value)) {
                     $messages[$field] = $message;
                 }
             }
@@ -57,13 +79,19 @@ abstract class xValidator {
      */
     var $options = array();
 
-    function __construct($options) {
+    function __construct($options = array()) {
         // We have to put messages declaration in a method
         // in order to be able to use the _() function for i18n.
         $this->options = array_merge($this->options, $options);
         // Merges options messages with predefined messages
         $options_messages = @$this->options['messages'] ? $this->options['messages'] : array();
         $this->messages = array_merge($this->messages(), $options_messages);
+    }
+
+    static function create($validator, $options = array()) {
+        // Creates validators instances
+        $validator_class = "xValidator{$validator}";
+        return new $validator_class($options);
     }
 
     abstract function invalid($value);
