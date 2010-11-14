@@ -81,6 +81,8 @@ class xBootstrap {
         require_once('Util/Auth.php');
         require_once('Util/Logger.php');
         require_once('Util/Router.php');
+        require_once('Util/Form.php');
+        require_once('Util/Validator.php');
         require_once('Core/Controller.php');
         require_once('Core/Model.php');
         require_once('Core/ModelMysql.php');
