@@ -29,14 +29,36 @@ abstract class xModel extends xController {
     /**
      * Params to fields mapping.
      * This mapping purpose is to abstract table fields names.
+     * <code>
+     * array(
+     *     'id' => 'id',
+     *     'name' => 'name',
+     *     'example_name' => 'another_name_in_table',
+     *     'shortname' => 'name_in_table'
+     * )
+     * </code>
      * @var array
      */
-    var $mapping = array(
-        'id' => 'id',
-        'name' => 'name',
-        'example_name' => 'another_name_in_table',
-        'shortname' => 'name_in_table'
-    );
+    var $mapping = array();
+
+    /**
+     * Fields validation definitions.
+     * This validation puropose is to use the xValidator classes
+     * to ease models validation code.
+     * Also, these can be reused in xForm validation definition.
+     * <code>
+     * array(
+     *     'name' => array(
+     *         'mandatory',
+     *         'string' => array(2, 50)
+     *     )
+     * );
+     * </code>
+     * @see invalids()
+     * @see xValidatorStore
+     * @var array
+     */
+    var $validation = array();
 
     /**
      * The primary key field names (model field names).
@@ -230,10 +252,13 @@ abstract class xModel extends xController {
     /**
      * Checks given params values and returns an array containing
      * the invalid params (fields) as key, and true as value.
+     * @param array If given, limits validation to the given $fields.
+     *              {@see xValidatorStore::invalids()}
      * @return array
      */
-    function invalids() {
-        return array();
+    function invalids($fields = array()) {
+        $validator = new xValidatorStore($this->validation, $this->params);
+        return $validator->invalids($fields);
     }
 
     /**

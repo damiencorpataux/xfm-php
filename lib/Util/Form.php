@@ -67,10 +67,11 @@ class xForm {
      */
     //var $template_mandatory = '*';
 
+
     function __construct() {
         $this->form_options = xUtil::array_merge($this->form_options, $this->form_options());
         $this->fields_options = xUtil::array_merge($this->fields_options, $this->fields_options());
-        $this->create_fields($this->model);
+        $this->create_fields();
     }
 
     function fields_options() {
@@ -118,12 +119,12 @@ class xForm {
      */
     function validator() {
         if ($this->validator) return $this->validator;
-        $form_options = array();
+        $options = array();
         foreach ($this->fields_options as $field => $field_options) {
             if (!@$field_options['validation']) continue;
-            $form_options[$field] = $field_options['validation'];
+            $options[$field] = $field_options['validation'];
         }
-        return $this->validator = new xValidatorStore($form_options);
+        return $this->validator = new xValidatorStore($options, $_REQUEST);
     }
 
     function validate() {

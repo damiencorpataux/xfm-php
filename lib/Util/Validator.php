@@ -45,11 +45,18 @@ class xValidatorStore {
 
     /**
      * Returns an array containing field => message for each invalid field.
+     * @param array Array of fields names to validate against.
+     *              If specified, only the given $fields will be validated,
+     *              otherwise every field will be validated.
      * @return array
      */
-    function invalids() {
+    function invalids($fields = array()) {
+        // Defines what fields are to be validated
+        $v = $this->validators;
+        if ($fields) $v = xUtil::filter_keys($this->validators, $fields);
+        // Validates fields
         $messages = array();
-        foreach ($this->validators as $field => $validators) {
+        foreach ($v as $field => $validators) {
             foreach ($validators as $validator) {
                 $value = @$this->params[$field];
                 // Validates the field if not already invalided, and saves message if applicable
@@ -88,20 +95,64 @@ abstract class xValidator {
         $this->messages = array_merge($this->messages(), $options_messages);
     }
 
+    /**
+     * Returns an instance of the given $validator
+     * initialized with the given optional $options.
+     * @param string The validator name
+     * @param array Options for the validator instance
+     * @return xValidator
+     */
     static function create($validator, $options = array()) {
         // Creates validators instances
         $validator_class = "xValidator{$validator}";
         return new $validator_class($options);
     }
 
+    /**
+     * Returns a user message if the valid is invalid,
+     * or returns false if the value is valid.
+     * @param mixed The value to validate against.
+     * @return string|bool
+     */
     abstract function invalid($value);
 
     function valid() { return (bool)$this->invalid(); }
 
+    /**
+     * Returns an array containing the validator messages.
+     * Used to initialize the validator messages
+     * and must be implemented in child classes.
+     * Validator messages have to be defined here
+     * in order to be able to use the _() function.
+     * @return array
+     */
     abstract function messages();
 
+    /**
+     * Returns the message $type given
+     * @see messages()
+     */
     function message($type = 'default') {
         return @$this->messages[$type] ? $this->messages[$type] : _('invalid');
+    }
+}
+
+class xValidatorModel extends xValidator {
+
+    var $options = array(
+        'name' => null, // Name of the model to validate against
+        'field' => null // Name of the model field to validate against
+    );
+
+    function messages() { return array(); }
+
+    function invalid($value) {
+        $name = $this->options['name'];
+        $field = $this->options['field'];
+        $model = xModel::load($name, array($field=>$value));
+        $message = array_shift($model->invalids($field));
+        if ($message) return $message;
+        else return false;
     }
 }
 
@@ -112,9 +163,13 @@ abstract class xValidatorRegexp extends xValidator {
     function invalid($value) {
         if (!preg_match($this->regexp, $value) > 0) {
             return $this->message();
+        } else {
+            return false;
         }
     }
 }
+
+//
 
 class xValidatorMandatory extends xValidator {
 
