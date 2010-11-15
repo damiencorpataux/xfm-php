@@ -59,7 +59,7 @@ abstract class xModelPostgres extends xModel {
         }
         // Creates final sql
         $sql = implode(' ', array(
-            "UPDATE `{$this->maintable}` SET ",
+            "UPDATE \"{$this->maintable}\" SET ",
             implode(', ', $updates),
             $this->sql_where(true)
         ));
@@ -94,7 +94,7 @@ abstract class xModelPostgres extends xModel {
             $sqlV[] = $this->escape($value, $this->modelfield($field));
         }
         // Creates final sql
-        $sql = "INSERT INTO `{$this->maintable}`".
+        $sql = "INSERT INTO \"{$this->maintable}\"".
             " (".implode(', ', $sqlF).") VALUES (".implode(', ', $sqlV).")";
         return $this->query($sql);
     }
@@ -138,7 +138,7 @@ abstract class xModelPostgres extends xModel {
         } else if ((!$this->constants || in_array($field, $this->constants)) && in_array($value, $this->sql_constants())) {
             return $value;
         }
-        return "'".mysql_real_escape_string($value)."'";
+        return "'".pg_escape_string($value)."'";
     }
     function sql_constants() {
         // TODO: to be completed with all mysql constants
@@ -175,7 +175,7 @@ abstract class xModelPostgres extends xModel {
         foreach ($joins as $model_name => $join) {
             $model = xModel::load($model_name);
             foreach($model->mapping as $model_field => $db_field) {
-                $fragments[] = "`{$model->maintable}`.`{$db_field}` AS `{$model_name}_{$model_field}`";
+                $fragments[] = "\"{$model->maintable}\".\"\'{$db_field}\' AS \'{$model_name}_{$model_field}\'";
             }
         }
         return " SELECT ".implode(', ', $fragments);
