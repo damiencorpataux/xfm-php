@@ -1,5 +1,18 @@
 <?php
+/*
+ * (c) 2010 Damien Corpataux
+ *
+ * LICENSE
+ * This library is licensed under the GNU GPL v3.0 license,
+ * accessible at http://www.gnu.org/licenses/gpl-3.0.html
+ *
+**/
 
+/**
+ * xForm class.
+ * Deals with form creation, validation and HTML generation.
+ * @package xFreemwork
+**/
 class xForm {
 
     /**
@@ -127,13 +140,17 @@ class xForm {
         return $this->validator = new xValidatorStore($options, $_REQUEST);
     }
 
-    function validate() {
+    function invalids() {
         $messages = $this->validator()->invalids();
         foreach ($messages as $field => $message) {
             $fieldname = @$this->fields_options[$field]['label'] ? $this->fields_options[$field]['label'] : $field;
             $this->fields[$field]->options['message'] = ucfirst($fieldname).' '.$message;
         }
         return $messages;
+    }
+
+    function valid() {
+        return !$this->invalid();
     }
 }
 
@@ -195,6 +212,11 @@ class xFormFieldCaptcha extends xFormField {
     }
 }
 
+/**
+ * xFormField class.
+ * Deals with form field HTML generation.
+ * @package xFreemwork
+**/
 class xFormField {
 
     var $template_label = '<label for="%1$s">%2$s</label>';

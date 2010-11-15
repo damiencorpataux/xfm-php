@@ -1,5 +1,16 @@
 <?php
+/*
+ * (c) 2010 Damien Corpataux
+ *
+ * LICENSE
+ * This library is licensed under the GNU GPL v3.0 license,
+ * accessible at http://www.gnu.org/licenses/gpl-3.0.html
+ *
+**/
 
+/**
+ * @package xFreemwork
+**/
 class xValidatorStore {
 
     var $validators = array();
@@ -278,6 +289,28 @@ class xValidatorChecked extends xValidator {
 
     function invalid($value) {
         if (!$value) return $this->message('checked');
+        else return false;
+    }
+}
+
+class xValidatorUnique extends xValidator {
+
+    var $options = array(
+        'model' => null,
+        'field' => null
+    );
+
+    function messages() {
+        return array(
+            'unique' => _('is already taken'),
+        );
+    }
+
+    function invalid($value) {
+        $model = $this->options['model'];
+        $field = $this->options['field'];
+        $exists = (bool)xModel::load($model, array($field=>$value))->count();
+        if ($exists) return $this->message('unique');
         else return false;
     }
 }
