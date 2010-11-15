@@ -89,7 +89,7 @@ abstract class xValidator {
      * Populated by the constructor from the messages().
      * @var array
      */
-    var $messages = array();
+    var $message = array();
 
     /**
      * Validation options (e.g. string min/max length)
@@ -101,9 +101,8 @@ abstract class xValidator {
         // We have to put messages declaration in a method
         // in order to be able to use the _() function for i18n.
         $this->options = array_merge($this->options, $options);
-        // Merges options messages with predefined messages
-        $options_messages = @$this->options['messages'] ? $this->options['messages'] : array();
-        $this->messages = array_merge($this->messages(), $options_messages);
+        // TODO:
+        // let an $options['message'] override the default message.
     }
 
     /**
@@ -130,22 +129,14 @@ abstract class xValidator {
     function valid() { return (bool)$this->invalid(); }
 
     /**
-     * Returns an array containing the validator messages.
-     * Used to initialize the validator messages
+     * Returns the validator message.
+     * Used to initialize the validator message
      * and must be implemented in child classes.
-     * Validator messages have to be defined here
+     * @note Validator message have to be defined here
      * in order to be able to use the _() function.
      * @return array
      */
-    abstract function messages();
-
-    /**
-     * Returns the message $type given
-     * @see messages()
-     */
-    function message($type = 'default') {
-        return @$this->messages[$type] ? $this->messages[$type] : _('invalid');
-    }
+    abstract function message();
 }
 
 class xValidatorModel extends xValidator {
@@ -155,7 +146,7 @@ class xValidatorModel extends xValidator {
         'field' => null // Name of the model field to validate against
     );
 
-    function messages() { return array(); }
+    function message() {}
 
     function invalid($value) {
         $name = $this->options['name'];
@@ -184,10 +175,8 @@ abstract class xValidatorRegexp extends xValidator {
 
 class xValidatorMandatory extends xValidator {
 
-    function messages() {
-        return array(
-            'mandatory' => _('is mandatory'),
-        );
+    function message() {
+        return _('is mandatory');
     }
 
     function invalid($value) {
@@ -197,120 +186,118 @@ class xValidatorMandatory extends xValidator {
 }
 
 class xValidatorEmail extends xValidatorRegexp {
-
     var $regexp = '/^[^\s]+?@[^\s]+?\.[\w]{2,5}$/';
-
-    function messages() {
-        return array(
-            'default' => _('invalid')
-        );
+    function message() {
+        return _('invalid');
     }
 }
 
-class xValidatorString extends xValidator {
-
+class xValidatorMinlength extends xValidator {
     var $options = array(
-        'min' => 0,
-        'max' => null
+        'length' => 0
     );
-
-    function messages() {
-        return array(
-            'min' => _(sprintf("too short (minimum %d characters)", $this->options['min'])),
-            'max' => _(sprintf("too long (maximum %d characters)", $this->options['max'])),
-        );
+    function message() {
+        return _(sprintf("too short (minimum %d characters)", $this->options['length']));
     }
-
     function invalid($value) {
         $o = $this->options;
-        if (isset($o['min']) && strlen($value) < $o['min'])
-            return $this->message('min');
-        if (isset($o['max']) && strlen($value) > $o['max'])
-            return $this->message('max');
+        if (isset($o['length']) && strlen($value) < $o['length'])
+            return $this->message();
         else return false;
     }
 }
 
-class xValidatorInteger extends xValidator {
-
+class xValidatorMaxlength extends xValidator {
     var $options = array(
-        'min' => null,
-        'max' => null
+        'length' => null
     );
-
-    function messages() {
-        return array(
-            'numeric' => _('must be a number'),
-            'min' => _(sprintf("too big (minimum %s)", $this->options['min'])),
-            'max' => _(sprintf("too small (maximum %s)", $this->options['max'])),
-        );
+    function message() {
+        return _(sprintf("too long (maximum %d characters)", $this->options['length']));
     }
-
     function invalid($value) {
         $o = $this->options;
-        if (!preg_match('/[0-9]*/', $value) > 0)
-            return $this->message('numeric');
-        if (isset($o['min']) && (int)$value > $o['min'])
-            return $this->message('min');
-        if (isset($o['max']) && (int)$value > $o['max'])
-            return $this->message('max');
+        if ($o['length'] && strlen($value) > $o['length'])
+            return $this->message('length');
+        else return false;
+    }
+}
+
+class xValidatorInteger extends xValidatorRegexp {
+    var $regexp = '/^[0-9]+$/';
+    function message() {
+        return  _('must be a number');
+    }
+}
+
+class xValidatorMinvalue extends xValidator {
+    var $options = array(
+        'value' => null,
+    );
+    function message() {
+        return _(sprintf("too small (minimum %s)", $this->options['value']));
+    }
+    function invalid($value) {
+        $o = $this->options;
+        if (isset($o['value']) && (int)$value < $o['value'])
+            return $this->message();
+        else return false;
+    }
+}
+
+class xValidatorMaxvalue extends xValidator {
+    var $options = array(
+        'value' => null,
+    );
+    function message() {
+        return _(sprintf("too big (maximum %s)", $this->options['value']));
+    }
+    function invalid($value) {
+        $o = $this->options;
+        if (isset($o['value']) && (int)$value > $o['value'])
+            return $this->message();
         else return false;
     }
 }
 
 class xValidatorConfirm extends xValidator {
-
     var $options = array(
         'match' => null,
         'label' => null
     );
-
-    function messages() {
-        return array(
-            'match' => sprintf(_('must match %s field'), $this->options['label']),
-        );
+    function message() {
+        return sprintf(_('must match %s field'), $this->options['label']);
     }
-
     function invalid($value) {
         $o = $this->options;
         if ($value != @$_REQUEST[$o['match']])
-            return $this->message('match');
+            return $this->message();
         else return false;
     }
 }
 
 class xValidatorChecked extends xValidator {
-
-    function messages() {
-        return array(
-            'checked' => _('must be checked'),
-        );
+    function message() {
+        return _('must be checked');
     }
-
     function invalid($value) {
-        if (!$value) return $this->message('checked');
+        if (strlen($value) <= 0) return $this->message();
         else return false;
     }
 }
 
 class xValidatorUnique extends xValidator {
-
     var $options = array(
         'model' => null,
         'field' => null
     );
-
-    function messages() {
-        return array(
-            'unique' => _('is already taken'),
-        );
+    function message() {
+        return _('is already taken');
     }
-
     function invalid($value) {
         $model = $this->options['model'];
         $field = $this->options['field'];
         $exists = (bool)xModel::load($model, array($field=>$value))->count();
-        if ($exists) return $this->message('unique');
+        if ($exists) return $this->message();
         else return false;
     }
 }
