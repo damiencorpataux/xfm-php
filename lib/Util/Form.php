@@ -102,10 +102,9 @@ class xForm {
         // Setups the messages from model validation, or form controller $invalids ?
         // Setups xFormFields
         foreach ($this->fields_options as $field => $options) {
-            $class = "xFormField{$options['type']}";
-            $options['name'] = $field;
+            if (@!$options['name']) $options['name'] = $field;
             if (@$_REQUEST[$options['name']]) $options['value'] = $_REQUEST[$options['name']];
-            $this->fields[$field] = new $class($options);
+            $this->fields[$field] = xFormField::create($options);
         }
     }
 
@@ -242,7 +241,8 @@ class xFormField {
     function init() {}
 
     static function create($options) {
-
+        $class = "xFormField{$options['type']}";
+        return new $class($options);
     }
 
     function render_label() {
