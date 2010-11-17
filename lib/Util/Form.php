@@ -10,7 +10,7 @@
 
 /**
  * xForm class.
- * Deals with form creation, validation and HTML generation.
+ * Deals form creation, validation and HTML generation.
  * @package xFreemwork
 **/
 class xForm {
@@ -100,9 +100,9 @@ class xForm {
 
     function create_fields() {
         // Setups the messages from model validation, or form controller $invalids ?
-        // Setups xFormFields
+        // Setups xFormFields
         foreach ($this->fields_options as $field => $options) {
-            if (@!$options['name']) $options['name'] = $field;
+            $options['name'] = $field;
             if (@$_REQUEST[$options['name']]) $options['value'] = $_REQUEST[$options['name']];
             $this->fields[$field] = xFormField::create($options);
         }
@@ -160,6 +160,7 @@ class xFormFieldText extends xFormField {
     var $template_label = '<label for="%1$s">%2$s</label>';
     var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" value="%4$s" %5$s/>';
     var $template_message = '<div class="%7$s">%8$s</div>';
+    var $template_selected;
     function options() {
         return array(
             'type' => "text"
@@ -181,14 +182,86 @@ class xFormFieldPassword extends xFormField {
 
 class xFormFieldCheckbox extends xFormField {
     var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" %5$s/>';
+    var $template_selected = 'checked="checked"';
     function options() {
         return array(
             'type' => 'checkbox',
-            'selected' => 'checked="checked"'
+            'value' => null, // true to select the checkbox by default
+            'default' => null, // true to select the checkbox by default
         );
     }
     function init() {
-        if (@!$_REQUEST[@$this->options['name']]) $this->options['selected'] = null;
+        if (@$_REQUEST[@$this->options['name']]) {
+            // If form posted
+            if ($this->options['value']) $selected = true;
+            else $selected = false;
+        } else {
+            if ($this->options['default']) $selected = $this->options['default'];
+            else $selected = false;
+        }
+        $this->options['selected'] = $selected;
+    }
+}
+
+class xFormFieldSelect extends xFormField {
+    var $template_field = '<select name="%1$s" id="%1$s" value="%4$s">%10$s</select>';
+    var $items = array();
+    function options() {
+        return array(
+            'type' => null,
+            'option_class' => 'option',
+            'values' => array(),
+            'default' => null // The value of the default selected item
+        );
+    }
+    function init() {
+        // Detects which item is selected
+        $item = array_intersect($this->options['values'], array(@$_REQUEST[@$this->options['name']]));
+        $selected = $item ? array_shift(array_keys($item)) : @$this->options['default'];
+        // Creates xFormField instances
+        foreach ($this->options['values'] as $value => $label) {
+            $this->items[] = xFormField::create(array(
+                'type' => 'option',
+                'name' => $this->options['name'],
+                'label' => $label,
+                'value' => $value,
+                'selected' => ($value == $selected)
+            ));
+        }
+        //if (@!$_REQUEST[@$this->options['name']]) $this->options['selected'] = null;
+    }
+    function render_field() {
+        $html = '';
+        foreach ($this->items as $item) $html .= $item->render_field();
+        return vsprintf($this->template_field, array_merge(
+            $this->options,
+            array('options' => $html)
+        ));
+    }
+}
+class xFormFieldOption extends xFormField {
+    var $template_field = '<option id="option_%1$s_%4$s" value="%4$s" %5$s>%2$s</option>';
+    var $template_selected = 'selected="selected"';
+    function options() {
+        return array(
+            'type' => 'option',
+            'label' => null,
+            'value' => null,
+            'name' => 'parent_name'
+        );
+    }
+    function render_label() { return '';}
+    function render_message() { return ''; }
+}
+
+class xFormFieldSelectNumeric extends xFormFieldSelect {
+    function init() {
+        $array_values = array_values($this->options['values']);
+        $this->options['values'] = array_combine(
+            array_values($this->options['values']),
+            array_values($this->options['values'])
+        );
+        return parent::init();
     }
 }
 
@@ -211,12 +284,7 @@ class xFormFieldCaptcha extends xFormField {
     }
 }
 
-/**
- * xFormField class.
- * Deals with form field HTML generation.
- * @package xFreemwork
-**/
-class xFormField {
+abstract class xFormField {
 
     var $template_label = '<label for="%1$s">%2$s</label>';
     var $template_field;
@@ -236,11 +304,15 @@ class xFormField {
     function __construct($options = array()) {
         $this->options = xUtil::array_merge($this->options, $this->options(), $options);
         $this->init();
+        $this->options['selected'] = @$this->options['selected'] ? $this->template_selected : null;
     }
 
     function init() {}
 
-    static function create($options) {
+    abstract function options();
+
+    static function create($options = array()) {
+        if (!@$options['type']) throw new Exception('Missing "type" in $options array argument');
         $class = "xFormField{$options['type']}";
         return new $class($options);
     }
