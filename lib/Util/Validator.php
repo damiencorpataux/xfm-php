@@ -101,9 +101,12 @@ abstract class xValidator {
         // We have to put messages declaration in a method
         // in order to be able to use the _() function for i18n.
         $this->options = array_merge($this->options, $options);
+        $this->init();
         // TODO:
         // let an $options['message'] override the default message.
     }
+
+    function init() {}
 
     /**
      * Returns an instance of the given $validator
@@ -180,7 +183,7 @@ class xValidatorMandatory extends xValidator {
     }
 
     function invalid($value) {
-        if ($value == '') return $this->message('mandatory');
+        if ($value == '') return $this->message();
         else return false;
     }
 }
@@ -197,7 +200,7 @@ class xValidatorMinlength extends xValidator {
         'length' => 0
     );
     function message() {
-        return _(sprintf("too short (minimum %d characters)", $this->options['length']));
+        return sprintf(_("too short (minimum %d characters)"), $this->options['length']);
     }
     function invalid($value) {
         $o = $this->options;
@@ -212,12 +215,12 @@ class xValidatorMaxlength extends xValidator {
         'length' => null
     );
     function message() {
-        return _(sprintf("too long (maximum %d characters)", $this->options['length']));
+        return sprintf(_("too long (maximum %d characters)"), $this->options['length']);
     }
     function invalid($value) {
         $o = $this->options;
         if ($o['length'] && strlen($value) > $o['length'])
-            return $this->message('length');
+            return $this->message();
         else return false;
     }
 }
@@ -229,12 +232,119 @@ class xValidatorInteger extends xValidatorRegexp {
     }
 }
 
+class xValidatorDate extends xValidator {
+    var $options = array(
+        // According PHP strftime() function format
+        // http://www.php.net/manual/fr/function.strftime.php
+        'format' => null
+    );
+    function init() {
+        // If not defined, uses the configuration format,
+        // or a hardcoded default format
+        if (!@$this->options['format']) {
+            $this->options['format'] = xContext::$config->i18n->format->date ?
+                xContext::$config->i18n->format->date :
+                '%d-%m-%Y';
+        }
+    }
+    function message() {
+        return _("invalid");
+    }
+    function invalid($value) {
+        $o = $this->options;
+        $date_info = strptime($value, $this->options['format']);
+        if (!$this->valid_date($date_info)) return $this->message();
+        return false;
+    }
+    /**
+     * Tells whether the given time is valid
+     * @see http://www.php.net/manual/fr/function.strptime.php
+     * @param array PHP strptime() return value
+     * @return bool
+     */
+    function valid_date($date_info) {
+        $day = isset($date_info['tm_mday']) ? $date_info['tm_mday'] : null;
+        $month = isset($date_info['tm_mon']) ? $date_info['tm_mon']+1 : null;
+        $year = isset($date_info['tm_year']) ? $date_info['tm_year']+1900 : null;
+        $unparsed = isset($date_info['unparsed']) ? $date_info['unparsed'] : null;
+        return !$unparsed && checkdate($day, $month, $year);
+    }
+}
+
+class xValidatorTime extends xValidator {
+    var $options = array(
+        // According PHP strftime() function format
+        // http://www.php.net/manual/fr/function.strftime.php
+        'format' => null
+    );
+    function init() {
+        // If not defined, uses the configuration format,
+        // or a hardcoded default format
+        if (!@$this->options['format']) {
+            $this->options['format'] = @xContext::$config->i18n->format->time ?
+                xContext::$config->i18n->format->time :
+                '%H:%M';
+        }
+    }
+    function message() {
+        return _("invalid");
+    }
+    function invalid($value) {
+        $o = $this->options;
+        $date_info = strptime($value, $this->options['format']);
+        if (!$this->valid_time($date_info)) return $this->message();
+        return false;
+    }
+    /**
+     * Tells whether the given time is valid
+     * @see http://www.php.net/manual/fr/function.strptime.php
+     * @param array PHP strptime() return value
+     * @return bool
+     */
+    function valid_time($date_info) {
+        $hours = isset($date_info['tm_hour']) ? $date_info['tm_hour'] : null;
+        $minutes = isset($date_info['tm_min']) ? $date_info['tm_min'] : 0;
+        $seconds = isset($date_info['tm_sec']) ? $date_info['tm_sec'] : 0;
+        $unparsed = isset($date_info['unparsed']) ? $date_info['unparsed'] : null;
+        return !$unparsed && !is_null($hours);
+    }
+}
+
+class xValidatorDatetime extends xValidator {
+    var $options = array(
+        // According PHP strftime() function format
+        // http://www.php.net/manual/fr/function.strftime.php
+        'format' => null
+    );
+    function init() {
+        // If not defined, uses the configuration format,
+        // or a hardcoded default format
+        if (!@$this->options['format']) {
+            $this->options['format'] = @xContext::$config->i18n->format->date && @xContext::$config->i18n->format->time ?
+                xContext::$config->i18n->format->date.' '.xContext::$config->i18n->format->time :
+                '%d-%m-%Y %H:%M';
+        }
+    }
+    function message() {
+        return _("invalid");
+    }
+    function invalid($value) {
+        $o = $this->options;
+        $date_info = strptime($value, $this->options['format']);
+        // Validates date & time using related validators
+        $valid_date = xValidator::create('date')->valid_date($date_info);
+        $valid_time = xValidator::create('time')->valid_time($date_info);
+        if (!$valid_date || !$valid_time) return $this->message();
+        return false;
+    }
+}
+
 class xValidatorMinvalue extends xValidator {
     var $options = array(
         'value' => null,
     );
     function message() {
-        return _(sprintf("too small (minimum %s)", $this->options['value']));
+        return sprintf(_("too small (minimum %s)"), $this->options['value']);
     }
     function invalid($value) {
         $o = $this->options;
@@ -249,7 +359,7 @@ class xValidatorMaxvalue extends xValidator {
         'value' => null,
     );
     function message() {
-        return _(sprintf("too big (maximum %s)", $this->options['value']));
+        return sprintf(_("too big (maximum %s)"), $this->options['value']);
     }
     function invalid($value) {
         $o = $this->options;
