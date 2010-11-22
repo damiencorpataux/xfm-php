@@ -29,6 +29,13 @@ class xContext {
     static $profile;
 
     /**
+     * The base path of the xfreemwork library.
+     *
+     * @var string
+     */
+    static $libpath;
+
+    /**
      * The base path of the application.
      *
      * @var string
