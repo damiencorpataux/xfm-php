@@ -167,8 +167,6 @@ class xView {
             xContext::$log->log(array("xView::load(): merging view meta into given array"), 'xView');
             $meta_return = xUtil::array_merge($meta_return, $instance->meta);
         }
-        xContext::$log->log(array(get_class($instance)." data:", $instance->data), $instance);
-        xContext::$log->log(array(get_class($instance)." meta:", $instance->meta), $instance);
         return $instance;
     }
 
@@ -218,9 +216,11 @@ class xView {
                 return xUtil::url($path, $full);
             }
         }
-        // Renders the template
+        // Loads the template and processes template tags
         $file = "{$this->path}/{$template}";
         if (!file_exists($file)) throw new xException("Template file not found ($file)", 404);
+//        $template = $this->process_tags(file_get_contents($file));
+        // Renders the template
         ob_start();
         require($file);
         $s = ob_get_contents();
@@ -237,6 +237,22 @@ class xView {
         }
         return $s;
     }
+
+/*
+    function process_tags($template) {
+        // Processes {{ ... }}
+        $template = preg_replace_callback('/\{(.*?)\}/', array($this, "process_tag_var"), $template);
+        return $template;
+    }
+    function process_tag_var($matches) {
+        $var = $matches[1];
+        // Create PHP variable
+        $phpvar = '$d';
+        foreach (explode('.', $var) as $fragment) $phpvar .= "['{$fragment}']";
+        // Replaces tag with PHP snippet
+        return "<?php print @{$phpvar} ?>";
+    }
+*/
 
     /**
      * Buffers the given string in the view buffer.
