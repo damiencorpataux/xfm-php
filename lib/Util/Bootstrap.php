@@ -50,6 +50,7 @@ class xBootstrap {
         xContext::$basepath = @$_SERVER['DOCUMENT_ROOT'] ?
             substr($_SERVER['DOCUMENT_ROOT'], 0, -strlen('/public')) :
             substr(dirname(__file__), 0, strpos(dirname(__file__), '/lib'));
+        xContext::$libpath = substr(dirname(__file__), 0, -strlen('/Util'));
         xContext::$baseuri = substr($_SERVER['SCRIPT_NAME'], 0, -strlen('/index.php'));
         xContext::$baseurl = xUtil::url(xContext::$baseuri, true);
         $this->setup_includes_externals();
