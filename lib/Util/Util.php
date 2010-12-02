@@ -469,9 +469,9 @@ class xUtil {
      * @param string 
      * @return bool The PHP mail function return value.
      */
-    static function mail($to, $subject , $message, $from, $encoding) {
+    static function mail($to, $subject , $message, $from, $encoding = 'utf-8') {
         $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/plain; charset=utf-8' . "\r\n";
+        $headers .= 'Content-type: text/plain; charset={$encoding}' . "\r\n";
         return mail($to, $subject, $message, $headers.$from);
     }
 
