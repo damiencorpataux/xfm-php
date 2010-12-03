@@ -47,10 +47,6 @@ class xWebFront extends xFront {
             'exception' => $exception
         ));
         $this->handle();
-        // Display PHP error if error reporting level is > 0
-        if (constant(xContext::$config->error->reporting)) {
-            xUtil::pre($exception->__toString());
-        }
     }
 
     function get() {
