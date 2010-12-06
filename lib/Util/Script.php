@@ -30,11 +30,13 @@ abstract class xScript {
 
     /**
      * Setups script components.
+     * @param bool If true, calls the run() method automatically from constructor.
      */
-    function setup() {
+    function setup($autorun = true) {
         $this->setup_bootstrap();
+        $this->init();
         $this->print_profile_information();
-        $this->run();
+        if ($autorun) $this->run();
     }
 
     /**
@@ -53,6 +55,11 @@ abstract class xScript {
         $this->log("Database: {$db['user']}@{$db['host']}/{$db['database']}", 1);
         $this->log();
     }
+
+    /**
+     * Hook for initializing specific things.
+     */
+    function init() {}
 
     /**
      * The actual user script logic.
