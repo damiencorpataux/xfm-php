@@ -35,7 +35,7 @@ class xBootstrap {
         header(xException::$statuses[$status]);
         // Calls specific front error handler
         try {
-            $error_front = xFront::load(xContext::$router->params['xfront'], xContext::$router->params)->handle_error($exception);
+            $error_front = xFront::load(xContext::$router->params['xfront'], xContext::$router->params);
         } catch (Exception $e) {
             null;
         }
