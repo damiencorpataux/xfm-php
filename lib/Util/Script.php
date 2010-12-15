@@ -14,8 +14,9 @@
 **/
 abstract class xScript {
 
-    function __construct() {
+    function __construct($autorun = true) {
         $this->setup();
+        if ($autorun) $this->run();
     }
 
     /**
@@ -32,11 +33,10 @@ abstract class xScript {
      * Setups script components.
      * @param bool If true, calls the run() method automatically from constructor.
      */
-    function setup($autorun = true) {
+    function setup() {
         $this->setup_bootstrap();
         $this->init();
         $this->print_profile_information();
-        if ($autorun) $this->run();
     }
 
     /**
@@ -50,9 +50,11 @@ abstract class xScript {
     function print_profile_information() {
         $p = xContext::$profile;
         $db = xContext::$config->db->toArray();
+        $this->log();
         $this->log("Running script with:");
         $this->log("Profile: {$p}", 1);
         $this->log("Database: {$db['user']}@{$db['host']}/{$db['database']}", 1);
+        $this->log("----");
         $this->log();
     }
 
@@ -77,6 +79,27 @@ abstract class xScript {
         for ($i=0; $i<$indent_level; $i++) $indent .= '*';
         if (strlen($indent)) $indent .= ' ';
         print "{$indent}{$msg}\n";
+    }
+
+    /**
+     * Returns command line options/arguments
+     * @see http://php.net/manual/en/function.getopt.php
+     * @param string Options string as defined in PHP getopt()
+     * @return array An array of options/argument as defined in PHP geoopt()
+     */
+    function opts($opts = 'h') {
+        $opts = getopt($opts);
+        if (isset($opts['h'])) {
+            echo 'Usage: '.@$_SERVER['argv'][0]."\n\n";
+            foreach (xUtil::arrize($this->help()) as $line) echo "{$line}\n";
+            echo "\n";
+            exit();
+        }
+        return $opts;
+    }
+
+    function help() {
+        return "Arguments description not available";
     }
 }
 
