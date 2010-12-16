@@ -122,7 +122,10 @@ abstract class xModelMysql extends xModel {
             "SELECT count(*) as count",
             $this->sql_from(),
             $this->sql_join(),
-            $this->sql_where()
+            $this->sql_where(),
+            $this->sql_group(),
+            $this->sql_order(),
+            $this->sql_limit()
         ));
         $count = array_shift($this->query($sql));
         return $count['count'];
