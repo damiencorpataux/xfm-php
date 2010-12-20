@@ -242,11 +242,11 @@ class xUtil {
      * Issues cross-browser header for page redirection.
      * @param string url to redirect to.
      */
-    static function redirect($url) {
+    static function redirect($url, $exit = true) {
         if (!@$url || @xContext::$config->prevent_redirect) return;
         header("Status: 301");
         header("Location: $url");
-        exit;
+        if ($exit) exit;
     }
 
     /**
