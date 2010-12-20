@@ -17,7 +17,7 @@ class xValidatorHelper {
     }
 
     function url($value) {
-        return preg_match('/^(\w+\.)+\w{2,4}(\/\S*)?$$/', $value) > 0;
+        return preg_match('/^([^\s]+\.)+\w{2,4}(\/\S*)?$/', $value) > 0;
     }
 
     function integer($value) {

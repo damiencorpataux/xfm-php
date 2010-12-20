@@ -85,13 +85,6 @@ class xValidatorStore {
 abstract class xValidator {
 
     /**
-     * Validator messages array.
-     * Populated by the constructor from the messages().
-     * @var array
-     */
-    var $message = array();
-
-    /**
      * Validation options (e.g. string min/max length)
      * @var array
      */
@@ -190,6 +183,13 @@ class xValidatorMandatory extends xValidator {
 
 class xValidatorEmail extends xValidatorRegexp {
     var $regexp = '/^[^\s]+?@[^\s]+?\.[\w]{2,5}$/';
+    function message() {
+        return _('invalid');
+    }
+}
+
+class xValidatorUrl extends xValidatorRegexp {
+    var $regexp = '/^([^\s]+\.)+\w{2,4}(\/\S*)?$/';
     function message() {
         return _('invalid');
     }
