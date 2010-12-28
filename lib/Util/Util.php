@@ -475,6 +475,25 @@ class xUtil {
         return mail($to, $subject, $message, $headers.$from);
     }
 
+    /**
+     * Returns distance in meters between two points
+     * @param float Longitude 1, in degrees
+     * @param float Lattitude 1, in degrees
+     * @param float Longitude 2, in degrees
+     * @param float Lattitude 2, in degrees
+     * @return float
+     */
+    static function distance($lon1, $lat1, $lon2, $lat2) {
+        // Note: earth's circumference is 40030 Km long, divided in 360 degrees, that's 111190
+        if ($lat1==$lat2 && $lon1==$lon2) return 0;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($lon1-$lon2));
+        $dist = acos($dist); 
+        $dist = rad2deg($dist);
+        if ($dist>0) return round($dist * 111190);
+        return 0;
+    }
+
+
 }
 
 ?>
