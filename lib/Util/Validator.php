@@ -9,6 +9,7 @@
 **/
 
 /**
+ * This component is to be used for validating multiple fields
  * @package xFreemwork
 **/
 class xValidatorStore {
@@ -82,6 +83,10 @@ class xValidatorStore {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Generic validator
+ * @package xFreemwork
+**/
 abstract class xValidator {
 
     /**
@@ -135,6 +140,10 @@ abstract class xValidator {
     abstract function message();
 }
 
+/**
+ * This validator is made for re-using models validation logic
+ * @package xFreemwork
+**/
 class xValidatorModel extends xValidator {
 
     var $options = array(
@@ -154,6 +163,10 @@ class xValidatorModel extends xValidator {
     }
 }
 
+/**
+ * Generic regular expression based validator
+ * @package xFreemwork
+**/
 abstract class xValidatorRegexp extends xValidator {
 
     var $regexp;
@@ -169,6 +182,10 @@ abstract class xValidatorRegexp extends xValidator {
 
 //
 
+/**
+ * Checks whether a value is present or not
+ * @package xFreemwork
+**/
 class xValidatorMandatory extends xValidator {
 
     function message() {
@@ -181,6 +198,10 @@ class xValidatorMandatory extends xValidator {
     }
 }
 
+/**
+ * Checks whether an email pattern is correct
+ * @package xFreemwork
+**/
 class xValidatorEmail extends xValidatorRegexp {
     var $regexp = '/^[^\s]+?@[^\s]+?\.[\w]{2,5}$/';
     function message() {
@@ -188,6 +209,10 @@ class xValidatorEmail extends xValidatorRegexp {
     }
 }
 
+/**
+ * Checks whether a url pattern is correct
+ * @package xFreemwork
+**/
 class xValidatorUrl extends xValidatorRegexp {
     var $regexp = '/^([^\s]+\.)+\w{2,4}(\/\S*)?$/';
     function message() {
@@ -195,6 +220,10 @@ class xValidatorUrl extends xValidatorRegexp {
     }
 }
 
+/**
+ * Checks the minimum length of a string
+ * @package xFreemwork
+**/
 class xValidatorMinlength extends xValidator {
     var $options = array(
         'length' => 0
@@ -210,6 +239,10 @@ class xValidatorMinlength extends xValidator {
     }
 }
 
+/**
+ * Checks the maximum length of a string
+ * @package xFreemwork
+**/
 class xValidatorMaxlength extends xValidator {
     var $options = array(
         'length' => null
@@ -225,6 +258,10 @@ class xValidatorMaxlength extends xValidator {
     }
 }
 
+/**
+ * Checks whether a value is an integer
+ * @package xFreemwork
+**/
 class xValidatorInteger extends xValidatorRegexp {
     var $regexp = '/^[0-9]+$/';
     function message() {
@@ -232,6 +269,10 @@ class xValidatorInteger extends xValidatorRegexp {
     }
 }
 
+/**
+ * Checks whether a value is a valid date
+ * @package xFreemwork
+**/
 class xValidatorDate extends xValidator {
     var $options = array(
         // According PHP strftime() function format
@@ -271,6 +312,10 @@ class xValidatorDate extends xValidator {
     }
 }
 
+/**
+ * Checks whether a value is a valid time
+ * @package xFreemwork
+**/
 class xValidatorTime extends xValidator {
     var $options = array(
         // According PHP strftime() function format
@@ -310,6 +355,10 @@ class xValidatorTime extends xValidator {
     }
 }
 
+/**
+ * Checks whether a value is a valid datetime
+ * @package xFreemwork
+**/
 class xValidatorDatetime extends xValidator {
     var $options = array(
         // According PHP strftime() function format
@@ -339,6 +388,10 @@ class xValidatorDatetime extends xValidator {
     }
 }
 
+/**
+ * Checks whether an integer value is equal or greater than a given value
+ * @package xFreemwork
+**/
 class xValidatorMinvalue extends xValidator {
     var $options = array(
         'value' => null,
@@ -354,6 +407,10 @@ class xValidatorMinvalue extends xValidator {
     }
 }
 
+/**
+ * Checks whether an integer value is equal or less than a given value
+ * @package xFreemwork
+**/
 class xValidatorMaxvalue extends xValidator {
     var $options = array(
         'value' => null,
@@ -369,6 +426,10 @@ class xValidatorMaxvalue extends xValidator {
     }
 }
 
+/**
+ * Checks whether two fields values are identical
+ * @package xFreemwork
+**/
 class xValidatorConfirm extends xValidator {
     var $options = array(
         'match' => null,
@@ -385,6 +446,10 @@ class xValidatorConfirm extends xValidator {
     }
 }
 
+/**
+ * Checks whether a checkbox is checked
+ * @package xFreemwork
+**/
 class xValidatorChecked extends xValidator {
     function message() {
         return _('must be checked');
@@ -395,6 +460,10 @@ class xValidatorChecked extends xValidator {
     }
 }
 
+/**
+ * Checks whether a value does not already exists in a table row
+ * @package xFreemwork
+**/
 class xValidatorUnique extends xValidator {
     var $options = array(
         'model' => null,
