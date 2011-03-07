@@ -1,14 +1,29 @@
 #!/bin/sh
 
+###############################################################################
+# Configuration
+#
+
+# Directories
 phpdoc_dir=PhpDocumentor
 source_dir=../../lib
 output_dir=../../docs/api/trunk
+
+# Title
+svn_revision=`svn info | grep Revision | cut -b11-`
+svn_date=`svn info | grep Date | cut -b20-38`
+title="xFreemwork API Documentation<br/>(trunk, revision $svn_revision, $svn_date)"
+
+
+###############################################################################
+# Processing
+#
 
 # Empties output directory
 rm -rf $output_dir/*
 
 # Generates HTML Documentation
-php $phpdoc_dir/phpdoc -o HTML:frames:earthli -d $source_dir -t $output_dir -dn xFreemwork -s -ti "xFreemwork API Documentation (trunk)" > /dev/null
+php $phpdoc_dir/phpdoc -o HTML:frames:earthli -d $source_dir -t $output_dir -dn xFreemwork -s -ti "$title" > /dev/null
 
 # Renames files (PhpDocumentor bug?)
 # - *.cs -> *.css
