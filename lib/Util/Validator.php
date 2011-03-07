@@ -10,7 +10,7 @@
 
 /**
  * This component is to be used for validating multiple fields
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorStore {
 
@@ -84,8 +84,8 @@ class xValidatorStore {
 ///////////////////////////////////////////////////////////////////////////////
 
 /**
- * Generic validator
- * @package xFreemwork
+ * Generic validator.
+ * @package xValidator
 **/
 abstract class xValidator {
 
@@ -142,7 +142,7 @@ abstract class xValidator {
 
 /**
  * This validator is made for re-using models validation logic
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorModel extends xValidator {
 
@@ -165,7 +165,7 @@ class xValidatorModel extends xValidator {
 
 /**
  * Generic regular expression based validator
- * @package xFreemwork
+ * @package xValidator
 **/
 abstract class xValidatorRegexp extends xValidator {
 
@@ -184,7 +184,7 @@ abstract class xValidatorRegexp extends xValidator {
 
 /**
  * Checks whether a value is present or not
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorMandatory extends xValidator {
 
@@ -200,7 +200,7 @@ class xValidatorMandatory extends xValidator {
 
 /**
  * Checks whether an email pattern is correct
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorEmail extends xValidatorRegexp {
     var $regexp = '/^[^\s]+?@[^\s]+?\.[\w]{2,5}$/';
@@ -211,7 +211,7 @@ class xValidatorEmail extends xValidatorRegexp {
 
 /**
  * Checks whether a url pattern is correct
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorUrl extends xValidatorRegexp {
     var $regexp = '/^([^\s]+\.)+\w{2,4}(\/\S*)?$/';
@@ -222,7 +222,7 @@ class xValidatorUrl extends xValidatorRegexp {
 
 /**
  * Checks the minimum length of a string
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorMinlength extends xValidator {
     var $options = array(
@@ -241,7 +241,7 @@ class xValidatorMinlength extends xValidator {
 
 /**
  * Checks the maximum length of a string
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorMaxlength extends xValidator {
     var $options = array(
@@ -260,7 +260,7 @@ class xValidatorMaxlength extends xValidator {
 
 /**
  * Checks whether a value is an integer
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorInteger extends xValidatorRegexp {
     var $regexp = '/^[0-9]+$/';
@@ -271,7 +271,7 @@ class xValidatorInteger extends xValidatorRegexp {
 
 /**
  * Checks whether a value is a valid date
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorDate extends xValidator {
     var $options = array(
@@ -314,7 +314,7 @@ class xValidatorDate extends xValidator {
 
 /**
  * Checks whether a value is a valid time
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorTime extends xValidator {
     var $options = array(
@@ -357,7 +357,7 @@ class xValidatorTime extends xValidator {
 
 /**
  * Checks whether a value is a valid datetime
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorDatetime extends xValidator {
     var $options = array(
@@ -390,7 +390,7 @@ class xValidatorDatetime extends xValidator {
 
 /**
  * Checks whether an integer value is equal or greater than a given value
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorMinvalue extends xValidator {
     var $options = array(
@@ -409,7 +409,7 @@ class xValidatorMinvalue extends xValidator {
 
 /**
  * Checks whether an integer value is equal or less than a given value
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorMaxvalue extends xValidator {
     var $options = array(
@@ -428,7 +428,7 @@ class xValidatorMaxvalue extends xValidator {
 
 /**
  * Checks whether two fields values are identical
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorConfirm extends xValidator {
     var $options = array(
@@ -448,7 +448,7 @@ class xValidatorConfirm extends xValidator {
 
 /**
  * Checks whether a checkbox is checked
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorChecked extends xValidator {
     function message() {
@@ -462,7 +462,7 @@ class xValidatorChecked extends xValidator {
 
 /**
  * Checks whether a value does not already exists in a table row
- * @package xFreemwork
+ * @package xValidator
 **/
 class xValidatorUnique extends xValidator {
     var $options = array(

@@ -2,7 +2,7 @@
 
 /**
  * Data validation helper
- * @package xFreemwork
+ * @package xHelper
 **/
 class xValidatorHelper {
 

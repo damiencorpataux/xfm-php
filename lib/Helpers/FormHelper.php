@@ -10,7 +10,7 @@
 
 /**
  * Utility class for generating form html code.
- * @package xFreemwork
+ * @package xHelper
 **/
 class xFormHelper {
 

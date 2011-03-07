@@ -11,7 +11,7 @@
 /**
  * xForm class.
  * Deals form creation, validation and HTML generation.
- * @package xFreemwork
+ * @package xForm
 **/
 class xForm {
 
@@ -156,6 +156,10 @@ class xForm {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * 
+ * @package xForm
+**/
 class xFormFieldText extends xFormField {
     var $template_label = '<label for="%1$s">%2$s</label>';
     var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" value="%4$s" %5$s/>';
@@ -168,6 +172,10 @@ class xFormFieldText extends xFormField {
     }
 }
 
+/**
+ *
+ * @package xForm
+**/
 class xFormFieldPassword extends xFormField {
     var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" value="%4$s" %5$s/>';
     function options() {
@@ -180,6 +188,10 @@ class xFormFieldPassword extends xFormField {
     }
 }
 
+/**
+ *
+ * @package xForm
+**/
 class xFormFieldCheckbox extends xFormField {
     var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" %5$s/>';
     var $template_selected = 'checked="checked"';
@@ -203,6 +215,10 @@ class xFormFieldCheckbox extends xFormField {
     }
 }
 
+/**
+ *
+ * @package xForm
+**/
 class xFormFieldSelect extends xFormField {
     var $template_field = '<select name="%1$s" id="%1$s" value="%4$s">%10$s</select>';
     var $items = array();
@@ -239,6 +255,11 @@ class xFormFieldSelect extends xFormField {
         ));
     }
 }
+/**
+ *
+ * @package xForm
+ * @see xFormFieldSelect
+**/
 class xFormFieldOption extends xFormField {
     var $template_field = '<option id="option_%1$s_%4$s" value="%4$s" %5$s>%2$s</option>';
     var $template_selected = 'selected="selected"';
@@ -254,6 +275,10 @@ class xFormFieldOption extends xFormField {
     function render_message() { return ''; }
 }
 
+/**
+ *
+ * @package xForm
+**/
 class xFormFieldSelectNumeric extends xFormFieldSelect {
     function init() {
         $array_values = array_values($this->options['values']);
@@ -265,6 +290,10 @@ class xFormFieldSelectNumeric extends xFormFieldSelect {
     }
 }
 
+/**
+ *
+ * @package xForm
+**/
 class xFormFieldSubmit extends xFormField {
     var $template_field = '<input type="%3$s" class="button" name="%1$s" id="%1$s" value="%4$s" %5$s/>';
     function options() {
@@ -274,16 +303,12 @@ class xFormFieldSubmit extends xFormField {
     }
 }
 
-class xFormFieldCaptcha extends xFormField {
-    var $template_field = 'TODO: Captcha';
-    function options() {
-        return array(
-            'validation' => "captcha" // I think we shall validate it here,
-                                      // not in a validator (for KISS sake)
-        );
-    }
-}
+///////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Generic form field.
+ * @package xForm
+**/
 abstract class xFormField {
 
     var $template_label = '<label for="%1$s">%2$s</label>';

@@ -2,7 +2,7 @@
 
 /**
  * Reusable component
- * @package xFreemwork
+ * @package xReusable
 **/
 class xSiteMap {
 
