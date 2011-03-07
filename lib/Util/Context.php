@@ -100,7 +100,7 @@ class xContext {
     private function __construct() {}
 
     /**
-     * Return a text dump of the context object for inspection.
+     * Returns a text dump of the context object for inspection.
      * @return string 
      */
     static function dump() {

@@ -1,10 +1,9 @@
 <?php
 
-// TODO:
-// create 2 validators that eat the same validation rules format:
-//  - 1 for PHP
-//  - 1 for JavaScript
-
+/**
+ * Data validation helper
+ * @package xFreemwork
+**/
 class xValidatorHelper {
 
     function email($value) {

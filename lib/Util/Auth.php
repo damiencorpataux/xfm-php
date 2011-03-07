@@ -14,6 +14,7 @@
  * Session infos structure:
  * - username: username of the authenticted user
  * - roles: csv roles
+ * @package xFreemwork
  */
 class xAuth {
 

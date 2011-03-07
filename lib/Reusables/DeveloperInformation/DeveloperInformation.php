@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Reusable component
+ * @package xFreemwork
+**/
 class xDeveloperInformation {
 
     function render() {

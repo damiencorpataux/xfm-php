@@ -20,6 +20,10 @@ abstract class xFront extends xController {
         $this->setup_i18n();
     }
 
+    /**
+     * Sets up the Gettext locale and domain according
+     * the selected/guessed language.
+     */
     function setup_i18n() {
         // Defines the current language
         $lang_available = xContext::$config->i18n->lang->alias->toArray();
@@ -50,6 +54,13 @@ abstract class xFront extends xController {
         bind_textdomain_codeset($domain, 'UTF-8');
     }
 
+    /**
+     * Entry point for Front controller.
+     * This method call the method related
+     * to the HTTP status.
+     * This is part of the REST orientatin of the framework.
+     * @return mixed
+     */
     function handle() {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':

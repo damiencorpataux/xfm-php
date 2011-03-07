@@ -55,7 +55,7 @@ abstract class xController {
     }
 
     /**
-     * Calls controller action and returns its output.
+     * Calls a controller action and returns its output.
      * @return string
      */
     function call($action) {

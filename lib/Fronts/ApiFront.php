@@ -10,31 +10,11 @@
 
 /**
  * Front controller class, api flavour.
- * Implements business objects logic,
- * such as validations, authentication, etc.
+ * Implements API features and session initialization.
  * @package xFreemwork
+ * @todo Implement API Key mechanism.
 **/
 class xApiFront extends xRestFront {
-
-    // TODO: shall the role check be done here or in controller->method() ?
-    /**
-     * Contains allowed methods for each role.
-     * Conventional array structure:
-     * <code>
-     * array(
-     *     'role1' => array(
-     *         'controller1' => array('method1', 'method2'),
-     *         'controller2' => array('method1'),
-     *         // Allows every method of controller2 for role1
-     *         'controller2' => '*'
-     *     ),
-     *     // Allows every controller and every methods for role2
-     *     'role2' =>'*'
-     * )
-     * </code>
-     * @var array
-     */
-    var $security = array();
 
     function __construct($params = null) {
         // TODO: check for API key?
@@ -50,6 +30,10 @@ class xApiFront extends xRestFront {
         parent::__construct($params);
     }
 
+    /**
+     * Calls a controller method and return its result.
+     * @return mixed Controller result.
+     */
     function call_method() {
         if (!@$this->params['xmethod']) throw new xException('Method param missing', 400);
         $method = $this->params['xmethod'];

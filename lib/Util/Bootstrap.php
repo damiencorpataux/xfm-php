@@ -8,6 +8,11 @@
  *
 **/
 
+/**
+ * This class is a dummy logger
+ * used for early stage bootstrap setup
+ * @package xFreemwork
+**/
 class xDummyLogger {
     function __call($m, $a) {}
 }
@@ -29,6 +34,9 @@ class xBootstrap {
     function __destruct() {
     }
 
+    /**
+     * Called when an expection is catched by the bootstrap.
+     */
     static function handle_exception($exception) {
         // Sends HTTP error status
         $status = @$exception->status ? $exception->status : 500;
@@ -43,6 +51,9 @@ class xBootstrap {
         else print_r($exception);
     }
 
+    /**
+     * Setups the application context.
+     */
     function setup($profile) {
         $this->setup_includes();
         if ($profile) xContext::$profile = $profile;
@@ -65,6 +76,9 @@ class xBootstrap {
         $this->setup_addons();
     }
 
+    /**
+     * Run the application.
+     */
     function run() {
         try {
             xContext::$router->route();
