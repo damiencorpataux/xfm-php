@@ -22,6 +22,10 @@ class xLogger {
     const FATAL = 5;
     const NONE = 6;
 
+    /**
+     * Logger levels labels.
+     * @var array
+     */
     var $labels = array(
         0 => 'DEBUG',
         1 => 'INFO',
@@ -33,25 +37,25 @@ class xLogger {
     );
 
     /**
-     * The minimum log level to be written in the log file
+     * The minimum log level to be written in the log file.
      * @var integer
      */
     var $level;
 
     /**
-     * The class names to be logged
+     * The class names to be logged.
      * @var array
      */
     var $classes = array();
 
     /**
-     * The path and filename to active log file
+     * The path and filename to active log file.
      * @var string
      */
     var $file;
 
     /**
-     * The microtimestamp corresponding when the logger was instanciated
+     * The microtimestamp of the logger instanciation time.
      * @var string
      */
     var $start_time;
@@ -64,9 +68,15 @@ class xLogger {
         $this->file = fopen($filename, "a");
         if (!$this->file) throw new Exception("Could not open log file: $filename");
         fwrite($this->file, "\n--8<---------------------------------------------------------------------------\n");
+        // Writes the requested URL
         $url = @$_SERVER['HTTP_HOST'].@$_SERVER['REQUEST_URI'];
         $url = $url ? $url : '[No url]';
         fwrite($this->file, "URL: {$url}\n");
+        // Writes the requester IP
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) $ip=$_SERVER['HTTP_CLIENT_IP'];
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        else $ip=$_SERVER['REMOTE_ADDR'];
+        fwrite($this->file, "IP: {$ip}\n");
     }
 
     function __destruct() {

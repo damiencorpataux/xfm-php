@@ -11,7 +11,9 @@
 
 /**
  * Base view class.
- * Deals with rendering and i18n.
+ * 
+ * Responsibilities
+ * - deals with rendering and internationalization (i18n)
  * @package xFreemwork
 **/
 class xView {

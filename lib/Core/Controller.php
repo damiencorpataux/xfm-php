@@ -11,26 +11,18 @@
 /**
  * Base controller class.
  * Deals with caller interactions (request & response).
+ * 
+ * Responsibilities
+ * - expose user actions
+ * - manage user inputs
+ * - output user data
  * @package xFreemwork
 **/
-abstract class xController {
-
-    /**
-     * Controller instance parameters (associative array).
-     * @var array
-     */
-    var $params = array();
-
+abstract class xController extends xRestElement {
 
     protected function __construct($params = null) {
-        $this->params = xUtil::array_merge($this->params, $params);
-        $this->init();
+        parent::__construct($params);
     }
-
-    /**
-     * Hook for subclass initialization logic
-     */
-    protected function init() {}
 
     /**
      * Loads and returns the controller specified object.
@@ -38,20 +30,16 @@ abstract class xController {
      * load the controllers/entry.php file.
      * and return an instance of the EntryController class:
      * <code>
-     * xView::load('entry');
+     * xController::load('entry');
      * </code>
      * @param string The controller to load.
      * @return xController
      */
     static function load($name, $params = null) {
-        $file = xContext::$basepath."/controllers/{$name}.php";
-        xContext::$log->log("Loading controller: $file", 'xController');
-        if (!file_exists($file)) throw new xException("Controller file not found (controller {$name})", 404);
-        require_once($file);
-        $class_name = str_replace(array('/', '.'), '', $name)."Controller";
-        xContext::$log->log(array("Instanciating controller: $class_name"), 'xController');
-        $instance = new $class_name($params);
-        return $instance;
+        $files = array(
+            str_replace(array('/', '.'), '', $name)."Controller" => xContext::$basepath."/controllers/{$name}.php"
+        );
+        return self::load_these($files, $params);
     }
 
     /**
@@ -65,26 +53,6 @@ abstract class xController {
         xContext::$log->log("Calling controller {$action_method}() method", $this);
         if (!method_exists($this, $action_method)) throw new xException("Controller action not found: {$action}", 404);
         return $this->$action_method();
-    }
-
-    // select
-    function get() {
-        throw new xException('Not implemented', 501);
-    }
-
-    // insert
-    function post() {
-        throw new xException('Not implemented', 501);
-    }
-
-    // update
-    function put() {
-        throw new xException('Not implemented', 501);
-    }
-
-    // delete
-    function delete() {
-        throw new xException('Not implemented', 501);
     }
 }
 

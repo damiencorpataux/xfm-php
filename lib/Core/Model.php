@@ -9,11 +9,13 @@
 **/
 
 /**
- * Model class.
- * Deals with database transactions.
+ * Model base class.
+ * 
+ * Responsibilities:
+ * - deal with database transactions
  * @package xFreemwork
 **/
-abstract class xModel extends xController {
+abstract class xModel extends xRestElement {
 
     var $table = 'sometablename';
 
@@ -80,16 +82,28 @@ abstract class xModel extends xController {
      */
     var $constants = array();
 
-    // Mandatory params for get operations (model fields names)
+    /**
+     * Mandatory params for get operations (model fields names)
+     * @var array
+     */
     var $get = array();
 
-    // Mandatory params for post operations (model fields names)
+    /**
+     * Mandatory params for post operations (model fields names)
+     * @var array
+     */
     var $post = array();
 
-    // Mandatory params for put operations (model fields names)
+    /**
+     * Mandatory params for put operations (model fields names)
+     * @var array
+     */
     var $put = array();
 
-    // Mandatory params for delete operations (model fields names)
+    /**
+     * Mandatory params for delete operations (model fields names)
+     * @var array
+     */
     var $delete = array();
 
     /**
@@ -179,13 +193,10 @@ abstract class xModel extends xController {
      * @return xModel
      */
     static function load($name, $params = null, $options = array()) {
-        $file = xContext::$basepath."/models/{$name}.php";
-        xContext::$log->log("Loading model: $file", 'xModel');
-        if (!file_exists($file)) throw new xException("Model file not found (model {$name})", 404);
-        require_once($file);
-        $class_name = str_replace(array('_', '.'), '', $name)."Model";
-        xContext::$log->log("Instanciating model: $class_name", 'xModel');
-        $instance = new $class_name($params);
+        $files = array(
+            str_replace(array('_', '.'), '', $name)."Model" => xContext::$basepath."/models/{$name}.php"
+        );
+        $instance = self::load_these($files, $params);
         // Applies options
         foreach ($options as $key => $value) {
             $instance->$key = $value;
@@ -325,6 +336,11 @@ abstract class xModel extends xController {
      * @return string
      */
     abstract function escape($value, $field = null);
+
+    /**
+     * Returns the allowed SQL constants (eg. CURRENT_TIMESTAMP).
+     * @return array
+     */
     abstract function sql_constants();
 
     /**

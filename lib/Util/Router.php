@@ -9,8 +9,12 @@
 **/
 
 /**
- * This class is responsible for uri routing.
- * It matches the best route, sets up arguments and calls the defined controller action.
+ * Manages HTTP Requests routing.
+ *
+ * Responsibilities:
+ * - parse the URL,
+ * - instantiate the requested controller
+ * - call the requested action (controller method) through the front controller
  * @package xFreemwork
 **/
 class xRouter {
@@ -72,20 +76,27 @@ class xRouter {
 
     function match_route() {
         $this->process_uri();
+        $routes = $this->routes;
         // Finds the best matching route
         foreach ($this->fragments as $ip => $part) {
-            foreach ($this->routes as $ir => $route) {
+            foreach ($routes as $ir => $route) {
                 if (@substr($route['pattern'][$ip], 0, 1)  == ':') continue;
                 if (@$route['pattern'][$ip] != $part) {
-                    unset($this->routes[$ir]);
+                    unset($routes[$ir]);
                     continue;
                 }
             }
         }
-        if (count($this->routes) < 1) throw new xException("No URI matching route", 404);
-        return array_shift($this->routes);
+        if (count($routes) < 1) throw new xException("No URI matching route", 404);
+        return array_shift($routes);
     }
 
+    /**
+     * Calls controller action and outputs HTTP response body.
+     * Controller actions are called through a front controller.
+     * The front controllers acts as a Decorator.
+     * (see Decorator design pattern)
+     */
     function route() {
         $route = $this->match_route();
         // Get params from route fragments

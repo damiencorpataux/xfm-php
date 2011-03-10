@@ -9,11 +9,13 @@
 **/
 
 /**
- * Front controller class.
- * Deals with controller output decoration (layouting, formatting).
+ * Front controller base class.
+ * 
+ * Responsibilities
+ * - decorate controllers
  * @package xFreemwork
 **/
-abstract class xFront extends xController {
+abstract class xFront extends xRestElement {
 
     protected function __construct($params = null) {
         parent::__construct($params);
@@ -81,25 +83,21 @@ abstract class xFront extends xController {
     }
 
     /**
-     * Loads and returns the front specified object.
+     * Loads and returns the specified front element.
      * For example, the following code will
-     * load the controllers/entry.php file.
-     * and return an instance of the EntryController class:
+     * load the fronts/web.php file.
+     * and return an instance of the WebFront class:
      * <code>
-     * xView::load('entry');
+     * xFront::load('web');
      * </code>
-     * @param string The controller to load.
-     * @return xController
+     * @param string The front to load.
+     * @return xFront
      */
     static function load($name, $params = null) {
-        $file = xContext::$basepath."/fronts/{$name}.php";
-        xContext::$log->log("Loading front: $file", 'xFront');
-        if (!file_exists($file)) throw new xException("Front file not found (front {$name})", 404);
-        require_once($file);
-        $class_name = $name."Front";
-        xContext::$log->log(array("Instanciating front: $class_name"), 'xFront');
-        $instance = new $class_name($params);
-        return $instance;
+        $files = array(
+            "{$name}Front" => xContext::$basepath."/fronts/{$name}.php"
+        );
+        return self::load_these($files, $params);
     }
 
     /**

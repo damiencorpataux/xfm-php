@@ -9,8 +9,8 @@
 **/
 
 /**
- * This class is a dummy logger
- * used for early stage bootstrap setup
+ * This class is a dummy logger.
+ * Used for early stage bootstrap setup.
  * @package xFreemwork
 **/
 class xDummyLogger {
@@ -19,6 +19,10 @@ class xDummyLogger {
 
 /**
  * This class creates the application context and launches the router.
+ * 
+ * Responsibilities
+ * - create application context (environment variables, configuration, database, etc)
+ * - launch the router and output the HTTP response body
  * @package xFreemwork
 **/
 class xBootstrap {
@@ -35,7 +39,10 @@ class xBootstrap {
     }
 
     /**
-     * Called when an expection is catched by the bootstrap.
+     * Called when an exception is catched by the bootstrap.
+     * This method handles exceptions
+     * and outputs the HTTP response body.
+     * @param Exception The catched exception.
      */
     static function handle_exception($exception) {
         // Sends HTTP error status
@@ -53,6 +60,7 @@ class xBootstrap {
 
     /**
      * Setups the application context.
+     * @param string The profile to load (defaults to 'development')
      */
     function setup($profile) {
         $this->setup_includes();
@@ -77,7 +85,7 @@ class xBootstrap {
     }
 
     /**
-     * Run the application.
+     * Runs the application and outputs the HTTP response body.
      */
     function run() {
         try {
@@ -98,6 +106,7 @@ class xBootstrap {
         require_once('Util/Router.php');
         require_once('Util/Form.php');
         require_once('Util/Validator.php');
+        require_once('Core/Rest.php');
         require_once('Core/Controller.php');
         require_once('Core/Model.php');
         require_once('Core/ModelMysql.php');
