@@ -35,9 +35,6 @@ class xBootstrap {
         }
     }
 
-    function __destruct() {
-    }
-
     /**
      * Called when an exception is catched by the bootstrap.
      * This method handles exceptions

@@ -51,18 +51,16 @@ abstract class xWebController extends xController {
     }
 
     /**
-     * Used to save/retrieve value in controller session.
-     * If only key param given,
-     * the corresponding stored value is returned
-     * (null if key does not exist)
-     * If both key and value are given,
-     * the value is stored in session.
-     * If no argument given, return the session
-     * array of the controller.
+     * Save/retrieve value(s) in controller session.
+     * Parameter behave as follows:
+     * - If only key param given, the corresponding stored value is returned (null if key does not exist)
+     * - If both key and value are given, the value is stored in session.
+     * - If no argument given, return the session array of the controller.
      * @param string The key identifier.
-     * @param string The value to store.
-     * @return mixed Null if key not found or if value is given,
-                     or the stored value if a valid key is given without value.
+     * @param string The value to store. If null or not provided, the 
+     * @return mixed
+     *     - The stored session array for the controller if $key is not provided or null
+     *     - The stored value if a valid key is given without value.
      */
     function session($key = null, $value = null) {
         if (func_num_args() == 0) return @$_SESSION['x'][get_class($this)];
