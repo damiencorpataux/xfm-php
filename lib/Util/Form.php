@@ -226,7 +226,7 @@ class xFormFieldSelect extends xFormField {
         return array(
             'type' => null,
             'option_class' => 'option',
-            'values' => array(),
+            'values' => array(), // An associative array of value => label tuples
             'default' => null // The value of the default selected item
         );
     }
