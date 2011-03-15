@@ -196,7 +196,7 @@ abstract class xForm {
             $this->fields[$field]->options['state_current'] =
                 $this->fields[$field]->options['state'] ?
                 $this->fields[$field]->options['state'] :
-                'warning';
+                'invalid';
         }
         return $messages;
     }
@@ -214,7 +214,7 @@ abstract class xForm {
  * @package xForm
 **/
 class xFormFieldText extends xFormField {
-    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}"/>';
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}" class="{state_current}"/>';
     function options() {
         return array(
             'type' => 'text'
@@ -227,7 +227,7 @@ class xFormFieldText extends xFormField {
  * @package xForm
 **/
 class xFormFieldTextarea extends xFormField {
-    var $template_field = '<textarea name="{name}" id="{name}" rows="{rows}" cols="{cols}">{value}</textarea>';
+    var $template_field = '<textarea name="{name}" id="{name}" rows="{rows}" cols="{cols}" class="{state_current}">{value}</textarea>';
     function options() {
         return array(
             'type' => 'textarea',
@@ -242,7 +242,7 @@ class xFormFieldTextarea extends xFormField {
  * @package xForm
 **/
 class xFormFieldPassword extends xFormField {
-    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}"/>';
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value} class="{state_current}""/>';
     function options() {
         return array(
             'type' => 'password',
@@ -260,7 +260,7 @@ class xFormFieldPassword extends xFormField {
  * @package xForm
 **/
 class xFormFieldCheckbox extends xFormField {
-    var $template_field = '<input type="{type}" name="{name}" id="{name}" {selected}/>';
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" class="{state_current}" {selected}/>';
     var $template_selected = 'checked="checked"';
     function options() {
         return array(
@@ -281,7 +281,7 @@ class xFormFieldCheckbox extends xFormField {
  * @package xForm
 **/
 class xFormFieldSelect extends xFormField {
-    var $template_field = '<select name="{name}" id="{name}" value="{value}">{options}</select>';
+    var $template_field = '<select name="{name}" id="{name}" value="{value}" class="{state_current}">{options}</select>';
     var $items = array();
     function options() {
         return array(
@@ -404,7 +404,7 @@ abstract class xFormField {
         'value' => null,
         'selected' => null,
         'mandatory' => null,
-        'state' => null,
+        'state' => 'invalid',
         'state_current' => null,
         'message' => null,
         'message_current' => null
