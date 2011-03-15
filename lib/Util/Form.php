@@ -108,12 +108,11 @@ abstract class xForm {
      */
     var $template_row = '<tr><th>{label}</th><td>{field} {message}</td></tr>';
 
-    /*
-     * HTML Form mandatory template (xFormTemplate format)
+    /**
+     * HTML Form row template for mandatory fields (xFormTemplate format)
      * @var string
-     *
-    var $template_mandatory = '*';
      */
+    var $template_row_mandatory = '<tr><th>{label}<span style="font-size:bold;color:red">*</span></th><td>{field} {message}</td></tr>';
 
 
     function __construct() {
@@ -157,12 +156,17 @@ abstract class xForm {
     function render() {
         $s = '';
         foreach ($this->fields as $field) {
-            $s .= xFormTemplate::apply($this->template_row, array(
+            // Determines if the field is mandatory
+            $mandatory = (bool)$this->validator()->get($field->options['name'], 'mandatory');
+            // Renders form contents (fields)
+            $row_template = $mandatory ? $this->template_row_mandatory : $this->template_row;
+            $s .= xFormTemplate::apply($row_template, array(
                 'label' => $field->render_label(),
                 'field' => $field->render_field(),
                 'message' => $field->render_message()
             ));
         }
+        // Applies and returns the processed form template
         $options = array_merge(array('content' => $s), $this->form_options);
         return xFormTemplate::apply($this->template_form, $options);
     }
