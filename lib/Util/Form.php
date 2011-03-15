@@ -9,11 +9,45 @@
 **/
 
 /**
- * xForm class.
- * Deals form creation, validation and HTML generation.
+ * xFormTemplate class.
+ * Manages for templates processing.
  * @package xForm
 **/
-class xForm {
+class xFormTemplate {
+
+    /**
+     * Applies the given data on the given template and returns the result.
+     * Templates are in the following form:
+     * <code>
+     * The value type is {type} and its value is {value}
+     * </code>
+     * Data are in the following structure:
+     * <code>
+     * array(
+     *     'type' => 'integer',
+     *     'value' => 12
+     * )
+     * </code>
+     * @param string A template string
+     * @param array An associative array containing the template data
+     * @return string The processed template output
+     */
+    static function apply($template, $data) {
+        // Creates a PHP processable string
+        $template = str_replace('"', '\"', $template);
+        $php = preg_replace('/\{([\w]*)\}/', '{$data[\'$1\']}', $template);
+        // Processes PHP string
+        eval('$result = "'.$php.'";');
+        return $result;
+    }
+}
+
+/**
+ * xForm class.
+ * Deals with form creation, validation and HTML generation.
+ * @package xForm
+**/
+abstract class xForm {
 
     /**
      * An array of fields options.
@@ -50,7 +84,7 @@ class xForm {
     var $form_options;
 
     /**
-     * An array of xFormField
+     * Array containing the created xFormField instances.
      * @var array
      */
     var $fields = array();
@@ -63,22 +97,23 @@ class xForm {
     var $validator;
 
     /**
-     * HTML Form template (sprintf format)
+     * HTML Form template (xFormTemplate format)
      * @var string
      */
-    var $template_form = '<form action="%2$s" method="%3$s"><table>%1$s</table></table></form>';
+    var $template_form = '<form action="{action}" method="{method}"><table>{content}</table></table></form>';
 
     /**
-     * HTML Form row template (sprintf format)
+     * HTML Form row template (xFormTemplate format)
      * @var string
      */
-    var $template_row = '<tr><th>%s</th><td>%s %s</td></tr>';
+    var $template_row = '<tr><th>{label}</th><td>{field} {message}</td></tr>';
 
-    /**
-     * HTML Form mandatory template (sprintf format)
+    /*
+     * HTML Form mandatory template (xFormTemplate format)
      * @var string
+     *
+    var $template_mandatory = '*';
      */
-    //var $template_mandatory = '*';
 
 
     function __construct() {
@@ -87,9 +122,14 @@ class xForm {
         $this->create_fields();
     }
 
-    function fields_options() {
-        return array();
-    }
+    /**
+     * Returns the form fields definition.
+     * This method must be implemented in child classes and return
+     * the form fields definition according the xFormField::options() format.
+     * @return array Fields definitions.
+     * 
+     */
+    abstract function fields_options();
 
     function form_options() {
         return array(
@@ -99,11 +139,13 @@ class xForm {
     }
 
     function create_fields() {
-        // Setups the messages from model validation, or form controller $invalids ?
         // Setups xFormFields
         foreach ($this->fields_options as $field => $options) {
             $options['name'] = $field;
-            if (@$_REQUEST[$options['name']]) $options['value'] = $_REQUEST[$options['name']];
+            // Assigns posted value if none defined
+            if (!isset($options['value'])) {
+                $options['value'] = @$_REQUEST[$options['name']];
+            }
             $this->fields[$field] = xFormField::create($options);
         }
     }
@@ -115,18 +157,18 @@ class xForm {
     function render() {
         $s = '';
         foreach ($this->fields as $field) {
-            $s .= vsprintf($this->template_row, array(
-                $field->render_label(),
-                $field->render_field(),
-                $field->render_message()
+            $s .= xFormTemplate::apply($this->template_row, array(
+                'label' => $field->render_label(),
+                'field' => $field->render_field(),
+                'message' => $field->render_message()
             ));
         }
         $options = array_merge(array('content' => $s), $this->form_options);
-        return vsprintf($this->template_form, $options);
+        return xFormTemplate::apply($this->template_form, $options);
     }
 
     /**
-     * Creates a xValidatorStore from fields 'validator' option.
+     * Returns a xValidatorStore singleton from fields 'validator' option.
      * @return xValidatorStore
      */
     function validator() {
@@ -161,10 +203,7 @@ class xForm {
  * @package xForm
 **/
 class xFormFieldText extends xFormField {
-    var $template_label = '<label for="%1$s">%2$s</label>';
-    var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" value="%4$s" %5$s/>';
-    var $template_message = '<div class="%7$s">%8$s</div>';
-    var $template_selected;
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}" {selected}/>';
     function options() {
         return array(
             'type' => "text"
@@ -177,7 +216,7 @@ class xFormFieldText extends xFormField {
  * @package xForm
 **/
 class xFormFieldPassword extends xFormField {
-    var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" value="%4$s" %5$s/>';
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}" {selected}/>';
     function options() {
         return array(
             'type' => "password"
@@ -193,7 +232,7 @@ class xFormFieldPassword extends xFormField {
  * @package xForm
 **/
 class xFormFieldCheckbox extends xFormField {
-    var $template_field = '<input type="%3$s" name="%1$s" id="%1$s" %5$s/>';
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" {selected}/>';
     var $template_selected = 'checked="checked"';
     function options() {
         return array(
@@ -203,15 +242,9 @@ class xFormFieldCheckbox extends xFormField {
         );
     }
     function init() {
-        if (@$_REQUEST[@$this->options['name']]) {
-            // If form posted
-            if ($this->options['value']) $selected = true;
-            else $selected = false;
-        } else {
-            if ($this->options['default']) $selected = $this->options['default'];
-            else $selected = false;
-        }
-        $this->options['selected'] = $selected;
+        // Determines whether the checkbox is selected or not
+        $this->options['selected'] = isset($this->options['value']) ?
+            true : @(bool)$this->options['default'];
     }
 }
 
@@ -220,7 +253,7 @@ class xFormFieldCheckbox extends xFormField {
  * @package xForm
 **/
 class xFormFieldSelect extends xFormField {
-    var $template_field = '<select name="%1$s" id="%1$s" value="%4$s">%10$s</select>';
+    var $template_field = '<select name="{name}" id="{name}" value="{value}">{options}</select>';
     var $items = array();
     function options() {
         return array(
@@ -231,9 +264,6 @@ class xFormFieldSelect extends xFormField {
         );
     }
     function init() {
-        // Detects which item is selected
-        $item = array_intersect($this->options['values'], array(@$_REQUEST[@$this->options['name']]));
-        $selected = $item ? array_shift(array_keys($item)) : @$this->options['default'];
         // Creates xFormField instances
         foreach ($this->options['values'] as $value => $label) {
             $this->items[] = xFormField::create(array(
@@ -241,15 +271,14 @@ class xFormFieldSelect extends xFormField {
                 'name' => $this->options['name'],
                 'label' => $label,
                 'value' => $value,
-                'selected' => ($value == $selected)
+                'selected' => ($value == @$this->options['value'])
             ));
         }
-        //if (@!$_REQUEST[@$this->options['name']]) $this->options['selected'] = null;
     }
     function render_field() {
         $html = '';
         foreach ($this->items as $item) $html .= $item->render_field();
-        return vsprintf($this->template_field, array_merge(
+        return xFormTemplate::apply($this->template_field, array_merge(
             $this->options,
             array('options' => $html)
         ));
@@ -261,7 +290,7 @@ class xFormFieldSelect extends xFormField {
  * @see xFormFieldSelect
 **/
 class xFormFieldOption extends xFormField {
-    var $template_field = '<option id="option_%1$s_%4$s" value="%4$s" %5$s>%2$s</option>';
+    var $template_field = '<option id="option_{name}_{value}" value="{value}" {selected}>{label}</option>';
     var $template_selected = 'selected="selected"';
     function options() {
         return array(
@@ -295,7 +324,7 @@ class xFormFieldSelectNumeric extends xFormFieldSelect {
  * @package xForm
 **/
 class xFormFieldSubmit extends xFormField {
-    var $template_field = '<input type="%3$s" class="button" name="%1$s" id="%1$s" value="%4$s" %5$s/>';
+    var $template_field = '<input type="{type}" class="button" name="{name}" id="{name}" value="{value}" {selected}/>';
     function options() {
         return array(
             'type' => "submit"
@@ -311,10 +340,35 @@ class xFormFieldSubmit extends xFormField {
 **/
 abstract class xFormField {
 
-    var $template_label = '<label for="%1$s">%2$s</label>';
-    var $template_field;
-    var $template_message = '<div class="%7$s">%8$s</div>';
+    /**
+     * HTML field label template (xFormTemplate format)
+     * @var string
+     */
+    var $template_label = '<label for="{name}">{label}</label>';
 
+    /**
+     * HTML field input template (xFormTemplate format)
+     * @var string
+     */
+    var $template_field;
+
+    /**
+     * HTML field message template (xFormTemplate format)
+     * @var string
+     */
+    var $template_message = '<div class="{state}">{message}</div>';
+
+    /**
+     * HTML string for selecting/checking for input/option
+     * @var string
+     */
+    var $template_selected;
+
+
+    /**
+     * Associative array containing the default field options.
+     * @var array
+     */
     var $options = array(
         'name' => '',
         'label' => '',
@@ -332,28 +386,61 @@ abstract class xFormField {
         $this->options['selected'] = @$this->options['selected'] ? $this->template_selected : null;
     }
 
+    /**
+     * Hook for initializing form fields.
+     */
     function init() {}
 
+    /**
+     * Default options for the field.
+     * This method returns an associative array
+     * containing the field default options.
+     * @note This method is called in the constructor and merges the class
+     *     options memeber with the result of this function. This array is
+     *     implemented in an method in order to allow functions and variables
+     *     in the array values.
+     * @return array An associative array containing the field default options.
+     */
     abstract function options();
 
+    /**
+     * Instanciates and return a field of the given type.
+     * @return xFormField xFormField instance.
+     */
     static function create($options = array()) {
         if (!@$options['type']) throw new Exception('Missing "type" in $options array argument');
         $class = "xFormField{$options['type']}";
         return new $class($options);
     }
 
+    /**
+     * Returns the HTML code for the field label.
+     * @return string HTML code for the field label.
+     */
     function render_label() {
-        return vsprintf($this->template_label, $this->options);
+        return xFormTemplate::apply($this->template_label, $this->options);
     }
 
+    /**
+     * Returns the HTML code for the field input.
+     * @return string HTML code for the field input.
+     */
     function render_field() {
-        return vsprintf($this->template_field, $this->options);
+        return xFormTemplate::apply($this->template_field, $this->options);
     }
 
+    /**
+     * Returns the HTML code for the field message.
+     * @return string HTML code for the field message.
+     */
     function render_message() {
-        return vsprintf($this->template_message, $this->options);
+        return xFormTemplate::apply($this->template_message, $this->options);
     }
 
+    /**
+     * Concatenates and returns the HTML code for the field label, input and message.
+     * @return string HTML code for the field.
+     */
     function render() {
         return $this->render_label().$this->render_field().$this->render_message();
     }
