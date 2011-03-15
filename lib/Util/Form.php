@@ -189,8 +189,14 @@ abstract class xForm {
         $messages = $this->validator()->invalids();
         foreach ($messages as $field => $message) {
             $fieldname = @$this->fields_options[$field]['label'] ? $this->fields_options[$field]['label'] : $field;
-            $this->fields[$field]->options['message'] = ucfirst($fieldname).' '.$message;
-            $this->fields[$field]->options['state'] = 'warning';
+            $this->fields[$field]->options['message_current'] =
+                $this->fields[$field]->options['message'] ?
+                $this->fields[$field]->options['message'] :
+                ucfirst($fieldname).' '.$message;
+            $this->fields[$field]->options['state_current'] =
+                $this->fields[$field]->options['state'] ?
+                $this->fields[$field]->options['state'] :
+                'warning';
         }
         return $messages;
     }
@@ -378,7 +384,7 @@ abstract class xFormField {
      * HTML field message template (xFormTemplate format)
      * @var string
      */
-    var $template_message = '<div class="{state} tip">{message}</div>';
+    var $template_message = '<br/><div class="{state_current} tip">{message_current}</div>';
 
     /**
      * HTML string for selecting/checking for input/option
@@ -392,14 +398,16 @@ abstract class xFormField {
      * @var array
      */
     var $options = array(
-        'name' => '',
-        'label' => '',
-        'type' => '',
-        'value' => '',
-        'selected' => '',
-        'mandatory' => '',
-        'state' => '',
-        'message' => ''
+        'name' => null,
+        'label' => null,
+        'type' => null,
+        'value' => null,
+        'selected' => null,
+        'mandatory' => null,
+        'state' => null,
+        'state_current' => null,
+        'message' => null,
+        'message_current' => null
     );
 
     function __construct($options = array()) {
@@ -456,7 +464,9 @@ abstract class xFormField {
      * @return string HTML code for the field message.
      */
     function render_message() {
-        return xFormTemplate::apply($this->template_message, $this->options);
+        return $this->options['message_current'] ?
+            xFormTemplate::apply($this->template_message, $this->options) :
+            null;
     }
 
     /**
