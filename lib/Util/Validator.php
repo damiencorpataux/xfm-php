@@ -14,6 +14,10 @@
 **/
 class xValidatorStore {
 
+    /**
+     * Array of created xValidator instances.
+     * @var array
+     */
     var $validators = array();
 
     /**
@@ -25,7 +29,7 @@ class xValidatorStore {
     /**
      * Instanciate a new xValidatorStore,
      * creating xValidator instances from the given $options
-     * @param array An array containing validators ids => options:
+     * @param array An array containing validators fieldname => options:
      * <code>
      * array(
      *     'name' => array(
@@ -35,6 +39,13 @@ class xValidatorStore {
      *     'birthyear' => array(
      *         'integer' => array(1900, 2012)
      *     )
+     * )
+     * </code>
+     * @param array An array of fieldname => value to validate:
+     * <code>
+     * array(
+     *     'name' => 'King Luis',
+     *     'birthyear' => '08/04/1901'
      * )
      * </code>
      */
@@ -53,6 +64,20 @@ class xValidatorStore {
                 $this->validators[$field][$validator] = xValidator::create($validator, $options);
             }
         }
+    }
+
+    /**
+     * Returns the given validator.
+     * @param string Field name.
+     * @param string Validator name.
+     * @return xValidator xValidator instance corresponding
+     *     to the given field and validator names,
+     *     null if not found.
+     */ 
+    function get($field_name = null, $validator_name = null) {
+        if (!$field_name) return $this->validators;
+        elseif (!$validator_name) return @$this->validators[$field_name];
+        else return @$this->validators[$field_name][$validator_name];
     }
 
     /**
