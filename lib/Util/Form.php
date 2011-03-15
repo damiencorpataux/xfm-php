@@ -190,6 +190,7 @@ abstract class xForm {
         foreach ($messages as $field => $message) {
             $fieldname = @$this->fields_options[$field]['label'] ? $this->fields_options[$field]['label'] : $field;
             $this->fields[$field]->options['message'] = ucfirst($fieldname).' '.$message;
+            $this->fields[$field]->options['state'] = 'warning';
         }
         return $messages;
     }
@@ -207,10 +208,25 @@ abstract class xForm {
  * @package xForm
 **/
 class xFormFieldText extends xFormField {
-    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}" {selected}/>';
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}"/>';
     function options() {
         return array(
-            'type' => "text"
+            'type' => 'text'
+        );
+    }
+}
+
+/**
+ *
+ * @package xForm
+**/
+class xFormFieldTextarea extends xFormField {
+    var $template_field = '<textarea name="{name}" id="{name}" rows="{rows}" cols="{cols}">{value}</textarea>';
+    function options() {
+        return array(
+            'type' => 'textarea',
+            'rows' => null,
+            'cols' => null
         );
     }
 }
@@ -220,14 +236,16 @@ class xFormFieldText extends xFormField {
  * @package xForm
 **/
 class xFormFieldPassword extends xFormField {
-    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}" {selected}/>';
+    var $template_field = '<input type="{type}" name="{name}" id="{name}" value="{value}"/>';
     function options() {
         return array(
-            'type' => "password"
+            'type' => 'password',
+            'persistant' => false
         );
     }
     function init() {
-        //$this->options['value'] = null;
+        // Reset password value if not 'persistant'
+        if (!$this->options['persistant']) $this->options['value'] = null;
     }
 }
 
@@ -360,7 +378,7 @@ abstract class xFormField {
      * HTML field message template (xFormTemplate format)
      * @var string
      */
-    var $template_message = '<div class="{state}">{message}</div>';
+    var $template_message = '<div class="{state} tip">{message}</div>';
 
     /**
      * HTML string for selecting/checking for input/option
