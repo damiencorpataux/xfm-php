@@ -115,6 +115,7 @@ class xBootstrap {
         require_once('Fronts/JsFront.php');
         require_once('Fronts/RestFront.php');
         require_once('Fronts/ApiFront.php');
+        require_once('Fronts/RssFront.php');
         // Helpers
         require_once('Helpers/FormHelper.php');
         require_once('Helpers/ValidatorHelper.php');

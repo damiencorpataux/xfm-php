@@ -17,6 +17,9 @@ class xRestFront extends xFront {
 
     var $encoding = 'UTF-8';
 
+    var $xml_root_node = 'resultset';
+    var $xml_default_node = 'item';
+
     var $params = array(
         'xformat' => 'php'
     );
@@ -65,15 +68,24 @@ class xRestFront extends xFront {
 
     function encode_xml($data) {
         $result = $this->encode_xml_nodes($data);
-        return '<?xml version="1.0" encoding="'.$this->encoding.'"?>'."\n"."<resultset>{$result}</resultset>";
+        if ($this->xml_root_node) {
+            $open_tag = $this->xml_root_node;
+            $close_tag = array_shift(explode(' ', $this->xml_root_node));
+            $xml = "<{$open_tag}>{$result}</{$close_tag}>";
+        } else {
+            $xml = $result;
+        }
+        return "<?xml version=\"1.0\" encoding=\"{$this->encoding}\"?>\n{$xml}";
     }
     function encode_xml_nodes($data) {
         if (!is_array($data)) return $data;
         $r = '';
         foreach ($data as $key => $value) {
+            $open_tag = $key;
+            $close_tag = array_shift(explode(' ', $key));
             if (is_array($value)) $value = $this->encode_xml_nodes($value);
-            if (is_numeric($key)) $key = 'item';
-            $r .= "<{$key}>{$value}</{$key}>";
+            if (is_numeric($key)) $open_tag = $close_tag = $this->xml_default_node;
+            $r .= "<{$open_tag}>{$value}</{$close_tag}>";
         }
         return $r;
     }
