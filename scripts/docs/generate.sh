@@ -6,14 +6,14 @@
 
 # Directories
 phpdoc_dir=PhpDocumentor
-source_dir=../../lib
-output_dir=../../docs/api/trunk
+base_dir=../..
+source_dir=$base_dir/lib
+output_dir=$base_dir/docs/api/trunk
 
 # Title
-svn_revision=`svn info | grep Revision | cut -b11-`
-svn_date=`svn info | grep Date | cut -b20-38`
+svn_revision=`svn info $base_dir | grep Revision | cut -b11-`
+svn_date=`svn info $base_dir | grep Date | cut -b20-38`
 title="xFreemwork API Documentation<br/>(trunk, revision $svn_revision, $svn_date)"
-
 
 ###############################################################################
 # Processing
