@@ -29,6 +29,8 @@ class xWebFront extends xFront {
 
     function handle_error($exception) {
         unset($this->params['xmodule']);
+        $error_controller = xContext::$config->error->controller ?
+            xContext::$config->error->controller : 'error';
         $this->params = xUtil::array_merge($this->params, array(
             'xcontroller' => xContext::$config->error->controller,
             'xaction' => 'default',
