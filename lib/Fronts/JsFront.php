@@ -32,7 +32,7 @@ class xJsFront extends xFront {
     }
 
     function set_header($extension) {
-        $mime = @$allowed_mime_types[$extension];
+        $mime = @$this->allowed_mime_types[$extension];
         if ($mime) header("Content-type: {$mime}");
     }
 
