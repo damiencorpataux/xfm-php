@@ -10,7 +10,7 @@
 
 /**
  * Front controller base class.
- * 
+ *
  * Responsibilities
  * - decorate controllers
  * @package xFreemwork
@@ -95,7 +95,8 @@ abstract class xFront extends xRestElement {
      */
     static function load($name, $params = null) {
         $files = array(
-            "{$name}Front" => xContext::$basepath."/fronts/{$name}.php"
+            "{$name}Front" => xContext::$basepath."/fronts/{$name}.php",
+            "x{$name}Front" => xContext::$libpath.'/Fronts/'.ucfirst($name).'Front.php'
         );
         return self::load_these($files, $params);
     }
