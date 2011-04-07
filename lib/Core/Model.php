@@ -141,7 +141,7 @@ abstract class xModel extends xRestElement {
      * Array example:
      * <code>
      * array(
-     *    join_name => 'LEFT JOIN foreign_table_name ON this_table_id = foreign_table_id'
+     *    'foreign_model_name' => 'LEFT JOIN foreign_table_name ON this_table_id = foreign_table_id'
      * )
      * </code>
      * @see xModel::sql_join()
