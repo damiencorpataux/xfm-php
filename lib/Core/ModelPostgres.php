@@ -90,7 +90,7 @@ abstract class xModelPostgres extends xModel {
         // Starts sql generation
         $sqlF = $sqlV = array();
         foreach ($this->fields_values(true) as $field => $value) {
-            $sqlF[] = $field;
+            $sqlF[] = "\"$field\"";
             $sqlV[] = $this->escape($value, $this->modelfield($field));
         }
         // Creates final sql
@@ -175,7 +175,7 @@ abstract class xModelPostgres extends xModel {
         foreach ($joins as $model_name => $join) {
             $model = xModel::load($model_name);
             foreach($model->mapping as $model_field => $db_field) {
-                $fragments[] = "\"{$model->maintable}\".\"\'{$db_field}\' AS \'{$model_name}_{$model_field}\'";
+                $fragments[] = "\"{$model->maintable}\".\"{$db_field}\" AS \"{$model_name}_{$model_field}\"";
             }
         }
         return " SELECT ".implode(', ', $fragments);
