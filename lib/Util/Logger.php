@@ -71,8 +71,9 @@ class xLogger {
         // Writes the requested URL
         $url = @$_SERVER['HTTP_HOST'].@$_SERVER['REQUEST_URI'];
         $url = $url ? $url : '[No url]';
-        fwrite($this->file, "URL: {$url}\n");
-        // Writes the requester IP
+        $method = strtoupper($_SERVER['REQUEST_METHOD']);
+        fwrite($this->file, "URL: {$url} [{$method}]\n");
+        // Writes the requester IP anf Method (HTTP Verb)
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) $ip=$_SERVER['HTTP_CLIENT_IP'];
         elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
         else $ip=$_SERVER['REMOTE_ADDR'];
