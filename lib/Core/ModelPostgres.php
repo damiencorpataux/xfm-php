@@ -171,12 +171,12 @@ abstract class xModelPostgres extends xModel {
         }
         */
         // Replaces joined tables db fields name with model fields names
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize(@$this->params['xjoin']));
-        foreach ($joins as $model_name => $join) {
-            $model = xModel::load($model_name);
-            foreach($model->mapping as $model_field => $db_field) {
-                $fragments[] = "\"{$model->maintable}\".\"{$db_field}\" AS \"{$model_name}_{$model_field}\"";
-            }
+        foreach ($this->foreign_mapping() as $modelfield => $dbfield) {
+            // Enquotes tablename and fieldname
+            $dbfield = preg_replace('/^(\w*)\.(\w*)$/', '"$1"."$2"', $dbfield);
+            $modelfield = "\"{$modelfield}\"";
+            // Creates SQL SELECT fragments
+            $fragments[] = "{$dbfield} AS {$modelfield}";
         }
         return " SELECT ".implode(', ', $fragments);
     }
@@ -250,7 +250,7 @@ abstract class xModelPostgres extends xModel {
      * @return string
      */
     function sql_join() {
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize(@$this->params['xjoin']));
+        $joins = xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
         return implode($joins, ' ');
     }
 
@@ -299,10 +299,7 @@ abstract class xModelPostgres extends xModel {
      */
     function query($sql) {
         $db = xContext::$db;
-        // Executes query
-        xContext::$log->log("Executing query: \n{$sql}", $this);
-        $qr = pg_query($db, $sql);
-        if (!$qr) throw new xException("Invalid query: $sql # " . pg_last_error($db));
+        $qr = $this->q($sql);
         // Creates an array of results
         if (is_resource($qr)) {
             // Returns an empty array if no row was retrieved
@@ -321,7 +318,9 @@ abstract class xModelPostgres extends xModel {
             }
         } else {
             $result = array(
+                'success' => true,
                 'insertid' => false, //TODO: mysql_insert_id($db),
+                'id' => false, //TODO: mysql_insert_id($db),
                 'affectedrows' => pg_affected_rows($db),
                 'info' => array(), //TODO: mysql_info($db),
                 'raw' => $qr
@@ -329,6 +328,19 @@ abstract class xModelPostgres extends xModel {
         }
         if (is_resource($qr)) pg_free_result($qr);
         return $result;
+    }
+
+    /**
+     * Executes the given sql and returns the raw result resource, or throws an exception on error.
+     * @see www.php.net/manual/function.mysql-query.php
+     * @return resource
+     */
+    static function q($sql) {
+        $db = xContext::$db;
+        // Executes query
+        xContext::$log->log("Executing query: \n{$sql}", $this);
+        $qr = pg_query($db, $sql);
+        if (!$qr) throw new xException("Invalid query: $sql # " . pg_last_error($db));
     }
 }
 

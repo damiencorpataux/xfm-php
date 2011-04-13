@@ -136,7 +136,7 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function escape($value, $field = null) {
-        if (is_null($value)) {
+        if (is_null($value) || $value === '') {
             return 'NULL';
         } else if ((!$this->constants || in_array($field, $this->constants)) && in_array($value, $this->sql_constants())) {
             return $value;
@@ -174,12 +174,12 @@ abstract class xModelMysql extends xModel {
         }
         */
         // Replaces joined tables db fields name with model fields names
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize(@$this->params['xjoin']));
-        foreach ($joins as $model_name => $join) {
-            $model = xModel::load($model_name);
-            foreach($model->mapping as $model_field => $db_field) {
-                $fragments[] = "`{$model->maintable}`.`{$db_field}` AS `{$model_name}_{$model_field}`";
-            }
+        foreach ($this->foreign_mapping() as $modelfield => $dbfield) {
+            // Enquotes tablename and fieldname
+            $dbfield = preg_replace('/^(\w*)\.(\w*)$/', '`$1`.`$2`', $dbfield);
+            $modelfield = "`{$modelfield}`";
+            // Creates SQL SELECT fragments
+            $fragments[] = "{$dbfield} AS {$modelfield}";
         }
         return " SELECT ".implode(', ', $fragments);
     }
@@ -218,7 +218,7 @@ abstract class xModelMysql extends xModel {
                 $sql .= ' AND ';
             }
             // Adds the condition field to the where clause
-            $sql .= " {$field}";
+            $sql .= " `{$this->maintable}`.`{$field}`";
             // Adds the condition comparator to the where clause
             if (@$this->params["{$modelfield}_comparator"]) {
                 $comparator = $this->params["{$modelfield}_comparator"];
@@ -253,7 +253,7 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function sql_join() {
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize(@$this->params['xjoin']));
+        $joins = xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
         return implode($joins, ' ');
     }
 
@@ -302,9 +302,7 @@ abstract class xModelMysql extends xModel {
      */
     function query($sql) {
         $db = xContext::$db;
-        // Executes query
-        xContext::$log->log("Executing query: \n{$sql}", $this);
-        $qr = mysql_query($sql, $db);
+        $qr = $this->q($sql);
         if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db));
         // Creates an array of results
         if (is_resource($qr)) {
@@ -323,15 +321,35 @@ abstract class xModelMysql extends xModel {
                 $result[] = array_combine($fields, $row);;
             }
         } else {
-            $result = array(
-                'insertid' => mysql_insert_id($db),
-                'affectedrows' => mysql_affected_rows($db),
-                'info' => mysql_info($db),
-                'raw' => $qr
+            $result = xUtil::array_merge(
+                array(
+                    'xsuccess' => true,
+                    'xinsertid' => mysql_insert_id($db),
+                    'insertid' => mysql_insert_id($db), // For retro-compatibility
+                    'xaffectedrows' => mysql_affected_rows($db),
+                    'xinfo' => mysql_info($db),
+                    'xraw' => $qr
+                ),
+                xUtil::filter_keys($this->params, array_keys(array_merge($this->foreign_mapping(), $this->mapping))),
+                array('id' => mysql_insert_id($db) ? mysql_insert_id($db) : @$this->params['id'])
             );
         }
         if (is_resource($qr)) mysql_free_result($qr);
         return $result;
+    }
+
+    /**
+     * Executes the given sql and returns the raw result resource, or throws an exception on error.
+     * @see www.php.net/manual/function.mysql-query.php
+     * @return resource
+     */
+    static function q($sql) {
+        $db = xContext::$db;
+        // Executes query
+        xContext::$log->log("Executing query: \n{$sql}", @$this ? $this : 'xModelMysql');
+        $qr = mysql_query($sql, $db);
+        if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db));
+        return $qr;
     }
 }
 

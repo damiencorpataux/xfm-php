@@ -10,7 +10,7 @@
 
 /**
  * Model base class.
- * 
+ *
  * Responsibilities:
  * - deal with database transactions
  * @package xFreemwork
@@ -63,10 +63,10 @@ abstract class xModel extends xRestElement {
     var $validation = array();
 
     /**
-     * The primary key field names (model field names).
+     * The primary key field names (model field names, defaults to 'id').
      * @var array
      */
-    var $primary = array();
+    var $primary = array('id');
 
     /**
      * Fields (model) that accept sql constants (e.g. CURRENT_TIMESTAMP).
@@ -108,36 +108,15 @@ abstract class xModel extends xRestElement {
 
     /**
      * Fields to return (model fields names).
+     * Contains db fields name(s).
+     * This property will be overridden with the xreturn parameter value.
      * @see Model::sql_select()
      * @var string|array
      */
     var $return = array('*');
 
     /**
-     * Result sorting fields (model fields names).
-     * @see xModel::sql_order()
-     * @var string|array
-     */
-    var $order_by = null; //'id';
-
-    /**
-     * Result sorting order.
-     * Accepted values: 'ASC' or 'DESC'.
-     * @see xModel::sql_order()
-     * @var string
-     */
-    var $order = null;
-
-    /**
-     * Result group by.
-     * Contains model fields name(s).
-     * @see xModel::sql_group()
-     * @var string|array
-     */
-    var $group_by = null;
-
-    /**
-     * SQL joins.
+     * Available SQL joins.
      * Array example:
      * <code>
      * array(
@@ -148,6 +127,42 @@ abstract class xModel extends xRestElement {
      * @var array
      */
     var $joins = array();
+
+    /**
+     * Enabled SQL joins.
+     * Contains model name(s).
+     * This property will be overridden with the xjoin parameter value.
+     * @see xModel::joins()
+     * @var array
+     */
+    var $join = array();
+
+    /**
+     * Result sorting fields (model fields names).
+     * Contains model fields name(s).
+     * This property will be overridden with the xorder_by parameter value.
+     * @see xModel::sql_order()
+     * @var string|array
+     */
+    var $order_by = null; //'id';
+
+    /**
+     * Result sorting order.
+     * Accepted values: 'ASC' or 'DESC'.
+     * This property will be overridden with the xorder parameter value.
+     * @see xModel::sql_order()
+     * @var string
+     */
+    var $order = null;
+
+    /**
+     * Result group by.
+     * Contains model fields name(s).
+     * This property will be overridden with the xgroup_by parameter value.
+     * @see xModel::sql_group()
+     * @var string|array
+     */
+    var $group_by = null;
 
     /**
      * Specifies which of the fields accept HTML.
@@ -178,11 +193,18 @@ abstract class xModel extends xRestElement {
                 }
             }
         }
-        // Override model properties from x-params
-        if (isset($this->params['xorder'])) $this->order = $this->params['xorder'];
-        if (isset($this->params['xorder_by'])) $this->order_by = $this->params['xorder_by'];
-        if (isset($this->params['xgroup_by'])) $this->group_by = $this->params['xgroup_by'];
-        if (isset($this->params['xreturn'])) $this->return = $this->params['xreturn'];
+        // Overrides model properties from x-params
+        $overrides = array(
+            //'parameter name' => 'class property name',
+            'xjoin' => 'join',
+            'xorder' => 'order',
+            'xorder_by' => 'order_by',
+            'xgroup_by' => 'group_by',
+            'xreturn' => 'return',
+        );
+        foreach ($overrides as $parameter => $property) {
+            if (isset($this->params[$parameter])) $this->$property = $this->params[$parameter];
+        }
     }
 
     /**
@@ -261,6 +283,22 @@ abstract class xModel extends xRestElement {
     }
 
     /**
+     * Returns the model mapping, including the foreign models mapping according the xjoin defined in parameters.
+     * @return array
+     */
+    function foreign_mapping() {
+        $joins = xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
+        $foreign_mapping = array();
+        foreach ($joins as $model_name => $join) {
+            $model = xModel::load($model_name);
+            foreach($model->mapping as $model_field => $db_field) {
+                $foreign_mapping["{$model_name}_{$model_field}"] = "{$model->maintable}.{$db_field}";
+            }
+        }
+        return $foreign_mapping;
+    }
+
+    /**
      * Checks given params values and returns an array containing
      * the invalid params (fields) as key, and true as value.
      * @param array If given, limits validation to the given $fields.
@@ -280,7 +318,7 @@ abstract class xModel extends xRestElement {
      * @return array
      */
     function get() {
-        return parent::get();
+        throw new xException('Not implemented', 501);
     }
 
     /**
@@ -291,7 +329,7 @@ abstract class xModel extends xRestElement {
      * @return array
      */
     function post() {
-        return parent::posts();
+        throw new xException('Not implemented', 501);
     }
 
     /**
@@ -302,7 +340,7 @@ abstract class xModel extends xRestElement {
      * @return array
      */
     function put() {
-        return parent::put();
+        throw new xException('Not implemented', 501);
     }
 
     /**
@@ -313,7 +351,7 @@ abstract class xModel extends xRestElement {
      * @return array
      */
     function delete() {
-        return parent::delete();
+        throw new xException('Not implemented', 501);
     }
 
     /**
@@ -401,6 +439,12 @@ abstract class xModel extends xRestElement {
      * @return array
      */
     abstract function query($sql);
+
+    static function q($sql) {
+        $driver = xContext::$config->db->driver;
+        $model_class = "xModel{$driver}";
+        return $model_class::q($sql);
+    }
 }
 
 ?>
