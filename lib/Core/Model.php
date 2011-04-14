@@ -29,6 +29,13 @@ abstract class xModel extends xRestElement {
     var $maintable = null;
 
     /**
+     * This property is set in the constructor.
+     * Name of the model (eg. a class name 'SomeModel' becomes 'my').
+     * @var string
+     */
+    var $name = null;
+
+    /**
      * Params to fields mapping.
      * This mapping purpose is to abstract table fields names.
      * <code>
@@ -180,7 +187,10 @@ abstract class xModel extends xRestElement {
      */
     protected function __construct($params = null) {
         parent::__construct($params);
+        // Sets the maintable name
         $this->maintable = trim(array_shift(explode(',', $this->table)));
+        // Sets the model name
+        $this->name = strtolower(substr(get_class($this), 0, -strlen('Model')));
         // Strip HTML tags from fields values
         foreach (array_intersect_key($this->params, $this->mapping) as $field => $value) {
             if (in_array($field, $this->allow_html)) continue;
@@ -280,6 +290,29 @@ abstract class xModel extends xRestElement {
             $mapping[$field] = $paramvalue;
         }
         return $mapping;
+    }
+
+    /**
+    * Returns an array of modelfield => value containing the subset of fields that belong to the given foreign model name.
+    * @param string The foreign model name
+    * @return array
+    */
+    function foreign_fields_values($foreign_model_name) {
+        // Determines fields & values beloning to foreign model:
+        $local_model = xModel::load($this->name, $this->params);
+        $foreign_model_name = $foreign_model_name;
+        $foreign_model = xModel::load($foreign_model_name);
+        $foreign_to_local_fields = array();
+        // Creates the foreign_fields_values array
+        $foreign_fields_values = array();
+        foreach ($local_model->foreign_mapping() as $local_foreign_modelfield => $local_foreign_dbfield) {
+            foreach ($foreign_model->mapping as $foreign_modelfield => $foreign_dbfield) {
+                if ($local_foreign_modelfield == "{$foreign_model_name}_{$foreign_modelfield}" && isset($local_model->params[$local_foreign_modelfield])) {
+                    $foreign_fields_values[$foreign_modelfield] = $local_model->params[$local_foreign_modelfield];
+                }
+            }
+        }
+        return $foreign_fields_values;
     }
 
     /**

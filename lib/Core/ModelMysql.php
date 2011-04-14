@@ -57,6 +57,10 @@ abstract class xModelMysql extends xModel {
         foreach ($this->fields_values(true) as $field => $value) {
             $updates[] = "{$field} = ".$this->escape($value, $this->modelfield($field));
         }
+        // Automagically sets the modified field if applicable
+        if (isset($this->mapping['modified'])) {
+            $updates[] = "modified = ".$this->escape('CURRENT_TIMESTAMP', 'modified', true);
+        }
         // Creates final sql
         $sql = implode(' ', array(
             "UPDATE `{$this->maintable}` SET ",
@@ -92,6 +96,11 @@ abstract class xModelMysql extends xModel {
         foreach ($this->fields_values(true) as $field => $value) {
             $sqlF[] = $field;
             $sqlV[] = $this->escape($value, $this->modelfield($field));
+        }
+        // Automagically sets the created field if applicable
+        if (isset($this->mapping['created'])) {
+            $sqlF[] = 'created';
+            $sqlV[] = $this->escape('CURRENT_TIMESTAMP', 'created', true);
         }
         // Creates final sql
         $sql = "INSERT INTO `{$this->maintable}`".
@@ -135,10 +144,10 @@ abstract class xModelMysql extends xModel {
      * @see xModel::escape()
      * @return string
      */
-    function escape($value, $field = null) {
+    function escape($value, $field = null, $allow_constants = false) {
         if (is_null($value) || $value === '') {
             return 'NULL';
-        } else if ((!$this->constants || in_array($field, $this->constants)) && in_array($value, $this->sql_constants())) {
+        } else if (($allow_constants || !$this->constants || in_array($field, $this->constants)) && in_array($value, $this->sql_constants())) {
             return $value;
         }
         return "'".mysql_real_escape_string($value)."'";
