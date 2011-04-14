@@ -51,7 +51,17 @@ class xException extends Exception {
         parent::__construct($message);
         $this->status = $status;
         $this->data = $data;
-        xContext::$log->log(array("Thrown exception ({$this->status}): {$message}", $this->getTraceAsString()), $this, xLogger::FATAL);
+        xContext::$log->log(
+            array(
+                "New exception ({$this->status}): {$message}",
+                "Status: {$this->status}",
+                "Message: {$message}",
+                "Data: ", $this->data,
+                "Trace: ", $this->getTraceAsString()
+            ),
+            $this,
+            xLogger::FATAL
+        );
     }
 
     function __toString() {
