@@ -19,7 +19,7 @@ class xDummyLogger {
 
 /**
  * This class creates the application context and launches the router.
- * 
+ *
  * Responsibilities
  * - create application context (environment variables, configuration, database, etc)
  * - launch the router and output the HTTP response body
@@ -108,6 +108,7 @@ class xBootstrap {
         require_once('Core/Model.php');
         require_once('Core/ModelMysql.php');
         require_once('Core/ModelPostgres.php');
+        require_once('Util/Transaction.php');
         require_once('Core/WebController.php');
         require_once('Core/View.php');
         require_once('Core/Front.php');
@@ -219,8 +220,8 @@ class xBootstrap {
             xContext::$config->db->user,
             xContext::$config->db->password
         );
-        if (!xContext::$db) throw new xException('Could not setup database: '.print_r(xContext::$config->db->toArray(), true));
         xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
+        if (!xContext::$db) throw new xException('Could connect to database: '.print_r(xContext::$config->db->toArray(), true));
         if (!mysql_select_db(xContext::$config->db->database, xContext::$db)) {
             throw new xException('Could not select database ('.mysql_error(xContext::$db).'): '.print_r(xContext::$config->db->toArray(), true));
         }
