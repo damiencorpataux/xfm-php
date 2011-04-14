@@ -53,14 +53,6 @@ class xApiFront extends xRestFront {
     }
 
     function post() {
-        $this->get();
-    }
-
-    function put() {
-        throw new xException('Not implemented', 501);
-    }
-
-    function delete() {
-        throw new xException('Not implemented', 501);
+        return $this->get();
     }
 }
