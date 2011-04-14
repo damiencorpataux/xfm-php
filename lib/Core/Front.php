@@ -17,14 +17,28 @@
 **/
 abstract class xFront extends xRestElement {
 
+    /**
+     * HTTP Request information.
+     */
+    var $http = array(
+        'method' => null,
+    );
+
     protected function __construct($params = null) {
         parent::__construct($params);
+        $this->setup_http_request_information();
         $this->setup_i18n();
     }
 
     /**
-     * Sets up the Gettext locale and domain according
-     * the selected/guessed language.
+     * Sets up the HTTP request information array.
+     */
+    function setup_http_request_information() {
+        $this->http['method'] = strtoupper($_SERVER['REQUEST_METHOD']);
+    }
+
+    /**
+     * Sets up the Gettext locale and domain according the selected/guessed language.
      */
     function setup_i18n() {
         // Defines the current language
@@ -64,22 +78,41 @@ abstract class xFront extends xRestElement {
      * @return mixed
      */
     function handle() {
-        switch ($_SERVER['REQUEST_METHOD']) {
+        switch ($this->http['method']) {
             case 'GET':
-                return $this->get();
+                return $this->handle_get();
             break;
             case 'POST':
-                return $this->post();
+                return $this->handle_post();
             case 'PUT':
-                return $this->put();
+                return $this->handle_put();
             break;
             case 'DELETE':
-                return $this->delete();
+                return $this->handle_delete();
             break;
             default:
                 header("HTTP/1.0 405 Method Not Allowed");
             break;
         }
+    }
+
+    function handle_get() { return $this->get(); }
+    function handle_post() { return $this->post(); }
+    function handle_put() { return $this->put(); }
+    function handle_delete() { return $this->delete(); }
+
+    /**
+     * Returns an error message in case of an error.
+     * @return string The error message to output.
+     */
+    abstract function handle_error($exception);
+
+    /**
+     * Returns HTTP request body contents
+     * @return string
+     */
+    static function get_request_body() {
+        return file_get_contents('php://input');
     }
 
     /**
@@ -100,12 +133,6 @@ abstract class xFront extends xRestElement {
         );
         return self::load_these($files, $params);
     }
-
-    /**
-     * Returns an error message in case of an error.
-     * @return string The error message to output.
-     */
-    abstract function handle_error($exception);
 }
 
 ?>
