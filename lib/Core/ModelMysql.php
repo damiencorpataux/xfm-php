@@ -338,9 +338,7 @@ abstract class xModelMysql extends xModel {
                     'xaffectedrows' => mysql_affected_rows($db),
                     'xinfo' => mysql_info($db),
                     'xraw' => $qr
-                ),
-                xUtil::filter_keys($this->params, array_keys(array_merge($this->foreign_mapping(), $this->mapping))),
-                array('id' => mysql_insert_id($db) ? mysql_insert_id($db) : @$this->params['id'])
+                )
             );
         }
         if (is_resource($qr)) mysql_free_result($qr);
