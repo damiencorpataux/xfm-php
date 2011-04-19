@@ -226,7 +226,7 @@ abstract class xModel extends xRestElement {
      */
     static function load($name, $params = null, $options = array()) {
         $files = array(
-            str_replace(array('_', '.'), '', $name)."Model" => xContext::$basepath."/models/{$name}.php"
+            str_replace(array('/', '.', '-'), '', $name)."Model" => xContext::$basepath."/models/{$name}.php"
         );
         $instance = self::load_these($files, $params);
         // Applies options
