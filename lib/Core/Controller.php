@@ -11,7 +11,7 @@
 /**
  * Base controller class.
  * Deals with caller interactions (request & response).
- * 
+ *
  * Responsibilities
  * - expose user actions
  * - manage user inputs
@@ -37,7 +37,7 @@ abstract class xController extends xRestElement {
      */
     static function load($name, $params = null) {
         $files = array(
-            str_replace(array('/', '.'), '', $name)."Controller" => xContext::$basepath."/controllers/{$name}.php"
+            str_replace(array('/', '.', '-'), '', $name)."Controller" => xContext::$basepath."/controllers/{$name}.php"
         );
         return self::load_these($files, $params);
     }
