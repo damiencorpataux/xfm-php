@@ -294,21 +294,29 @@ abstract class xModel extends xRestElement {
 
     /**
     * Returns an array of modelfield => value containing the subset of fields that belong to the given foreign model name.
-    * @param string The foreign model name
+    * @param string|array The foreign model(s) name(s). If not given, uses the current $join property value.
+    * @param boolean True to return fields with their model name as a prefix (defaults to false).
     * @return array
     */
-    function foreign_fields_values($foreign_model_name) {
-        // Determines fields & values beloning to foreign model:
-        $local_model = xModel::load($this->name, $this->params);
-        $foreign_model_name = $foreign_model_name;
-        $foreign_model = xModel::load($foreign_model_name);
-        $foreign_to_local_fields = array();
-        // Creates the foreign_fields_values array
+    function foreign_fields_values($foreign_models_names = null) {
+        // Manages function argument default values
+        if (is_null($foreign_models_names)) $foreign_models_names = xUtil::arrize($this->join);
+        else $foreign_models_names = xUtil::arrize($foreign_models_names);
+        // Creates the foreign_fields_values array for each foreign model name
         $foreign_fields_values = array();
-        foreach ($local_model->foreign_mapping() as $local_foreign_modelfield => $local_foreign_dbfield) {
-            foreach ($foreign_model->mapping as $foreign_modelfield => $foreign_dbfield) {
-                if ($local_foreign_modelfield == "{$foreign_model_name}_{$foreign_modelfield}" && isset($local_model->params[$local_foreign_modelfield])) {
-                    $foreign_fields_values[$foreign_modelfield] = $local_model->params[$local_foreign_modelfield];
+        foreach ($foreign_models_names as $foreign_model_name) {
+            // Determines fields & values beloning to foreign model:
+            $local_model = xModel::load($this->name, $this->params);
+            $foreign_model_name = $foreign_model_name;
+            $foreign_model = xModel::load($foreign_model_name);
+            // Creates the foreign_fields_values array
+            foreach ($local_model->foreign_mapping() as $local_foreign_modelfield => $local_foreign_dbfield) {
+                foreach ($foreign_model->mapping as $foreign_modelfield => $foreign_dbfield) {
+                    $prefixed_field_name = "{$foreign_model_name}_{$foreign_modelfield}";
+                    if ($local_foreign_modelfield == $prefixed_field_name && isset($local_model->params[$local_foreign_modelfield])) {
+                        $i = $prefix ? $prefixed_field_name : $foreign_modelfield;
+                        $foreign_fields_values[$i] = $local_model->params[$local_foreign_modelfield];
+                    }
                 }
             }
         }

@@ -206,52 +206,69 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function sql_where($primary_only = false) {
-        $fields_values = $this->fields_values();
+        // Creates data structure
+        $data = array();
+        $table_to_modelname = array();
+        $data[$this->maintable] = $this->fields_values();
+        foreach (xUtil::arrize($this->join) as $join_model) {
+            $model = xModel::load($join_model);
+            $data[$model->maintable] = $this->foreign_fields_values($join_model);
+            $table_to_modelname[$model->maintable] = $join_model;
+        }
         // Sets WHERE 1=0 if the 1st where clause is OR
-        $sql = @$this->params[array_shift(array_keys($fields_values)).'_operator'] == 'OR' ?  ' WHERE 1=0' : ' WHERE 1=1';
+        $first_operator = @$this->params[@array_shift(@array_keys(@$data[@array_shift(@array_keys(@$data))])).'_operator'];
+        $sql = strtoupper($first_operator) == 'OR' ?  ' WHERE 1=0' : ' WHERE 1=1';
         // Adds where clause conditions
-        foreach ($fields_values as $field => $value) {
-            $modelfield = $this->modelfield($field);
-            // If applicable, skips field if not a primary key field
-            if ($primary_only && !in_array($modelfield, $this->primary)) continue;
-            // Adds the condition operator to the where clause
-            if(@$this->params["{$modelfield}_operator"]) {
-                $operator = $this->params["{$modelfield}_operator"];
-                // Check if operator is allowed
-                $allowed_operators = array('AND', 'OR');
-                if (!in_array(strtoupper($operator), $allowed_operators))
-                    throw new xException("Operator not allowed: {$operator}", 400);
-                $sql .= " {$operator} ";
-            } else {
-                // Default operator
-                $sql .= ' AND ';
-            }
-            // Adds the condition field to the where clause
-            $sql .= " `{$this->maintable}`.`{$field}`";
-            // Adds the condition comparator to the where clause
-            if (@$this->params["{$modelfield}_comparator"]) {
-                $comparator = $this->params["{$modelfield}_comparator"];
-                // Check if comparator is allowed
-                $allowed_comparators = array('=', '!=', '<', '>', '<=', '>=', 'LIKE', 'IS', 'IS NOT');
-                if (!in_array(strtoupper($comparator), $allowed_comparators))
-                    throw new xException("Comparator not allowed: {$comparator}", 400);
-                $sql .= " {$comparator} ";
-            } elseif (is_array($value)) {
-                $sql .= ' IN ';
-            } elseif (is_null($value)) {
-                $sql .= ' IS ';
-            } else {
-                // Default comparator
-                $sql .= ' = ';
-            }
-            // Adds the condition value to the where clause
-            if (is_array($value)) {
-                $values = array();
-                foreach ($value as $val) $values[] = $this->escape($val, $this->modelfield($field));
-                $sql .= ' ('.implode(',', $values).')';
-            } else {
-                // Adds condition value to the where clause
-                $sql .= $this->escape($value, $this->modelfield($field));
+        foreach ($data as $table => $fields_values) {
+            foreach ($fields_values as $field => $value) {
+                // For the current field, computes:
+                // - $modelfield: the model field name
+                // - $field_param_name: the name of the field as it should be found in the $this->params array
+                $modelfield = $this->modelfield($field);
+                $field_param_name = ($table == $this->maintable) ? $modelfield : "{$table_to_modelname[$table]}_{$modelfield}";
+                // If applicable, skips field if not a primary key field
+                if ($primary_only && !in_array($modelfield, $this->primary)) continue;
+                // Adds the condition operator to the where clause
+                $operator_param_name = "{$field_param_name}_operator";
+                if(@$this->params[$operator_param_name]) {
+                    $operator = $this->params[$operator_param_name];
+                    // Check if operator is allowed
+                    $allowed_operators = array('AND', 'OR');
+                    if (!in_array(strtoupper($operator), $allowed_operators))
+                        throw new xException("Operator not allowed: {$operator}", 400);
+                    $sql .= " {$operator} ";
+                } else {
+                    // Default operator
+                    $sql .= ' AND ';
+                }
+                // Adds the condition field to the where clause
+                $sql .= " `{$table}`.`{$field}`";
+                // Adds the condition comparator to the where clause
+                $comparator_param_name = $table == $this->maintable ? "{$modelfield}_comparator" : "{$table_to_modelname[$table]}_{$modelfield}_comparator";
+                if (@$this->params[$comparator_param_name]) {
+                    $comparator = $this->params[$comparator_param_name];
+                    // Check if comparator is allowed
+                    $allowed_comparators = array('=', '!=', '<', '>', '<=', '>=', 'LIKE', 'IS', 'IS NOT');
+                    if (!in_array(strtoupper($comparator), $allowed_comparators))
+                        throw new xException("Comparator not allowed: {$comparator}", 400);
+                    $sql .= " {$comparator} ";
+                } elseif (is_array($value)) {
+                    $sql .= ' IN ';
+                } elseif (is_null($value)) {
+                    $sql .= ' IS ';
+                } else {
+                    // Default comparator
+                    $sql .= ' = ';
+                }
+                // Adds the condition value to the where clause
+                if (is_array($value)) {
+                    $values = array();
+                    foreach ($value as $val) $values[] = $this->escape($val, $this->modelfield($field));
+                    $sql .= ' ('.implode(',', $values).')';
+                } else {
+                    // Adds condition value to the where clause
+                    $sql .= $this->escape($value, $this->modelfield($field));
+                }
             }
         }
         return $sql;
@@ -310,9 +327,7 @@ abstract class xModelMysql extends xModel {
      * @return array
      */
     function query($sql) {
-        $db = xContext::$db;
         $qr = $this->q($sql);
-        if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db));
         // Creates an array of results
         if (is_resource($qr)) {
             // Returns an empty array if no row was retrieved
@@ -330,6 +345,7 @@ abstract class xModelMysql extends xModel {
                 $result[] = array_combine($fields, $row);;
             }
         } else {
+            $db = xContext::$db;
             $result = xUtil::array_merge(
                 array(
                     'xsuccess' => true,
@@ -355,7 +371,7 @@ abstract class xModelMysql extends xModel {
         // Executes query
         xContext::$log->log("Executing query: \n{$sql}", @$this ? $this : 'xModelMysql');
         $qr = mysql_query($sql, $db);
-        if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db));
+        if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db), 500);
         return $qr;
     }
 }
