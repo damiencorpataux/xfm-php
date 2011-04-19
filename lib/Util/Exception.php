@@ -34,6 +34,7 @@ class xException extends Exception {
         // Client error 4xx
         400 => 'HTTP/1.0 400 Bad Request',
         401 => 'HTTP/1.0 401 Unauthorized',
+        403 => 'HTTP/1.0 403 Forbidden',
         404 => 'HTTP/1.0 404 Not Found',
         405 => 'HTTP/1.0 405 Method Not Allowed',
         // Server error 5xx
