@@ -19,9 +19,25 @@ abstract class xFront extends xRestElement {
 
     /**
      * HTTP Request information.
+     * @var array
      */
     var $http = array(
         'method' => null,
+    );
+
+    /**
+     * 'HTTP Request Method' => 'xFront Method' mapping.
+     * Since REST specification is subject to interpretation
+     * when it comes to HTTP Method to CRUD mapping,
+     * this mapping array enables to define which
+     * xFront method should be called for each HTTP Request Method.
+     * @var array
+     */
+    var $method_mapping = array(
+        'GET' => 'get',
+        'POST' => 'post',
+        'PUT' => 'put',
+        'DELETE' => 'delete'
     );
 
     protected function __construct($params = null) {
@@ -78,22 +94,10 @@ abstract class xFront extends xRestElement {
      * @return mixed
      */
     function handle() {
-        switch ($this->http['method']) {
-            case 'GET':
-                return $this->handle_get();
-            break;
-            case 'POST':
-                return $this->handle_post();
-            case 'PUT':
-                return $this->handle_put();
-            break;
-            case 'DELETE':
-                return $this->handle_delete();
-            break;
-            default:
-                header("HTTP/1.0 405 Method Not Allowed");
-            break;
-        }
+        $front_method = $this->method_mapping[$this->http['method']];
+        if (!$front_method)throw new xException('Method not allowed', 405);
+        $handle_method = "handle_{$front_method}";
+        return $this->$handle_method();
     }
 
     function handle_get() { return $this->get(); }
