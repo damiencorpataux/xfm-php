@@ -36,6 +36,18 @@ class xRestFront extends xFront {
         parent::__construct($params);
         // Switches encoding if applicable
         if (@$this->params['xencoding']) $this->encoding = $this->params['xencoding'];
+        $this->handle_request_body_params();
+    }
+
+    /**
+     * Merges the HTTP Request body paramters with the the instance parameters.
+     */
+    function handle_request_body_params() {
+        // Merges HTTP Request body with the instance parameters,
+        // instance params have priority for security reasons
+        $body = $this->get_request_body();
+        $params = $this->decode($body);
+        $this->params = xUtil::array_merge(xUtil::arrize($params), $this->params);
     }
 
     function handle_error($exception) {
@@ -106,6 +118,7 @@ class xRestFront extends xFront {
     }
     function encode_json($data) {
         if (!function_exists('json_encode')) throw new xException("JSON encoding unavailable", 501);
+        // TODO: manage 'invalid UTF-8 sequence' case (PHP Warning issue)
         return json_encode($data);
     }
     function encode_xml($data) {
