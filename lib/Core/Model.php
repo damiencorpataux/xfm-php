@@ -314,8 +314,7 @@ abstract class xModel extends xRestElement {
                 foreach ($foreign_model->mapping as $foreign_modelfield => $foreign_dbfield) {
                     $prefixed_field_name = "{$foreign_model_name}_{$foreign_modelfield}";
                     if ($local_foreign_modelfield == $prefixed_field_name && isset($local_model->params[$local_foreign_modelfield])) {
-                        $i = $prefix ? $prefixed_field_name : $foreign_modelfield;
-                        $foreign_fields_values[$i] = $local_model->params[$local_foreign_modelfield];
+                        $foreign_fields_values[$foreign_modelfield] = $local_model->params[$local_foreign_modelfield];
                     }
                 }
             }
