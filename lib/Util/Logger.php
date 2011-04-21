@@ -132,6 +132,13 @@ class xLogger {
         }
     }
 
+    function debug($msgs, $instance = null) { return $this->log($msgs, $instance, self::DEBUG); }
+    function info($msgs, $instance = null) { return $this->log($msgs, $instance, self::INFO); }
+    function notice($msgs, $instance = null) { return $this->log($msgs, $instance, self::NOTICE); }
+    function warning($msgs, $instance = null) { return $this->log($msgs, $instance, self::WARNING); }
+    function error($msgs, $instance = null) { return $this->log($msgs, $instance, self::ERROR); }
+    function fatal($msgs, $instance = null) { return $this->log($msgs, $instance, self::FATAL); }
+
 }
 
 ?>
