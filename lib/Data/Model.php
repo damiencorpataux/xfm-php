@@ -482,8 +482,16 @@ abstract class xModel extends xRestElement {
 
     static function q($sql) {
         $driver = xContext::$config->db->driver;
-        $model_class = "xModel{$driver}";
-        return $model_class::q($sql);
+        /* Should be:
+         * $model_class = "xModel{$driver}";
+         * $return $model_class::q($sql);
+         * But for PHP 5.3 compatibility, has to be:
+         */
+         switch ($driver) {
+             case 'postgres': return xModelPostgres::q($sql);
+             default:
+             case 'mysql': return xModelMysql::q($sql);
+         }
     }
 }
 

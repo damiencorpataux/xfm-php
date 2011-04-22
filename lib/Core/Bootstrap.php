@@ -95,29 +95,31 @@ class xBootstrap {
     function setup_includes() {
         // Set xFreemwork lib include path
         set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__file__).'/../');
-        require_once('Util/Util.php');
-        require_once('Util/Exception.php');
-        require_once('Util/Context.php');
-        require_once('Util/Auth.php');
-        require_once('Util/Logger.php');
-        require_once('Util/Router.php');
-        require_once('Util/Form.php');
-        require_once('Util/Validator.php');
+        require_once('Core/Logger.php');
+        require_once('Core/Util.php');
+        require_once('Core/Exception.php');
+        require_once('Core/Context.php');
+        require_once('Core/Bootstrap.php');
         require_once('Core/Rest.php');
         require_once('Core/Controller.php');
-        require_once('Core/Model.php');
-        require_once('Core/ModelMysql.php');
-        require_once('Core/ModelPostgres.php');
-        require_once('Util/Transaction.php');
         require_once('Core/WebController.php');
-        require_once('Core/View.php');
-        require_once('Core/Front.php');
-        require_once('Fronts/WebFront.php');
-        require_once('Fronts/JsFront.php');
-        require_once('Fronts/RestFront.php');
-        require_once('Fronts/ApiFront.php');
-        require_once('Fronts/RssFront.php');
-        // Helpers
+        require_once('Front/Front.php');
+        require_once('Front/WebFront.php');
+        require_once('Front/RestFront.php');
+        require_once('Front/ApiFront.php');
+        require_once('Front/JsFront.php');
+        require_once('Front/ModelFront.php');
+        require_once('Front/RssFront.php');
+        require_once('Util/Router.php');
+        require_once('Util/Script.php');
+        require_once('Util/Auth.php');
+        require_once('Util/Form.php');
+        require_once('Data/Validator.php');
+        require_once('Data/Model.php');
+        require_once('Data/ModelPostgres.php');
+        require_once('Data/ModelMysql.php');
+        require_once('Data/Transaction.php');
+        require_once('View/View.php');
         require_once('Helpers/FormHelper.php');
         require_once('Helpers/ValidatorHelper.php');
     }
@@ -138,11 +140,11 @@ class xBootstrap {
         $config_path = xContext::$basepath.'/config';
         // Detects profile to be used
         if (!xContext::$profile) {
-            $profile = new Zend_Config_Ini(
+            try { $profile = new Zend_Config_Ini(
                 "{$config_path}/default.ini",
                 'profile',
                 array('allowModifications' => true)
-            );
+            ); } catch (Exception $e) {}
             foreach ($this->get_config_files() as $file) {
                 try { $profile->merge(new Zend_Config_Ini($file, 'profile')); }
                 catch (Exception $e) { continue; }
@@ -150,16 +152,17 @@ class xBootstrap {
             if ($profile->name) xContext::$profile = $profile->name;
         }
         // Loads default configuration file
-        xContext::$config = new Zend_Config_Ini(
+        try { xContext::$config = new Zend_Config_Ini(
             "{$config_path}/default.ini",
             xContext::$profile,
             array('allowModifications' => true)
-        );
+        ); } catch (Exception $e) {}
         // Merges environment (host and/or app-path specific) configuration file
         foreach ($this->get_config_files() as $file) {
             try { xContext::$config->merge(new Zend_Config_Ini($file, 'overrides')); }
             catch (Exception $e) { continue; }
         }
+        if (!@xContext::$config) xContext::$config = new stdClass();
     }
 
     /**

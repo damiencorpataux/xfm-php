@@ -12,9 +12,7 @@ class xTransaction {
     function __construct() {}
 
     static function q($sql) {
-        $driver = xContext::$config->db->driver;
-        $model = "xModel{$driver}";
-        return $model::q($sql);
+        return xModel::q($sql);
     }
 
     function start() {
