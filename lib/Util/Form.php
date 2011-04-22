@@ -210,6 +210,41 @@ abstract class xForm {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
+ *
+ * @package xForm
+**/
+class xFormFieldFree extends xFormField {
+    function options() {
+        return array(
+            'content' => 'This is to be replaced with html content to render field'
+        );
+    }
+    function render_field() {
+        return $this->options['content'];
+    }
+}
+
+/**
+ *
+ * @package xForm
+**/
+class xFormFieldView extends xFormField {
+    function options() {
+        throw new xException('Not yet working properly with metadata', 500);
+        return array(
+            'type' => 'view',
+            'view' => null,
+            'data' => array(),
+            'meta' => null
+        );
+    }
+    function render_field() {
+        $view = xView::load($this->options['view'], $this->options['data'], &$this->options['meta']);
+        return $view->render();
+    }
+}
+
+/**
  * 
  * @package xForm
 **/
