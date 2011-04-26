@@ -220,6 +220,8 @@ abstract class xModelMysql extends xModel {
         $sql = strtoupper($first_operator) == 'OR' ?  ' WHERE 1=0' : ' WHERE 1=1';
         // Adds where clause conditions
         foreach ($data as $table => $fields_values) {
+            // If applicable, skips fields that belong to foreign tables
+            if ($primary_only && $table != $this->maintable) continue;
             foreach ($fields_values as $field => $value) {
                 // For the current field, computes:
                 // - $modelfield: the model field name
