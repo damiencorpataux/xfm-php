@@ -190,7 +190,8 @@ abstract class xModel extends xRestElement {
         // Sets the maintable name
         $this->maintable = trim(array_shift(explode(',', $this->table)));
         // Sets the model name
-        $this->name = strtolower(substr(get_class($this), 0, -strlen('Model')));
+        $reflector = new ReflectionClass(get_class($this));
+        $this->name = substr(basename($reflector->getFileName()), 0, -strlen('.php'));
         // Strip HTML tags from fields values
         foreach (array_intersect_key($this->params, $this->mapping) as $field => $value) {
             if (in_array($field, $this->allow_html)) continue;
@@ -307,7 +308,6 @@ abstract class xModel extends xRestElement {
         foreach ($foreign_models_names as $foreign_model_name) {
             // Determines fields & values beloning to foreign model:
             $local_model = xModel::load($this->name, $this->params);
-            $foreign_model_name = $foreign_model_name;
             $foreign_model = xModel::load($foreign_model_name);
             // Creates the foreign_fields_values array
             foreach ($local_model->foreign_mapping() as $local_foreign_modelfield => $local_foreign_dbfield) {
