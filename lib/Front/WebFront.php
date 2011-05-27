@@ -40,7 +40,7 @@ class xWebFront extends xFront {
     }
 
     function get() {
-        $controller_name = $this->params['xcontroller'];
+        $controller_name = @$this->params['xcontroller'];
         if (@$this->params['xmodule']) $controller_name = "{$this->params['xmodule']}/$controller_name";
         $controller = xController::load($controller_name, $this->params);
         $data = array();
@@ -88,7 +88,7 @@ class xWebFront extends xFront {
     static function messages($text = null, $type = 'info') {
         if ($text === false) {
             $messages = @$_SESSION['x']['xWebFront']['messages'] ? $_SESSION['x']['xWebFront']['messages'] : array();
-            return xUtil::arrize($messages);        
+            return xUtil::arrize($messages);
         } elseif (is_null($text)) {
             $messages = @$_SESSION['x']['xWebFront']['messages'] ? $_SESSION['x']['xWebFront']['messages'] : array();
             $_SESSION['x']['xWebFront']['messages'] = array();
