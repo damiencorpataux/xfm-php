@@ -63,9 +63,7 @@ class xBootstrap {
         $this->setup_includes();
         if ($profile) xContext::$profile = $profile;
         $this->setup_dummy_log();
-        xContext::$basepath = @$_SERVER['DOCUMENT_ROOT'] ?
-            substr($_SERVER['DOCUMENT_ROOT'], 0, -strlen('/public')) :
-            substr(dirname(__file__), 0, strpos(dirname(__file__), '/lib'));
+        xContext::$basepath = substr(dirname(__file__), 0, strpos(dirname(__file__), '/lib'));
         xContext::$libpath = substr(dirname(__file__), 0, -strlen('/Util'));
         xContext::$baseuri = substr($_SERVER['SCRIPT_NAME'], 0, -strlen('/index.php'));
         xContext::$baseurl = xUtil::url(xContext::$baseuri, true);
@@ -228,6 +226,8 @@ class xBootstrap {
         if (!mysql_select_db(xContext::$config->db->database, xContext::$db)) {
             throw new xException('Could not select database ('.mysql_error(xContext::$db).'): '.print_r(xContext::$config->db->toArray(), true));
         }
+        mysql_set_charset('utf8', xContext::$db);
+        xContext::$log->log('Set database client encoding to: '.mysql_client_encoding(xContext::$db), $this);
     }
 
     function setup_db_postgres() {
