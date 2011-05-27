@@ -104,6 +104,10 @@ class xTransaction {
 
     function throw_exception() {
         $error_count = count($this->exceptions);
+        // Enhances exception data with sql query error message, if applicable
+        if (xContext::$config->error->reporting == 'E_ALL')
+            foreach ($this->exceptions as $exception)
+                $exception->data = $exception->getMessage();
         throw new xException(
             "{$error_count} operation(s) failed during the transaction",
             500,
