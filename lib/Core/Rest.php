@@ -25,6 +25,8 @@ abstract class xElement {
     var $params = array();
 
     protected function __construct($params = null) {
+        // Ensures the given params is an array
+        if (!is_null($params) && !is_array($params)) $params = xUtil::arrize($params);
         $this->params = xUtil::array_merge($this->params, $params);
         $this->init();
     }
