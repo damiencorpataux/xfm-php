@@ -260,10 +260,11 @@ abstract class xModelPostgres extends xModel {
      */
     function sql_order() {
         $sql = '';
-        if ($this->order && $this->order_by) {
+        if ($this->order_by) {
             $fields = array();
             foreach(xUtil::arrize($this->order_by) as $field) $fields[] = $this->dbfield($field);
-            $sql = ' ORDER BY '.implode(',', $fields)." {$this->order}";
+            $order = $this->order ? $this->order : 'ASC';
+            $sql = ' ORDER BY '.implode(',', $fields)." {$order}";
         }
         return $sql;
     }
