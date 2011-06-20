@@ -54,6 +54,7 @@ class xValidatorStore {
         $this->params = $params;
         // Creates validators
         foreach ($options as $field => $validators) {
+            $validators = xUtil::arrize($validators);
             foreach ($validators as $validator => $options) {
                 // Validators without options can be passed as a simple key
                 if (is_int($validator)) {
@@ -73,7 +74,7 @@ class xValidatorStore {
      * @return xValidator xValidator instance corresponding
      *     to the given field and validator names,
      *     null if not found.
-     */ 
+     */
     function get($field_name = null, $validator_name = null) {
         if (!$field_name) return $this->validators;
         elseif (!$validator_name) return @$this->validators[$field_name];
