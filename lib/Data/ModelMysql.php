@@ -19,7 +19,7 @@ abstract class xModelMysql extends xModel {
      * @see xModel::get()
      * @return array
      */
-    function get() {
+    function get($rownum=null) {
         $sql = implode(' ', array(
             $this->sql_select(),
             $this->sql_from(),
@@ -29,7 +29,12 @@ abstract class xModelMysql extends xModel {
             $this->sql_order(),
             $this->sql_limit()
         ));
-        return $this->query($sql);
+        // Manages return format
+        $result = $this->query($sql);
+        // Returns only the record corresponding to rownum.
+        // If the record doesn't exist, returns an empty array
+        if (!is_null($rownum)) return @$result[$rownum] ? $result[$rownum] : array();
+        else return $result;
     }
 
     /**
@@ -203,9 +208,11 @@ abstract class xModelMysql extends xModel {
 
     /**
      * @see xModel::sql_where()
+     * @param bool True to consider primary key field(s) only
+     * @param bool True to consider local fields only (ignoring foreign tables fields)
      * @return string
      */
-    function sql_where($primary_only = false) {
+    function sql_where($primary_only = false, $local_only = false) {
         // Creates data structure
         $data = array();
         $table_to_modelname = array();
@@ -222,13 +229,14 @@ abstract class xModelMysql extends xModel {
         foreach ($data as $table => $fields_values) {
             // If applicable, skips fields that belong to foreign tables
             if ($primary_only && $table != $this->maintable) continue;
+            if ($local_only && $table != $this->maintable) continue;
             foreach ($fields_values as $field => $value) {
                 // For the current field, computes:
                 // - $modelfield: the model field name
                 // - $field_param_name: the name of the field as it should be found in the $this->params array
                 $modelfield = $this->modelfield($field);
                 $field_param_name = ($table == $this->maintable) ? $modelfield : "{$table_to_modelname[$table]}_{$modelfield}";
-                // If applicable, skips field if not a primary key field
+                // If applicable, skips field if not a primary key field for this model table
                 if ($primary_only && !in_array($modelfield, $this->primary)) continue;
                 // Adds the condition operator to the where clause
                 $operator_param_name = "{$field_param_name}_operator";
