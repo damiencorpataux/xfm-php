@@ -357,7 +357,7 @@ abstract class xModel extends xRestElement {
      * @see xModel::query()
      * @return array
      */
-    function get() {
+    function get($rownum=null) {
         throw new xException('Not implemented', 501);
     }
 

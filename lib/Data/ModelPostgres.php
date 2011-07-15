@@ -19,7 +19,7 @@ abstract class xModelPostgres extends xModel {
      * @see xModel::get()
      * @return array
      */
-    function get() {
+    function get($rownum=null) {
         $sql = implode(' ', array(
             $this->sql_select(),
             $this->sql_from(),
@@ -29,7 +29,12 @@ abstract class xModelPostgres extends xModel {
             $this->sql_order(),
             $this->sql_limit()
         ));
-        return $this->query($sql);
+        // Manages return format
+        $result = $this->query($sql);
+        // Returns only the record corresponding to rownum.
+        // If the record doesn't exist, returns an empty array
+        if (!is_null($rownum)) return @$result[$rownum] ? $result[$rownum] : array();
+        else return $result;
     }
 
     /**
