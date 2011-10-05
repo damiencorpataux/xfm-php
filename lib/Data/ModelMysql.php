@@ -20,7 +20,7 @@ abstract class xModelMysql extends xModel {
      * @return array
      */
     function get($rownum=null) {
-        $sql = implode(' ', array(
+        $sql = implode("\n ", array(
             $this->sql_select(),
             $this->sql_from(),
             $this->sql_join(),
@@ -195,7 +195,7 @@ abstract class xModelMysql extends xModel {
             // Creates SQL SELECT fragments
             $fragments[] = "{$dbfield} AS {$modelfield}";
         }
-        return " SELECT ".implode(', ', $fragments);
+        return " SELECT ".implode(",\n\t", $fragments);
     }
 
     /**
@@ -246,10 +246,10 @@ abstract class xModelMysql extends xModel {
                     $allowed_operators = array('AND', 'OR');
                     if (!in_array(strtoupper($operator), $allowed_operators))
                         throw new xException("Operator not allowed: {$operator}", 400);
-                    $sql .= " {$operator} ";
+                    $sql .= "\n\t"." {$operator} ";
                 } else {
                     // Default operator
-                    $sql .= ' AND ';
+                    $sql .= "\n\t".' AND ';
                 }
                 // Adds the condition field to the where clause
                 $sql .= " `{$table}`.`{$field}`";
@@ -290,7 +290,7 @@ abstract class xModelMysql extends xModel {
      */
     function sql_join() {
         $joins = xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
-        return implode($joins, ' ');
+        return implode($joins, "\n");
     }
 
     /**
@@ -379,8 +379,9 @@ abstract class xModelMysql extends xModel {
      */
     static function q($sql) {
         $db = xContext::$db;
+        $class = get_called_class();
         // Executes query
-        xContext::$log->log("Executing query: \n{$sql}", @$this ? $this : 'xModelMysql');
+        xContext::$log->log("Executing query: \n{$sql}", $class);
         $qr = mysql_query($sql, $db);
         if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db), 500);
         return $qr;

@@ -343,8 +343,9 @@ abstract class xModelPostgres extends xModel {
      */
     static function q($sql) {
         $db = xContext::$db;
+        $class = get_called_class();
         // Executes query
-        xContext::$log->log("Executing query: \n{$sql}", $this);
+        xContext::$log->log("Executing query: \n{$sql}", $class);
         $qr = pg_query($db, $sql);
         if (!$qr) throw new xException("Invalid query: $sql # " . pg_last_error($db));
     }
