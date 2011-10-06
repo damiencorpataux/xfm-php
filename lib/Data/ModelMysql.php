@@ -20,7 +20,7 @@ abstract class xModelMysql extends xModel {
      * @return array
      */
     function get($rownum=null) {
-        $sql = implode("\n ", array(
+        $sql = implode("\n", array(
             $this->sql_select(),
             $this->sql_from(),
             $this->sql_join(),
@@ -67,9 +67,10 @@ abstract class xModelMysql extends xModel {
             $updates[] = "modified = ".$this->escape('CURRENT_TIMESTAMP', 'modified', true);
         }
         // Creates final sql
-        $sql = implode(' ', array(
-            "UPDATE `{$this->maintable}` SET ",
-            implode(', ', $updates),
+        $sql = implode('', array(
+            "UPDATE `{$this->maintable}` SET\n\t",
+            implode(",\n\t", $updates),
+            "\n",
             $this->sql_where(true)
         ));
         return $this->query($sql);
@@ -123,7 +124,7 @@ abstract class xModelMysql extends xModel {
         if (array_intersect($this->delete, array_keys($this->params)) != $this->delete)
             throw new Exception('Missing mandatory params for delete action: '.implode(',', $this->delete), 400);
         // Starts sql generation
-        $sql = "DELETE FROM {$this->maintable}".$this->sql_where(false, true);
+        $sql = "DELETE FROM {$this->maintable}"."\n".$this->sql_where(false, true);
         return $this->query($sql);
     }
 
@@ -195,7 +196,7 @@ abstract class xModelMysql extends xModel {
             // Creates SQL SELECT fragments
             $fragments[] = "{$dbfield} AS {$modelfield}";
         }
-        return " SELECT ".implode(",\n\t", $fragments);
+        return "SELECT ".implode(",\n\t", $fragments);
     }
 
     /**
@@ -203,7 +204,7 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function sql_from() {
-        return " FROM `{$this->maintable}`";
+        return "FROM `{$this->maintable}`";
     }
 
     /**
@@ -224,7 +225,7 @@ abstract class xModelMysql extends xModel {
         }
         // Sets WHERE 1=0 if the 1st where clause is OR
         $first_operator = @$this->params[@array_shift(@array_keys(@$data[@array_shift(@array_keys(@$data))])).'_operator'];
-        $sql = strtoupper($first_operator) == 'OR' ?  ' WHERE 1=0' : ' WHERE 1=1';
+        $sql = strtoupper($first_operator) == 'OR' ?  'WHERE 1=0' : 'WHERE 1=1';
         // Adds where clause conditions
         foreach ($data as $table => $fields_values) {
             // If applicable, skips fields that belong to foreign tables
@@ -246,10 +247,10 @@ abstract class xModelMysql extends xModel {
                     $allowed_operators = array('AND', 'OR');
                     if (!in_array(strtoupper($operator), $allowed_operators))
                         throw new xException("Operator not allowed: {$operator}", 400);
-                    $sql .= "\n\t"." {$operator} ";
+                    $sql .= "\n\t"."{$operator} ";
                 } else {
                     // Default operator
-                    $sql .= "\n\t".' AND ';
+                    $sql .= "\n\t".'AND ';
                 }
                 // Adds the condition field to the where clause
                 $sql .= " `{$table}`.`{$field}`";
@@ -290,7 +291,7 @@ abstract class xModelMysql extends xModel {
      */
     function sql_join() {
         $joins = xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
-        return implode($joins, "\n");
+        return "\t".implode($joins, "\n\t");
     }
 
     /**
