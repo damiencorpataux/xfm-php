@@ -229,7 +229,7 @@ class xValidatorMandatory extends xValidator {
  * @package xValidator
 **/
 class xValidatorEmail extends xValidatorRegexp {
-    var $regexp = '/^[^\s]+?@[^\s]+?\.[\w]{2,5}$/';
+    var $regexp = '/^([^\s]+?@[^\s]+?\.[\w]{2,5}){0,1}$/';
     function message() {
         return _('invalid');
     }
