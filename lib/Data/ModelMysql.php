@@ -133,7 +133,7 @@ abstract class xModelMysql extends xModel {
      * @return int
      */
     function count() {
-        $sql = implode(' ', array(
+        $sql = implode("\n", array(
             "SELECT count(*) as count",
             $this->sql_from(),
             $this->sql_join(),
