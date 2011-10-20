@@ -213,8 +213,16 @@ abstract class xModel extends xRestElement {
             'xgroup_by' => 'group_by',
             'xreturn' => 'return',
         );
+        $csv_params = array('join', 'order_by', 'group_by', 'return');
         foreach ($overrides as $parameter => $property) {
-            if (isset($this->params[$parameter])) $this->$property = $this->params[$parameter];
+            if (isset($this->params[$parameter])) {
+                $this->$property = $this->params[$parameter];
+                // Creates an array from property (if in plain text or CSV format)
+                if (in_array($property, $csv_params) && !is_array($this->$property)) {
+                    $this->$property = explode(',', $this->$property);
+                    $this->$property = array_map('trim', $this->$property);
+                }
+            }
         }
     }
 
