@@ -142,7 +142,7 @@ class xUtil {
         foreach($arrays as $array) {
             //xContext::$log->log(array('xUtil::merge_array(): Merging array: ', $array), 'xUtil');
             if (is_null($array)) continue;
-            if (!is_array($array)) trigger_error('can only merge arrays', E_USER_ERROR);
+            if (!is_array($array)) throw new xException('xUtil::array_merge() can only merge arrays', 500, $arrays);
             foreach ($array as $key => &$value) {
                 if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                     if (is_numeric($key)) $merged[] = xUtil::array_merge($merged[$key], $value);
@@ -158,13 +158,13 @@ class xUtil {
 
     /**
      * Returns a deep clone of the given array.
-     * 
+     *
      * @param array The array to clone.
      * @return array The clone of the given array.
      */
     function array_clone($array) {
         // check if input is really an array
-        if (!is_array($array)) return $array;        
+        if (!is_array($array)) return $array;
         // initialize return array
         $clone = array();
         // get array keys
@@ -178,7 +178,7 @@ class xUtil {
             elseif (is_array($cell)) $clone[$key] = array_clone($cell); // assign just a plain scalar value
             else $clone[$key] = $cell;
         }
-        return $clone;  
+        return $clone;
     }
 
     /**
@@ -264,8 +264,8 @@ class xUtil {
         $url = '';
         if ($full) {
             $url =  @$_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
-            $url .= '://' . $_SERVER['HTTP_HOST'];
-            $url .= $_SERVER['SERVER_PORT'] == 80 ? '' : ":{$_SERVER['SERVER_PORT']}";
+            $url .= '://' . @$_SERVER['HTTP_HOST'];
+            $url .= @$_SERVER['SERVER_PORT'] == 80 ? '' : ':'.@$_SERVER['SERVER_PORT'];
         }
         return $url . xContext::$baseuri."/{$suffix}";
     }
@@ -466,7 +466,7 @@ class xUtil {
      * @param string Mail body.
      * @param string Sender email address.
      * @param string Encoding (eg. UTF-8, iso-8859-1).
-     * @param string 
+     * @param string
      * @return bool The PHP mail function return value.
      */
     static function mail($to, $subject , $message, $from, $encoding = 'utf-8') {
@@ -487,7 +487,7 @@ class xUtil {
         // Note: earth's circumference is 40030 Km long, divided in 360 degrees, that's 111190
         if ($lat1==$lat2 && $lon1==$lon2) return 0;
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($lon1-$lon2));
-        $dist = acos($dist); 
+        $dist = acos($dist);
         $dist = rad2deg($dist);
         if ($dist>0) return round($dist * 111190);
         return 0;

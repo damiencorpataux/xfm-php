@@ -44,6 +44,15 @@ class xLogger {
 
     /**
      * The class names to be logged.
+     * Structure:
+     * <code>
+     * array(
+     *     array(
+     *          'class' => 'ClassName',
+     *          'method' => 'MethodName'
+     *     )
+     * )
+     * </code>
      * @var array
      */
     var $classes = array();
@@ -70,13 +79,14 @@ class xLogger {
         fwrite($this->file, "\n--8<---------------------------------------------------------------------------\n");
         // Writes the requested URL
         $url = @$_SERVER['HTTP_HOST'].@$_SERVER['REQUEST_URI'];
-        $url = $url ? $url : '[No url]';
-        $method = strtoupper($_SERVER['REQUEST_METHOD']);
+        $url = $url ? $url : '[No URL]';
+        $method = strtoupper(@$_SERVER['REQUEST_METHOD']);
         fwrite($this->file, "URL: {$url} [{$method}]\n");
         // Writes the requester IP anf Method (HTTP Verb)
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) $ip=$_SERVER['HTTP_CLIENT_IP'];
         elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-        else $ip=$_SERVER['REMOTE_ADDR'];
+        elseif (!empty($_SERVER['REMOTE_ADDR'])) $ip=$_SERVER['REMOTE_ADDR'];
+        else $ip='[No IP]';
         fwrite($this->file, "IP: {$ip}\n");
     }
 
@@ -94,14 +104,17 @@ class xLogger {
      * @return bool True if the log has to be written into logfile, false otherwise
      */
     function is_log($level, $class) {
+        // Guesses method and class names if not given
+        $trace=debug_backtrace();
+        $caller=$trace[2];
+        if (!$class) $class = $caller['class'];
+        $method = $caller['function'];
         // Don't log if the logline level is lower than the logger level
         if ($level < $this->level && self::NONE == $this->level) return false;
-        // Log if logline class
-        if (!count($this->classes)) return true;
         // Log if no filter class is set
-        elseif (!count($this->classes)) return true;
-        // Log if logline class is a filter class
-        elseif (count($this->classes) && in_array($class, $this->classes)) return true;
+        if (!count($this->classes)) return true;
+        // Log if logline class is a filter class (and method if applicable
+        if (in_array($class, $this->classes)) return true;
         // Log if logline class is a subclass of a filter class
         else foreach($this->classes as $class_to_log) {
             if (is_subclass_of($class, $class_to_log)) return true;

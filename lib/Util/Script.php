@@ -26,7 +26,7 @@ abstract class xScript {
      * @return string Bootstrap absolute location
      */
     function bootstrap_location() {
-        return dirname(__file__).'/Bootstrap.php';
+        return dirname(__file__).'/../Core/Bootstrap.php';
     }
 
     /**
