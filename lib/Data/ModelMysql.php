@@ -182,7 +182,7 @@ abstract class xModelMysql extends xModel {
             }
         }
         // Replaces model fields names with db fields names
-        // TODO: the regexp to be able to replace some and somefield without trouble
+        // TODO: the regexp to be able to replace 'some' and 'somefield' without trouble
         /*
         foreach ($this->mapping as $modelfield => $dbfield) {
             $fragments = preg_replace("/($modelfield)/", "{$dbfield}", $fragments);

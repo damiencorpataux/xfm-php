@@ -246,8 +246,11 @@ abstract class xModel extends xRestElement {
     }
 
     /**
-     * Returns the model field name from the given database field name.
-     * @param string The model field name.
+     * Returns the database field name from the given model field name.
+     * If the database field is not mapped, returns the given database field name.
+     * FIXME: foreign models fieldnames are not translated.
+     *        This might cause problems in eg. sql_where()?
+     * @param string The model field name, or the database field name if not mapped.
      * @return string The databse field name.
      */
     function dbfield($modelfield) {
@@ -256,9 +259,10 @@ abstract class xModel extends xRestElement {
     }
 
     /**
-     * Returns the database field name from the given model field name.
-     * If the database field is not mapped, returns the given database field name.
-     * @param string The model field name, or the database field name if not mapped.
+     * Returns the model field name from the given database field name.
+     * FIXME: foreign models fieldnames are not translated.
+     *        This might cause problems in eg. sql_where()?
+     * @param string The model field name.
      * @return string The databse field name.
      */
     function modelfield($dbfield) {
@@ -303,6 +307,8 @@ abstract class xModel extends xRestElement {
 
     /**
     * Returns an array of modelfield => value containing the subset of fields that belong to the given foreign model name.
+    * FIXME: are the fieldnames translated (eg. reflect the db field names?)
+    *        To be consistent with fields_values, they should be translated.
     * @param string|array The foreign model(s) name(s). If not given, uses the current $join property value.
     * @param boolean True to return fields with their model name as a prefix (defaults to false).
     * @return array
