@@ -448,6 +448,75 @@ abstract class xModel extends xRestElement {
     abstract function sql_from();
 
     /**
+     * Creates a structured where clause content array.
+     * <code>
+     * array(
+     *     array(
+     *         'operator' => 'AND',
+     *         'comparator' => '=',
+     *         'table' => 'tablename',
+     *         'field' => 'fieldname',
+     *         'value' => 'somevalue', // or array('value1', 'value2', ...)
+     *     )
+     * );
+     * </code>
+     * @see xModel::sql_where()
+     * @param bool True to consider primary key field(s) only
+     * @param bool True to consider local fields only (ignoring foreign tables fields)
+     * @return string
+     */
+    protected function sql_where_prepare($primary_only = false, $local_only = false) {
+        // Creates query data structure from parameters
+        $data = array();
+        $table_to_modelname = array();
+        $data[$this->maintable] = $this->fields_values();
+        foreach (xUtil::arrize($this->join) as $join_model) {
+            $model = xModel::load($join_model);
+            $data[$model->maintable] = $this->foreign_fields_values($join_model);
+            $table_to_modelname[$model->maintable] = $join_model;
+        }
+        //
+        $where = array();
+        foreach ($data as $table => $fields_values) {
+            // If applicable, skips fields that belong to foreign tables
+            if ($primary_only && $table != $this->maintable) continue;
+            if ($local_only && $table != $this->maintable) continue;
+            foreach ($fields_values as $field => $value) {
+                // For the current field, computes:
+                // - $modelfield: the model field name
+                // - $field_param_name: the name of the field as it should be found in the $this->params array
+                $modelfield = $this->modelfield($field);
+                $field_param_name = ($table == $this->maintable) ? $modelfield : "{$table_to_modelname[$table]}_{$modelfield}";
+                // If applicable, skips field if not a primary key field for this model table
+                if ($primary_only && !in_array($modelfield, $this->primary)) continue;
+                // Retrieves operator or sets default operator
+                $allowed_operators = array('AND', 'OR');
+                $operator_param_name = "{$field_param_name}_operator";
+                $operator = strtoupper(@$this->params[$operator_param_name]);
+                if ($operator && !in_array($operator, $allowed_operators))
+                        throw new xException("Operator not allowed: {$operator}", 400);
+                $operator = $operator ? $operator : 'AND';
+                // Retrieves comparator or set default/auto comparator
+                $allowed_comparators = array('=', '!=', '<', '>', '<=', '>=', 'LIKE', 'IS', 'IS NOT');
+                $comparator_param_name = $table == $this->maintable ? "{$modelfield}_comparator" : "{$table_to_modelname[$table]}_{$modelfield}_comparator";
+                $comparator = strtoupper(@$this->params[$comparator_param_name]);
+                if ($comparator && !in_array(strtoupper($comparator), $allowed_comparators))
+                        throw new xException("Comparator not allowed: {$comparator}", 400);
+                $comparator = $comparator ? $comparator : '=';
+                // Creates where item structure
+                $where[] = array(
+                    'operator' => $operator,
+                    'comparator' => $comparator,
+                    'table' => $table,
+                    'field' => $field,
+                    'value' => $value
+                );
+            }
+        }
+        return $where;
+    }
+
+    /**
      * Returns a default SQL WHERE clause.
      * @return string
      */

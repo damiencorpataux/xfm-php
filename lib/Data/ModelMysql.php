@@ -214,75 +214,28 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function sql_where($primary_only = false, $local_only = false) {
-        // Creates data structure
-        $data = array();
-        $table_to_modelname = array();
-        $data[$this->maintable] = $this->fields_values();
-        foreach (xUtil::arrize($this->join) as $join_model) {
-            $model = xModel::load($join_model);
-            $data[$model->maintable] = $this->foreign_fields_values($join_model);
-            $table_to_modelname[$model->maintable] = $join_model;
-        }
+        $where = $this->sql_where_prepare($primary_only, $local_only);
+        $lines = array();
         // Sets WHERE 1=0 if the 1st where clause is OR
-        $first_operator = @$this->params[@array_shift(@array_keys(@$data[@array_shift(@array_keys(@$data))])).'_operator'];
-        $sql = strtoupper($first_operator) == 'OR' ?  'WHERE 1=0' : 'WHERE 1=1';
-        // Adds where clause conditions
-        foreach ($data as $table => $fields_values) {
-            // If applicable, skips fields that belong to foreign tables
-            if ($primary_only && $table != $this->maintable) continue;
-            if ($local_only && $table != $this->maintable) continue;
-            foreach ($fields_values as $field => $value) {
-                // For the current field, computes:
-                // - $modelfield: the model field name
-                // - $field_param_name: the name of the field as it should be found in the $this->params array
-                $modelfield = $this->modelfield($field);
-                $field_param_name = ($table == $this->maintable) ? $modelfield : "{$table_to_modelname[$table]}_{$modelfield}";
-                // If applicable, skips field if not a primary key field for this model table
-                if ($primary_only && !in_array($modelfield, $this->primary)) continue;
-                // Adds the condition operator to the where clause
-                $operator_param_name = "{$field_param_name}_operator";
-                if(@$this->params[$operator_param_name]) {
-                    $operator = $this->params[$operator_param_name];
-                    // Check if operator is allowed
-                    $allowed_operators = array('AND', 'OR');
-                    if (!in_array(strtoupper($operator), $allowed_operators))
-                        throw new xException("Operator not allowed: {$operator}", 400);
-                    $sql .= "\n\t"."{$operator} ";
-                } else {
-                    // Default operator
-                    $sql .= "\n\t".'AND ';
-                }
-                // Adds the condition field to the where clause
-                $sql .= " `{$table}`.`{$field}`";
-                // Adds the condition comparator to the where clause
-                $comparator_param_name = $table == $this->maintable ? "{$modelfield}_comparator" : "{$table_to_modelname[$table]}_{$modelfield}_comparator";
-                if (@$this->params[$comparator_param_name]) {
-                    $comparator = $this->params[$comparator_param_name];
-                    // Check if comparator is allowed
-                    $allowed_comparators = array('=', '!=', '<', '>', '<=', '>=', 'LIKE', 'IS', 'IS NOT');
-                    if (!in_array(strtoupper($comparator), $allowed_comparators))
-                        throw new xException("Comparator not allowed: {$comparator}", 400);
-                    $sql .= " {$comparator} ";
-                } elseif (is_array($value)) {
-                    $sql .= ' IN ';
-                } elseif (is_null($value)) {
-                    $sql .= ' IS ';
-                } else {
-                    // Default comparator
-                    $sql .= ' = ';
-                }
-                // Adds the condition value to the where clause
-                if (is_array($value)) {
-                    $values = array();
-                    foreach ($value as $val) $values[] = $this->escape($val, $this->modelfield($field));
-                    $sql .= ' ('.implode(',', $values).')';
-                } else {
-                    // Adds condition value to the where clause
-                    $sql .= $this->escape($value, $this->modelfield($field));
-                }
+        $first_operator = @$where[0]['operator'];
+        $lines[] = strtoupper($first_operator) == 'OR' ?  'WHERE 1=0' : 'WHERE 1=1';
+        // Creates sql where clause contents
+        foreach ($where as $i) {
+            // Manages comparator
+            if (is_array($i['value'])) $i['comparator'] = 'IN';
+            elseif (is_null($i['value'])) $i['comparator'] = 'IS';
+            // Manages value
+            if (is_array($i['value'])) {
+                $values = array();
+                foreach ($i['value'] as $v) $values[] = $this->escape($v, $this->modelfield($i['field']));
+                $i['value'] = '('.implode(',', $values).')';
+            } else {
+                $i['value'] = $this->escape($i['value'], $this->modelfield($i['field']));
             }
+            // Create SQL clause
+            $lines[] = "{$i['operator']} `{$i['table']}`.`{$i['field']}` {$i['comparator']} {$i['value']}";
         }
-        return $sql;
+        return implode("\n\t", $lines);
     }
 
     /**
