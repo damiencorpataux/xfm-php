@@ -220,17 +220,17 @@ abstract class xModelMysql extends xModel {
         $first_operator = @$where[0]['operator'];
         $lines[] = strtoupper($first_operator) == 'OR' ?  'WHERE 1=0' : 'WHERE 1=1';
         // Creates sql where clause contents
-        foreach ($where as $i) {
+        foreach ($where as $modelfield => $i) {
             // Manages comparator
             if (is_array($i['value'])) $i['comparator'] = 'IN';
-            elseif (is_null($i['value'])) $i['comparator'] = 'IS';
+            elseif ($this->escape($i['value']) == 'NULL') $i['comparator'] = 'IS';
             // Manages value
             if (is_array($i['value'])) {
                 $values = array();
-                foreach ($i['value'] as $v) $values[] = $this->escape($v, $this->modelfield($i['field']));
+                foreach ($i['value'] as $v) $values[] = $this->escape($v, $modelfield);
                 $i['value'] = '('.implode(',', $values).')';
             } else {
-                $i['value'] = $this->escape($i['value'], $this->modelfield($i['field']));
+                $i['value'] = $this->escape($i['value'], $modelfield);
             }
             // Create SQL clause
             $lines[] = "{$i['operator']} `{$i['table']}`.`{$i['field']}` {$i['comparator']} {$i['value']}";
