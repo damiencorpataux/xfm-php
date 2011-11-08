@@ -145,6 +145,33 @@ abstract class xModel extends xRestElement {
     var $join = array();
 
     /**
+     * Available SQL where templates.
+     * Conventions:
+     *  - {modelfield} substitutes the value given for this field
+     *  - [modelfield] substitutes database field name corresponding to modelfield
+     * Array example:
+     * <code>
+     * array(
+     *    'where_name1' => "dbfield1 = {modelfield1} AND (dbfield3 > {modelfield3} OR dbfield4 IN {modelfield4})",
+     *    'where_name2' => "{{field1}} = {field1} AND {{field2}} = {field2} OR {{field3}} LIKE {field3})",
+     *    'where_name3' => "{{foreign_id}} = {foreign_id} AND (0=1 [OR {{*}} LIKE {*}])"
+     * )
+     * </code>
+     * @see xModel::sql_where()
+     * @var array
+     */
+    var $wheres = array();
+
+    /**
+     * Enabled SQL where template.
+     * Contains where template name(s).
+     * This property will be overridden with the xwhere parameter value.
+     * @see xModel::joins()
+     * @var string
+     */
+    var $where = null;
+
+    /**
      * Result sorting fields (model fields names).
      * Contains model fields name(s).
      * This property will be overridden with the xorder_by parameter value.
@@ -207,6 +234,7 @@ abstract class xModel extends xRestElement {
         // Overrides model properties from x-params
         $overrides = array(
             //'parameter name' => 'class property name',
+            'xwhere' => 'where',
             'xjoin' => 'join',
             'xorder' => 'order',
             'xorder_by' => 'order_by',

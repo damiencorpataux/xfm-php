@@ -147,12 +147,19 @@ abstract class xModelMysql extends xModel {
     }
 
     /**
+     * @param mixed The value to escape.
+     * @param string The model field name related to the given value.
+     * @param bool True to allow SQL constants.
      * @see xModel::escape()
      * @return string
      */
     function escape($value, $field = null, $allow_constants = false) {
         if (is_null($value) || $value === '') {
             return 'NULL';
+        } else if (is_array($value)) {
+            $values = array();
+            foreach ($value as $v) $values[] = $this->escape($v, $field);
+            return '('.implode(',', $values).')';
         } else if (($allow_constants || !$this->constants || in_array($field, $this->constants)) && in_array($value, $this->sql_constants())) {
             return $value;
         }
@@ -214,10 +221,12 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function sql_where($primary_only = false, $local_only = false) {
+        if ($this->where) return $this->sql_where_from_template();
         $where = $this->sql_where_prepare($primary_only, $local_only);
         $lines = array();
         // Sets WHERE 1=0 if the 1st where clause is OR
-        $first_operator = @$where[0]['operator'];
+        $first_predicate = array_shift(array_slice($where, 0, 1));
+        $first_operator = $first_predicate['operator'];
         $lines[] = strtoupper($first_operator) == 'OR' ?  'WHERE 1=0' : 'WHERE 1=1';
         // Creates sql where clause contents
         foreach ($where as $modelfield => $i) {
@@ -225,17 +234,47 @@ abstract class xModelMysql extends xModel {
             if (is_array($i['value'])) $i['comparator'] = 'IN';
             elseif ($this->escape($i['value']) == 'NULL') $i['comparator'] = 'IS';
             // Manages value
-            if (is_array($i['value'])) {
-                $values = array();
-                foreach ($i['value'] as $v) $values[] = $this->escape($v, $modelfield);
-                $i['value'] = '('.implode(',', $values).')';
-            } else {
-                $i['value'] = $this->escape($i['value'], $modelfield);
-            }
+            $i['value'] = $this->escape($i['value'], $modelfield);
             // Create SQL clause
             $lines[] = "{$i['operator']} `{$i['table']}`.`{$i['field']}` {$i['comparator']} {$i['value']}";
         }
         return implode("\n\t", $lines);
+    }
+    function sql_where_from_template($primary_only = false, $local_only = false) {
+        $where = $this->sql_where_prepare($primary_only, $local_only);
+        $tpl = @$this->wheres[$this->where];
+        if (!$tpl) throw new xException('Where template not found or empty');
+        // Replace regular field names ({{x}}) and values ({x})
+        foreach ($where as $modelfield => $predicate) {
+            $value = $this->escape($predicate['value'], $modelfield);
+            $tpl = str_replace("{{{$modelfield}}}", $predicate['field'], $tpl, $count1);
+            $tpl = str_replace("{{$modelfield}}", $value, $tpl, $count2);
+            if ($count1 || $count2) $replaced[] = $modelfield;
+        }
+        // Replaces loops ([]), if applicable
+        preg_match_all('/\[(.*?)\]/', $tpl, $matches);
+        list($replaces, $patterns) = $matches;
+        for ($i=0; $i<count($replaces); $i++) {
+            $pattern = $patterns[$i];
+            $replace = $replaces[$i];
+            $sql = array();
+            foreach ($where as $modelfield => $predicate) {
+                if (@in_array($modelfield, $replaced)) continue;
+                $sql[] = str_replace(
+                    array(
+                        '{{*}}',
+                        '{*}'
+                    ),
+                    array(
+                        $predicate['field'],
+                        $this->escape($predicate['value'], $modelfield)
+                    ),
+                    $pattern
+                );
+            }
+            $tpl = str_replace($replace, implode($sql, ' '), $tpl);
+        }
+        return "WHERE {$tpl}";
     }
 
     /**
