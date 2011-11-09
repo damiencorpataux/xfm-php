@@ -532,7 +532,7 @@ abstract class xModel extends xRestElement {
                         throw new xException("Comparator not allowed: {$comparator}", 400);
                 $comparator = $comparator ? $comparator : '=';
                 // Creates where item structure
-                $where[$modelfield] = array(
+                $where[] = array(
                     'operator' => $operator,
                     'comparator' => $comparator,
                     'table' => $table,

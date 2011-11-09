@@ -229,12 +229,12 @@ abstract class xModelMysql extends xModel {
         $first_operator = $first_predicate['operator'];
         $lines[] = strtoupper($first_operator) == 'OR' ?  'WHERE 1=0' : 'WHERE 1=1';
         // Creates sql where clause contents
-        foreach ($where as $modelfield => $i) {
+        foreach ($where as $i) {
             // Manages comparator
             if (is_array($i['value'])) $i['comparator'] = 'IN';
             elseif ($this->escape($i['value']) == 'NULL') $i['comparator'] = 'IS';
             // Manages value
-            $i['value'] = $this->escape($i['value'], $modelfield);
+            $i['value'] = $this->escape($i['value'], $this->modelfield($i['field']));
             // Create SQL clause
             $lines[] = "{$i['operator']} `{$i['table']}`.`{$i['field']}` {$i['comparator']} {$i['value']}";
         }
@@ -245,7 +245,8 @@ abstract class xModelMysql extends xModel {
         $tpl = @$this->wheres[$this->where];
         if (!$tpl) throw new xException('Where template not found or empty');
         // Replace regular field names ({{x}}) and values ({x})
-        foreach ($where as $modelfield => $predicate) {
+        foreach ($where as $predicate) {
+            $modelfield = $this->modelfield($predicate['modelfield']);
             $value = $this->escape($predicate['value'], $modelfield);
             $tpl = str_replace("{{{$modelfield}}}", $predicate['field'], $tpl, $count1);
             $tpl = str_replace("{{$modelfield}}", $value, $tpl, $count2);
