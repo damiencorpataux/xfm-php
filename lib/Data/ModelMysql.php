@@ -243,7 +243,7 @@ abstract class xModelMysql extends xModel {
     function sql_where_from_template($primary_only = false, $local_only = false) {
         $where = $this->sql_where_prepare($primary_only, $local_only);
         $tpl = @$this->wheres[$this->where];
-        if (!$tpl) throw new xException('Where template not found or empty');
+        if (!$tpl) throw new xException("Where template not found or empty ('{$this->where}')");
         // Replace regular field names ({{x}}) and values ({x})
         foreach ($where as $predicate) {
             $modelfield = $this->modelfield($predicate['field']);
