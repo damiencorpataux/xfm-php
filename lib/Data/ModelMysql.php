@@ -246,7 +246,7 @@ abstract class xModelMysql extends xModel {
         if (!$tpl) throw new xException('Where template not found or empty');
         // Replace regular field names ({{x}}) and values ({x})
         foreach ($where as $predicate) {
-            $modelfield = $this->modelfield($predicate['modelfield']);
+            $modelfield = $this->modelfield($predicate['field']);
             $value = $this->escape($predicate['value'], $modelfield);
             $tpl = str_replace("{{{$modelfield}}}", $predicate['field'], $tpl, $count1);
             $tpl = str_replace("{{$modelfield}}", $value, $tpl, $count2);
