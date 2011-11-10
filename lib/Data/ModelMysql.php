@@ -245,12 +245,13 @@ abstract class xModelMysql extends xModel {
         $tpl = @$this->wheres[$this->where];
         if (!$tpl) throw new xException("Where template not found or empty ('{$this->where}')");
         // Replace regular field names ({{x}}) and values ({x})
-        foreach ($where as $predicate) {
+        foreach ($where as $i => $predicate) {
             $modelfield = $this->modelfield($predicate['field']);
             $value = $this->escape($predicate['value'], $modelfield);
             $tpl = str_replace("{{{$modelfield}}}", $predicate['field'], $tpl, $count1);
             $tpl = str_replace("{{$modelfield}}", $value, $tpl, $count2);
-            if ($count1 || $count2) $replaced[] = $modelfield;
+            // Already replaced fields will not be reused in loops below
+            if ($count1 || $count2) unset($where[$i]);
         }
         // Replaces loops ([]), if applicable
         preg_match_all('/\[(.*?)\]/', $tpl, $matches);
@@ -260,14 +261,13 @@ abstract class xModelMysql extends xModel {
             $replace = $replaces[$i];
             $sql = array();
             foreach ($where as $modelfield => $predicate) {
-                if (@in_array($modelfield, $replaced)) continue;
                 $sql[] = str_replace(
                     array(
                         '{{*}}',
                         '{*}'
                     ),
                     array(
-                        $predicate['field'],
+                        "`{$predicate['table']}`.`{$predicate['field']}`",
                         $this->escape($predicate['value'], $modelfield)
                     ),
                     $pattern
