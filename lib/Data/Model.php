@@ -139,7 +139,7 @@ abstract class xModel extends xRestElement {
      * Enabled SQL joins.
      * Contains model name(s).
      * This property will be overridden with the xjoin parameter value.
-     * @see xModel::joins()
+     * @see xModel::joins
      * @var array
      */
     var $join = array();
@@ -365,11 +365,14 @@ abstract class xModel extends xRestElement {
     }
 
     /**
-     * Returns the model mapping, including the foreign models mapping according the xjoin defined in parameters.
+     * Returns the foreign models mapping according the xjoin defined in parameters.
+     * @param array If defined, the returned mapping is limited to specified models.
      * @return array
      */
-    function foreign_mapping() {
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
+    function foreign_mapping($foreign_models_names=null) {
+        $joins = $foreign_models_names ?
+            xUtil::filter_keys($this->joins, xUtil::arrize($foreign_models_names)) :
+            $this->joins();
         $foreign_mapping = array();
         foreach ($joins as $model_name => $join) {
             $model = xModel::load($model_name);
@@ -446,7 +449,17 @@ abstract class xModel extends xRestElement {
     }
 
     /**
-     * Return the given value, escaped and quoted.
+     * Returns an array of active joins.
+     * @see xModel::join
+     * @see xModel::joins
+     * @return array
+     */
+    function joins() {
+        return xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
+    }
+
+    /**
+     * Returns the given value, escaped and quoted.
      * If the field name (modelfield) is given and the
      * field is listed in self::constants array,
      * and the value is a sql constant,
@@ -595,7 +608,7 @@ abstract class xModel extends xRestElement {
         $driver = xContext::$config->db->driver;
         /* Should be:
          * $model_class = "xModel{$driver}";
-         * $return $model_class::q($sql);
+         * return $model_class::q($sql);
          * But for PHP 5.3 compatibility, has to be:
          */
          switch ($driver) {

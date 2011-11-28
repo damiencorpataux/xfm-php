@@ -283,8 +283,7 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function sql_join() {
-        $joins = xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
-        return "\t".implode($joins, "\n\t");
+        return "\t".implode($this->joins(), "\n\t");
     }
 
     /**
