@@ -6,8 +6,8 @@ class xTransaction {
 
     var $last_insert_id = null;
 
-    var $results;
-    var $exceptions;
+    var $results = array();
+    var $exceptions = array();
 
     function __construct() {}
 
