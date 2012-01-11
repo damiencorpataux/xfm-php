@@ -24,10 +24,18 @@ class xTransaction {
         $this->q('BEGIN');
     }
 
+    function commit() {
+        $this->q('COMMIT');
+    }
+
+    function rollback() {
+        $this->q('ROLLBACK');
+    }
+
     function end() {
         // Commit or rollback according occured exceptions
-        if ($this->exceptions) $this->q('ROLLBACK');
-        else $this->q('COMMIT');
+        if ($this->exceptions) $this->rollback();
+        else $this->commit();
         // Restores autocommit state
         $this->autocommit($this->autocommit_state_backup);
         // Throws an exception if errors occured
@@ -35,6 +43,10 @@ class xTransaction {
         else return $this->summary();
     }
 
+    /**
+     * Shorthand for execute_model()
+     * @see execute_model()
+     */
     function execute($model_instance, $method_name, $method_args = array()) {
         return $this->execute_model($model_instance, $method_name, $method_args);
     }
