@@ -450,8 +450,8 @@ abstract class xModel extends xRestElement {
 
     /**
      * Returns an array of active joins.
-     * @see xModel::join
-     * @see xModel::joins
+     * @see xModel::$join
+     * @see xModel::$joins
      * @return array
      */
     function joins() {
