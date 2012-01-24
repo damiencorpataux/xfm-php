@@ -35,6 +35,14 @@ class xTransaction {
      * Otherwise, simulates a nested transaction through a single transaction.
      */
     function start() {
+        // Warns if binary logging is not active
+        //$r = $this->q("show variables like 'log_bin'");
+        //if (@mysql_fetch_object($r)->Value != 'ON') {
+            // Binary log should be used for better data reliability
+            // see http://dev.mysql.com/doc/refman/5.0/fr/commit.html
+            // and http://dev.mysql.com/doc/refman/5.0/fr/binary-log.html
+            // and http://www.cyberciti.biz/faq/what-is-mysql-binary-log/
+        //}
         // Manages nested transactions:
         // only issues a BEGIN statement for the first transaction
         if (self::$started_transactions_count < 1) {
