@@ -1,5 +1,18 @@
 <?php
+/*
+ * (c) 2010 Damien Corpataux
+ *
+ * LICENSE
+ * This library is licensed under the GNU GPL v3.0 license,
+ * accessible at http://www.gnu.org/licenses/gpl-3.0.html
+ *
+**/
 
+/**
+ * SQL Transaction controller class.
+ * This class is intended simulate nested transactions using a single transaction.
+ * @package xFreemwork
+ */
 class xTransaction {
 
     static $started_transactions_count = 0;
@@ -19,7 +32,7 @@ class xTransaction {
 
     /**
      * Starts a new transaction if no transaction already started.
-     * Otherwise, manages nested transaction as a single transaction.
+     * Otherwise, simulates a nested transaction through a single transaction.
      */
     function start() {
         // Manages nested transactions:
@@ -31,6 +44,11 @@ class xTransaction {
             $this->autocommit(false);
             // Begin transaction
             $this->q('BEGIN');
+            // Resets internal variables
+            self::$started_transactions_count = 0;
+            $this->last_insert_id = null;
+            $this->results = array();
+            $this->exceptions = array();
         }
         // Manages transactions counter
         self::$started_transactions_count++;
@@ -38,18 +56,25 @@ class xTransaction {
 
     function commit() {
         if (self::$started_transactions_count < 1) {
-            throw new xException('Cannot commit when no transaction in progress', 500);
-        } else {
-            $this->q('COMMIT');
-            self::$started_transactions_count--;
+            throw new xException('Cannot commit if no transaction in progress', 500);
         }
+        if (self::$started_transactions_count == 1) {
+            $this->q('COMMIT');
+            $this->restore_autocommit_state();
+        }
+        self::$started_transactions_count--;
+        return $this->summary();
     }
 
     function rollback() {
         $this->q('ROLLBACK');
+        $this->restore_autocommit_state();
         self::$started_transactions_count = 0;
-        $this->autocommit(self::$autocommit_state_backup);
         return $this->summary();
+    }
+
+    function restore_autocommit_state() {
+        $this->autocommit(self::$autocommit_state_backup);
     }
 
     /**
@@ -64,10 +89,8 @@ class xTransaction {
             $this->rollback();
             $this->throw_exception();
         } else {
-            $this->commit();
+            if (self::$started_transactions_count > 0) $this->commit();
         }
-        // Restores autocommit state
-        if (self::$started_transactions_count < 1) $this->autocommit(self::$autocommit_state_backup);
         // Returns current summary
         return $this->summary();
     }
@@ -81,6 +104,9 @@ class xTransaction {
     }
 
     function execute_model($model_instance, $method_name, $method_args = array()) {
+        if (self::$started_transactions_count < 1) {
+            throw new xException('Cannot execute a statement if no transaction in progress', 500);
+        }
         // Resets last insert id value
         $this->last_insert_id = null;
         // Executes model method
@@ -97,7 +123,7 @@ class xTransaction {
                 array('result' => $result)
             );
             // Latches the last insert id
-            $this->last_insert_id = $result['xinsertid'];
+            $this->last_insert_id = @$result['xinsertid'];
             // Returns the result
             return $result;
         } catch (Exception $e) {
@@ -107,6 +133,9 @@ class xTransaction {
     }
 
     function execute_sql($sql) {
+        if (self::$started_transactions_count < 1) {
+            throw new xException('Cannot execute a statement if no transaction in progress', 500);
+        }
         $sql = xUtil::arrize($sql);
         // Executes query/ies
         foreach ($sql as $sql_statement) {
@@ -124,7 +153,7 @@ class xTransaction {
     function summary() {
         // Computes the total number of affected rows accross queries
         $affected_rows = 0;
-        foreach ($this->results as $result) $affected_rows += $result['result']['xaffectedrows'];
+        foreach ($this->results as $result) $affected_rows += @$result['result']['xaffectedrows'];
         // Creates a result set according xModel::query result
         $results = array(
             'xsuccess' => empty($this->exceptions),
