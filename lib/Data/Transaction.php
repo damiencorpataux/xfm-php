@@ -2,7 +2,9 @@
 
 class xTransaction {
 
-    var $autocommit_state_backup = null;
+    static $started_transactions_count = 0;
+
+    static $autocommit_state_backup = null;
 
     var $last_insert_id = null;
 
@@ -15,32 +17,59 @@ class xTransaction {
         return xModel::q($sql);
     }
 
+    /**
+     * Starts a new transaction if no transaction already started.
+     * Otherwise, manages nested transaction as a single transaction.
+     */
     function start() {
-        // Backups current autocommit state
-        $this->autocommit_state_backup = $this->autocommit();
-        // Sets autocommit state to false
-        $this->autocommit(false);
-        // Begin transaction
-        $this->q('BEGIN');
+        // Manages nested transactions:
+        // only issues a BEGIN statement for the first transaction
+        if (self::$started_transactions_count < 1) {
+            // Backups current autocommit state
+            self::$autocommit_state_backup = $this->autocommit();
+            // Sets autocommit state to false
+            $this->autocommit(false);
+            // Begin transaction
+            $this->q('BEGIN');
+        }
+        // Manages transactions counter
+        self::$started_transactions_count++;
     }
 
     function commit() {
-        $this->q('COMMIT');
+        if (self::$started_transactions_count < 1) {
+            throw new xException('Cannot commit when no transaction in progress', 500);
+        } else {
+            $this->q('COMMIT');
+            self::$started_transactions_count--;
+        }
     }
 
     function rollback() {
         $this->q('ROLLBACK');
+        self::$started_transactions_count = 0;
+        $this->autocommit(self::$autocommit_state_backup);
+        return $this->summary();
     }
 
+    /**
+     * Ends the current transaction (COMMIT or ROLLBACK according errors).
+     * If nested, the transaction is not COMMITed until the last top-level transaction is ended.
+     * @throw xException Throw an exception if exceptions occured
+     * @return Transaction summary (xModel compatible)
+     */
     function end() {
         // Commit or rollback according occured exceptions
-        if ($this->exceptions) $this->rollback();
-        else $this->commit();
+        if ($this->exceptions) {
+            $this->rollback();
+            $this->throw_exception();
+        } else {
+            $this->commit();
+        }
         // Restores autocommit state
-        $this->autocommit($this->autocommit_state_backup);
-        // Throws an exception if errors occured
-        if ($this->exceptions) $this->throw_exception();
-        else return $this->summary();
+        if (self::$started_transactions_count < 1) $this->autocommit(self::$autocommit_state_backup);
+        // Returns current summary
+        return $this->summary();
     }
 
     /**
