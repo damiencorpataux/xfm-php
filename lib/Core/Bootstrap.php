@@ -189,9 +189,11 @@ class xBootstrap {
     }
 
     function setup_error_handler() {
-        function myErrorHandler($errno, $errstr, $errfile, $errline) {
-            $exception = new xException($errstr, 500);
-            xBootstrap::handle_exception($exception);
+        if (!function_exists('myErrorHandler')) {
+            function myErrorHandler($errno, $errstr, $errfile, $errline) {
+                $exception = new xException($errstr, 500);
+                xBootstrap::handle_exception($exception);
+            }
         }
         // TODO: this should catch all errors excpet notices and warnings
         set_error_handler("myErrorHandler", E_ERROR);
