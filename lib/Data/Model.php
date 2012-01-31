@@ -338,7 +338,7 @@ abstract class xModel extends xRestElement {
     * FIXME: are the fieldnames translated (eg. reflect the db field names?)
     *        To be consistent with fields_values, they should be translated.
     * @param string|array The foreign model(s) name(s). If not given, uses the current $join property value.
-    * @param boolean True to return fields with their model name as a prefix (defaults to false).
+    * @param bool True to return fields with their model name as a prefix (defaults to false).
     * @return array
     */
     function foreign_fields_values($foreign_models_names = null) {
