@@ -27,9 +27,12 @@ class xDummyLogger {
 **/
 class xBootstrap {
 
-    function __construct($profile = null) {
+    function __construct($profile=null) {
         try {
+            // Setups application
             $this->setup($profile);
+            // References bootstra instance in xContext
+            xContext::$bootstrap = $this;
         } catch (Exception $e) {
             $this->handle_exception($e);
         }
@@ -208,39 +211,44 @@ class xBootstrap {
 
     function setup_db() {
         if (!@xContext::$config->db) return;
+        xContext::$db = $this->create_db();
+        if (!xContext::$db) throw new xException('Could not setup database: '.print_r(xContext::$config->db->toArray(), true));
+    }
+
+    function create_db() {
         xContext::$log->log("Setting up database link on host ".xContext::$config->db->host, $this);
         // Forks based on database driver
         $driver = @xContext::$config->db->driver ? xContext::$config->db->driver : 'mysql';
         xContext::$log->log("Using database driver: {$driver}", $this);
-        $setup_function = "setup_db_{$driver}";
-        $this->$setup_function();
-        if (!xContext::$db) throw new xException('Could not setup database: '.print_r(xContext::$config->db->toArray(), true));
+        $setup_function = "create_db_{$driver}";
+        return $this->$setup_function();
     }
-
-    function setup_db_mysql() {
-        xContext::$db = mysql_connect(
+    function create_db_mysql() {
+        $db = mysql_connect(
             xContext::$config->db->host,
             xContext::$config->db->user,
-            xContext::$config->db->password
+            xContext::$config->db->password,
+            true // creates a new connection on every call
         );
         xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
-        if (!xContext::$db) throw new xException('Could connect to database: '.print_r(xContext::$config->db->toArray(), true));
-        if (!mysql_select_db(xContext::$config->db->database, xContext::$db)) {
-            throw new xException('Could not select database ('.mysql_error(xContext::$db).'): '.print_r(xContext::$config->db->toArray(), true));
+        if (!$db) throw new xException('Could connect to database: '.print_r(xContext::$config->db->toArray(), true));
+        if (!mysql_select_db(xContext::$config->db->database, $db)) {
+            throw new xException('Could not select database ('.mysql_error($db).'): '.print_r(xContext::$config->db->toArray(), true));
         }
-        mysql_set_charset('utf8', xContext::$db);
-        xContext::$log->log('Set database client encoding to: '.mysql_client_encoding(xContext::$db), $this);
+        mysql_set_charset('utf8', $db);
+        xContext::$log->log('Set database client encoding to: '.mysql_client_encoding($db), $this);
+        return $db;
     }
-
-    function setup_db_postgres() {
+    function create_db_postgres() {
         xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
         $host = xContext::$config->db->host;
         $user = xContext::$config->db->user;
         $password = xContext::$config->db->password;
         $database = xContext::$config->db->database;
-        xContext::$db = pg_connect(
+        $db = pg_connect(
             "host=$host port=5432 dbname=$database user=$user password=$password options='--client_encoding=UTF8'"
         );
+        return $db;
     }
 
     function setup_auth() {

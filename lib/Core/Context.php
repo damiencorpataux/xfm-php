@@ -82,6 +82,12 @@ class xContext {
     static $router;
 
     /**
+     * The application-wide bootstrap object.
+     * @var xBootstrap
+     */
+    static $bootstrap;
+
+    /**
      * The application-wide database object.
      * @var ressource
      */
@@ -101,7 +107,7 @@ class xContext {
 
     /**
      * Returns a text dump of the context object for inspection.
-     * @return string 
+     * @return string
      */
     static function dump() {
         return print_r(get_class_vars("xContext"), true);
