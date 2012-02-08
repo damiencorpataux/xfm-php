@@ -606,6 +606,7 @@ abstract class xModel extends xRestElement {
 
     static function q($sql) {
         $driver = xContext::$config->db->driver;
+        if (!$driver) throw new xException('Database driver not defined', 500);
         $model_class = "xModel{$driver}";
         return $model_class::q($sql);
     }
