@@ -75,7 +75,7 @@ class xLogger {
         if (self::NONE == $this->level) return;
         $this->classes = $classes;
         $this->file = fopen($filename, "a");
-        chmod($filename, 0777);
+        @chmod($filename, 0777);
         if (!$this->file) throw new Exception("Could not open log file: $filename");
         fwrite($this->file, "\n--8<---------------------------------------------------------------------------\n");
         // Writes the requested URL
