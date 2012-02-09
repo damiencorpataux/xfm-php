@@ -299,6 +299,17 @@ abstract class xModel extends xRestElement {
     }
 
     /**
+     * Returns the primary key model field name
+     * @return string Name of the model id field.
+     */
+    function primary() {
+        $primaries = xUtil::arrize($this->primary);
+        $primary = @$primaries[0];
+        if (!$primary) throw new xException('Missing primary field');
+        return $primary;
+    }
+
+    /**
      * Returns an associative array contanining params values
      * with translated keys (e.g. keys reflect the db fields names).
      * Return array structure:
