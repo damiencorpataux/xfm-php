@@ -18,7 +18,7 @@
  */
 class xAuth {
 
-    function __constructor() {}
+    function __construct() {}
 
     /**
      * Sets auth information.
