@@ -99,7 +99,7 @@ abstract class xModelMysql extends xModel {
         ));
         // Starts sql generation
         $sqlF = $sqlV = array();
-        foreach ($this->fields_values(true) as $field => $value) {
+        foreach ($this->fields_values() as $field => $value) {
             $sqlF[] = $field;
             $sqlV[] = $this->escape($value, $this->modelfield($field));
         }
