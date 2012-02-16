@@ -14,19 +14,23 @@
 **/
 abstract class xScript {
 
+    var $timer_start = null;
+
     function __construct($autorun = true) {
+        $this->timer_start();
         $this->setup();
         if ($autorun) $this->run();
     }
 
-    /**
-     * Defines the location of the bootstrap to be used.
-     * Enables to use an overridden bootstrap.
-     * This property is set in the constructor.
-     * @return string Bootstrap absolute location
-     */
-    function bootstrap_location() {
-        return dirname(__file__).'/../Core/Bootstrap.php';
+    function timer_start() {
+        $this->timer_start = microtime();
+    }
+    function timer_lapse() {
+        list($old_usec, $old_sec) = explode(' ', $this->timer_start);
+        list($new_usec, $new_sec) = explode(' ', microtime());
+        $old_mt = ((float)$old_usec + (float)$old_sec);
+        $new_mt = ((float)$new_usec + (float)$new_sec);
+        return $new_mt - $old_mt;
     }
 
     /**
@@ -43,8 +47,8 @@ abstract class xScript {
      * Setups Bootstrap.
      */
     function setup_bootstrap() {
-        require_once($this->bootstrap_location());
-        $b = new xBootstrap();
+        require_once(dirname(__file__).'/../Core/Bootstrap.php');
+        new xBootstrap();
     }
 
     function print_profile_information() {
