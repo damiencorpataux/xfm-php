@@ -77,12 +77,26 @@ abstract class xScript {
      * Outputs a string on stdout, optionally indenting it
      * @param string $msg The string to output
      * @param int $indent_level The indentation level
+     * @param string $indent_symbol The indentation symbol to use
      */
-    function log($msg = '', $indent_level = 0) {
+    function log($msg = '', $indent_level=0, $indent_symbol='*', $newline=true) {
         $indent = '';
-        for ($i=0; $i<$indent_level; $i++) $indent .= '*';
+        for ($i=0; $i<$indent_level; $i++) $indent .= $indent_symbol;
         if (strlen($indent)) $indent .= ' ';
-        print "{$indent}{$msg}\n";
+        print "{$indent}{$msg}";
+        if ($newline) print "\n";
+    }
+
+    function prompt($msg, $indent_level=1, $indent_symbol='>', $newline=false) {
+        $this->log();
+        $this->log($msg, $indent_level, $indent_symbol, $newline);
+        @ob_flush();
+        $reply = trim(fgets(STDIN));
+        return $reply;
+    }
+    function confirm($msg, $indent_level=1) {
+        $reply = $this->prompt("{$msg} [y/N]: ", $indent_level);
+        if (strtolower($reply) !== 'y') exit(0);
     }
 
     /**
