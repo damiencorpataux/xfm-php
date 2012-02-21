@@ -245,10 +245,10 @@ abstract class xModel extends xRestElement {
         foreach ($overrides as $parameter => $property) {
             if (isset($this->params[$parameter])) {
                 $this->$property = $this->params[$parameter];
-                // Creates an array from property (if in plain text or CSV format)
+                // Creates an array from property (if not already an array)
                 if (in_array($property, $csv_params) && !is_array($this->$property)) {
-                    $this->$property = explode(',', $this->$property);
-                    $this->$property = array_map('trim', $this->$property);
+                    if (!strlen($this->$property)) $this->$property = array();
+                    else $this->$property = array_map('trim', explode(',', $this->$property));
                 }
             }
         }
