@@ -16,10 +16,14 @@ abstract class xScript {
 
     var $timer_start = null;
 
+    /**
+     * Setups script components.
+     * @param bool If true, calls the run() method automatically from constructor.
+     */
     function __construct($autorun = true) {
         $this->timer_start();
         $this->setup();
-        if ($autorun) $this->run();
+        if ($autorun) $this->autorun();
     }
 
     function timer_start() {
@@ -33,10 +37,6 @@ abstract class xScript {
         return $new_mt - $old_mt;
     }
 
-    /**
-     * Setups script components.
-     * @param bool If true, calls the run() method automatically from constructor.
-     */
     function setup() {
         $this->setup_bootstrap();
         $this->init();
@@ -45,6 +45,7 @@ abstract class xScript {
 
     /**
      * Setups Bootstrap.
+     * You might want to refine this method if you are using a custom bootstrap.
      */
     function setup_bootstrap() {
         require_once(dirname(__file__).'/../Core/Bootstrap.php');
@@ -66,6 +67,19 @@ abstract class xScript {
      * Hook for initializing specific things.
      */
     function init() {}
+
+    function autorun() {
+        try {
+            $this->run();
+        } catch(Exception $e) {
+            $message = $e->getMessage();
+            $this->log("ERROR: {$message}");
+            throw $e;
+        }
+        // Displays run time
+        $this->log();
+        $this->log('Runtime: '.$this->timer_lapse().' seconds');
+    }
 
     /**
      * The actual user script logic.
