@@ -60,6 +60,8 @@ abstract class xFront extends xRestElement {
      * Sets up the Gettext locale and domain according the selected/guessed language.
      */
     function setup_i18n() {
+        // Skips i18n setup if Gettext is not installed
+        if (!function_exists('gettext')) return;
         // Defines the current language
         $lang_available = xContext::$config->i18n->lang->alias->toArray();
         $lang_browser = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : null;
