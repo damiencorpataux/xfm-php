@@ -50,13 +50,20 @@ abstract class xFront extends xRestElement {
      * Sets up the HTTP request information array.
      */
     function setup_http_request_information() {
-        $this->http['method'] = strtoupper($_SERVER['REQUEST_METHOD']);
+        $this->http['method'] = @strtoupper($_SERVER['REQUEST_METHOD']);
     }
 
     /**
      * Sets up the Gettext locale and domain according the selected/guessed language.
      */
     function setup_i18n() {
+        // If Gettext is not installed, simulates the _() function
+        // and aborts i18n setup
+        if (!function_exists('_')) {
+            xContext::$log->log('Gettext is not installed', $this);
+            function _($str) { return $str; };
+            return;
+        }
         // Defines the current language
         $lang_available = xContext::$config->i18n->lang->alias->toArray();
         $lang_browser = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : null;

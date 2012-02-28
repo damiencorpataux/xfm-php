@@ -280,8 +280,8 @@ class xUtil {
      */
     static function current_url($query_string = true) {
         $url =  @$_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
-        $url .= '://' . $_SERVER['HTTP_HOST'];
-        $url .= $_SERVER['SERVER_PORT'] == 80 ? '' : ":{$_SERVER['SERVER_PORT']}";
+        $url .= '://' . @$_SERVER['HTTP_HOST'];
+        $url .= @$_SERVER['SERVER_PORT'] == 80 ? '' : @":{$_SERVER['SERVER_PORT']}";
         // Query string
         @list($uri, $qs) = explode('?', $_SERVER['REQUEST_URI']);
         $url .= $uri;
