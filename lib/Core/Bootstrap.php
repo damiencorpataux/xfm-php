@@ -262,6 +262,14 @@ class xBootstrap {
      * @see xFront::setup_i18n()
      */
     function setup_i18n() {
+        // If Gettext is not installed, simulates the _() function
+        // and aborts i18n setup
+        if (!function_exists('_')) {
+            xContext::$log->log('Gettext is not installed', $this);
+            function _($str) { return $str; };
+            return;
+        }
+        // Sets default language from config
         xContext::$lang = xContext::$config->i18n->lang->default;
     }
 
