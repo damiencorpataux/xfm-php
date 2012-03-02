@@ -402,7 +402,8 @@ abstract class xModel extends xRestElement {
      * @return array
      */
     function invalids($fields = array()) {
-        $validator = new xValidatorStore($this->validation, $this->params);
+        // Validates mapped params
+        $validator = new xValidatorStore($this->validation, $this->fields_values());
         return $validator->invalids($fields);
     }
 
