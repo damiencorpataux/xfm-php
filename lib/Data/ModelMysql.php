@@ -159,7 +159,7 @@ abstract class xModelMysql extends xModel {
         } else if (is_array($value)) {
             $values = array();
             foreach ($value as $v) $values[] = $this->escape($v, $field);
-            return '('.implode(',', $values).')';
+            return $values ? '('.implode(',', $values).')' : '(NULL)';
         } else if (($allow_constants || !$this->constants || in_array($field, $this->constants)) && in_array($value, $this->sql_constants())) {
             return $value;
         }
