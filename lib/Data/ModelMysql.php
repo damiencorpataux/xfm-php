@@ -179,29 +179,25 @@ abstract class xModelMysql extends xModel {
      * @return string
      */
     function sql_select() {
-        $fragments = xUtil::arrize($this->return);
-        // Replaces * with all fields
-        foreach ($fragments as $key => $fragment) {
-            if ($fragment != '*') continue;
-            unset($fragments[$key]);
-            foreach ($this->mapping as $model_field => $db_field) {
-                $fragments[] = "`{$this->maintable}`.`{$db_field}` AS `{$model_field}`";
-            }
+        // Creates SELECT for all fields (local and foreign)
+        // - Local fields
+        foreach ($this->mapping as $model_field => $db_field) {
+            $allfragments[] = "`{$this->maintable}`.`{$db_field}` AS `{$model_field}`";
         }
-        // Replaces model fields names with db fields names
-        // TODO: the regexp to be able to replace 'some' and 'somefield' without trouble
-        /*
-        foreach ($this->mapping as $modelfield => $dbfield) {
-            $fragments = preg_replace("/($modelfield)/", "{$dbfield}", $fragments);
-        }
-        */
-        // Replaces joined tables db fields name with model fields names
+        // - Foreign fields
+        //   (replaces joined tables db fields name with model fields names)
         foreach ($this->foreign_mapping() as $modelfield => $dbfield) {
             // Enquotes tablename and fieldname
             $dbfield = preg_replace('/^(\w*)\.(\w*)$/', '`$1`.`$2`', $dbfield);
             $modelfield = "`{$modelfield}`";
             // Creates SQL SELECT fragments
-            $fragments[] = "{$dbfield} AS {$modelfield}";
+            $allfragments[] = "{$dbfield} AS {$modelfield}";
+        }
+        $all = implode(",\n\t", $allfragments);
+        // Replaces '*' with all-fields-SELECT
+        $fragments = xUtil::arrize($this->return);
+        foreach ($fragments as &$fragment) {
+            $fragment = preg_replace('/\*/', $all, $fragment);
         }
         return "SELECT ".implode(",\n\t", $fragments);
     }
