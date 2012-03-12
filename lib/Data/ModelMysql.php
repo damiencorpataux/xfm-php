@@ -290,7 +290,10 @@ abstract class xModelMysql extends xModel {
         $sql = '';
         if ($this->order_by) {
             $fields = array();
-            foreach(xUtil::arrize($this->order_by) as $field) $fields[] = $this->dbfield($field);
+            foreach(xUtil::arrize($this->order_by) as $field) {
+                $dbfield = $this->dbfield($field);
+                $fields[] = "`{$this->maintable}`.`{$dbfield}`";
+            }
             $order = $this->order ? $this->order : 'ASC';
             $sql = ' ORDER BY '.implode(',', $fields)." {$order}";
         }
