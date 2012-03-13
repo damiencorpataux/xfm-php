@@ -121,13 +121,33 @@ abstract class xScript {
      */
     function opts($opts = 'h') {
         $opts = getopt($opts);
-        if (isset($opts['h'])) {
-            echo 'Usage: '.@$_SERVER['argv'][0]."\n\n";
-            foreach (xUtil::arrize($this->help()) as $line) echo "{$line}\n";
-            echo "\n";
-            exit();
-        }
+        if (isset($opts['h'])) $this->display_help();
+        $this->opts = $opts;
         return $opts;
+    }
+
+    /**
+     * Returns information about the given option:
+     * - false: option is not found
+     * - true: option is found with no value
+     * - mixed: option is found with the given value
+     * @see http://php.net/manual/en/function.getopt.php
+     * @param string Options string as defined in PHP getopt()
+     * @return array Information about the given option
+     */
+    function opt($name) {
+        $opts = $this->opts($name);
+        if (!$opts) return false;
+        $opt = array_shift($opts);
+        if (!$opt) return true;
+        return $opt;
+    }
+
+    function display_help() {
+        echo 'Usage: '.@$_SERVER['argv'][0]."\n\n";
+        foreach (xUtil::arrize($this->help()) as $line) echo "{$line}\n";
+        echo "\n";
+        exit();
     }
 
     function help() {
