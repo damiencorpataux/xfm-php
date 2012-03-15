@@ -200,6 +200,24 @@ class xUtil {
     }
 
     /**
+     * Returns true if the given needle(s) exist in the given haystack.
+     * Note that multiple needles can be given.
+     * @param array Haystack.
+     * @param mixed Needle(s). Multiple needles can be provided within a array.
+     * @param bool And search. False to perform an OR search (default), true to perform an AND search.
+     * @param bool Strict. True to also check types.
+     * @return bool
+     */
+    static function in_array($needles, $haystack, $and_search=false, $strict=false) {
+        $needles = xUtil::arrize($needles);
+        $matches = array();
+        foreach ($needles as $needle) {
+            $matches[] = in_array($needle, $haystack, $strict);
+        }
+        return $and_search ? min($matches) : max($matches);
+    }
+
+    /**
      * Returns the given $string with HTML tags stripped,
      * preserving null value for $string.
      * @param string The string to strip.
