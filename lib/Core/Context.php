@@ -30,35 +30,30 @@ class xContext {
 
     /**
      * The base path of the xfreemwork library.
-     *
-     * @var string
+    * @var string
      */
     static $libpath;
 
     /**
      * The base path of the application.
-     *
      * @var string
      */
     static $basepath;
 
     /**
      * The base uri of the application.
-     *
      * @var string
      */
     static $baseuri;
 
     /**
      * The base url of the application (including http://domaine.tld/baseuri).
-     *
      * @var string
      */
     static $baseurl;
 
     /**
      * The current language (as defined in config i18n.lang.alias directive).
-     *
      * @var string
      */
     static $lang;
@@ -68,6 +63,13 @@ class xContext {
      * @var Zend_Config_Ini
      */
     static $config;
+
+    /**
+     * The numeric value of the PHP reporting level,
+     * as set in the bootstrap from config file.
+     * @var int
+     */
+    static $error_reporting;
 
     /**
      * The application-wide logger object.

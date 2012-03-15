@@ -188,7 +188,9 @@ class xBootstrap {
     function setup_error_reporting() {
         // Redefines php error reporting level
         $level = xContext::$config->error->reporting ? xContext::$config->error->reporting : 0;
-        error_reporting(is_int($level) ? $level : constant($level));
+        $level_numeric = is_int($level) ? $level : constant($level);
+        xContext::$error_reporting = $level_numeric;
+        error_reporting($level_numeric);
     }
 
     function setup_error_handler() {

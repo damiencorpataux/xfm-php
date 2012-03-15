@@ -397,7 +397,13 @@ abstract class xModelMysql extends xModel {
         // Executes query
         xContext::$log->log("Executing query: \n{$sql}", $class);
         $qr = mysql_query($sql, $db);
-        if (!$qr) throw new xException("Invalid query: $sql # " . mysql_error($db), 500);
+        if (!$qr) {
+            $mysql_error = mysql_error($db);
+            $message = xContext::$error_reporting ?
+                "Invalid query: $sql # {$mysql_error}" :
+                "Invalid query: [query obfuscated] # {$mysql_error}";
+            throw new xException($message, 500);
+        }
         return $qr;
     }
 }
