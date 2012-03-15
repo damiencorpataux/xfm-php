@@ -133,8 +133,9 @@ abstract class xModelMysql extends xModel {
      * @return int
      */
     function count() {
+        $primary = $this->primary();
         $sql = implode("\n", array(
-            "SELECT count(*) as count",
+            "SELECT count(`{$this->maintable}`.`{$primary}`) as count",
             $this->sql_from(),
             $this->sql_join(),
             $this->sql_where(),
@@ -189,9 +190,8 @@ abstract class xModelMysql extends xModel {
         foreach ($this->foreign_mapping() as $modelfield => $dbfield) {
             // Enquotes tablename and fieldname
             $dbfield = preg_replace('/^(\w*)\.(\w*)$/', '`$1`.`$2`', $dbfield);
-            $modelfield = "`{$modelfield}`";
             // Creates SQL SELECT fragments
-            $allfragments[] = "{$dbfield} AS {$modelfield}";
+            $allfragments[] = "{$dbfield} AS `{$modelfield}`";
         }
         $all = implode(",\n\t", $allfragments);
         // Replaces '*' with all-fields-SELECT
@@ -199,6 +199,27 @@ abstract class xModelMysql extends xModel {
         foreach ($fragments as &$fragment) {
             $fragment = preg_replace('/\*/', $all, $fragment);
         }
+        // Manages specified modelfield names in xreturn parameter:
+        // - Substitutes local field names
+        // - Substitutes foreign field names
+        // - Substitutes unknown field names
+        $mapping = $this->mapping;
+        $foreign_mapping = $this->foreign_mapping();
+        foreach ($fragments as $key => &$fragment) {
+            if (in_array($fragment, $mapping)) {
+                // Substitutes 'modelfield' with 'tablename.dbfield AS modelfield'
+                $fragment = "`{$this->maintable}`.`{$fragment}` AS `{$fragment}`";
+            } elseif (in_array($fragment, array_keys($foreign_mapping))) {
+                // Substitutes 'modelfield' with 'tablename.dbfield AS modelfield'
+                $fragment = "{$foreign_mapping[$fragment]} AS `{$fragment}`";
+                // Enquotes to table/field names
+                $fragment = preg_replace('/(\w*)\.(\w*)/', '`$1`.`$2`', $fragment);
+            } else {
+                // Substitutes unknown modelfields
+                // Unknown modelfields stay as is for now
+            }
+        }
+        // Returns the SELECT statement
         return "SELECT ".implode(",\n\t", $fragments);
     }
 
