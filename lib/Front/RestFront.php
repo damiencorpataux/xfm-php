@@ -21,7 +21,7 @@ class xRestFront extends xFront {
     var $xml_default_node = 'item';
 
     var $params = array(
-        'xformat' => 'php'
+        'xformat' => 'xml'
     );
 
     /**
