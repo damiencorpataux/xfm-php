@@ -218,6 +218,26 @@ class xUtil {
     }
 
     /**
+     * Returns the last class called, null if last call is not a class.
+     * @return string The name of the last called class (null if not a class)
+     */
+    function get_calling_class() {
+        $trace=debug_backtrace();
+        $caller=$trace[2];
+        return @$caller['class'];
+    }
+
+    /**
+     * Returns the last function called, null if last call is not a function.
+     * @return string The name of the last called class (null if not a class)
+     */
+    function get_calling_function() {
+        $trace=debug_backtrace();
+        $caller=$trace[2];
+        return @$caller['function'];
+    }
+
+    /**
      * Returns the given $string with HTML tags stripped,
      * preserving null value for $string.
      * @param string The string to strip.
