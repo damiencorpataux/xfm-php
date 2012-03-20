@@ -9,7 +9,7 @@
 **/
 
 /**
- * This component is to be used for validating multiple fields
+ * This component is to be used for transforming field(s) value(s).
  * @package xValidator
 **/
 class xValidatorStore {
