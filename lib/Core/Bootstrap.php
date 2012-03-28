@@ -54,7 +54,7 @@ class xBootstrap {
             xContext::$router->params
         );
         if (@$error_front) $error_front->handle_error($exception);
-        else print_r($exception);
+        else throw $exception;
     }
 
     /**
