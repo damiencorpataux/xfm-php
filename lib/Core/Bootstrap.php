@@ -49,11 +49,10 @@ class xBootstrap {
         $status = @$exception->status ? $exception->status : 500;
         header(xException::$statuses[$status]);
         // Calls specific front error handler
-        try {
-            $error_front = xFront::load(xContext::$router->params['xfront'], xContext::$router->params);
-        } catch (Exception $e) {
-            null;
-        }
+        if (xContext::$router) $error_front = xFront::load(
+            xContext::$router->params['xfront'],
+            xContext::$router->params
+        );
         if (@$error_front) $error_front->handle_error($exception);
         else print_r($exception);
     }
@@ -141,11 +140,17 @@ class xBootstrap {
         $config_path = xContext::$basepath.'/config';
         // Detects profile to be used
         if (!xContext::$profile) {
-            try { $profile = new Zend_Config_Ini(
-                "{$config_path}/default.ini",
-                'profile',
-                array('allowModifications' => true)
-            ); } catch (Exception $e) {}
+            try {
+                $profile = new Zend_Config_Ini(
+                    "{$config_path}/default.ini",
+                    'profile',
+                    array('allowModifications' => true)
+                );
+            } catch (Exception $e) {
+                throw new xException(
+                    'Could not read config file (default.ini): '.$e->getMessage()
+                );
+            }
             foreach ($this->get_config_files() as $file) {
                 try { $profile->merge(new Zend_Config_Ini($file, 'profile')); }
                 catch (Exception $e) { continue; }
