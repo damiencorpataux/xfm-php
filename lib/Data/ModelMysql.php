@@ -210,7 +210,7 @@ abstract class xModelMysql extends xModel {
                 // Substitutes 'modelfield' with 'tablename.dbfield AS modelfield'
                 $fragment = "`{$this->maintable}`.`{$fragment}` AS `{$fragment}`";
             } elseif (in_array($fragment, array_keys($foreign_mapping))) {
-                // Substitutes 'modelfield' with 'tablename.dbfield AS modelfield'
+                // Substitutes foreign 'modelfield' with 'foreign_tablename.dbfield AS modelfield'
                 $fragment = "{$foreign_mapping[$fragment]} AS `{$fragment}`";
                 // Enquotes to table/field names
                 $fragment = preg_replace('/(\w*)\.(\w*)/', '`$1`.`$2`', $fragment);
