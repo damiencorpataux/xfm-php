@@ -197,26 +197,49 @@ abstract class xModelMysql extends xModel {
         // Replaces '*' with all-fields-SELECT
         $fragments = xUtil::arrize($this->return);
         foreach ($fragments as &$fragment) {
-            $fragment = preg_replace('/\*/', $all, $fragment);
+            $fragment = preg_replace('/^\*$/', $all, $fragment);
         }
         // Manages specified modelfield names in xreturn parameter:
         // - Substitutes local field names
         // - Substitutes foreign field names
         // - Substitutes unknown field names
-        $mapping = $this->mapping;
+        $local_mapping = $this->mapping;
         $foreign_mapping = $this->foreign_mapping();
+        // - Creates a mapping for substitution, giving priority to foreign models
+        $mapping = array_merge($local_mapping, $foreign_mapping);
+        uksort($mapping, function($a, $b) { return strlen($b) - strlen($a); });
         foreach ($fragments as $key => &$fragment) {
-            if (in_array($fragment, $mapping)) {
-                // Substitutes 'modelfield' with 'tablename.dbfield AS modelfield'
+            if (in_array($fragment, $local_mapping)) {
+                // Substitutes 'modelfield'
+                // with 'tablename.dbfield AS modelfield'
                 $fragment = "`{$this->maintable}`.`{$fragment}` AS `{$fragment}`";
             } elseif (in_array($fragment, array_keys($foreign_mapping))) {
-                // Substitutes foreign 'modelfield' with 'foreign_tablename.dbfield AS modelfield'
+                // Substitutes foreign 'modelfield'
+                // with 'foreign_tablename.dbfield AS modelfield'
                 $fragment = "{$foreign_mapping[$fragment]} AS `{$fragment}`";
-                // Enquotes to table/field names
+                // Enquotes table.field names
                 $fragment = preg_replace('/(\w*)\.(\w*)/', '`$1`.`$2`', $fragment);
             } else {
-                // Substitutes unknown modelfields
-                // Unknown modelfields stay as is for now
+                // Substitutes unknown modelfields:
+                // - Skips if statement is complete (eg. dbfield AS modelfield)
+                if (stripos($fragment, ' AS ')) continue;
+                // - This pattern matches a complete modelfield name
+                //   (eg. does not match 'personne_id' if searching for 'id')
+                $pattern = "/(.*[^\w.`])(%s)([^\w`].*)/";
+                // - Foreign fields substitution
+                foreach ($mapping as $modelfield => $dbfield) {
+                    $search = sprintf($pattern, $modelfield);
+                    // Enquotes table.field name (if any)
+                    $dbfield = preg_replace('/(\w*)\.(\w*)/', '`$1`.`$2`', $dbfield);
+                    // Replace backrefs:
+                    // $1=fieldname-prejunk, $3=fieldname-postjunk
+                    $replace = (strpos($dbfield, '.') !== false) ?
+                        // Replace for foreign fields
+                        "$1{$dbfield}$3 AS `{$modelfield}`" :
+                        // Replace for local fields
+                        "$1`{$this->maintable}`.`{$dbfield}`$3 AS `{$modelfield}`";
+                    $fragment = preg_replace($search, $replace, $fragment);
+                }
             }
         }
         // Returns the SELECT statement
@@ -304,6 +327,7 @@ abstract class xModelMysql extends xModel {
     }
 
     /**
+     * TODO: allow to order_by foreign fields
      * @see xModel::sql_order()
      * @return string
      */
@@ -311,6 +335,8 @@ abstract class xModelMysql extends xModel {
         $sql = '';
         if ($this->order_by) {
             $fields = array();
+            // Substitues modelfields with dbfields if possible,
+            // else keep field as is
             foreach(xUtil::arrize($this->order_by) as $field) {
                 $dbfield = $this->dbfield($field);
                 $fields[] = in_array($field, $this->mapping) ?
@@ -323,6 +349,7 @@ abstract class xModelMysql extends xModel {
     }
 
     /**
+     * TODO: allow to group_by foreign fields
      * @see xModel::sql_group()
      * @return string
      */
@@ -330,7 +357,13 @@ abstract class xModelMysql extends xModel {
         $sql = '';
         if ($this->group_by) {
             $fields = array();
-            foreach(xUtil::arrize($this->group_by) as $field) $fields[] = $this->dbfield($field);
+            // Substitues modelfields with dbfields if possible,
+            // else keep field as is
+            foreach(xUtil::arrize($this->group_by) as $field) {
+                $dbfield = $this->dbfield($field);
+                $fields[] = in_array($field, $this->mapping) ?
+                    "`{$this->maintable}`.`{$dbfield}`" : $field;
+            }
             $sql = ' GROUP BY '.implode(',', $fields);
         }
         return $sql;
