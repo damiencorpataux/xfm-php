@@ -57,7 +57,7 @@ abstract class xWebController extends xController {
      * - If both key and value are given, the value is stored in session.
      * - If no argument given, return the session array of the controller.
      * @param string The key identifier.
-     * @param string The value to store. If null or not provided, the 
+     * @param string The value to store. If null or not provided, the
      * @return mixed
      *     - The stored session array for the controller if $key is not provided or null
      *     - The stored value if a valid key is given without value.
@@ -78,5 +78,3 @@ abstract class xWebController extends xController {
         return @xWebFront::$history[1] ? xWebFront::$history[1] : xContext::$baseuri;
     }
 }
-
-?>

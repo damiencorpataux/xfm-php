@@ -70,5 +70,3 @@ class xException extends Exception {
     }
 
 }
-
-?>

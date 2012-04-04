@@ -124,5 +124,3 @@ class xRouter {
         xFront::load($this->params['xfront'], $this->params)->handle();
     }
 }
-
-?>

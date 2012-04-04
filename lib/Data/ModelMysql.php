@@ -440,5 +440,3 @@ abstract class xModelMysql extends xModel {
         return $qr;
     }
 }
-
-?>

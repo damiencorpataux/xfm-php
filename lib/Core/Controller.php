@@ -55,5 +55,3 @@ abstract class xController extends xRestElement {
         return $this->$action_method();
     }
 }
-
-?>

@@ -294,5 +294,3 @@ class xBootstrap {
     function setup_addons() {}
 
 }
-
-?>

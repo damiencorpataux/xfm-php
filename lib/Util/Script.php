@@ -154,5 +154,3 @@ abstract class xScript {
         return "Arguments description not available";
     }
 }
-
-?>

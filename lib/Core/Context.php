@@ -115,5 +115,3 @@ class xContext {
         return print_r(get_class_vars("xContext"), true);
     }
 }
-
-?>

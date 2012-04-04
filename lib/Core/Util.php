@@ -533,5 +533,3 @@ class xUtil {
 
 
 }
-
-?>

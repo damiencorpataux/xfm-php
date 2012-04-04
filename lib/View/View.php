@@ -11,7 +11,7 @@
 
 /**
  * Base view class.
- * 
+ *
  * Responsibilities
  * - deals with rendering and internationalization (i18n)
  * @package xFreemwork
@@ -283,5 +283,3 @@ class xView {
         return $this->apply($this->default_tpl);
     }
 }
-
-?>

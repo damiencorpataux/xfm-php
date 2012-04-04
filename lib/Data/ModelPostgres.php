@@ -350,5 +350,3 @@ abstract class xModelPostgres extends xModel {
         if (!$qr) throw new xException("Invalid query: $sql # " . pg_last_error($db));
     }
 }
-
-?>

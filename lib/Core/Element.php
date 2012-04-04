@@ -110,5 +110,3 @@ abstract class xRestElement extends xElement {
         throw new xException('Not implemented', 501);
     }
 }
-
-?>

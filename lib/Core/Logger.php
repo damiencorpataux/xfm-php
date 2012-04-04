@@ -154,5 +154,3 @@ class xLogger {
     function fatal($msgs, $instance = null) { return $this->log($msgs, $instance, self::FATAL); }
 
 }
-
-?>

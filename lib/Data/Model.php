@@ -623,5 +623,3 @@ abstract class xModel extends xRestElement {
         return $model_class::q($sql);
     }
 }
-
-?>

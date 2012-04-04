@@ -126,7 +126,7 @@ abstract class xForm {
      * This method must be implemented in child classes and return
      * the form fields definition according the xFormField::options() format.
      * @return array Fields definitions.
-     * 
+     *
      */
     abstract function fields_options();
 
@@ -245,7 +245,7 @@ class xFormFieldView extends xFormField {
 }
 
 /**
- * 
+ *
  * @package xForm
 **/
 class xFormFieldText extends xFormField {

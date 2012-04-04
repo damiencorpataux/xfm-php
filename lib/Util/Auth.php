@@ -93,5 +93,3 @@ class xAuth {
         return $username === $this->username();
     }
 }
-
-?>
