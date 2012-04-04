@@ -100,7 +100,7 @@ class xBootstrap {
         require_once('Core/Exception.php');
         require_once('Core/Context.php');
         require_once('Core/Bootstrap.php');
-        require_once('Core/Rest.php');
+        require_once('Core/Element.php');
         require_once('Core/Controller.php');
         require_once('Core/WebController.php');
         require_once('Front/Front.php');
