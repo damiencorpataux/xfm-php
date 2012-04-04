@@ -1,6 +1,6 @@
 <?php
 /*
- * (c) 2010 Damien Corpataux
+ * (c) 2012 Damien Corpataux
  *
  * LICENSE
  * This library is licensed under the GNU GPL v3.0 license,
