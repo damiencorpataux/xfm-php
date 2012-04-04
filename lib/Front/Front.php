@@ -143,5 +143,3 @@ abstract class xFront extends xRestElement {
         return self::load_these($files, $params);
     }
 }
-
-?>

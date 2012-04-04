@@ -101,5 +101,3 @@ class xWebFront extends xFront {
         }
     }
 }
-
-?>

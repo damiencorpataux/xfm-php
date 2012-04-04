@@ -52,5 +52,3 @@ class xModelFront extends xRestFront {
         print $this->encode($r);
     }
 }
-
-?>

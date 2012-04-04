@@ -74,5 +74,3 @@ x.context.auth.username = '".xContext::$auth->username()."';
 ";
     }
 }
-
-?>

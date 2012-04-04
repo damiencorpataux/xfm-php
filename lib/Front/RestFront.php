@@ -151,5 +151,3 @@ class xRestFront extends xFront {
         return xmlrpc_encode($data);
     }
 }
-
-?>
