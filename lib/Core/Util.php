@@ -70,14 +70,16 @@ class xUtil {
 
     /**
      * Make sure the given value is an array by returning an array of the given value.
+     * If the given value is NULL, returns an empty array.
      * If the given value is a scalar, returns an array containing the value.
      * If the given value is already an array, returns the given value without transformation.
      * @param mixed The value
      * @return array
      */
     static function arrize($value) {
-        if (!is_array($value)) $value = array($value);
-        return $value;
+        if (is_array($value)) return $value;
+        elseif (is_null($value)) return array();
+        return array($value);
     }
 
     /**
