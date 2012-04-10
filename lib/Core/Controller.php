@@ -20,10 +20,6 @@
 **/
 abstract class xController extends xRestElement {
 
-    protected function __construct($params = null) {
-        parent::__construct($params);
-    }
-
     /**
      * Loads and returns the controller specified object.
      * For example, the following code will
