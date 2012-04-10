@@ -21,7 +21,6 @@ abstract class xWebController extends xController {
      */
     var $meta = array();
 
-
     /**
      * Convenience method for merging this instance metadata
      * with additional metadata.

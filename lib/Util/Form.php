@@ -114,7 +114,6 @@ abstract class xForm {
      */
     var $template_row_mandatory = '<tr><th>{label}<span style="font-size:bold;color:red">*</span></th><td>{field} {message}</td></tr>';
 
-
     function __construct() {
         $this->form_options = xUtil::array_merge($this->form_options, $this->form_options());
         $this->fields_options = xUtil::array_merge($this->fields_options, $this->fields_options());

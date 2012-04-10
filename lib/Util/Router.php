@@ -39,7 +39,6 @@ class xRouter {
      */
     var $params = array();
 
-
     /**
      * @param array $params Default route params.
      */
