@@ -550,7 +550,7 @@ abstract class xModel extends xRestElement {
                         throw new xException("Operator not allowed: {$operator}", 400);
                 $operator = $operator ? $operator : 'AND';
                 // Retrieves comparator or set default/auto comparator
-                $allowed_comparators = array('=', '!=', '<', '>', '<=', '>=', 'LIKE', 'IS', 'IS NOT');
+                $allowed_comparators = array('=', '!=', '<', '>', '<=', '>=', 'LIKE', 'IS', 'IS NOT', 'REGEXP');
                 $comparator_param_name = $table == $this->maintable ? "{$modelfield}_comparator" : "{$table_to_modelname[$table]}_{$modelfield}_comparator";
                 $comparator = strtoupper(@$this->params[$comparator_param_name]);
                 if ($comparator && !in_array(strtoupper($comparator), $allowed_comparators))
