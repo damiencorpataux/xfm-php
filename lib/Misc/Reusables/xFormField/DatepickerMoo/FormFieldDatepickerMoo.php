@@ -2,11 +2,12 @@
 
 /**
  * This class uses Mootools and Datepicker
+ * @package xForm
  * @see http://mootools.net/
  * @see http://www.monkeyphysics.com/mootools/script/2/datepicker
  */
 class xFormFieldDatepickerMoo extends xFormFieldText {
-    
+
     function add_meta() {
         $path = '/a/reusables/xFormField/DatepickerMoo/public';
         $this->meta = array(
@@ -19,11 +20,15 @@ class xFormFieldDatepickerMoo extends xFormFieldText {
             )
         );
     }
-    
+
     protected function js() {
         return "
             window.addEvent('load', function() {
-                new DatePicker('#{$this->options['name']}', { timePicker: true, format: 'd.m.Y H:i', positionOffset: { x: 0, y: 5 }});
+                new DatePicker('#{$this->options['name']}', {
+                    timePicker: true,
+                    format: 'd.m.Y H:i',
+                    positionOffset: { x: 0, y: 5 }
+                });
             });
         ";
     }

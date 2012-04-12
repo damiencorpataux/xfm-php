@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Geocoder component.
+ * @package xReusable
+**/
 abstract class xGeocoder {
 
     var $url;
@@ -45,6 +49,10 @@ abstract class xGeocoder {
 }
 
 
+/**
+ * Geonames Geocoder component.
+ * @package xReusable
+**/
 abstract class xGeocoderGeonames extends xGeocoder {
     function get() {
         $params = array_merge($this->options, array('type'=>'json'));
@@ -54,6 +62,7 @@ abstract class xGeocoderGeonames extends xGeocoder {
 
 /**
  * Geonames fulltext search
+ * @package xReusable
  * @see http://www.geonames.org/export/geonames-search.html
  */
 class xGeocoderGeonamesFulltext extends xGeocoderGeonames {
@@ -67,6 +76,7 @@ class xGeocoderGeonamesFulltext extends xGeocoderGeonames {
 
 /**
  * Geonames fulltext search
+ * @package xReusable
  * @see http://www.geonames.org/export/geonames-search.html
  */
 class xGeocoderGeonamesZipSearch extends xGeocoderGeonames {
