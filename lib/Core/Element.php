@@ -24,17 +24,34 @@ abstract class xElement {
      */
     var $params = array();
 
+    /**
+     * Plugins instances.
+     * @var array
+     * @see xPlugin
+     */
+    var $plugins = array();
+
+    /**
+     * Class constructor.
+     * Classes must be instanciated using xElement::load().
+     * @see load()
+     */
     protected function __construct($params = null) {
         // Ensures the given params is an array
         if (!is_null($params) && !is_array($params)) $params = xUtil::arrize($params);
         $this->params = xUtil::array_merge($this->params, $params);
-        $this->init();
     }
 
     /**
-     * Hook for subclass initialization logic.
+     * Loads and stores and activates an instance of the specified plugin with the given params.
+     * <code>
+     * $this->loadplugin('test', array('text' => 'Sample text.'));
+     * </code>
+     * @return xPlugin The stored plugin instance
      */
-    protected function init() {}
+    protected function load_plugin($name, $params=array()) {
+        return $this->plugins[] = xPlugin::load($name, $params);
+    }
 
     /**
      * Loads and returns an instance of the specified xElement.
