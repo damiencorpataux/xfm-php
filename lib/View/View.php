@@ -223,6 +223,7 @@ class xView {
         if (!file_exists($file)) throw new xException("Template file not found ($file)", 404);
 //        $template = $this->process_tags(file_get_contents($file));
         // Renders the template
+        // TODO: Clean spaces before '<?php' and after '>'
         ob_start();
         require($file);
         $s = ob_get_contents();
