@@ -332,16 +332,16 @@ abstract class xModel extends xRestElement {
      * @return array
      */
     function fields_values($no_primary = false) {
-        $mapping = array();
+        $values = array();
         foreach ($this->params as $paramname => $paramvalue) {
             if (!array_key_exists($paramname, $this->mapping)) continue;
             // If applicable, skips field if it is a primary key field
             if ($no_primary && in_array($paramname, $this->primary)) continue;
             $field = $this->mapping[$paramname];
 //            if ($paramvalue === '') $paramvalue = 'NULL';
-            $mapping[$field] = $paramvalue;
+            $values[$field] = $paramvalue;
         }
-        return $mapping;
+        return $values;
     }
 
     /**
@@ -522,8 +522,10 @@ abstract class xModel extends xRestElement {
         // Creates query data structure from parameters
         $data = array();
         $table_to_modelname = array();
+        // Collects local fields values
         $data[$this->maintable] = $this->fields_values();
-        foreach (xUtil::arrize($this->join) as $join_model) {
+        // Collects foreign fields values
+        if (!$local_only) foreach (xUtil::arrize($this->join) as $join_model) {
             $model = xModel::load($join_model);
             $data[$model->maintable] = $this->foreign_fields_values($join_model);
             $table_to_modelname[$model->maintable] = $join_model;
