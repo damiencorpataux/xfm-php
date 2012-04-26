@@ -242,13 +242,21 @@ class xUtil {
     /**
      * Returns the given $string with HTML tags stripped,
      * preserving null value for $string.
-     * @param string The string to strip.
+     * @param string|array The string (or array of string) to strip.
      * @param string Allowable HTML tags (those will not be stripped).
-     * @return string The stripped string.
+     * @return string|array The stripped string (or array is $string is an array).
      */
     static function strip_tags($string, $allowable_tags = null) {
         // Preserve a null value for $string
-        if (is_null($string)) return $string;
+        if (is_null($string)) {
+            return $string;
+        }
+        if (is_array($string)) {
+            $strip_tags = function($v) use ($allowable_tags) {
+                return strip_tags($v, $allowable_tags);
+            };
+            return array_map($strip_tags, $string);
+        }
         return strip_tags($string, $allowable_tags);
     }
 
