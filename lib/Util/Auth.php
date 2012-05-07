@@ -18,6 +18,8 @@
  */
 class xAuth {
 
+    protected $role_separator = ',';
+
     function __construct() {}
 
     /**
@@ -51,7 +53,7 @@ class xAuth {
      * @return array
      */
     function roles() {
-        return explode(',', @$_SESSION['x']['xAuth']['roles']);
+        return array_filter(explode($this->role_separator, @$_SESSION['x']['xAuth']['roles']));
     }
 
     /**
