@@ -74,6 +74,7 @@ abstract class xScript {
         } catch(Exception $e) {
             $message = $e->getMessage();
             $this->log("ERROR: {$message}");
+            for ($i=0; $i<3; $i++) $this->log();
             throw $e;
         }
         // Displays run time
