@@ -53,7 +53,9 @@ class xAuth {
      * @return array
      */
     function roles() {
-        return array_filter(explode($this->role_separator, @$_SESSION['x']['xAuth']['roles']));
+        return array_filter(
+            array_map('trim', explode($this->role_separator, @$_SESSION['x']['xAuth']['roles']))
+        );
     }
 
     /**
