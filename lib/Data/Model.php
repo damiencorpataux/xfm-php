@@ -274,6 +274,17 @@ abstract class xModel extends xRestElement {
     }
 
     /**
+     * Scans and returns available models.
+     * @return array An array of available models (filename => modelname).
+     */
+    static function scan() {
+        $files = scandir(xContext::$basepath.'/models');
+        $files = array_diff($files, array('.', '..'));
+        $files = preg_replace('/\.php$/', null, $files);
+        return $files;
+    }
+
+    /**
      * Returns the database field name from the given model field name.
      * If the database field is not mapped, returns the given database field name.
      * FIXME: foreign models fieldnames are not translated.
