@@ -182,13 +182,23 @@ class xTransaction {
 
     function throw_exception() {
         $error_count = count($this->exceptions);
-        // Enhances exception data with sql query error message, if applicable
+        // Enhances exception data with sql queries error messages, if applicable
         if (xContext::$config->error->reporting == 'E_ALL')
             foreach ($this->exceptions as $exception)
                 $exception->data = $exception->getMessage();
+        // Picks the most prioritary status amongst raised exceptions
+        $priority = array(404, 401, 402, 403, 405, 404, 500);
+        $status = null;
+        foreach ($this->exceptions as $exception) {
+            $priority_stored = array_search($status, $priority);
+            $priority_new = array_search($exception->status, $priority);
+            if ($priority_new > $priority_stored || $priority_stored === false) {
+                $status = $exception->status;
+            }
+        }
         throw new xException(
             "{$error_count} operation(s) failed during the transaction",
-            500,
+            $status,
             array(
                 'exceptions' => $this->exceptions,
                 'results' => $this->results
