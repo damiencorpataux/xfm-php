@@ -99,6 +99,7 @@ class xBootstrap {
         require_once('Core/Util.php');
         require_once('Core/Exception.php');
         require_once('Core/Context.php');
+        require_once('Core/Config.php');
         require_once('Core/Bootstrap.php');
         require_once('Core/Element.php');
         require_once('Core/Plugin.php');
@@ -132,9 +133,6 @@ class xBootstrap {
     function setup_includes_externals() {
         // Set general lib include path
         set_include_path(get_include_path() . PATH_SEPARATOR . xContext::$basepath.'/lib/');
-        // Set Zend Framework lib path in php include path
-        set_include_path(get_include_path() . PATH_SEPARATOR . xContext::$basepath.'/lib/Zend/lib/');
-        require_once('Zend/Config/Ini.php');
     }
 
     function setup_config() {
@@ -142,7 +140,7 @@ class xBootstrap {
         // Detects profile to be used
         if (!xContext::$profile) {
             try {
-                $profile = new Zend_Config_Ini(
+                $profile = new xZend_Config_Ini(
                     "{$config_path}/default.ini",
                     'profile',
                     array('allowModifications' => true)
@@ -153,20 +151,20 @@ class xBootstrap {
                 );
             }
             foreach ($this->get_config_files() as $file) {
-                try { $profile->merge(new Zend_Config_Ini($file, 'profile')); }
+                try { $profile->merge(new xZend_Config_Ini($file, 'profile')); }
                 catch (Exception $e) { continue; }
             }
             if ($profile->name) xContext::$profile = $profile->name;
         }
         // Loads default configuration file
-        try { xContext::$config = new Zend_Config_Ini(
+        try { xContext::$config = new xZend_Config_Ini(
             "{$config_path}/default.ini",
             xContext::$profile,
             array('allowModifications' => true)
         ); } catch (Exception $e) {}
         // Merges environment (host and/or app-path specific) configuration file
         foreach ($this->get_config_files() as $file) {
-            try { xContext::$config->merge(new Zend_Config_Ini($file, 'overrides')); }
+            try { xContext::$config->merge(new xZend_Config_Ini($file, 'overrides')); }
             catch (Exception $e) { continue; }
         }
         if (!@xContext::$config) xContext::$config = new stdClass();
@@ -285,6 +283,7 @@ class xBootstrap {
         xContext::$router = new xRouter(xContext::$config->route_defaults->toArray());
         xContext::$log->log(array("Setting routes"), $this);
         foreach (xContext::$config->route->toArray() as $params) {
+            $params = $params->toArray();
             if (!isset($params['pattern'])) throw new xException("Route pattern mandatory in .ini file");
             $pattern = $params['pattern'];
             unset($params['pattern']);
