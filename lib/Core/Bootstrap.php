@@ -246,7 +246,7 @@ class xBootstrap {
         xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
         if (!$db) throw new xException('Could not connect to database');
         if (!mysql_select_db(xContext::$config->db->database, $db)) {
-            throw new xException('Could not select database';
+            throw new xException('Could not select database');
         }
         mysql_set_charset('utf8', $db);
         xContext::$log->log('Setting database client encoding to: '.mysql_client_encoding($db), $this);
