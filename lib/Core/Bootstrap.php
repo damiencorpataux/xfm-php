@@ -121,6 +121,7 @@ class xBootstrap {
         require_once('Data/ModelPostgres.php');
         require_once('Data/ModelMysql.php');
         require_once('Data/Transaction.php');
+        require_once('Data/Transformer.php');
         require_once('View/View.php');
         require_once('Misc/Helpers/FormHelper.php');
         require_once('Misc/Helpers/ValidatorHelper.php');
