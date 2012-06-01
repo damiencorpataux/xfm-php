@@ -35,6 +35,7 @@ class xBootstrap {
             xContext::$bootstrap = $this;
         } catch (Exception $e) {
             $this->handle_exception($e);
+            throw $e;
         }
     }
 
@@ -147,7 +148,7 @@ class xBootstrap {
                 );
             } catch (Exception $e) {
                 throw new xException(
-                    'Could not read config file (default.ini): '.$e->getMessage()
+                    'Could not read default [profile] from config file (default.ini): '.$e->getMessage()
                 );
             }
             foreach ($this->get_config_files() as $file) {
@@ -157,11 +158,17 @@ class xBootstrap {
             if ($profile->name) xContext::$profile = $profile->name;
         }
         // Loads default configuration file
-        try { xContext::$config = new xZend_Config_Ini(
-            "{$config_path}/default.ini",
-            xContext::$profile,
-            array('allowModifications' => true)
-        ); } catch (Exception $e) {}
+        try {
+            xContext::$config = new xZend_Config_Ini(
+                "{$config_path}/default.ini",
+                xContext::$profile,
+                array('allowModifications' => true)
+            );
+        } catch (Exception $e) {
+            throw new xException(
+                'Could not read config file (default.ini), profile ('.xContext::$profile.'): '.$e->getMessage()
+            );
+        }
         // Merges environment (host and/or app-path specific) configuration file
         foreach ($this->get_config_files() as $file) {
             try { xContext::$config->merge(new xZend_Config_Ini($file, 'overrides')); }
@@ -237,12 +244,12 @@ class xBootstrap {
             true // creates a new connection on every call
         );
         xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
-        if (!$db) throw new xException('Could connect to database: '.print_r(xContext::$config->db->toArray(), true));
+        if (!$db) throw new xException('Could not connect to database');
         if (!mysql_select_db(xContext::$config->db->database, $db)) {
-            throw new xException('Could not select database ('.mysql_error($db).'): '.print_r(xContext::$config->db->toArray(), true));
+            throw new xException('Could not select database';
         }
         mysql_set_charset('utf8', $db);
-        xContext::$log->log('Set database client encoding to: '.mysql_client_encoding($db), $this);
+        xContext::$log->log('Setting database client encoding to: '.mysql_client_encoding($db), $this);
         return $db;
     }
     function create_db_postgres() {
