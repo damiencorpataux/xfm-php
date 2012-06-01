@@ -103,6 +103,7 @@ class xBootstrap {
         require_once('Core/Config.php');
         require_once('Core/Bootstrap.php');
         require_once('Core/Element.php');
+        require_once('Core/Plugin.php');
         require_once('Core/Controller.php');
         require_once('Core/WebController.php');
         require_once('Front/Front.php');
