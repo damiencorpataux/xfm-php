@@ -25,7 +25,7 @@
 
 /**
  * @category   Zend
- * @package    Zend_Config
+ * @package    xZend_Config
  * @version    $Id: Config.php 23775 2011-03-01 17:25:24Z ralph $
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -95,11 +95,11 @@ class xZend_Config implements Countable, Iterator
     protected $_loadFileErrorStr = null;
 
     /**
-     * Zend_Config provides a property based interface to
+     * xZend_Config provides a property based interface to
      * an array. The data are read-only unless $allowModifications
      * is set to true on construction.
      *
-     * Zend_Config also implements Countable and Iterator to
+     * xZend_Config also implements Countable and Iterator to
      * facilitate easy access to the data.
      *
      * @param  array   $array
@@ -168,12 +168,12 @@ class xZend_Config implements Countable, Iterator
             }
             $this->_count = count($this->_data);
         } else {
-            throw new xException('Zend_Config is read only', 500);
+            throw new xException('xZend_Config is read only', 500);
         }
     }
 
     /**
-     * Deep clone of this instance to ensure that nested Zend_Configs
+     * Deep clone of this instance to ensure that nested xZend_Configs
      * are also cloned.
      *
      * @return void
@@ -182,7 +182,7 @@ class xZend_Config implements Countable, Iterator
     {
       $array = array();
       foreach ($this->_data as $key => $value) {
-          if ($value instanceof Zend_Config) {
+          if ($value instanceof xZend_Config) {
               $array[$key] = clone $value;
           } else {
               $array[$key] = $value;
@@ -201,7 +201,7 @@ class xZend_Config implements Countable, Iterator
         $array = array();
         $data = $this->_data;
         foreach ($data as $key => $value) {
-            if ($value instanceof Zend_Config) {
+            if ($value instanceof xZend_Config) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;
@@ -235,7 +235,7 @@ class xZend_Config implements Countable, Iterator
             $this->_count = count($this->_data);
             $this->_skipNextIteration = true;
         } else {
-            throw new xException('Zend_Config is read only', 500);
+            throw new xException('xZend_Config is read only', 500);
         }
 
     }
@@ -331,25 +331,25 @@ class xZend_Config implements Countable, Iterator
 
 
     /**
-     * Merge another Zend_Config with this one. The items
+     * Merge another xZend_Config with this one. The items
      * in $merge will override the same named items in
      * the current config.
      *
-     * @param Zend_Config $merge
-     * @return Zend_Config
+     * @param xZend_Config $merge
+     * @return xZend_Config
      */
-    public function merge(Zend_Config $merge)
+    public function merge(xZend_Config $merge)
     {
         foreach($merge as $key => $item) {
             if(array_key_exists($key, $this->_data)) {
-                if($item instanceof Zend_Config && $this->$key instanceof Zend_Config) {
-                    $this->$key = $this->$key->merge(new Zend_Config($item->toArray(), !$this->readOnly()));
+                if($item instanceof xZend_Config && $this->$key instanceof xZend_Config) {
+                    $this->$key = $this->$key->merge(new xZend_Config($item->toArray(), !$this->readOnly()));
                 } else {
                     $this->$key = $item;
                 }
             } else {
-                if($item instanceof Zend_Config) {
-                    $this->$key = new Zend_Config($item->toArray(), !$this->readOnly());
+                if($item instanceof xZend_Config) {
+                    $this->$key = new xZend_Config($item->toArray(), !$this->readOnly());
                 } else {
                     $this->$key = $item;
                 }
@@ -361,7 +361,7 @@ class xZend_Config implements Countable, Iterator
 
     /**
      * Prevent any more modifications being made to this instance. Useful
-     * after merge() has been used to merge multiple Zend_Config objects
+     * after merge() has been used to merge multiple xZend_Config objects
      * into one object which should then not be modified again.
      *
      */
@@ -369,14 +369,14 @@ class xZend_Config implements Countable, Iterator
     {
         $this->_allowModifications = false;
         foreach ($this->_data as $key => $value) {
-            if ($value instanceof Zend_Config) {
+            if ($value instanceof xZend_Config) {
                 $value->setReadOnly();
             }
         }
     }
 
     /**
-     * Returns if this Zend_Config object is read only or not.
+     * Returns if this xZend_Config object is read only or not.
      *
      * @return boolean
      */
@@ -396,7 +396,7 @@ class xZend_Config implements Countable, Iterator
     }
 
     /**
-     * Set an extend for Zend_Config_Writer
+     * Set an extend for xZend_Config_Writer
      *
      * @param  string $extendingSection
      * @param  string $extendedSection
@@ -485,7 +485,7 @@ class xZend_Config implements Countable, Iterator
 
 /**
  * @category   Zend
- * @package    Zend_Config
+ * @package    xZend_Config
  * @version    $Id: Ini.php 23775 2011-03-01 17:25:24Z ralph $
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -535,13 +535,13 @@ class xZend_Config_Ini extends xZend_Config
      *      [staging : all]
      *      hostname = staging
      *
-     * after calling $data = new Zend_Config_Ini($file, 'staging'); then
+     * after calling $data = new xZend_Config_Ini($file, 'staging'); then
      *      $data->hostname === "staging"
      *      $data->db->connection === "database"
      *
      * The $options parameter may be provided as either a boolean or an array.
      * If provided as a boolean, this sets the $allowModifications option of
-     * Zend_Config. If provided as an array, there are two configuration
+     * xZend_Config. If provided as an array, there are two configuration
      * directives that may be set. For example:
      *
      * $options = array(

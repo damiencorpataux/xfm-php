@@ -289,7 +289,6 @@ class xBootstrap {
         xContext::$router = new xRouter(xContext::$config->route_defaults->toArray());
         xContext::$log->log(array("Setting routes"), $this);
         foreach (xContext::$config->route->toArray() as $params) {
-            $params = $params->toArray();
             if (!isset($params['pattern'])) throw new xException("Route pattern mandatory in .ini file");
             $pattern = $params['pattern'];
             unset($params['pattern']);
