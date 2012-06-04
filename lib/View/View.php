@@ -290,6 +290,11 @@ class xView {
      * @return string
      */
     function __toString() {
-        return $this->render();
+        // PHP does not allow __toString magic method to throw an Exception
+        try {
+            return $this->render();
+        } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_ERROR);
+        }
     }
 }
