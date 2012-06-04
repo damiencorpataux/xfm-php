@@ -58,12 +58,14 @@ abstract class xFront extends xRestElement {
 
     /**
      * Sets up the Gettext locale and domain according the selected/guessed language.
+     * @see xBootstrap::setup_i18n()
      */
     function setup_i18n() {
         // Skips i18n setup if Gettext is not installed
         if (!function_exists('gettext')) return;
         // Defines the current language
-        $lang_available = xContext::$config->i18n->lang->alias->toArray();
+        $lang_aliases = @xContext::$config->i18n->lang->alias;
+        $lang_available = $lang_aliases ? $lang_aliases->toArray() : array();
         $lang_browser = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : null;
         // If a language is given  and is available, use it
         if (array_key_exists(@$_REQUEST['xlang'], $lang_available)) {
@@ -76,17 +78,18 @@ abstract class xFront extends xRestElement {
             $lang = $lang_browser;
         // Else use the default language specified in config
         } else {
-            $lang = xContext::$config->i18n->lang->default;
+            // xContext::$lang default value is set by xBootstrap
+            $lang = xContext::$lang;
         }
         $_SESSION['x']['lang'] = xContext::$lang = $lang;
         // Sets up gettext
         $directory = xContext::$basepath.'/i18n/mo';
-        $locale = $lang_available[$lang]; // Warning: must the exact locale as defined on the linux host,
+        $locale = @$lang_available[$lang]; // Warning: must the exact locale as defined on the linux host,
         $domain = $lang;
         xContext::$log->log("Setting up gettext for '{$lang}' language, using '{$locale}' locale and '{$domain}' domain", $this);
         setlocale(LC_MESSAGES, $locale);
         putenv("LANG={$locale}"); // putenv only is useful for Windows
-        bindtextdomain($domain, $directory);
+        @bindtextdomain($domain, $directory);
         textdomain($domain);
         bind_textdomain_codeset($domain, 'UTF-8');
     }
