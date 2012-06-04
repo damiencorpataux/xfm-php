@@ -21,8 +21,8 @@ process();
  */
 function init() {
     global $po_path;
-    require_once(dirname(__file__).'/../../lib/Util/Bootstrap.php');
-    new xBootstrap('script');
+    require_once(dirname(__file__).'/../../lib/Core/Bootstrap.php');
+    new xBootstrap();
     $po_path = xContext::$basepath.'/i18n/po';
     require_once(dirname(__file__).'/../util.php');
 }
@@ -33,7 +33,7 @@ function init() {
  */
 function process() {
     global $po_path;
-    $files = get_files();    
+    $files = get_files();
     foreach (xContext::$config->i18n->lang->alias->toArray() as $lang => $locale) {
         $po_file = substr($po_path, strlen(xContext::$basepath.'/'))."/$lang.po";
         // Because xgettext references into the po file
@@ -99,6 +99,7 @@ function clean_po_references($po_file) {
  */
 function parse($parse_file, $po_file) {
     exec("cd ".xContext::$basepath." && \
+        mkdir -p $(dirname {$po_file}) && \
         touch {$po_file} && \
         xgettext \
         --language=PHP \

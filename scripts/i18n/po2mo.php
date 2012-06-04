@@ -26,8 +26,8 @@ o();
  */
 function init() {
     global $po_path, $mo_path;
-    require_once(dirname(__file__).'/../../lib/Util/Bootstrap.php');
-    new xBootstrap('script');
+    require_once(dirname(__file__).'/../../lib/Core/Bootstrap.php');
+    new xBootstrap();
     $po_path = xContext::$basepath.'/i18n/po';
     $mo_path = xContext::$basepath.'/i18n/mo';
 }
@@ -59,7 +59,7 @@ function compile($po_file, $mo_file) {
     if (!file_exists(dirname($mo_file))) {
         $dir = dirname($mo_file);
         o("Creating directory for mo file: {$dir}", 1);
-        mkdir($dir, 0755, true);        
+        mkdir($dir, 0755, true);
     }
     o("Compiling file", 1);
     o("Source po file: {$po_file}", 2);
