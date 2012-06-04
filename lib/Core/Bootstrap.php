@@ -281,8 +281,8 @@ class xBootstrap {
             function _($str) { return $str; };
             return;
         }
-        // Sets default language from config
-        xContext::$lang = xContext::$config->i18n->lang->default;
+        // Sets default language from config (null if not defined)
+        xContext::$lang = @xContext::$config->i18n->lang->default;
     }
 
     function setup_router() {
