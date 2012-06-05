@@ -85,7 +85,12 @@ class xUtil {
     /**
      * Merges arrays recursively, replacing existing keys.
      * Priority is given to the last given array parameter.
-     * For example:
+     *
+     * Careful: This algorythm differs from PHP array_merge_recursive
+     * in the sense that merging array with same-level-same-keyname
+     * will remain unique when using xUtil::array_merge().
+     *
+     * Merge example:
      * <code>
      * print_r(xUtil::array_merge(array(
      *     'Index content',
@@ -96,7 +101,8 @@ class xUtil {
      *     ),
      *     array(
      *         'key' => 'value'
-     *     )
+     *     ),
+     *     'this-key' => 'remains-unique',
      * ), array(
      *     'assoc' => array(
      *         'a_key' => 'a_content_modified',
@@ -105,7 +111,8 @@ class xUtil {
      *     array(
      *         'key' => 'value'
      *     ),
-     *     'Index content 2'
+     *     'Index content 2',
+     *     'this-key' => 'remains-unique'
      * )));
      * </code>
      * will output:
@@ -132,6 +139,7 @@ class xUtil {
      *         )
      *
      *    [3] => Index content 2
+     *    [this-key] => remains-unique
      * )
      * </code>
      * @param array $array1,... unlimited optional Arrays to merge.
