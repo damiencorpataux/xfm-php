@@ -68,8 +68,8 @@ abstract class xFront extends xRestElement {
         $lang_available = $lang_aliases ? $lang_aliases->toArray() : array();
         $lang_browser = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : null;
         // If a language is given  and is available, use it
-        if (array_key_exists(@$_REQUEST['xlang'], $lang_available)) {
-            $lang = $_REQUEST['xlang'];
+        if (array_key_exists(@$this->params['xlang'], $lang_available)) {
+            $lang = $this->params['xlang'];
         // Else, if the session stored language is available, use it
         } elseif (array_key_exists(@$_SESSION['x']['lang'], $lang_available)) {
             $lang = $_SESSION['x']['lang'];
