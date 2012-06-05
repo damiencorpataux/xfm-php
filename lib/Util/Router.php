@@ -133,21 +133,26 @@ class xRouter {
     /**
      * Creates and returns an URL using the given $route pattern,
      * substituting the given $parameters to $route pattern variables.
-     * @param array A route definition structured as in $this->routes.
      * @param array Value to substitute route variables (:var_name).
+     * @param array A route definition structured as in $this->routes,
+     *              or null to use the xRouter::matched_route.
      * @param string URL suffix as in xUtil::url().
      * @param string Full URL as in xUtil::url().
      * @return string The generated URL.
      * @see xUtil::url()
      */
-    function url_from($route, $params, $suffix = null, $full = false) {
+    function url_from($params, $route = null, $suffix = null, $full = false) {
         // Retrieves route pattern and params information
-        $pattern = $this->matched_route['pattern'];
-        $params = array_merge_recursive(
+        $route = $route ? $route : $this->matched_route;
+        $pattern = $route['pattern'];
+        $params = xUtil::array_merge(
             $this->params,
             xUtil::arrize($route['params']),
             $params
         );
+        if (!is_array($pattern)) {
+            throw new xException('Route pattern should be an array');
+        }
         // Replaces route pattern variables with params values
         foreach ($pattern as &$part) {
             preg_match('/^:(\w.+)$/', $part, $matches);
