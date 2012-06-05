@@ -54,11 +54,11 @@ abstract class xScript {
 
     function print_profile_information() {
         $p = xContext::$profile;
-        $db = xContext::$config->db->toArray();
+        $db = xContext::$config->db ? xContext::$config->db->toArray() : null;
         $this->log();
         $this->log("Running script with:");
         $this->log("Profile: {$p}", 1);
-        $this->log("Database: {$db['user']}@{$db['host']}/{$db['database']}", 1);
+        if ($db) $this->log("Database: {$db['user']}@{$db['host']}/{$db['database']}", 1);
         $this->log("----");
         $this->log();
     }
@@ -152,6 +152,6 @@ abstract class xScript {
     }
 
     function help() {
-        return "Arguments description not available";
+        return "Script description not available";
     }
 }
