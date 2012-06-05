@@ -131,7 +131,7 @@ class xRouter {
     }
 
     /**
-     * Creates an URL using the given $route pattern,
+     * Creates and returns an URL using the given $route pattern,
      * substituting the given $parameters to $route pattern variables.
      * @param array A route definition structured as in $this->routes.
      * @param array Value to substitute route variables (:var_name).
@@ -140,7 +140,7 @@ class xRouter {
      * @return string The generated URL.
      * @see xUtil::url()
      */
-    function create_url_from($route, $params, $suffix = null, $full = false) {
+    function url_from($route, $params, $suffix = null, $full = false) {
         // Retrieves route pattern and params information
         $pattern = $this->matched_route['pattern'];
         $params = array_merge_recursive(
