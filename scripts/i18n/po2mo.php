@@ -8,64 +8,76 @@
  *
 **/
 
+require_once(dirname(__file__).'/../../lib/Util/Script.php');
+
 /**
  * Compiles po files to mo files
  * @package xFreemwork
 **/
+class Po2MoScript extends xScript {
 
-require_once(dirname(__file__).'/../util.php');
+    public $po_path;
+    public $mo_path;
 
-init();
-process();
-o();
-o("You should restart you apache webserver to apply changes");
-o();
+    function init() {
+        $this->po_path = xContext::$basepath.'/i18n/po';
+        $this->mo_path = xContext::$basepath.'/i18n/mo';
+    }
 
-/**
- * Sets up script useful information
- */
-function init() {
-    global $po_path, $mo_path;
-    require_once(dirname(__file__).'/../../lib/Core/Bootstrap.php');
-    new xBootstrap();
-    $po_path = xContext::$basepath.'/i18n/po';
-    $mo_path = xContext::$basepath.'/i18n/mo';
-}
-
-/**
- * Processes po files, using languages defined in configuration
- */
-function process() {
-    global $po_path, $mo_path;
-    foreach (xContext::$config->i18n->lang->alias->toArray() as $lang => $locale) {
-        o();
-        $po_file = "{$po_path}/{$lang}.po";
-        o("Processing po file: {$po_file}");
-        if (!file_exists($po_file)) {
-            o("File does not exist: {$po_file}", 1);
-            continue;
+    function run() {
+        $aliases = $this->get_configured_locales();
+        // Compiles each configured alias .po file into .mo
+        foreach ($aliases as $lang => $locale) {
+            $po_file = "{$this->po_path}/{$lang}.po";
+            $this->log("Processing po file: {$po_file}", 1);
+            if (file_exists($po_file)) {
+                $mo_file = "{$this->mo_path}/{$lang}/LC_MESSAGES/{$lang}.mo";
+                $this->compile($po_file, $mo_file);
+            } else {
+                $this->log("File does not exist: {$po_file}", 2);
+            }
+            $this->log();
         }
-        $mo_file = "{$mo_path}/{$lang}/LC_MESSAGES/{$lang}.mo";
-        compile($po_file, $mo_file);
+        // A friendly reminder because we care about the user
+        $this->log('Done');
+        $this->log('You should restart you apache webserver to apply changes', 1);
+        $this->log('sudo apache2ctl restart', 1);
+    }
+
+    /**
+     * Retrives configured languages and returns an alias => locales array.
+     * @return array
+     */
+    function get_configured_locales() {
+        $this->log('Processing configured languages...');
+        // Retrives configured languages
+        $aliases_config = @xContext::$config->i18n->lang->alias;
+        $aliases = $aliases_config ? $aliases_config->toArray() : array();
+        if (!$aliases) $this->log('No configured languages found', 1);
+        return $aliases;
+    }
+
+    /**
+     * Creates a compiled mo file from a po file
+     * @param $po_file the source po file
+     * @param $mo_file the destination mo file
+     */
+    function compile($po_file, $mo_file) {
+        if (!file_exists(dirname($mo_file))) {
+            $dir = dirname($mo_file);
+            $this->log("Creating directory for mo file: {$dir}", 2);
+            mkdir($dir, 0755, true);
+        }
+        $this->log("Compiling file", 2);
+        $this->log("Source po file: {$po_file}", 3);
+        $this->log("Destination mo file: {$mo_file}", 3);
+        exec("msgfmt -o {$mo_file} {$po_file}", $output, $r);
+        if ($output) $this->log("Error compiling file: {$output}", 2);
+    }
+
+    function help() {
+        return "This function compiles i18n/po/*.po files into i18n/mo/*.mo";
     }
 }
 
-/**
- * Creates a compiled mo file from a po file
- * @param $po_file the source po file
- * @param $mo_file the destination mo file
- */
-function compile($po_file, $mo_file) {
-    if (!file_exists(dirname($mo_file))) {
-        $dir = dirname($mo_file);
-        o("Creating directory for mo file: {$dir}", 1);
-        mkdir($dir, 0755, true);
-    }
-    o("Compiling file", 1);
-    o("Source po file: {$po_file}", 2);
-    o("Destination mo file: {$mo_file}", 2);
-    exec("msgfmt -o {$mo_file} {$po_file}", $output, $r);
-    if ($output) o("Error compiling file: {$output}", 2);
-}
-
-?>
+new Po2MoScript();
