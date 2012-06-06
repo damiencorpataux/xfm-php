@@ -87,11 +87,18 @@ abstract class xFront extends xRestElement {
         $locale = @$lang_available[$lang]; // Warning: must the exact locale as defined on the linux host,
         $domain = $lang;
         xContext::$log->log("Setting up gettext for '{$lang}' language, using '{$locale}' locale and '{$domain}' domain", $this);
-        setlocale(LC_MESSAGES, $locale);
-        putenv("LANG={$locale}"); // putenv only is useful for Windows
-        @bindtextdomain($domain, $directory);
-        textdomain($domain);
-        bind_textdomain_codeset($domain, 'UTF-8');
+        $success = min(
+            setlocale(LC_MESSAGES, $locale),
+            // putenv is necessary for Windows OS
+            putenv("LANG={$locale}"),
+            @bindtextdomain($domain, $directory),
+            textdomain($domain),
+            bind_textdomain_codeset($domain, 'UTF-8')
+        );
+        if (!$success) {
+            xContext::$log->warning("Failed setting up gettext for '{$lang}'", $this);
+die('a');
+        }
     }
 
     /**
