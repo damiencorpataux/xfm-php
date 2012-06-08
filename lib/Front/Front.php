@@ -97,7 +97,6 @@ abstract class xFront extends xRestElement {
         );
         if (!$success) {
             xContext::$log->warning("Failed setting up gettext for '{$lang}'", $this);
-die('a');
         }
     }
 
