@@ -38,7 +38,14 @@ abstract class xScript {
     }
 
     function setup() {
+        // Bootstrap setup
         $this->setup_bootstrap();
+        // Help display (if applicable)
+        if ($this->opt('h')) {
+            $this->display_help();
+            exit(0);
+        }
+        // Script setup
         $this->init();
         $this->print_profile_information();
     }
@@ -79,7 +86,8 @@ abstract class xScript {
         }
         // Displays run time
         $this->log();
-        $this->log('Runtime: '.$this->timer_lapse().' seconds');
+        $elapsed = number_format($this->timer_lapse(), 4);
+        $this->log('Runtime: '.$elapsed.' seconds');
     }
 
     /**
@@ -115,19 +123,6 @@ abstract class xScript {
     }
 
     /**
-     * Returns command line options/arguments
-     * @see http://php.net/manual/en/function.getopt.php
-     * @param string Options string as defined in PHP getopt()
-     * @return array An array of options/argument as defined in PHP geoopt()
-     */
-    function opts($opts = 'h') {
-        $opts = getopt($opts);
-        if (isset($opts['h'])) $this->display_help();
-        $this->opts = $opts;
-        return $opts;
-    }
-
-    /**
      * Returns information about the given option:
      * - false: option is not found
      * - true: option is found with no value
@@ -137,7 +132,7 @@ abstract class xScript {
      * @return array Information about the given option
      */
     function opt($name) {
-        $opts = $this->opts($name);
+        $opts = getopt($name);
         if (!$opts) return false;
         $opt = array_shift($opts);
         if (!$opt) return true;
@@ -148,7 +143,6 @@ abstract class xScript {
         echo 'Usage: '.@$_SERVER['argv'][0]."\n\n";
         foreach (xUtil::arrize($this->help()) as $line) echo "{$line}\n";
         echo "\n";
-        exit();
     }
 
     function help() {
