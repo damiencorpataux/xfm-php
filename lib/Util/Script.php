@@ -38,16 +38,24 @@ abstract class xScript {
     }
 
     function setup() {
-        // Bootstrap setup
-        $this->setup_bootstrap();
+        // Bootstrap setup,
+        // preventing outputting xBootstrap::handle_exception(),
+        // outputting raw exception instead (see catch block)
+        try {
+            ob_start();
+            $this->setup_bootstrap();
+        } catch (Exception $e) {
+            ob_end_clean();
+            throw $e;
+        }
+        // Script setup
+        $this->init();
+        $this->print_profile_information();
         // Help display (if applicable)
         if ($this->opt('h')) {
             $this->display_help();
             exit(0);
         }
-        // Script setup
-        $this->init();
-        $this->print_profile_information();
     }
 
     /**
