@@ -136,6 +136,9 @@ class xBootstrap {
     }
 
     function setup_config() {
+        // Does not overwrite existing config to allow custom config injection
+        if (xContext::$config instanceof xZend_Config_Ini) return;
+        // Setups config path
         $config_path = xContext::$basepath.'/config';
         // Detects profile to be used
         if (!xContext::$profile) {
@@ -236,19 +239,28 @@ class xBootstrap {
         return $this->$setup_function();
     }
     function create_db_mysql() {
+        // Creates mysql link
+        $host = xContext::$config->db->host;
+        xContext::$log->log("Creating database link to host '{$host}'", $this);
         $db = mysql_connect(
             xContext::$config->db->host,
             xContext::$config->db->user,
             xContext::$config->db->password,
             true // creates a new connection on every call
         );
-        xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
-        if (!$db) throw new xException('Could not connect to database');
-        if (!mysql_select_db(xContext::$config->db->database, $db)) {
-            throw new xException('Could not select database');
+        if (!$db) throw new xException("Could create link to database");
+        // Selects database (if applicable)
+        $dbname = xContext::$config->db->database;
+        if ($dbname) {
+            xContext::$log->log("Selecting database '{$dbname}'", $this);
+            $success = mysql_select_db(xContext::$config->db->database, $db);
+            if (!$success) throw new xException("Could not select database '{$dbname}'");
+        } else {
+            xContext::$log->log("Skipping database selection", $this);
         }
-        mysql_set_charset('utf8', $db);
+        // Forces database link encoding
         xContext::$log->log('Setting database client encoding to: '.mysql_client_encoding($db), $this);
+        mysql_set_charset('utf8', $db);
         return $db;
     }
     function create_db_postgres() {
