@@ -24,7 +24,9 @@ class PoUpdateScript extends xScript {
 
     function run() {
         $files = $this->get_files_to_parse();
-        $aliases = $this->get_configured_locales();
+        $aliases = $this->get_configured_langs();
+        $this->log('Processing configured languages...');
+        if (!$aliases) $this->log('No configured languages found', 1);
         foreach ($aliases as $lang => $locale) {
             // TODO: refactor: $po_file = "{$this->po_path}/{$lang}.po";
             $po_file = substr(
@@ -62,12 +64,10 @@ class PoUpdateScript extends xScript {
      * Retrives configured languages and returns an alias => locales array.
      * @return array
      */
-    function get_configured_locales() {
-        $this->log('Processing configured languages...');
+    function get_configured_langs() {
         // Retrives configured languages
         $aliases_config = @xContext::$config->i18n->lang->alias;
         $aliases = $aliases_config ? $aliases_config->toArray() : array();
-        if (!$aliases) $this->log('No configured languages found', 1);
         return $aliases;
     }
 
@@ -76,7 +76,6 @@ class PoUpdateScript extends xScript {
      * @return array
      */
     function get_files_to_parse() {
-        $this->log("Determining files to parse");
         $filenames = array_merge(
             xUtil::cascade_dir(xContext::$basepath.'/views', 'php'),
             xUtil::cascade_dir(xContext::$basepath.'/views', 'tpl'),
@@ -120,6 +119,17 @@ class PoUpdateScript extends xScript {
             {$parse_file}", $output
         );
         return $output;
+    }
+
+    function help() {
+        $aliases = implode(', ', array_keys($this->get_configured_langs()));
+        return array(
+            "Updates i18n/po/*.po files with i18n strings",
+            "present in application views and controllers.",
+            null,
+            "Note that only configured languages will be updated:",
+            $aliases ? $aliases : 'No configured language found.'
+        );
     }
 }
 

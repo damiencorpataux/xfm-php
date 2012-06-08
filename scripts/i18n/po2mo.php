@@ -39,8 +39,9 @@ class Po2MoScript extends xScript {
             $this->log();
         }
         // A friendly reminder because we care about the user
-        $this->log('Done');
-        $this->log('You should restart you apache webserver to apply changes', 1);
+        $this->log('Done.');
+        $this->log();
+        $this->log('You should restart you apache webserver to apply changes');
         $this->log('sudo apache2ctl restart', 1);
     }
 
@@ -76,7 +77,7 @@ class Po2MoScript extends xScript {
     }
 
     function help() {
-        return "This function compiles i18n/po/*.po files into i18n/mo/*.mo";
+        return "Compiles i18n/po/*.po files into i18n/mo/*.mo";
     }
 }
 
