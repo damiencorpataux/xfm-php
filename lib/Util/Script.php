@@ -44,8 +44,9 @@ abstract class xScript {
         try {
             ob_start();
             $this->setup_bootstrap();
+            @ob_end_flush();
         } catch (Exception $e) {
-            ob_end_clean();
+            @ob_end_clean();
             throw $e;
         }
         // Script setup
