@@ -399,6 +399,11 @@ abstract class xModelMysql extends xModel {
     static function q($sql) {
         $db = xContext::$db;
         $class = get_called_class();
+        if (!$db) {
+            throw new xException(
+                'Cannot execute sql statement without a valid database resource'
+            );
+        }
         // Executes query
         xContext::$log->log("Executing query: \n{$sql}", $class);
         $qr = mysql_query($sql, $db);

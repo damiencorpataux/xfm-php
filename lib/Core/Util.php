@@ -29,12 +29,12 @@ class xUtil {
     /**
      * Filesystem: copies the given source to the given destination, using the given options.
      * Useful for recursive file copy.
-     * @param string The source file or directory
-     * @param string The destination file or directory
+     * @param string The source file or directory.
+     * @param string The destination file or directory.
      * @param string Options (defaults to 'rf'), valid options are:
      *               - r: recursive
      *               - f: force
-     * @return bool True if success, false otherwise
+     * @return bool True if success, false otherwise.
      */
     static function copy($source, $destination, $options = 'rf') {
         if ($options) $options = "-{$options}";
@@ -51,11 +51,11 @@ class xUtil {
     /**
      * Filesystem: removes the given location
      * Useful for non-empty directory removal.
-     * @param string The location (file or directory) to remove
+     * @param string The location (file or directory) to remove.
      * @param string Options (defaults to 'rf'), valid options are:
      *               - r: recursive
      *               - f: force
-     * @return bool True if success, false otherwise
+     * @return bool True if success, false otherwise.
      */
     static function remove($location, $options = 'rf') {
         if ($options) $options = "-{$options}";
@@ -66,6 +66,34 @@ class xUtil {
         ), 'xUtil');
         $o = exec("rm {$options} {$location} && echo ok");
         return $o == 'ok';
+    }
+
+    /**
+    * Filesystem: Returns all absolute file names with the given $extension
+    * contained in the given $dir (recursive lookup).
+    * @param string The directory to cascade (e.g. /some/path).
+    * @param string The extension of the file (e.g. php).
+    * @param array Array of initial filenames (optional, used for recursive calls).
+    * @return array Array of absolute filenames.
+    */
+    function cascade_dir($dir, $extension) {
+        $filenames = array();
+        if (!is_dir($dir)) return $filenames;
+        foreach (scandir($dir) as $file) {
+            if ('.' == @$file{0}) continue;
+            $file = "{$dir}/{$file}";
+            if (is_file($file) && ".{$extension}" == substr($file, -strlen(".{$extension}"))) {
+                //o("Matching file: ${file}", 1);
+                $filenames[] = $file;
+            } elseif (is_dir($file)) {
+                //o("Exploring directory: ${file}", 1);
+                $filenames = array_merge(
+                    $filenames,
+                    xUtil::cascade_dir($file, $extension)
+                );
+            }
+        }
+        return $filenames;
     }
 
     /**
@@ -85,7 +113,12 @@ class xUtil {
     /**
      * Merges arrays recursively, replacing existing keys.
      * Priority is given to the last given array parameter.
-     * For example:
+     *
+     * Careful: This algorythm differs from PHP array_merge_recursive
+     * in the sense that merging array with same-level-same-keyname
+     * will remain unique when using xUtil::array_merge().
+     *
+     * Merge example:
      * <code>
      * print_r(xUtil::array_merge(array(
      *     'Index content',
@@ -96,7 +129,8 @@ class xUtil {
      *     ),
      *     array(
      *         'key' => 'value'
-     *     )
+     *     ),
+     *     'this-key' => 'remains-unique',
      * ), array(
      *     'assoc' => array(
      *         'a_key' => 'a_content_modified',
@@ -105,7 +139,8 @@ class xUtil {
      *     array(
      *         'key' => 'value'
      *     ),
-     *     'Index content 2'
+     *     'Index content 2',
+     *     'this-key' => 'remains-unique'
      * )));
      * </code>
      * will output:
@@ -132,6 +167,7 @@ class xUtil {
      *         )
      *
      *    [3] => Index content 2
+     *    [this-key] => remains-unique
      * )
      * </code>
      * @param array $array1,... unlimited optional Arrays to merge.

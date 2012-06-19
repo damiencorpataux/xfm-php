@@ -103,7 +103,6 @@ class xBootstrap {
         require_once('Core/Config.php');
         require_once('Core/Bootstrap.php');
         require_once('Core/Element.php');
-        require_once('Core/Plugin.php');
         require_once('Core/Controller.php');
         require_once('Core/WebController.php');
         require_once('Front/Front.php');
@@ -137,6 +136,9 @@ class xBootstrap {
     }
 
     function setup_config() {
+        // Does not overwrite existing config to allow custom config injection
+        if (xContext::$config instanceof xZend_Config_Ini) return;
+        // Setups config path
         $config_path = xContext::$basepath.'/config';
         // Detects profile to be used
         if (!xContext::$profile) {
@@ -237,19 +239,28 @@ class xBootstrap {
         return $this->$setup_function();
     }
     function create_db_mysql() {
+        // Creates mysql link
+        $host = xContext::$config->db->host;
+        xContext::$log->log("Creating database link to host '{$host}'", $this);
         $db = mysql_connect(
             xContext::$config->db->host,
             xContext::$config->db->user,
             xContext::$config->db->password,
             true // creates a new connection on every call
         );
-        xContext::$log->log("Connecting to database ".xContext::$config->db->database, $this);
-        if (!$db) throw new xException('Could not connect to database');
-        if (!mysql_select_db(xContext::$config->db->database, $db)) {
-            throw new xException('Could not select database');
+        if (!$db) throw new xException("Could create link to database");
+        // Selects database (if applicable)
+        $dbname = xContext::$config->db->database;
+        if ($dbname) {
+            xContext::$log->log("Selecting database '{$dbname}'", $this);
+            $success = mysql_select_db(xContext::$config->db->database, $db);
+            if (!$success) throw new xException("Could not select database '{$dbname}'");
+        } else {
+            xContext::$log->log("Skipping database selection", $this);
         }
-        mysql_set_charset('utf8', $db);
+        // Forces database link encoding
         xContext::$log->log('Setting database client encoding to: '.mysql_client_encoding($db), $this);
+        mysql_set_charset('utf8', $db);
         return $db;
     }
     function create_db_postgres() {
@@ -282,15 +293,14 @@ class xBootstrap {
             function _($str) { return $str; };
             return;
         }
-        // Sets default language from config
-        xContext::$lang = xContext::$config->i18n->lang->default;
+        // Sets default language from config (null if not defined)
+        xContext::$lang = @xContext::$config->i18n->lang->default;
     }
 
     function setup_router() {
         xContext::$router = new xRouter(xContext::$config->route_defaults->toArray());
         xContext::$log->log(array("Setting routes"), $this);
         foreach (xContext::$config->route->toArray() as $params) {
-            $params = $params->toArray();
             if (!isset($params['pattern'])) throw new xException("Route pattern mandatory in .ini file");
             $pattern = $params['pattern'];
             unset($params['pattern']);

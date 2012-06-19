@@ -11,7 +11,8 @@
 /**
  * Create files from .in files, replacing environment variables.
  * For example: default.ini will be created from default.ini.in
- * @package xFreemwork
+ *
+ * Note: This script is a draft and is not complete
 **/
 
 require_once(dirname(__file__).'/../util.php');
@@ -62,4 +63,18 @@ function get_files() {
 function get_env_file() {
 }
 
+
+// Util function (moved from in ../util.php file)
+
+/**
+ * Outputs a string on stdout, optionally indenting it
+ * @param string $msg The string to output
+ * @param int $indent_level The indentation level
+ */
+function o($msg = '', $indent_level = 0) {
+    $indent = '';
+    for ($i=0; $i<$indent_level; $i++) $indent .= '*';
+    if (strlen($indent)) $indent .= ' ';
+    print "{$indent}{$msg}\n";
+}
 ?>

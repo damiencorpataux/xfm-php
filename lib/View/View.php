@@ -283,4 +283,18 @@ class xView {
     function render() {
         return $this->apply($this->default_tpl);
     }
+
+    /**
+     * Allows to echo() or print() a xView instance.
+     * @see xView::render()
+     * @return string
+     */
+    function __toString() {
+        // PHP does not allow __toString magic method to throw an Exception
+        try {
+            return $this->render();
+        } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_ERROR);
+        }
+    }
 }

@@ -34,6 +34,13 @@ class xRouter {
     var $routes = array();
 
     /**
+     * One a route has been matched,
+     * this property is set with the route information.
+     * @see match_route
+     */
+    var $matched_route = null;
+
+    /**
      * Generated params from route config, route arguments and post/get params.
      * @var array
      */
@@ -87,7 +94,7 @@ class xRouter {
             }
         }
         if (count($routes) < 1) throw new xException("No URI matching route", 404);
-        return array_shift($routes);
+        return $this->matched_route = array_shift($routes);
     }
 
     /**
@@ -121,5 +128,38 @@ class xRouter {
         }
         // Calls front controller
         xFront::load($this->params['xfront'], $this->params)->handle();
+    }
+
+    /**
+     * Creates and returns an URL using the given $route pattern,
+     * substituting the given $parameters to $route pattern variables.
+     * @param array Value to substitute route variables (:var_name).
+     * @param array A route definition structured as in $this->routes,
+     *              or null to use the xRouter::matched_route.
+     * @param string URL suffix as in xUtil::url().
+     * @param string Full URL as in xUtil::url().
+     * @return string The generated URL.
+     * @see xUtil::url()
+     */
+    function url_from($params, $route = null, $suffix = null, $full = false) {
+        // Retrieves route pattern and params information
+        $route = $route ? $route : $this->matched_route;
+        $pattern = $route['pattern'];
+        $params = xUtil::array_merge(
+            $this->params,
+            xUtil::arrize($route['params']),
+            $params
+        );
+        if (!is_array($pattern)) {
+            throw new xException('Route pattern should be an array');
+        }
+        // Replaces route pattern variables with params values
+        foreach ($pattern as &$part) {
+            preg_match('/^:(\w.+)$/', $part, $matches);
+            $name = array_pop($matches);
+            $part = $params[$name];
+        }
+        return xUtil::url(implode('/', $pattern));
+        return $this->matched_route;
     }
 }

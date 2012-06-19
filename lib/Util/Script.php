@@ -38,9 +38,25 @@ abstract class xScript {
     }
 
     function setup() {
-        $this->setup_bootstrap();
+        // Bootstrap setup,
+        // preventing outputting xBootstrap::handle_exception(),
+        // outputting raw exception instead (see catch block)
+        try {
+            ob_start();
+            $this->setup_bootstrap();
+            @ob_end_flush();
+        } catch (Exception $e) {
+            @ob_end_clean();
+            throw $e;
+        }
+        // Script setup
         $this->init();
         $this->print_profile_information();
+        // Help display (if applicable)
+        if ($this->opt('h')) {
+            $this->display_help();
+            exit(0);
+        }
     }
 
     /**
@@ -54,11 +70,11 @@ abstract class xScript {
 
     function print_profile_information() {
         $p = xContext::$profile;
-        $db = xContext::$config->db->toArray();
+        $db = xContext::$config->db ? xContext::$config->db->toArray() : null;
         $this->log();
         $this->log("Running script with:");
         $this->log("Profile: {$p}", 1);
-        $this->log("Database: {$db['user']}@{$db['host']}/{$db['database']}", 1);
+        if ($db) $this->log("Database: {$db['user']}@{$db['host']}/{$db['database']}", 1);
         $this->log("----");
         $this->log();
     }
@@ -79,7 +95,8 @@ abstract class xScript {
         }
         // Displays run time
         $this->log();
-        $this->log('Runtime: '.$this->timer_lapse().' seconds');
+        $elapsed = number_format($this->timer_lapse(), 4);
+        $this->log('Runtime: '.$elapsed.' seconds');
     }
 
     /**
@@ -115,19 +132,6 @@ abstract class xScript {
     }
 
     /**
-     * Returns command line options/arguments
-     * @see http://php.net/manual/en/function.getopt.php
-     * @param string Options string as defined in PHP getopt()
-     * @return array An array of options/argument as defined in PHP geoopt()
-     */
-    function opts($opts = 'h') {
-        $opts = getopt($opts);
-        if (isset($opts['h'])) $this->display_help();
-        $this->opts = $opts;
-        return $opts;
-    }
-
-    /**
      * Returns information about the given option:
      * - false: option is not found
      * - true: option is found with no value
@@ -137,7 +141,7 @@ abstract class xScript {
      * @return array Information about the given option
      */
     function opt($name) {
-        $opts = $this->opts($name);
+        $opts = getopt($name);
         if (!$opts) return false;
         $opt = array_shift($opts);
         if (!$opt) return true;
@@ -148,10 +152,9 @@ abstract class xScript {
         echo 'Usage: '.@$_SERVER['argv'][0]."\n\n";
         foreach (xUtil::arrize($this->help()) as $line) echo "{$line}\n";
         echo "\n";
-        exit();
     }
 
     function help() {
-        return "Arguments description not available";
+        return "Script description not available";
     }
 }
