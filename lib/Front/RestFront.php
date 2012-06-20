@@ -13,7 +13,7 @@
  * Deals with model output formatting.
  * @package xFreemwork
 **/
-class xRestFront extends xFront {
+abstract class xRestFront extends xFront {
 
     var $encoding = 'UTF-8';
 
@@ -50,6 +50,11 @@ class xRestFront extends xFront {
         $this->params = xUtil::array_merge(xUtil::arrize($params), $this->params);
     }
 
+    /**
+     * Returns prints an encoded error structure,
+     * or plain text error message if encoder is unavailable.
+     * @param xException|Exception
+     */
     function handle_error($exception) {
         try {
             print $this->encode(array(
