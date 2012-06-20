@@ -19,19 +19,6 @@ class xModelFront extends xRestFront {
         parent::__construct($params);
     }
 
-    function handle_error($exception) {
-        try {
-            print $this->encode(array(
-                'error' => $exception->getMessage(),
-                'message' => $exception->getMessage(), // Should be a i18n end user message
-                'data' => @$exception->data,
-                'status' => @$exception->status
-            ));
-        } catch(Exception $e) {
-            echo 'Error: '.$e->getmessage();
-        }
-    }
-
     function get() {
         $r = xModel::load(@$this->params['xmodel'], $this->params)->get();
         print $this->encode($r);
