@@ -8,7 +8,7 @@
 **/
 
 // Requires PHPUnit dependancies
-$vendors = dirname(__file__).'/vendors';
+$vendors = __dir__.'/vendors';
 $paths = array(
     "{$vendors}/phpunit/",
     "{$vendors}/php-file-iterator/",
