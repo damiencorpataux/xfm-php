@@ -27,10 +27,10 @@ class xDummyLogger {
 **/
 class xBootstrap {
 
-    function __construct($profile=null) {
+    function __construct() {
         try {
             // Setups application
-            $this->setup($profile);
+            $this->setup();
             // References bootstra instance in xContext
             xContext::$bootstrap = $this;
         } catch (Exception $e) {
@@ -62,11 +62,11 @@ class xBootstrap {
      * Setups the application context.
      * @param string The profile to load (defaults to 'development')
      */
-    function setup($profile) {
+    function setup() {
         $this->setup_includes();
-        if ($profile) xContext::$profile = $profile;
         $this->setup_dummy_log();
         xContext::$basepath = substr(dirname(__file__), 0, strpos(dirname(__file__), '/lib'));
+        xContext::$configpath = xContext::$basepath.'/config';
         xContext::$libpath = substr(dirname(__file__), 0, -strlen('/Util'));
         xContext::$baseuri = substr($_SERVER['SCRIPT_NAME'], 0, -strlen('/index.php'));
         xContext::$baseurl = xUtil::url(xContext::$baseuri, true);
@@ -127,6 +127,7 @@ class xBootstrap {
     }
 
     function setup_dummy_log() {
+        // This dummy logger mocks the real logger API until it is setup.
         xContext::$log = new xDummyLogger();
     }
 
@@ -137,9 +138,83 @@ class xBootstrap {
 
     function setup_config() {
         // Does not overwrite existing config to allow custom config injection
+        // Eg. The /scripts/deploy.php can nullify the database configuration to allow
+        //     the bootstrap to run before the actual database is created.
+        // TODO: Allow Bootstrap user to switch profile and re-setup
+        //       by using xBootstrap::setup('new-profile').
+        if ($config instanceof xZend_Config_Ini) return;
+        //
+        $config_path = xContext::$configpath;
+        // Loads default configuration file
+        // and create basic xZend_Config_Ini instance
+        try {
+            $config = new xZend_Config_Ini(
+                "{$config_path}/default.ini",
+                null,
+                array(
+                    'allowModifications' => true
+                )
+            );
+        } catch (Exception $e) {
+            throw new xException(
+                'Could not read default.ini config file'.$e->getMessage()
+            );
+        }
+        // Merges additionnal configuration files
+        foreach ($this->get_config_files('conf.d') as $file) {
+            $config->merge(new xZend_Config_Ini($file));
+        }
+        // Merges instance-specific configuration files
+        foreach ($this->get_config_files('conf.d') as $file) {
+            $config->merge(new xZend_Config_Ini($file));
+        }
+        // Sets up profile name
+        xContext::$profile = $profile = $config->profile;
+        // Merges profile-specific configuration files
+        $config->merge(new xZend_Config_Ini($file));
+var_dump($config->toArray());
+die();
+        xContext::$config = $config;
+    }
+
+    /**
+     * Returns an array containing the existing additional configuration files,
+     * in alphabetical order.
+     * @param string|array The path(s) to process, relative to config/ directory.
+     * @return array
+     */
+    protected function get_config_files($paths) {
+        $config_path = xContext::$basepath.'/config';
+        $files = array();
+        // conf.d/* and profile.d/ files
+        $paths = xUtil::arrize($paths);
+        foreach ($paths as $path) {
+            $path = "{$config_path}/{$path}";
+            $f = xUtil::arrize(@scandir($path));
+            foreach ($f as $file) {
+                $file = "{$path}/$file";
+                if (is_file($file)) $files[] = $file;
+            }
+        }
+        // Host/instance-specific files
+        $host = php_uname('n');
+        $app_path = str_replace('/', '-', trim(xContext::$basepath, '/'));
+        $instance_files = array(
+            "{$config_path}/{$host}.ini",
+            "{$config_path}/{$host}_{$app_path}.ini"
+        );
+        foreach ($instance_files as $file) {
+            if (is_file($file)) $files[] = $file;;
+        }
+        return $files;
+    }
+
+    function OLD_________________________________________________________________________________setup_config() {
+        // Does not overwrite existing config to allow custom config injection
+        // Eg. The /scripts/deploy.php can nullify the database configuration to allow
+        //     the bootstrap to run before the actual database is created.
         if (xContext::$config instanceof xZend_Config_Ini) return;
         // Setups config path
-        $config_path = xContext::$basepath.'/config';
         // Detects profile to be used
         if (!xContext::$profile) {
             try {
@@ -168,7 +243,7 @@ class xBootstrap {
             );
         } catch (Exception $e) {
             throw new xException(
-                'Could not read config file (default.ini), profile ('.xContext::$profile.'): '.$e->getMessage()
+                'Could not read default.ini config file, profile ('.xContext::$profile.'): '.$e->getMessage()
             );
         }
         // Merges environment (host and/or app-path specific) configuration file
@@ -184,7 +259,7 @@ class xBootstrap {
      * configuration overrides, in the correct order.
      * @return array
      */
-    protected function get_config_files() {
+    protected function OLD_________________________________________________________________________________get_config_files() {
         $config_path = xContext::$basepath.'/config';
         $host = php_uname('n');
         $app_path = str_replace('/', '-', trim(xContext::$basepath, '/'));

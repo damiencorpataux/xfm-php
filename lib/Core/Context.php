@@ -29,16 +29,22 @@ class xContext {
     static $profile;
 
     /**
-     * The base path of the xfreemwork library.
-    * @var string
-     */
-    static $libpath;
-
-    /**
-     * The base path of the application.
+     * The base path of the application (absolute form).
      * @var string
      */
     static $basepath;
+
+    /**
+     * The config path of the application (absolute form).
+     * @var string
+     */
+    static $configpath;
+
+    /**
+     * The base path of the xfreemwork library (absolute form).
+     * @var string
+     */
+    static $libpath;
 
     /**
      * The base uri of the application.
