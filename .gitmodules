@@ -1,3 +1,4 @@
+# PHPUnit submodules
 [submodule "unittests/vendors/phpunit"]
 	path = unittests/vendors/phpunit
 	url = git://github.com/sebastianbergmann/phpunit.git
