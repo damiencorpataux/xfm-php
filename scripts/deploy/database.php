@@ -77,7 +77,7 @@ class DeployDatabaseScript extends xScript {
      * @return array
      */
     function get_files_to_execute() {
-        $filenames = xUtil::cascade_dir(xContext::$basepath.'/sql', 'sql');
+        $filenames = xUtil::cascade_dir($this->sql_path, 'sql');
         foreach ($filenames as &$filename) {
             $filename = substr($filename, strlen(xContext::$basepath.'/'));
         }
