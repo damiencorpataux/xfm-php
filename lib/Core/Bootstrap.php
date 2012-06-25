@@ -60,7 +60,6 @@ class xBootstrap {
 
     /**
      * Setups the application context.
-     * @param string The profile to load (defaults to 'development')
      */
     function setup() {
         $this->setup_includes();
@@ -142,9 +141,11 @@ class xBootstrap {
         //     the bootstrap to run before the actual database is created.
         // TODO: Allow Bootstrap user to switch profile and re-setup
         //       by using xBootstrap::setup('new-profile').
-        if ($config instanceof xZend_Config_Ini) return;
-        //
+        if (xContext::$config instanceof xZend_Config_Ini) return;
+        // Makes config_path variable local
         $config_path = xContext::$configpath;
+        // Sets default profile to 'development'
+        xContext::$profile = 'development';
         // Loads default configuration file
         // and create basic xZend_Config_Ini instance
         try {
@@ -160,20 +161,32 @@ class xBootstrap {
                 'Could not read default.ini config file'.$e->getMessage()
             );
         }
-        // Merges additionnal configuration files
+        // Merges additionnal configuration file(s)
         foreach ($this->get_config_files('conf.d') as $file) {
             $config->merge(new xZend_Config_Ini($file));
         }
-        // Merges instance-specific configuration files
-        foreach ($this->get_config_files('conf.d') as $file) {
+        // Merges instance-specific configuration file(s)
+        $instance_host = php_uname('n');
+        $instance_path = str_replace('/', '-', trim(xContext::$basepath, '/'));
+        $instance_files = array_intersect(
+            $this->get_config_files('instances'), array(
+                "{$config_path}/instances/{$instance_host}.ini",
+                "{$config_path}/instances/{$instance_host}_{$instance_path}.ini"
+            )
+        );
+        foreach ($instance_files as $file) {
             $config->merge(new xZend_Config_Ini($file));
         }
-        // Sets up profile name
-        xContext::$profile = $profile = $config->profile;
+        // Sets up profile name according instance config
+        xContext::$profile = $profile = $config->profile ?
+            $config->profile : xContext::$profile;
         // Merges profile-specific configuration files
-        $config->merge(new xZend_Config_Ini($file));
-var_dump($config->toArray());
-die();
+        foreach ($this->get_config_files('profiles') as $file) {
+            // Skips filenames that do not begin with $profile
+            $filename = array_pop(explode('/', $file));
+            if (substr($filename, 0, strlen($profile)) != $profile) continue;
+            $config->merge(new xZend_Config_Ini($file));
+        }
         xContext::$config = $config;
     }
 
@@ -186,7 +199,6 @@ die();
     protected function get_config_files($paths) {
         $config_path = xContext::$basepath.'/config';
         $files = array();
-        // conf.d/* and profile.d/ files
         $paths = xUtil::arrize($paths);
         foreach ($paths as $path) {
             $path = "{$config_path}/{$path}";
@@ -375,10 +387,12 @@ die();
     function setup_router() {
         xContext::$router = new xRouter(xContext::$config->route_defaults->toArray());
         xContext::$log->log(array("Setting routes"), $this);
-        foreach (xContext::$config->route->toArray() as $params) {
-            if (!isset($params['pattern'])) throw new xException("Route pattern mandatory in .ini file");
-            $pattern = $params['pattern'];
-            unset($params['pattern']);
+        // Sorts routes according their index in config
+        $routes = xContext::$config->route->toArray();
+        ksort($routes);
+        foreach ($routes as $params) {
+            $pattern = @$params['pattern'];
+            if (!$pattern) throw new xException("Route pattern mandatory in .ini file");
             xContext::$router->add($pattern, $params);
         }
     }
