@@ -81,8 +81,9 @@ abstract class xElement {
         require_once($file);
         xContext::$log->log("Instanciating: $class", 'xElement');
         // Checks if instantiable before returning instance
-        $rc = new ReflectionClass($class);
-        if (!$rc->IsInstantiable()) throw new xException("Cannot instanciate {$class}");
+        // FIXME: This doesn't work (plain classes are said not instantiable)
+        //$rc = new ReflectionClass($class);
+        //if (!$rc->IsInstantiable()) throw new xException("Cannot instanciate {$class}");
         return new $class($params);
     }
 }
