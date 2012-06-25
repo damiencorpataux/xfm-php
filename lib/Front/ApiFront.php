@@ -20,7 +20,7 @@ class xApiFront extends xRestFront {
         // TODO: check for API key?
         if (!session_id()) {
             if (!@$params['key']) {
-                session_start();
+                if (!headers_sent()) session_start();
             } else {
                 // TODO: check this code
                 session_id($params['key']);
