@@ -48,7 +48,7 @@ class xBootstrap {
     static function handle_exception($exception) {
         // Sends HTTP error status
         $status = @$exception->status ? $exception->status : 500;
-        header(xException::$statuses[$status]);
+        if (!headers_sent()) header(xException::$statuses[$status]);
         // Calls specific front error handler
         if (xContext::$router) $error_front = xFront::load(
             xContext::$router->params['xfront'],
