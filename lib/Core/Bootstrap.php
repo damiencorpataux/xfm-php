@@ -27,10 +27,10 @@ class xDummyLogger {
 **/
 class xBootstrap {
 
-    function __construct($profile=null) {
+    function __construct() {
         try {
             // Setups application
-            $this->setup($profile);
+            $this->setup();
             // References bootstra instance in xContext
             xContext::$bootstrap = $this;
         } catch (Exception $e) {
@@ -60,13 +60,12 @@ class xBootstrap {
 
     /**
      * Setups the application context.
-     * @param string The profile to load (defaults to 'development')
      */
-    function setup($profile) {
+    function setup() {
         $this->setup_includes();
-        if ($profile) xContext::$profile = $profile;
         $this->setup_dummy_log();
         xContext::$basepath = substr(dirname(__file__), 0, strpos(dirname(__file__), '/lib'));
+        xContext::$configpath = xContext::$basepath.'/config';
         xContext::$libpath = substr(dirname(__file__), 0, -strlen('/Util'));
         xContext::$baseuri = substr($_SERVER['SCRIPT_NAME'], 0, -strlen('/index.php'));
         xContext::$baseurl = xUtil::url(xContext::$baseuri, true);
@@ -127,6 +126,7 @@ class xBootstrap {
     }
 
     function setup_dummy_log() {
+        // This dummy logger mocks the real logger API until it is setup.
         xContext::$log = new xDummyLogger();
     }
 
@@ -137,70 +137,93 @@ class xBootstrap {
 
     function setup_config() {
         // Does not overwrite existing config to allow custom config injection
+        // Eg. The /scripts/deploy.php can nullify the database configuration to allow
+        //     the bootstrap to run before the actual database is created.
+        // TODO: Allow Bootstrap user to switch profile and re-setup
+        //       by using xBootstrap::setup('new-profile').
         if (xContext::$config instanceof xZend_Config_Ini) return;
-        // Setups config path
-        $config_path = xContext::$basepath.'/config';
-        // Detects profile to be used
-        if (!xContext::$profile) {
-            try {
-                $profile = new xZend_Config_Ini(
-                    "{$config_path}/default.ini",
-                    'profile',
-                    array('allowModifications' => true)
-                );
-            } catch (Exception $e) {
-                throw new xException(
-                    'Could not read default [profile] from config file (default.ini): '.$e->getMessage()
-                );
-            }
-            foreach ($this->get_config_files() as $file) {
-                try { $profile->merge(new xZend_Config_Ini($file, 'profile')); }
-                catch (Exception $e) { continue; }
-            }
-            if ($profile->name) xContext::$profile = $profile->name;
-        }
+        // Makes config_path variable local
+        $config_path = xContext::$configpath;
+        // Sets default profile to 'development'
+        xContext::$profile = 'development';
         // Loads default configuration file
+        // and create basic xZend_Config_Ini instance
         try {
-            xContext::$config = new xZend_Config_Ini(
+            $config = new xZend_Config_Ini(
                 "{$config_path}/default.ini",
-                xContext::$profile,
-                array('allowModifications' => true)
+                null,
+                array(
+                    'allowModifications' => true
+                )
             );
         } catch (Exception $e) {
             throw new xException(
-                'Could not read config file (default.ini), profile ('.xContext::$profile.'): '.$e->getMessage()
+                'Could not read default.ini config file'.$e->getMessage()
             );
         }
-        // Merges environment (host and/or app-path specific) configuration file
-        foreach ($this->get_config_files() as $file) {
-            try { xContext::$config->merge(new xZend_Config_Ini($file, 'overrides')); }
-            catch (Exception $e) { continue; }
+        // Merges additionnal configuration file(s)
+        foreach ($this->get_config_files('conf.d') as $file) {
+            $config->merge(new xZend_Config_Ini($file));
         }
-        if (!@xContext::$config) xContext::$config = new stdClass();
+        // Merges instance-specific configuration file(s)
+        $instance_host = php_uname('n');
+        $instance_path = str_replace('/', '-', trim(xContext::$basepath, '/'));
+        $instance_files = array_intersect(
+            $this->get_config_files('instances'), array(
+                "{$config_path}/instances/{$instance_host}.ini",
+                "{$config_path}/instances/{$instance_host}_{$instance_path}.ini"
+            )
+        );
+        foreach ($instance_files as $file) {
+            $config->merge(new xZend_Config_Ini($file));
+        }
+        // Sets up profile name according instance config
+        xContext::$profile = $profile = $config->profile ?
+            $config->profile : xContext::$profile;
+        // Merges profile-specific configuration files
+        foreach ($this->get_config_files('profiles') as $file) {
+            // Skips filenames that do not begin with $profile
+            $filename = array_pop(explode('/', $file));
+            if (substr($filename, 0, strlen($profile)) != $profile) continue;
+            $config->merge(new xZend_Config_Ini($file));
+        }
+        xContext::$config = $config;
     }
 
     /**
-     * Returns an array containing the files elligible for
-     * configuration overrides, in the correct order.
+     * Returns an array containing the existing additional configuration files,
+     * in alphabetical order.
+     * @param string|array The path(s) to process, relative to config/ directory.
      * @return array
      */
-    protected function get_config_files() {
+    protected function get_config_files($paths) {
         $config_path = xContext::$basepath.'/config';
+        $files = array();
+        $paths = xUtil::arrize($paths);
+        foreach ($paths as $path) {
+            $path = "{$config_path}/{$path}";
+            $f = xUtil::arrize(@scandir($path));
+            foreach ($f as $file) {
+                $file = "{$path}/$file";
+                if (is_file($file)) $files[] = $file;
+            }
+        }
+        // Host/instance-specific files
         $host = php_uname('n');
         $app_path = str_replace('/', '-', trim(xContext::$basepath, '/'));
-        $files = array(
+        $instance_files = array(
             "{$config_path}/{$host}.ini",
             "{$config_path}/{$host}_{$app_path}.ini"
         );
-        foreach ($files as $i => $file) {
-            if (!file_exists($file)) unset($files[$i]);
+        foreach ($instance_files as $file) {
+            if (is_file($file)) $files[] = $file;;
         }
         return $files;
     }
 
     function setup_error_reporting() {
         // Redefines php error reporting level
-        $level = xContext::$config->error->reporting ? xContext::$config->error->reporting : 0;
+        $level = @xContext::$config->error->reporting ? xContext::$config->error->reporting : 0;
         $level_numeric = is_int($level) ? $level : constant($level);
         xContext::$error_reporting = $level_numeric;
         error_reporting($level_numeric);
@@ -218,9 +241,9 @@ class xBootstrap {
     }
 
     function setup_log() {
-        $file = xContext::$config->log->file ? xContext::$config->log->file : '/tmp/xfreemwork.log';
-        $level = xContext::$config->log->level ? xContext::$config->log->level : 'NONE';
-        $classes = xContext::$config->log->classes ? explode(',', xContext::$config->log->classes) : null;
+        $file = @xContext::$config->log->file ? xContext::$config->log->file : '/tmp/xfreemwork.log';
+        $level = @xContext::$config->log->level ? xContext::$config->log->level : 'NONE';
+        $classes = @xContext::$config->log->classes ? explode(',', xContext::$config->log->classes) : null;
         xContext::$log = new xLogger($file, constant("xLogger::{$level}"), $classes);
     }
 
@@ -298,12 +321,15 @@ class xBootstrap {
     }
 
     function setup_router() {
-        xContext::$router = new xRouter(xContext::$config->route_defaults->toArray());
+        $route_defaults = @xContext::$config->route_defaults ? xContext::$config->route_defaults->toArray() : array();
+        xContext::$router = new xRouter($route_defaults);
         xContext::$log->log(array("Setting routes"), $this);
-        foreach (xContext::$config->route->toArray() as $params) {
-            if (!isset($params['pattern'])) throw new xException("Route pattern mandatory in .ini file");
-            $pattern = $params['pattern'];
-            unset($params['pattern']);
+        // Sorts routes according their index in config
+        $routes = xContext::$config->route ? xContext::$config->route->toArray() : array();
+        ksort($routes);
+        foreach ($routes as $params) {
+            $pattern = @$params['pattern'];
+            if (!$pattern) throw new xException("Route pattern mandatory in .ini file");
             xContext::$router->add($pattern, $params);
         }
     }
