@@ -240,7 +240,7 @@ class xValidatorEmail extends xValidatorRegexp {
  * @package xValidator
 **/
 class xValidatorUrl extends xValidatorRegexp {
-    var $regexp = '/^([^\s]+\.)+\w{2,4}(\/\S*)?$/';
+    var $regexp = '/^(([^\s]+\.)+\w{2,4}(\/\S*)?){0,1}$/';
     function message() {
         return _('invalid');
     }
