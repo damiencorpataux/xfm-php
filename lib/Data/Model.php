@@ -202,7 +202,10 @@ abstract class xModel extends xRestElement {
      * Specifies which of the fields accept HTML.
      * Example:
      * <code>
-     * array('field-1', 'field-2')
+     * array(
+     *     'field-1' => null,         // Allows all HTML tags
+     *     'field-2' => '<p><b><br/>' // Allows a set of tags, strips others
+     * )
      * </code>
      * @var array
      */
@@ -221,13 +224,25 @@ abstract class xModel extends xRestElement {
         $this->name = substr(basename($reflector->getFileName()), 0, -strlen('.php'));
         // Strip HTML tags from fields values
         foreach (array_intersect_key($this->params, $this->mapping) as $field => $value) {
-            if (in_array($field, $this->allow_html)) continue;
+            // Skips stripping if all html tags are allowed for this field
+            // eg. field is defined in allow_html with a null value
+            $allow_all_html = min(
+                in_array($field, array_keys($this->allow_html)),
+                !@$this->allow_html[$field]
+            );
+            if ($allow_all_html) continue;
             // Strips HTML tags in params values, dig down into array if necessary
             if (!is_array($this->params[$field])) {
-                $this->params[$field] = xUtil::strip_tags($this->params[$field]);
+                $this->params[$field] = xUtil::strip_tags(
+                    $this->params[$field],
+                    @$this->allow_html[$field]
+                );
             } else {
                 foreach ($this->params[$field] as $key => $value) {
-                    $this->params[$field][$key] = xUtil::strip_tags($this->params[$field][$key]);
+                    $this->params[$field][$key] = xUtil::strip_tags(
+                        $this->params[$field][$key],
+                        @$this->allow_html[$field]
+                    );
                 }
             }
         }
