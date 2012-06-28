@@ -48,7 +48,7 @@ class xWebFront extends xFront {
         // Renders and output the decorated controller action data
         $layout = xView::load('layout/layout', $data);
         $layout->meta = xUtil::array_merge($layout->meta, $controller->meta);
-        print $layout->render();
+        print $layout;
     }
 
     function post() {
@@ -81,17 +81,19 @@ class xWebFront extends xFront {
      *     - The message to display
      *     - If false, the messages stack is returned as an array.
      *     - If not defined or null, the messages stack is returned as an array and the stack is reset.
-     * @param string The type of the message to add to the stack (ignored if $text is not a string)
+     * @param string The type of the message to add to the stack (ignored if $text is not a string).
+     *     - The value depends on the CSS you're using (eg. bootstrap.css: http://twitter.github.com/bootstrap/components.html#alerts),
+     *     - If null, the view that parses and displays messages should decide of a $type.
      * @return array|null Depending on the given arguments:
      *     - Null if $text is given,
      *     - An array containing the stored messages if $text is empty.
      */
-    static function messages($text = null, $type = 'info') {
+    static function messages($text = null, $type = null) {
         if ($text === false) {
-            $messages = @$_SESSION['x']['xWebFront']['messages'] ? $_SESSION['x']['xWebFront']['messages'] : array();
+            $messages = xUtil::arrize(@$_SESSION['x']['xWebFront']['messages']);
             return xUtil::arrize($messages);
         } elseif (is_null($text)) {
-            $messages = @$_SESSION['x']['xWebFront']['messages'] ? $_SESSION['x']['xWebFront']['messages'] : array();
+            $messages = xUtil::arrize(@$_SESSION['x']['xWebFront']['messages']);
             $_SESSION['x']['xWebFront']['messages'] = array();
             return xUtil::arrize($messages);
         } else {
