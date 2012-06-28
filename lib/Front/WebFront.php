@@ -82,7 +82,7 @@ class xWebFront extends xFront {
      *     - If false, the messages stack is returned as an array.
      *     - If not defined or null, the messages stack is returned as an array and the stack is reset.
      * @param string The type of the message to add to the stack (ignored if $text is not a string)
-     * @return array|null Depending on the given arguments
+     * @return array|null Depending on the given arguments:
      *     - Null if $text is given,
      *     - An array containing the stored messages if $text is empty.
      */
