@@ -124,6 +124,7 @@ abstract class xModel extends xRestElement {
 
     /**
      * Available SQL joins.
+     * Joins MUST must match 0..1 tuple at most.
      * Array example:
      * <code>
      * array(
