@@ -84,16 +84,28 @@ class xContext {
     static $log;
 
     /**
+     * The application-wide bootstrap object.
+     * Set by xBootstrap.
+     * @var xBootstrap
+     * @see xBootstrap
+     */
+    static $bootstrap;
+
+    /**
      * The application-wide router object.
+     * Set by xBootstrap.
      * @var xRouter
+     * @see xBootstrap
      */
     static $router;
 
     /**
-     * The application-wide bootstrap object.
+     * The application-wide front object.
+     * As instanciated by the xRouter.
      * @var xBootstrap
+     * @see xRouter::route()
      */
-    static $bootstrap;
+    static $front;
 
     /**
      * The application-wide database object.
