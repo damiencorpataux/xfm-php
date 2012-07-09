@@ -28,8 +28,10 @@ abstract class xRestFront extends xFront {
      * Mime types definition for each format
      */
     var $mimetypes = array(
+        'php' => 'text/x-php',
         'xml' => 'text/xml',
         'json' => 'application/json', // http://www.ietf.org/rfc/rfc4627.txt
+        'csv' => 'text/csv'
     );
 
     protected function __construct($params = null) {
@@ -46,7 +48,7 @@ abstract class xRestFront extends xFront {
         // Merges HTTP Request body with the instance parameters,
         // instance params have priority for security reasons
         $body = $this->get_request_body();
-        $params = $this->decode($body);
+        $params = $body ? $this->decode($body) : null;
         $this->params = xUtil::array_merge(xUtil::arrize($params), $this->params);
     }
 
@@ -74,6 +76,7 @@ abstract class xRestFront extends xFront {
      * @return mixed Decoded data
      */
     function decode($data) {
+        // TODO: parse extension (prioritary before xformat parameter)
         $format = $this->params['xformat'];
         $format_method = "decode_{$format}";
         if (!method_exists($this, $format_method)) throw new xException("REST format input not allowed: {$format}", 501);
@@ -154,5 +157,35 @@ abstract class xRestFront extends xFront {
     function encode_xmlrpc($data) {
         if (!function_exists('xmlrpc_encode')) throw new xException("XMLRPC encoding unavailable", 501);
         return xmlrpc_encode($data);
+    }
+    function encode_csv($data) {
+        // Returns a double-quotes-escaped $data with surrounding double-quotes
+        $enquote = function($value) {
+            return '"'.str_replace('"', '""', $value).'"';
+        };
+        if (!is_array($data)) throw new xException('Data must be an array');
+        // Saves fields names and order to ensure data structure consistency
+        $keys = @array_keys(@$data[0]);
+        // Throws an exception with kind-of serialized $data
+        if (!$keys) throw new xException(preg_replace(
+            array('/[}]?\w:\d*:{?/', '/;}/', '/\w:/', '/"(.*?)";/'),
+            array('',                '',     '',      '"$1",', ''),
+            serialize($data)
+        ));
+        // Creates CSV header
+        $csv_header = implode(',', array_map($enquote, $keys));
+        // Creates CSV contents
+        $csv_body = array();
+        foreach ($data as $line) {
+            // Ensures fields consistency (names and order)
+            if (array_keys($line) !== $keys) {
+                throw new xException('Data items keys must be consistant');
+            }
+            $csv_body[] = implode(',', array_map($enquote, $line));
+        }
+        return implode("\n", array_merge(
+            array($csv_header),
+            $csv_body
+        ));
     }
 }
