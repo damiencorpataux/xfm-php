@@ -60,15 +60,18 @@ abstract class xFront extends xRestElement {
      * Sets up the Gettext locale and domain according the selected/guessed language.
      * @see xBootstrap::setup_i18n()
      */
-    function setup_i18n() {
+    function setup_i18n($lang=null) {
         // Skips i18n setup if Gettext is not installed
         if (!function_exists('gettext')) return;
         // Defines the current language
         $lang_aliases = @xContext::$config->i18n->lang->alias;
         $lang_available = $lang_aliases ? $lang_aliases->toArray() : array();
         $lang_browser = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : null;
-        // If a language is given  and is available, use it
-        if (array_key_exists(@$this->params['xlang'], $lang_available)) {
+        // If a language is given as method argument, use it
+        if ($lang) {
+            $lang = $lang;
+        // If a language is given and is available, use it
+        } elseif (array_key_exists(@$this->params['xlang'], $lang_available)) {
             $lang = $this->params['xlang'];
         // Else, if the session stored language is available, use it
         } elseif (array_key_exists(@$_SESSION['x']['lang'], $lang_available)) {

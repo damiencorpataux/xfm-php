@@ -149,8 +149,11 @@ abstract class xRestFront extends xFront {
             $close_tag = array_shift(explode(' ', $tag));
             if (is_array($value)) $value = $this->encode_xml_nodes($value);
             else $value = "<![CDATA[{$value}]]>";
+            // Uses default node tag if array key is numeric
             if (is_numeric($tag)) $open_tag = $close_tag = $this->xml_default_node;
-            $r .= "<{$open_tag}>{$value}</{$close_tag}>";
+            // Avoid tag if default node tag is empty
+            $r .= ($open_tag && $close_tag) ?
+                "<{$open_tag}>{$value}</{$close_tag}>" : $value;
         }
         return $r;
     }
