@@ -381,8 +381,11 @@ abstract class xModel extends xRestElement {
     */
     function foreign_fields_values($foreign_models_names = null) {
         // Manages function argument default values
-        if (is_null($foreign_models_names)) $foreign_models_names = xUtil::arrize($this->join);
-        else $foreign_models_names = xUtil::arrize($foreign_models_names);
+        if (is_null($foreign_models_names)) {
+            $foreign_models_names = array_keys($this->joins());
+        } else {
+            $foreign_models_names = xUtil::arrize($foreign_models_names);
+        }
         // Creates the foreign_fields_values array for each foreign model name
         $foreign_fields_values = array();
         foreach ($foreign_models_names as $foreign_model_name) {
@@ -489,12 +492,21 @@ abstract class xModel extends xRestElement {
 
     /**
      * Returns an array of active joins.
+     * @param string|array Joins to use. If not given, uses the current $join property value.
      * @see xModel::$join
      * @see xModel::$joins
      * @return array
      */
-    function joins() {
-        return xUtil::filter_keys($this->joins, xUtil::arrize($this->join));
+    function joins($join=null) {
+        $join = $join ? xUtil::arrize($join) : xUtil::arrize($this->join);
+        if ($j = array_diff($join, array_keys($this->joins))) {
+            throw new xException(implode(' ', array(
+                'Join(s)',
+                implode(', ', $j),
+                "not available for model '{$this->name}'"
+            )), 400);
+        }
+        return xUtil::filter_keys($this->joins, $join);
     }
 
     /**
@@ -552,7 +564,7 @@ abstract class xModel extends xRestElement {
         // Collects local fields values
         $data[$this->maintable] = $this->fields_values();
         // Collects foreign fields values
-        if (!$local_only) foreach (xUtil::arrize($this->join) as $join_model) {
+        if (!$local_only) foreach (array_keys($this->joins()) as $join_model) {
             $model = xModel::load($join_model);
             $data[$model->maintable] = $this->foreign_fields_values($join_model);
             $table_to_modelname[$model->maintable] = $join_model;
