@@ -52,6 +52,13 @@ abstract class xRestFront extends xFront {
         $this->params = xUtil::array_merge(xUtil::arrize($params), $this->params);
     }
 
+    function get() {
+        // Sets HTTP mime type
+        $mime = $this->mimetypes[$format] ? $this->mimetypes[$format] : 'text/plain';
+        header ("Content-Type: {$mime}; charset={$this->encoding}");
+        print $this->encode($this->call_method());
+    }
+
     /**
      * Returns prints an encoded error structure,
      * or plain text error message if encoder is unavailable.
@@ -99,7 +106,10 @@ abstract class xRestFront extends xFront {
         if (!function_exists('xmlrpc_decode')) throw new xException("XMLRPC decoding unavailable", 501);
         return xmlrpc_decode($data);
     }
-
+    function decode_csv($data) {
+        $separator = @$this->params['xseparator'] ? $this->params['xseparator'] : ',';
+        return str_getcsv($data, $separator);
+    }
 
     /**
      * Encodes and returns the given data into the format specified by the xformat parameter.
@@ -115,9 +125,6 @@ abstract class xRestFront extends xFront {
         if ($this->encoding != 'UTF-8') {
             $output = iconv('UTF-8', "{$this->encoding}//TRANSLIT", $output);
         }
-        // Sets HTTP mime type
-        $mime = $this->mimetypes[$format] ? $this->mimetypes[$format] : 'text/plain';
-        header ("Content-Type: {$mime}; charset={$this->encoding}");
         // Returns output
         return $output;
     }
@@ -162,21 +169,31 @@ abstract class xRestFront extends xFront {
         return xmlrpc_encode($data);
     }
     function encode_csv($data) {
+        $separator = @$this->params['xseparator'] ? $this->params['xseparator'] : ',';
+        $newline = @$this->params['xnewline'] ? $this->params['xnewline'] : "\n";
         // Returns a double-quotes-escaped $data with surrounding double-quotes
-        $enquote = function($value) {
-            return '"'.str_replace('"', '""', $value).'"';
+        // and LF-type carriage return
+        $format = function($value) use ($newline) {
+            return implode('', array(
+                '"', str_replace(
+                    array("\r", "\n", "\r\n", "\n\r"),
+                    $newline,
+                    str_replace('"', '""', $value)
+                ),
+                '"'
+            ));
         };
         if (!is_array($data)) throw new xException('Data must be an array');
         // Saves fields names and order to ensure data structure consistency
         $keys = @array_keys(@$data[0]);
-        // Throws an exception with kind-of serialized $data
+        // Throws an exception with kind-of serialized $data as message
         if (!$keys) throw new xException(preg_replace(
             array('/[}]?\w:\d*:{?/', '/;}/', '/\w:/', '/"(.*?)";/'),
             array('',                '',     '',      '"$1",', ''),
             serialize($data)
         ));
         // Creates CSV header
-        $csv_header = implode(',', array_map($enquote, $keys));
+        $csv_header = implode($separator, array_map($enquote, $keys));
         // Creates CSV contents
         $csv_body = array();
         foreach ($data as $line) {
@@ -184,7 +201,7 @@ abstract class xRestFront extends xFront {
             if (array_keys($line) !== $keys) {
                 throw new xException('Data items keys must be consistant');
             }
-            $csv_body[] = implode(',', array_map($enquote, $line));
+            $csv_body[] = implode($separator, array_map($format, $line));
         }
         return implode("\n", array_merge(
             array($csv_header),

@@ -48,10 +48,6 @@ class xApiFront extends xRestFront {
         return $controller->$method();
     }
 
-    function get() {
-        print $this->encode($this->call_method());
-    }
-
     function post() {
         return $this->get();
     }
