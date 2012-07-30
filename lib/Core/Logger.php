@@ -135,7 +135,7 @@ class xLogger {
     function log($msgs, $instance = null, $level = self::DEBUG) {
         $class = is_object($instance) ? get_class($instance) : (string)$instance;
         if (!$this->is_log($level, $class)) return;
-        $datum = date('Y-m-d H:i:s');
+        $datum = @date('Y-m-d H:i:s');
         $level = $this->labels[$level];
         $class = is_object($instance) ? get_class($instance) : (string)$instance;
         $msgs = is_array($msgs) ? $msgs : array($msgs);
