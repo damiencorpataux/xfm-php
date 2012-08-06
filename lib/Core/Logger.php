@@ -106,9 +106,10 @@ class xLogger {
      */
     function is_log($level, $class) {
         // Guesses method and class names if not given
-        $trace=debug_backtrace();
-        $caller=$trace[2];
-        if (!$class) $class = $caller['class'];
+        $trace = debug_backtrace();
+        $caller = $trace[2];
+        if (!$class) $class = @$caller['class'];
+        if (!$class) $class = 'Unknown';
         $method = $caller['function'];
         // Don't log if the logline level is lower than the logger level
         if ($level < $this->level && self::NONE == $this->level) return false;
@@ -134,7 +135,7 @@ class xLogger {
     function log($msgs, $instance = null, $level = self::DEBUG) {
         $class = is_object($instance) ? get_class($instance) : (string)$instance;
         if (!$this->is_log($level, $class)) return;
-        $datum = date('Y-m-d H:i:s');
+        $datum = @date('Y-m-d H:i:s');
         $level = $this->labels[$level];
         $class = is_object($instance) ? get_class($instance) : (string)$instance;
         $msgs = is_array($msgs) ? $msgs : array($msgs);

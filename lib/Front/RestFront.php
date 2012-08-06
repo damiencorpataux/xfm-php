@@ -28,8 +28,10 @@ abstract class xRestFront extends xFront {
      * Mime types definition for each format
      */
     var $mimetypes = array(
+        'php' => 'text/x-php',
         'xml' => 'text/xml',
         'json' => 'application/json', // http://www.ietf.org/rfc/rfc4627.txt
+        'csv' => 'text/csv'
     );
 
     protected function __construct($params = null) {
@@ -46,8 +48,15 @@ abstract class xRestFront extends xFront {
         // Merges HTTP Request body with the instance parameters,
         // instance params have priority for security reasons
         $body = $this->get_request_body();
-        $params = $this->decode($body);
+        $params = $body ? $this->decode($body) : null;
         $this->params = xUtil::array_merge(xUtil::arrize($params), $this->params);
+    }
+
+    function get() {
+        // Sets HTTP mime type
+        $mime = $this->mimetypes[$format] ? $this->mimetypes[$format] : 'text/plain';
+        header ("Content-Type: {$mime}; charset={$this->encoding}");
+        print $this->encode($this->call_method());
     }
 
     /**
@@ -74,6 +83,7 @@ abstract class xRestFront extends xFront {
      * @return mixed Decoded data
      */
     function decode($data) {
+        // TODO: parse extension (prioritary before xformat parameter)
         $format = $this->params['xformat'];
         $format_method = "decode_{$format}";
         if (!method_exists($this, $format_method)) throw new xException("REST format input not allowed: {$format}", 501);
@@ -96,7 +106,10 @@ abstract class xRestFront extends xFront {
         if (!function_exists('xmlrpc_decode')) throw new xException("XMLRPC decoding unavailable", 501);
         return xmlrpc_decode($data);
     }
-
+    function decode_csv($data) {
+        $separator = @$this->params['xseparator'] ? $this->params['xseparator'] : ',';
+        return str_getcsv($data, $separator);
+    }
 
     /**
      * Encodes and returns the given data into the format specified by the xformat parameter.
@@ -112,9 +125,6 @@ abstract class xRestFront extends xFront {
         if ($this->encoding != 'UTF-8') {
             $output = iconv('UTF-8', "{$this->encoding}//TRANSLIT", $output);
         }
-        // Sets HTTP mime type
-        $mime = $this->mimetypes[$format] ? $this->mimetypes[$format] : 'text/plain';
-        header ("Content-Type: {$mime}; charset={$this->encoding}");
         // Returns output
         return $output;
     }
@@ -146,13 +156,56 @@ abstract class xRestFront extends xFront {
             $close_tag = array_shift(explode(' ', $tag));
             if (is_array($value)) $value = $this->encode_xml_nodes($value);
             else $value = "<![CDATA[{$value}]]>";
+            // Uses default node tag if array key is numeric
             if (is_numeric($tag)) $open_tag = $close_tag = $this->xml_default_node;
-            $r .= "<{$open_tag}>{$value}</{$close_tag}>";
+            // Avoid tag if default node tag is empty
+            $r .= ($open_tag && $close_tag) ?
+                "<{$open_tag}>{$value}</{$close_tag}>" : $value;
         }
         return $r;
     }
     function encode_xmlrpc($data) {
         if (!function_exists('xmlrpc_encode')) throw new xException("XMLRPC encoding unavailable", 501);
         return xmlrpc_encode($data);
+    }
+    function encode_csv($data) {
+        $separator = @$this->params['xseparator'] ? $this->params['xseparator'] : ',';
+        $newline = @$this->params['xnewline'] ? $this->params['xnewline'] : "\n";
+        // Returns a double-quotes-escaped $data with surrounding double-quotes
+        // and LF-type carriage return
+        $format = function($value) use ($newline) {
+            return implode('', array(
+                '"', str_replace(
+                    array("\r", "\n", "\r\n", "\n\r"),
+                    $newline,
+                    str_replace('"', '""', $value)
+                ),
+                '"'
+            ));
+        };
+        if (!is_array($data)) throw new xException('Data must be an array');
+        // Saves fields names and order to ensure data structure consistency
+        $keys = @array_keys(@$data[0]);
+        // Throws an exception with kind-of serialized $data as message
+        if (!$keys) throw new xException(preg_replace(
+            array('/[}]?\w:\d*:{?/', '/;}/', '/\w:/', '/"(.*?)";/'),
+            array('',                '',     '',      '"$1",', ''),
+            serialize($data)
+        ));
+        // Creates CSV header
+        $csv_header = implode($separator, array_map($enquote, $keys));
+        // Creates CSV contents
+        $csv_body = array();
+        foreach ($data as $line) {
+            // Ensures fields consistency (names and order)
+            if (array_keys($line) !== $keys) {
+                throw new xException('Data items keys must be consistant');
+            }
+            $csv_body[] = implode($separator, array_map($format, $line));
+        }
+        return implode("\n", array_merge(
+            array($csv_header),
+            $csv_body
+        ));
     }
 }

@@ -127,7 +127,8 @@ class xRouter {
             return;
         }
         // Calls front controller
-        xFront::load($this->params['xfront'], $this->params)->handle();
+        xContext::$front = xFront::load($this->params['xfront'], $this->params);
+        xContext::$front->handle();
     }
 
     /**
