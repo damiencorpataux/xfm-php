@@ -61,8 +61,9 @@ class DeployDatabaseScript extends xScript {
                 //       use a regex /;(\s)$/
                 //       -OR- use CLIENT_MULTI_STATEMENTS (http://www.php.net/manual/fr/function.mysql-query.php#91669)
                 // ---
-                // Allows multiple statements
-                $statements = array_map('trim', array_filter(explode(";", $sql)));
+                // Allows multiple statements in a single file,
+                // discarding empty statements
+                $statements = array_filter(array_map('trim', explode(";", $sql)));
                 foreach ($statements as $statement) xModel::q($statement);
             } catch (Exception $e) {
                 $this->log("Failed executing '{$file}'", 2);
