@@ -193,7 +193,7 @@ abstract class xRestFront extends xFront {
             serialize($data)
         ));
         // Creates CSV header
-        $csv_header = implode($separator, array_map($enquote, $keys));
+        $csv_header = implode($separator, array_map($format, $keys));
         // Creates CSV contents
         $csv_body = array();
         foreach ($data as $line) {
@@ -203,7 +203,7 @@ abstract class xRestFront extends xFront {
             }
             $csv_body[] = implode($separator, array_map($format, $line));
         }
-        return implode("\n", array_merge(
+        return implode($newline, array_merge(
             array($csv_header),
             $csv_body
         ));
