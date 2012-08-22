@@ -271,7 +271,7 @@ abstract class xModelMysql extends xModel {
         // Creates sql where clause contents
         foreach ($where as $i) {
             // Manages comparator
-            if (is_array($i['value'])) $i['comparator'] = 'IN';
+            if (is_array($i['value']) && $i['comparator']=='=') $i['comparator'] = 'IN';
             elseif ($this->escape($i['value']) == 'NULL') $i['comparator'] = 'IS';
             // Manages value
             $i['value'] = $this->escape($i['value'], $this->modelfield($i['field']));
