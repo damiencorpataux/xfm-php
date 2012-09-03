@@ -20,6 +20,3 @@
 [submodule "unittests/vendors/phpunit-mock-objects"]
 	path = unittests/vendors/phpunit-mock-objects
 	url = git://github.com/sebastianbergmann/phpunit-mock-objects.git
-[submodule "vendors/phpDocumentor2"]
-	path = vendors/phpDocumentor2
-	url = https://github.com/phpDocumentor/phpDocumentor2.git
