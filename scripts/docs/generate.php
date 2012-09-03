@@ -94,6 +94,7 @@ class ApiDocGenerateScript extends xScript {
         $cmd = "php {$phpdoc} project:run -d {$this->project_path} -t {$this->output_path}";
         exec($cmd, $output, $status);
         if ($status) throw new xException("Error generating documentation", 500, $output);
+        $this->log("Done", 1);
     }
 
     function help() {
