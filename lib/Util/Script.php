@@ -53,7 +53,7 @@ abstract class xScript {
         $this->init();
         $this->print_profile_information();
         // Help display (if applicable)
-        if ($this->opt('h')) {
+        if ($this->opt('h', 'help')) {
             $this->display_help();
             exit(0);
         }
