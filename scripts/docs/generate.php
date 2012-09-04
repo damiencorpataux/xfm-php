@@ -28,7 +28,7 @@ class ApiDocGenerateScript extends xScript {
 
     function run() {
         // Installs phpDocumentor2, skipped if --no-install argument is given
-        if (!$this->opt(null, 'no-install')) $this->install_phpdocumentor();
+        if (!$this->opt('no-install', true)) $this->install_phpdocumentor();
         // Generates documentation
         $this->clear_output_path();
         $this->generate_api_doc();

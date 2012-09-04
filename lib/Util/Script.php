@@ -137,12 +137,13 @@ abstract class xScript {
      * - true: option is found with no value
      * - mixed: option is found with the given value
      * @see http://php.net/manual/en/function.getopt.php
-     * @param string Short options string as defined in PHP getopt()
-     * @param string Long options string or array as defined in PHP getopt()
+     * @param string Options string as defined in PHP getopt()
+     * @param boolean True to use long options, false to use short options (defaults to false)
      * @return array Information about the given option
      */
-    function opt($name, $longname=array()) {
-        $opts = getopt($name, xUtil::arrize($longname));
+    function opt($name, $long_options=false) {
+        $opts = (!$long_options) ?
+            getopt($name) : getopt(null, xUtil::arrize($name));
         if (!$opts) return false;
         $opt = array_shift($opts);
         if (!$opt) return true;
