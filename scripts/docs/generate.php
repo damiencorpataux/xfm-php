@@ -19,6 +19,11 @@ class ApiDocGenerateScript extends xScript {
     public $project_path;
     public $output_path;
 
+    public $phpdoc_options = array(
+        "--title xFreemwork",
+        "--template new-black"
+    );
+
     function init() {
         $this->phpdoc_path = '/tmp/phpDocumentor2';
         // Setups project & output paths
@@ -91,11 +96,12 @@ class ApiDocGenerateScript extends xScript {
         $phpdoc = "{$this->phpdoc_path}/bin/phpdoc.php";
         // Generates API documentation
         $this->log("Generating API documentation from {$this->project_path}");
-        $cmd = implode(' ', array(
-            "php {$phpdoc}",
-            "project:run -d {$this->project_path} -t {$this->output_path}",
-            "--title xFreemwork",
-            //"--template new-black"
+        $cmd = implode(' ', array_merge(
+            array(
+                "php {$phpdoc}",
+                "project:run -d {$this->project_path} -t {$this->output_path}",
+            ),
+            $this->phpdoc_options
         ));
         exec($cmd, $output, $status);
         if ($status) throw new xException("Error generating documentation", 500, $output);
