@@ -91,7 +91,12 @@ class ApiDocGenerateScript extends xScript {
         $phpdoc = "{$this->phpdoc_path}/bin/phpdoc.php";
         // Generates API documentation
         $this->log("Generating API documentation from {$this->project_path}");
-        $cmd = "php {$phpdoc} project:run -d {$this->project_path} -t {$this->output_path}";
+        $cmd = implode(' ', array(
+            "php {$phpdoc}",
+            "project:run -d {$this->project_path} -t {$this->output_path}",
+            "--title xFreemwork",
+            //"--template new-black"
+        ));
         exec($cmd, $output, $status);
         if ($status) throw new xException("Error generating documentation", 500, $output);
         $this->log("Done", 1);
