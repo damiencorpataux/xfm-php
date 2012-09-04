@@ -21,7 +21,7 @@ class ApiDocGenerateScript extends xScript {
 
     public $phpdoc_options = array(
         "--title xFreemwork",
-        "--template new-black"
+        //"--template new-black"
     );
 
     function init() {
