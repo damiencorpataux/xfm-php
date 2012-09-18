@@ -411,23 +411,55 @@ class xUtil {
     }
 
     /**
-     * Returns a timestamp from a mysql date format
-     * @param string A mysql formatted date (yyyy-mm-dd hh:mm:ss)
-     * @return int The corresponding timestamp
+     * Returns an array containing date components from a ISO/US date.
+     * Useful for parsing mysql date fields values.
+     * @param string ISO/US formatted date (yyyy-mm-dd hh:mm:ss).
+     * @return int The corresponding date components array.
      */
-    function timestamp($mysql_date) {
+    function dateparts($mysql_date) {
+        // Extracts date components
         list($date, $time) = explode(' ', $mysql_date);
         list($year, $month, $day) = explode('-', $date);
         list($hour, $minute, $second) = explode(':', $time);
-        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
-        return $timestamp;
+        // Returns date parts, casted to (int)
+        return array(
+            'year' => (int)$year,
+            'month' => (int)$month,
+            'day' => (int)$day,
+            'hour' => (int)$hour,
+            'minute' => (int)$minute,
+            'second' => (int)$second
+        );
     }
 
     /**
-     * Returns a ISO/US formatted date from a unix timestamp
-     * Useful for mysql inserts
-     * @param string A unix timestamp
-     * @return int The corresponding ISO/US date (yyyy-mm-dd hh:mm:ss)
+     * Returns a timestamp from a ISO/US date.
+     * Useful for parsing mysql date fields values.
+     * @param string ISO/US formatted date (yyyy-mm-dd hh:mm:ss).
+     * @return int The corresponding timestamp.
+     */
+    function timestamp($mysql_date) {
+        $parts = self::dateparts($mysql_date);
+        // Fixes date components towards a valid date
+        if (!$parts['year']) $parts['year'] = 1970;
+        if (!$parts['month']) $parts['month'] = 1;
+        if (!$parts['day']) $parts['day'] = 1;
+        // Creates and returns timestamp
+        return mktime(
+            $parts['hour'],
+            $parts['minute'],
+            $parts['second'],
+            $parts['month'],
+            $parts['day'],
+            $parts['year']
+        );
+    }
+
+    /**
+     * Returns a ISO/US formatted date from a unix timestamp.
+     * Useful for mysql inserts.
+     * @param string A unix timestamp.
+     * @return int The corresponding ISO/US date (yyyy-mm-dd hh:mm:ss).
      */
     function ustime($timestamp = null) {
         if (!$timestamp) $timestamp = mktime();
@@ -435,35 +467,49 @@ class xUtil {
     }
 
     /**
-     * Returns a formatted date from the given timestamp.
+     * Returns a formatted date from the given timestamp or ISO/US date.
      * @param int Timestamp.
+     * @param string Value to return if timestamp is null.
      * @return string
      */
-    static function date($timestamp = null) {
-        if (!$timestamp) return '-';
-        if (!is_numeric($timestamp)) $timestamp = self::timestamp($timestamp);
-        return trim(strftime(xContext::$config->i18n->format->date, $timestamp));
+    static function date($timestamp = null, $null = null) {
+        if (!$timestamp) return $null;
+        // Manages ISO/US date
+        if (!is_numeric($timestamp)) {
+            $parts = self::dateparts($timestamp);
+            $timestamp = self::timestamp($timestamp);
+            // Manages incomplete date formatting
+            if (!$parts['day']) $format = xContext::$config->i18n->format->date_month;
+            if (!$parts['month']) $format = xContext::$config->i18n->format->date_year;
+            if (!$parts['year']) $format = '';
+        }
+        if (!isset($format)) $format = xContext::$config->i18n->format->date;
+        return trim(strftime($format, $timestamp));
     }
 
     /**
-     * Returns a formatted time from the given timestamp.
-     * @param int Timestamp.
+     * Returns a formatted time from the given timestamp or ISO/US date.
+     * @param int Timestamp or ISO/US date.
+     * @param string Value to return if timestamp is null.
      * @return string
      */
-    static function time($timestamp = null) {
-        if (!$timestamp) return '-';
+    static function time($timestamp = null, $null = null) {
+        if (!$timestamp) return $null;
         if (!is_numeric($timestamp)) $timestamp = self::timestamp($timestamp);
         return strftime(xContext::$config->i18n->format->time, $timestamp);
     }
 
     /**
-     * Returns a formatted date and time from the given timestamp.
-     * @param int Timestamp.
+     * Returns a formatted date and time from the given timestamp or ISO/US date.
+     * @param int Timestamp or ISO/US date.
+     * @param string Value to return if timestamp is null.
      * @return string
      */
-    static function datetime($timestamp = null) {
-        if (!$timestamp) return '-';
-        return self::date($timestamp).' '.self::time($timestamp);
+    static function datetime($timestamp = null, $null = null) {
+        if (!$timestamp) return $null;
+        return implode(' ', array_filter(array(
+            self::date($timestamp), self::time($timestamp)
+        )));
     }
 
     /**
