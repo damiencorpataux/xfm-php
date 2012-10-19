@@ -238,7 +238,7 @@ class xFormFieldView extends xFormField {
         );
     }
     function render_field() {
-        $view = xView::load($this->options['view'], $this->options['data'], &$this->options['meta']);
+        $view = xView::load($this->options['view'], $this->options['data'], $this->options['meta']);
         return $view->render();
     }
 }
