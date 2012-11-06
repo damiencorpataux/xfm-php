@@ -40,20 +40,29 @@ abstract class xFront extends xRestElement {
         'DELETE' => 'delete'
     );
 
-    protected function __construct($params = null) {
-        parent::__construct($params);
-        $this->setup_http_request_information();
-        $this->setup_i18n();
+    /**
+     * Returns HTTP request body contents
+     * FIXME: This might cause problems when reading concurrent request (?)
+     * @return string
+     */
+    static function get_request_body() {
+        return file_get_contents('php://input');
     }
 
     /**
-     * Sets up the HTTP request information array.
-     * Default method: GET (if REQUEST_METHOD is undefined).
+     * Sets up:
+     * - sessionned i18n
+     * - HTTP information (defaults to GET)
      */
-    function setup_http_request_information() {
+    protected function __construct($params = null) {
+        parent::__construct($params);
+        // Sets up the HTTP request information array
+        // (defaults to GET)
         $method = @strtoupper($_SERVER['REQUEST_METHOD']);
-        if (!$method) $method = 'GET';
-        $this->http['method'] = $method;
+        $this->http['method'] = (!$method) ? 'GET' : $method;
+        // Sets up i18n
+        // (now that session information is available)
+        $this->setup_i18n();
     }
 
     /**
@@ -107,34 +116,20 @@ abstract class xFront extends xRestElement {
      * Entry point for Front controller.
      * This method call the method related
      * to the HTTP status.
-     * This is part of the REST orientatin of the framework.
-     * @return mixed
+     * This is part of the REST orientation of the framework.
+     * @return mixed Response contents.
      */
     function handle() {
         $front_method = $this->method_mapping[$this->http['method']];
-        if (!$front_method)throw new xException('Method not allowed', 405);
-        $handle_method = "handle_{$front_method}";
-        return $this->$handle_method();
+        if (!$front_method) throw new xException('Method not allowed', 405);
+        return $this->$front_method();
     }
-
-    function handle_get() { return $this->get(); }
-    function handle_post() { return $this->post(); }
-    function handle_put() { return $this->put(); }
-    function handle_delete() { return $this->delete(); }
 
     /**
      * Returns an error message in case of an error.
      * @return string The error message to output.
      */
     abstract function handle_error($exception);
-
-    /**
-     * Returns HTTP request body contents
-     * @return string
-     */
-    static function get_request_body() {
-        return file_get_contents('php://input');
-    }
 
     /**
      * Loads and returns the specified front element.

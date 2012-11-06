@@ -30,9 +30,18 @@ class xApiFront extends xRestFront {
         parent::__construct($params);
     }
 
+    function handle_request() {
+        print $this->encode($this->call_method());
+    }
+
+    function get() { $this->handle_request(); }
+    function put() { $this->handle_request(); }
+    function post() { $this->handle_request(); }
+    function delete() { $this->handle_request(); }
+
     /**
-     * Calls a controller method and return its result.
-     * @return mixed Controller result.
+     * Calls a controller method and return its response.
+     * @return mixed Controller response.
      */
     function call_method() {
         if (!@$this->params['xcontroller']) throw new xException('Controller param missing', 400);
@@ -46,9 +55,5 @@ class xApiFront extends xRestFront {
         xContext::$log->log("Calling {$controller_name}->{$method}() method", $this);
         if (!method_exists($controller, $method)) throw new xException("Controller method not found: {$method}", 400);
         return $controller->$method();
-    }
-
-    function post() {
-        return $this->get();
     }
 }

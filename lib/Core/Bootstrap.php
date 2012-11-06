@@ -86,7 +86,10 @@ class xBootstrap {
      */
     function run() {
         try {
-            xContext::$router->route();
+            $params = xContext::$router->route();
+            // Calls front controller
+            xContext::$front = xFront::load($params['xfront'], $params);
+            xContext::$front->handle();
         } catch (Exception $e) {
             $this->handle_exception($e);
         }
