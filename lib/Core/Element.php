@@ -89,7 +89,7 @@ abstract class xElement {
 }
 
 /**
- * Famework RESTful elements base class.
+ * Framework RESTful elements base class.
  * This clas implements the default responses for HTTP methods (get, post, put, delete)
  * @package xFreemwork
  */

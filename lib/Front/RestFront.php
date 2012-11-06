@@ -38,7 +38,12 @@ abstract class xRestFront extends xFront {
         parent::__construct($params);
         // Switches encoding if applicable
         if (@$this->params['xencoding']) $this->encoding = $this->params['xencoding'];
+        // Merges HTTP Request Body into instance params
         $this->handle_request_body_params();
+        // Sets HTTP mime type
+        $format = @$this->params['xformat'];
+        $mime = @$this->mimetypes[$format] ? $this->mimetypes[$format] : 'text/plain';
+        header ("Content-Type: {$mime}; charset={$this->encoding}");
     }
 
     /**
@@ -50,14 +55,6 @@ abstract class xRestFront extends xFront {
         $body = $this->get_request_body();
         $params = $body ? $this->decode($body) : null;
         $this->params = xUtil::array_merge(xUtil::arrize($params), $this->params);
-    }
-
-    function get() {
-        // Sets HTTP mime type
-        $format = @$this->params['xformat'];
-        $mime = @$this->mimetypes[$format] ? $this->mimetypes[$format] : 'text/plain';
-        header ("Content-Type: {$mime}; charset={$this->encoding}");
-        print $this->encode($this->call_method());
     }
 
     /**

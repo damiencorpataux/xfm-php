@@ -124,11 +124,10 @@ class xRouter {
             $url = xContext::$baseuri.$this->params['xredirect'];
             xContext::$log->log("Redirecting to url: $url", $this);
             xUtil::redirect($url);
-            return;
+            exit();
         }
-        // Calls front controller
-        xContext::$front = xFront::load($this->params['xfront'], $this->params);
-        xContext::$front->handle();
+        // Returns computed parameters
+        return $this->params;
     }
 
     /**
