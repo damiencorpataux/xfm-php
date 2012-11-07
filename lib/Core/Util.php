@@ -175,7 +175,7 @@ class xUtil {
      * @todo Write unit tests (use the above example for one of the tests).
      */
     static function array_merge() {
-        $arrays = &func_get_args();
+        $arrays = func_get_args();
         $merged = array_shift($arrays);
         foreach($arrays as $array) {
             //xContext::$log->log(array('xUtil::merge_array(): Merging array: ', $array), 'xUtil');

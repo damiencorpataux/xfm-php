@@ -163,7 +163,8 @@ class xView {
         $parts = explode('/', $name);
         array_pop($parts);
         $instance->path = xContext::$basepath."/views/".implode('/', $parts);
-        $instance->default_tpl = array_pop(explode('/', $name)).'.tpl';
+        $parts = explode('/', $name);
+        $instance->default_tpl = array_pop($parts).'.tpl';
         // Merges view meta with the given array
         if (is_array($meta_return)) {
             xContext::$log->log(array("xView::load(): merging view meta into given array"), 'xView');
