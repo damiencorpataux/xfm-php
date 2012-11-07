@@ -186,7 +186,8 @@ class xBootstrap {
         // Merges profile-specific configuration files
         foreach ($this->get_config_files('profiles') as $file) {
             // Skips filenames that do not begin with $profile
-            $filename = array_pop(explode('/', $file));
+            $parts = explode('/', $file);
+            $filename = array_pop($parts);
             if (substr($filename, 0, strlen($profile)) != $profile) continue;
             $config->merge(new xZend_Config_Ini($file));
         }

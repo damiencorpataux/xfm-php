@@ -219,7 +219,8 @@ abstract class xModel extends xRestElement {
     protected function __construct($params = null) {
         parent::__construct($params);
         // Sets the maintable name
-        $this->maintable = trim(array_shift(explode(',', $this->table)));
+        $parts = explode(',', $this->table);
+        $this->maintable = trim(array_shift($parts));
         // Sets the model name
         $reflector = new ReflectionClass(get_class($this));
         $this->name = substr(basename($reflector->getFileName()), 0, -strlen('.php'));

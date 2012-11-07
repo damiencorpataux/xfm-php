@@ -57,7 +57,9 @@ abstract class xElement {
      * Loads and returns an instance of the specified xElement.
      * @return xElement An new instance of the specified xElement.
      */
-    abstract static function load($name, $params = null);
+    static function load($name, $params = null) {
+        throw new xException('Not implemented, please implement in child classes', 501);
+    }
 
     /**
      * Helper method for loading and instanciating an xElement.
@@ -69,7 +71,7 @@ abstract class xElement {
      * @param array Array of parrameters to pass to the created xEelement instance.
      * @return xElement An xElement instance with the given parameters set.
      */
-    protected function load_these($items, $params = null) {
+    protected static function load_these($items, $params = null) {
         $valid = null;
         foreach ($items as $class => $file) {
             xContext::$log->log("Trying to load: $file", 'xElement');

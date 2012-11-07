@@ -143,7 +143,8 @@ abstract class xModelMysql extends xModel {
             $this->sql_order(),
             $this->sql_limit()
         ));
-        $count = array_shift($this->query($sql));
+        $result = $this->query($sql);
+        $count = array_shift($result);
         return $count['count'];
     }
 
@@ -265,7 +266,8 @@ abstract class xModelMysql extends xModel {
         $where = $this->sql_where_prepare($primary_only, $local_only);
         $lines = array();
         // Sets WHERE 1=0 if the 1st where clause is OR
-        $first_predicate = array_shift(array_slice($where, 0, 1));
+        $slice = array_slice($where, 0, 1);
+        $first_predicate = array_shift($slice);
         $first_operator = $first_predicate['operator'];
         $lines[] = strtoupper($first_operator) == 'OR' ?  'WHERE 1=0' : 'WHERE 1=1';
         // Creates sql where clause contents

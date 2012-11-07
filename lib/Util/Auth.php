@@ -33,7 +33,7 @@ class xAuth {
         $_SESSION['x']['xAuth']['username'] = $username;
         $_SESSION['x']['xAuth']['roles'] = $roles;
         $_SESSION['x']['xAuth']['info'] = $info;
-        $_SESSION['x']['xAuth']['logintime'] = mktime();
+        $_SESSION['x']['xAuth']['logintime'] = @mktime();
     }
 
     function clear() {
