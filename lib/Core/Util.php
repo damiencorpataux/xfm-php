@@ -463,7 +463,7 @@ class xUtil {
      */
     function ustime($timestamp = null) {
         if (!$timestamp) $timestamp = mktime();
-        return date("Y-m-d H:i:s", $timestamp);
+        return @date("Y-m-d H:i:s", $timestamp);
     }
 
     /**
