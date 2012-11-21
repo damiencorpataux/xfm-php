@@ -76,7 +76,7 @@ class xUtil {
     * @param array Array of initial filenames (optional, used for recursive calls).
     * @return array Array of absolute filenames.
     */
-    function cascade_dir($dir, $extension) {
+    static function cascade_dir($dir, $extension) {
         $filenames = array();
         if (!is_dir($dir)) return $filenames;
         foreach (scandir($dir) as $file) {
@@ -200,7 +200,7 @@ class xUtil {
      * @param array The array to clone.
      * @return array The clone of the given array.
      */
-    function array_clone($array) {
+    static function array_clone($array) {
         // check if input is really an array
         if (!is_array($array)) return $array;
         // initialize return array
@@ -259,7 +259,7 @@ class xUtil {
      * Returns the last class called, null if last call is not a class.
      * @return string The name of the last called class (null if not a class)
      */
-    function get_calling_class() {
+    static function get_calling_class() {
         $trace=debug_backtrace();
         $caller=$trace[2];
         return @$caller['class'];
@@ -269,7 +269,7 @@ class xUtil {
      * Returns the last function called, null if last call is not a function.
      * @return string The name of the last called class (null if not a class)
      */
-    function get_calling_function() {
+    static function get_calling_function() {
         $trace=debug_backtrace();
         $caller=$trace[2];
         return @$caller['function'];
@@ -416,7 +416,7 @@ class xUtil {
      * @param string ISO/US formatted date (yyyy-mm-dd hh:mm:ss).
      * @return int The corresponding date components array.
      */
-    function dateparts($mysql_date) {
+    static function dateparts($mysql_date) {
         // Extracts date components
         list($date, $time) = explode(' ', $mysql_date);
         list($year, $month, $day) = explode('-', $date);
@@ -438,7 +438,7 @@ class xUtil {
      * @param string ISO/US formatted date (yyyy-mm-dd hh:mm:ss).
      * @return int The corresponding timestamp.
      */
-    function timestamp($mysql_date) {
+    static function timestamp($mysql_date) {
         $parts = self::dateparts($mysql_date);
         // Fixes date components towards a valid date
         if (!$parts['year']) $parts['year'] = 1970;
@@ -461,7 +461,7 @@ class xUtil {
      * @param string A unix timestamp.
      * @return int The corresponding ISO/US date (yyyy-mm-dd hh:mm:ss).
      */
-    function ustime($timestamp = null) {
+    static function ustime($timestamp = null) {
         if (!$timestamp) $timestamp = mktime();
         return @date("Y-m-d H:i:s", $timestamp);
     }
