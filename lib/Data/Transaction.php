@@ -209,7 +209,7 @@ class xTransaction {
     static function autocommit($value = null) {
         // No $value specified, returns the current autocommit state
         if (is_null($value))
-            return array_shift(mysql_fetch_assoc(self::q('SELECT @@autocommit')));
+            return @array_shift(mysql_fetch_assoc(self::q('SELECT @@autocommit')));
         // Sets autocommit state to $value
         $value = $value ? '1' : '0';
         $success = self::q("SET AUTOCOMMIT={$value}");
