@@ -60,11 +60,11 @@ abstract class xModelMysql extends xModel {
         // Starts sql generation
         $updates = array();
         foreach ($this->fields_values(true) as $field => $value) {
-            $updates[] = "{$field} = ".$this->escape($value, $this->modelfield($field));
+            $updates[] = "`{$field}` = ".$this->escape($value, $this->modelfield($field));
         }
         // Automagically sets the modified field if applicable
         if (isset($this->mapping['modified'])) {
-            $updates[] = "modified = ".$this->escape('CURRENT_TIMESTAMP', 'modified', true);
+            $updates[] = "`modified` = ".$this->escape('CURRENT_TIMESTAMP', 'modified', true);
         }
         // Creates final sql
         $sql = implode('', array(
@@ -100,12 +100,12 @@ abstract class xModelMysql extends xModel {
         // Starts sql generation
         $sqlF = $sqlV = array();
         foreach ($this->fields_values() as $field => $value) {
-            $sqlF[] = $field;
+            $sqlF[] = "`$field`";
             $sqlV[] = $this->escape($value, $this->modelfield($field));
         }
         // Automagically sets the created field if applicable
         if (isset($this->mapping['created'])) {
-            $sqlF[] = 'created';
+            $sqlF[] = '`created`';
             $sqlV[] = $this->escape('CURRENT_TIMESTAMP', 'created', true);
         }
         // Creates final sql
