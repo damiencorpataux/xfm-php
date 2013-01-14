@@ -44,13 +44,18 @@ class xApiFront extends xRestFront {
      * @return mixed Controller response.
      */
     function call_method() {
+        // Sets the called method according the HTTP Request Verb if no method specified
+        if (!@$this->params['xmethod']) $this->params['xmethod'] = @$this->http['method'];
+        // Checks mandatory params
         if (!@$this->params['xcontroller']) throw new xException('Controller param missing', 400);
         if (!@$this->params['xmethod']) throw new xException('Method param missing', 400);
+        // Extracts controller and method
         $method = str_replace('-', '', $this->params['xmethod']);
         if ($method{0} == '_') throw new xException("Method {$method} is not meant to be called", 401);
         $controller_name = $this->params['xcontroller'];
         xContext::$log->log("Creating controller {$controller_name}", $this);
         if (@$this->params['xmodule']) $controller_name = "{$this->params['xmodule']}/$controller_name";
+        // Load controller, calls method and returns contents
         $controller = xController::load($controller_name, $this->params);
         xContext::$log->log("Calling {$controller_name}->{$method}() method", $this);
         if (!method_exists($controller, $method)) throw new xException("Controller method not found: {$method}", 400);
