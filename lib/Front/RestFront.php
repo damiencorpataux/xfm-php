@@ -43,7 +43,7 @@ abstract class xRestFront extends xFront {
         // Sets HTTP mime type
         $format = @$this->params['xformat'];
         $mime = @$this->mimetypes[$format] ? $this->mimetypes[$format] : 'text/plain';
-        header ("Content-Type: {$mime}; charset={$this->encoding}");
+        header("Content-Type: {$mime}; charset={$this->encoding}");
     }
 
     /**

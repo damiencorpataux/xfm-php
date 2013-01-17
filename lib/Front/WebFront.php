@@ -25,6 +25,7 @@ class xWebFront extends xFront {
         if (!session_id()) session_start();
         $this->setup_history();
         parent::__construct($params);
+        header("Content-Type: text/html; charset=UTF-8");
     }
 
     function handle_error($exception) {
