@@ -462,7 +462,7 @@ class xUtil {
      * @return int The corresponding ISO/US date (yyyy-mm-dd hh:mm:ss).
      */
     static function ustime($timestamp = null) {
-        if (!$timestamp) $timestamp = mktime();
+        if (!$timestamp) $timestamp = time();
         return @date("Y-m-d H:i:s", $timestamp);
     }
 
