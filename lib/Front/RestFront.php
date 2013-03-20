@@ -28,6 +28,7 @@ abstract class xRestFront extends xFront {
      * Mime types definition for each format
      */
     var $mimetypes = array(
+        'html' => 'text/html',
         'php' => 'text/x-php',
         'xml' => 'text/xml',
         'json' => 'application/json', // http://www.ietf.org/rfc/rfc4627.txt
