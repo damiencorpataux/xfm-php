@@ -39,6 +39,17 @@ abstract class xController extends xRestElement {
     }
 
     /**
+     * Scans and returns available controllers.
+     * @return array An array of available models (filename => controllername).
+     */
+    static function scan() {
+        $files = scandir(xContext::$basepath.'/controllers');
+        $files = array_diff($files, array('.', '..'));
+        $files = preg_replace('/\.php$/', null, $files);
+        return $files;
+    }
+
+    /**
      * Calls a controller action and returns its output.
      * @return string
      */
