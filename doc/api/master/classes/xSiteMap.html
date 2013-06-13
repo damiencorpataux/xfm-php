@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xSiteMap</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_render" title="render :: "><span class="description">render()
+        </span><pre>render()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_actions" title="actions :: "><span class="description">actions()
+        </span><pre>actions()</pre></a></li>
+<li class="method protected "><a href="#method_controllers" title="controllers :: "><span class="description">controllers()
+        </span><pre>controllers()</pre></a></li>
+<li class="method protected "><a href="#method_generate" title="generate :: "><span class="description">generate()
+        </span><pre>generate()</pre></a></li>
+<li class="method protected "><a href="#method_map" title="map :: Return an array containing the following structure:
+&lt;code&gt;
+array(
+   'controller_name' =&gt; array(
+       'action_1_name' =&gt; array(
+           'title' =&gt; 'title string',
+           'url' =&gt; 'action url'
+   ),
+       'action_2_name' =&gt; array(
+           'title' =&gt; 'title string',
+           'url' =&gt; 'action url'
+   )
+)
+&lt;/code&gt;"><span class="description">Return an array containing the following structure:
+&lt;code&gt;
+array(
+   'controller_name' =&gt; array(
+       'action_1_name' =&gt; array(
+           'title' =&gt; 'title string',
+           'url' =&gt; 'action url'
+   ),
+       'action_2_name' =&gt; array(
+           'title' =&gt; 'title string',
+           'url' =&gt; 'action url'
+   )
+)
+&lt;/code&gt;</span><pre>map()</pre></a></li>
+<li class="method protected "><a href="#method_title" title="title :: "><span class="description">title()
+        </span><pre>title()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_appends" title="$appends :: "><span class="description"></span><pre>$appends</pre></a></li>
+<li class="property public "><a href="#property_cache_path" title="$cache_path :: Path for generated sitemap html file."><span class="description"></span><pre>$cache_path</pre></a></li>
+<li class="property public "><a href="#property_controller_titles" title="$controller_titles :: Controllers custom titles for sitemap
+Conventions:
+array (
+    'controller_name_1' =&gt; _('Custom Title 1'),
+    'controller_name_2' =&gt; _('Custom Title 2')
+)"><span class="description"></span><pre>$controller_titles</pre></a></li>
+<li class="property public "><a href="#property_excludes" title="$excludes :: Controllers and actions to exlude from sitemap."><span class="description"></span><pre>$excludes</pre></a></li>
+<li class="property public "><a href="#property_prepends" title="$prepends :: "><span class="description"></span><pre>$prepends</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xSiteMap"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xSiteMap.html">xSiteMap</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Reusable component</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xReusable.html">xReusable</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct($options) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$options</h4></div>
+</div></div>
+</div>
+<a id="method_render"></a><div class="element clickable method public method_render" data-toggle="collapse" data-target=".method_render .collapse">
+<h2>render()
+        </h2>
+<pre>render() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_actions"></a><div class="element clickable method protected method_actions" data-toggle="collapse" data-target=".method_actions .collapse">
+<h2>actions()
+        </h2>
+<pre>actions($controller_instance) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$controller_instance</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>xController action names</div>
+</div></div>
+</div>
+<a id="method_controllers"></a><div class="element clickable method protected method_controllers" data-toggle="collapse" data-target=".method_controllers .collapse">
+<h2>controllers()
+        </h2>
+<pre>controllers() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>xController instances</div>
+</div></div>
+</div>
+<a id="method_generate"></a><div class="element clickable method protected method_generate" data-toggle="collapse" data-target=".method_generate .collapse">
+<h2>generate()
+        </h2>
+<pre>generate() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_map"></a><div class="element clickable method protected method_map" data-toggle="collapse" data-target=".method_map .collapse">
+<h2>Return an array containing the following structure:
+&lt;code&gt;
+array(
+   'controller_name' =&gt; array(
+       'action_1_name' =&gt; array(
+           'title' =&gt; 'title string',
+           'url' =&gt; 'action url'
+   ),
+       'action_2_name' =&gt; array(
+           'title' =&gt; 'title string',
+           'url' =&gt; 'action url'
+   )
+)
+&lt;/code&gt;</h2>
+<pre>map() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Map array structure reflecting site controllers and actions</div>
+</div></div>
+</div>
+<a id="method_title"></a><div class="element clickable method protected method_title" data-toggle="collapse" data-target=".method_title .collapse">
+<h2>title()
+        </h2>
+<pre>title($controller_instance, $action_name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$controller_instance</h4></div>
+<div class="subelement argument"><h4>$action_name</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>xController action title metadata if existing,
+               action name otherwise</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_appends"> </a><div class="element clickable property public property_appends" data-toggle="collapse" data-target=".property_appends .collapse">
+<h2></h2>
+<pre>$appends </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_cache_path"> </a><div class="element clickable property public property_cache_path" data-toggle="collapse" data-target=".property_cache_path .collapse">
+<h2></h2>
+<pre>$cache_path : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>If not set, cache mecanism is not used.</p></div></div></div>
+</div>
+<a id="property_controller_titles"> </a><div class="element clickable property public property_controller_titles" data-toggle="collapse" data-target=".property_controller_titles .collapse">
+<h2></h2>
+<pre>$controller_titles : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_excludes"> </a><div class="element clickable property public property_excludes" data-toggle="collapse" data-target=".property_excludes .collapse">
+<h2></h2>
+<pre>$excludes : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Note: Controller and actions names must be lowercase.
+Structure convention:</p>
+
+<pre><code>array (
+    'controller_name_1' => true, // Excude this controller from sitemap
+    'controller_name_2' => array(
+        'action_1', // Exclude action_1 from sitemap
+        'action_2'  // Exclude action_2 from sitemap
+    )
+)
+</code></pre></div></div></div>
+</div>
+<a id="property_prepends"> </a><div class="element clickable property public property_prepends" data-toggle="collapse" data-target=".property_prepends .collapse">
+<h2></h2>
+<pre>$prepends </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

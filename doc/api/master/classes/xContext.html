@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xContext</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul><li class="method public "><a href="#method_dump" title="dump :: Returns a text dump of the context object for inspection."><span class="description">Returns a text dump of the context object for inspection.</span><pre>dump()</pre></a></li></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method___construct" title="__construct :: Prevents class instanciation."><span class="description">Prevents class instanciation.</span><pre>__construct()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_auth" title="$auth :: The application-wide auth object."><span class="description"></span><pre>$auth</pre></a></li>
+<li class="property public "><a href="#property_basepath" title="$basepath :: The base path of the application (absolute form)."><span class="description"></span><pre>$basepath</pre></a></li>
+<li class="property public "><a href="#property_baseuri" title="$baseuri :: The base uri of the application."><span class="description"></span><pre>$baseuri</pre></a></li>
+<li class="property public "><a href="#property_baseurl" title="$baseurl :: The base url of the application (including http://domaine.tld/baseuri)."><span class="description"></span><pre>$baseurl</pre></a></li>
+<li class="property public "><a href="#property_bootstrap" title="$bootstrap :: The application-wide bootstrap object."><span class="description"></span><pre>$bootstrap</pre></a></li>
+<li class="property public "><a href="#property_config" title="$config :: The application configuration data object."><span class="description"></span><pre>$config</pre></a></li>
+<li class="property public "><a href="#property_configpath" title="$configpath :: The config path of the application (absolute form)."><span class="description"></span><pre>$configpath</pre></a></li>
+<li class="property public "><a href="#property_db" title="$db :: The application-wide database object."><span class="description"></span><pre>$db</pre></a></li>
+<li class="property public "><a href="#property_error_reporting" title="$error_reporting :: The numeric value of the PHP reporting level,
+as set in the bootstrap from config file."><span class="description"></span><pre>$error_reporting</pre></a></li>
+<li class="property public "><a href="#property_front" title="$front :: The application-wide front object."><span class="description"></span><pre>$front</pre></a></li>
+<li class="property public "><a href="#property_lang" title="$lang :: The current language (as defined in config i18n.lang.alias directive)."><span class="description"></span><pre>$lang</pre></a></li>
+<li class="property public "><a href="#property_libpath" title="$libpath :: The base path of the xfreemwork library (absolute form)."><span class="description"></span><pre>$libpath</pre></a></li>
+<li class="property public "><a href="#property_log" title="$log :: The application-wide logger object."><span class="description"></span><pre>$log</pre></a></li>
+<li class="property public "><a href="#property_profile" title="$profile :: Application profile: used to determine in what environement the application runs."><span class="description"></span><pre>$profile</pre></a></li>
+<li class="property public "><a href="#property_router" title="$router :: The application-wide router object."><span class="description"></span><pre>$router</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xContext"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xContext.html">xContext</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">This class contains the application context.</p>
+<div class="details">
+<div class="long_description"><p>It is a globally accessible static class that contains application-wide
+settings and tools</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_dump"></a><div class="element clickable method public method_dump" data-toggle="collapse" data-target=".method_dump .collapse">
+<h2>Returns a text dump of the context object for inspection.</h2>
+<pre>dump() : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method___construct"></a><div class="element clickable method private method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Prevents class instanciation.</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_auth"> </a><div class="element clickable property public property_auth" data-toggle="collapse" data-target=".property_auth .collapse">
+<h2></h2>
+<pre>$auth : <a href="../classes/xAuth.html">\xAuth</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_basepath"> </a><div class="element clickable property public property_basepath" data-toggle="collapse" data-target=".property_basepath .collapse">
+<h2></h2>
+<pre>$basepath : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_baseuri"> </a><div class="element clickable property public property_baseuri" data-toggle="collapse" data-target=".property_baseuri .collapse">
+<h2></h2>
+<pre>$baseuri : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_baseurl"> </a><div class="element clickable property public property_baseurl" data-toggle="collapse" data-target=".property_baseurl .collapse">
+<h2></h2>
+<pre>$baseurl : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_bootstrap"> </a><div class="element clickable property public property_bootstrap" data-toggle="collapse" data-target=".property_bootstrap .collapse">
+<h2></h2>
+<pre>$bootstrap : <a href="../classes/xBootstrap.html">\xBootstrap</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Set by xBootstrap.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Core.Bootstrap.html#%5CxBootstrap">\xBootstrap</a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_config"> </a><div class="element clickable property public property_config" data-toggle="collapse" data-target=".property_config .collapse">
+<h2></h2>
+<pre>$config : \Zend_Config_Ini</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_configpath"> </a><div class="element clickable property public property_configpath" data-toggle="collapse" data-target=".property_configpath .collapse">
+<h2></h2>
+<pre>$configpath : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_db"> </a><div class="element clickable property public property_db" data-toggle="collapse" data-target=".property_db .collapse">
+<h2></h2>
+<pre>$db : \ressource</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_error_reporting"> </a><div class="element clickable property public property_error_reporting" data-toggle="collapse" data-target=".property_error_reporting .collapse">
+<h2></h2>
+<pre>$error_reporting : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_front"> </a><div class="element clickable property public property_front" data-toggle="collapse" data-target=".property_front .collapse">
+<h2></h2>
+<pre>$front : <a href="../classes/xBootstrap.html">\xBootstrap</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>As instanciated by the xRouter.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Util.Router.html#%5CxRouter::route()">\xRouter::route()</a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_lang"> </a><div class="element clickable property public property_lang" data-toggle="collapse" data-target=".property_lang .collapse">
+<h2></h2>
+<pre>$lang : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_libpath"> </a><div class="element clickable property public property_libpath" data-toggle="collapse" data-target=".property_libpath .collapse">
+<h2></h2>
+<pre>$libpath : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_log"> </a><div class="element clickable property public property_log" data-toggle="collapse" data-target=".property_log .collapse">
+<h2></h2>
+<pre>$log : <a href="../classes/xLogger.html">\xLogger</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_profile"> </a><div class="element clickable property public property_profile" data-toggle="collapse" data-target=".property_profile .collapse">
+<h2></h2>
+<pre>$profile : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Should be defined by the bootstrap or by the main php file (index.php).</p>
+
+<p>Typically used to determine what configuration section should be used
+from application .ini file.</p></div></div></div>
+</div>
+<a id="property_router"> </a><div class="element clickable property public property_router" data-toggle="collapse" data-target=".property_router .collapse">
+<h2></h2>
+<pre>$router : <a href="../classes/xRouter.html">\xRouter</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Set by xBootstrap.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Core.Bootstrap.html#%5CxBootstrap">\xBootstrap</a></td>
+</tr></table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

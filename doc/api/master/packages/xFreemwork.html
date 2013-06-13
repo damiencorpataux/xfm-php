@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » xFreemwork</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/xFreemwork.html" title="xFreemwork"><i class="icon-folder-open"></i>xFreemwork</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#xTransaction" title="SQL Transaction controller class.">xTransaction</a></li>
+<li><a href="#xModel" title="Model base class.">xModel</a></li>
+<li><a href="#xModelPostgres" title="Model class.">xModelPostgres</a></li>
+<li><a href="#xModelMysql" title="Model class.">xModelMysql</a></li>
+<li><a href="#xJsFront" title="Front controller for fetching views js files and js context object.">xJsFront</a></li>
+<li><a href="#xRssFront" title="Front controller class for RSS feed.">xRssFront</a></li>
+<li><a href="#xFront" title="Front controller base class.">xFront</a></li>
+<li><a href="#xWebFront" title="Front controller class, web flavour.">xWebFront</a></li>
+<li><a href="#xModelFront" title="Front controller class, rest flavour.">xModelFront</a></li>
+<li><a href="#xApiFront" title="Front controller class, api flavour.">xApiFront</a></li>
+<li><a href="#xRestFront" title="Front controller class, rest flavour.">xRestFront</a></li>
+<li><a href="#xUtil" title="This class contains utility functions.">xUtil</a></li>
+<li><a href="#xLogger" title="This class is used for logging information into the text log file.">xLogger</a></li>
+<li><a href="#xWebController" title="Base controller class with web niceties.">xWebController</a></li>
+<li><a href="#xConfig" title="This class reads and parses .ini config file.">xConfig</a></li>
+<li><a href="#xElement" title="Famework elements base class.">xElement</a></li>
+<li><a href="#xRestElement" title="Framework RESTful elements base class.">xRestElement</a></li>
+<li><a href="#xDummyLogger" title="This class is a dummy logger.">xDummyLogger</a></li>
+<li><a href="#xBootstrap" title="This class creates the application context and launches the router.">xBootstrap</a></li>
+<li><a href="#xContext" title="This class contains the application context.">xContext</a></li>
+<li><a href="#xException" title="This class enhances the native PHP Exception with xFreemwork specific information.">xException</a></li>
+<li><a href="#xController" title="Base controller class.">xController</a></li>
+<li><a href="#xScript" title="This class is used to create command line scripts">xScript</a></li>
+<li><a href="#xAuth" title="Auth container interface.">xAuth</a></li>
+<li><a href="#xRouter" title="Manages HTTP Requests routing.">xRouter</a></li>
+<li><a href="#xView" title="Base view class.">xView</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/xFreemwork.html">xFreemwork</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="xApiFront" class="element ajax clickable class">
+<h1>xApiFront<a href="../classes/xApiFront.html">¶</a>
+</h1>
+<p class="short_description">Front controller class, api flavour.</p>
+<div class="details collapse"></div>
+<a href="../classes/xApiFront.html" class="more">« More »</a>
+</div>
+<div id="xAuth" class="element ajax clickable class">
+<h1>xAuth<a href="../classes/xAuth.html">¶</a>
+</h1>
+<p class="short_description">Auth container interface.</p>
+<div class="details collapse"></div>
+<a href="../classes/xAuth.html" class="more">« More »</a>
+</div>
+<div id="xBootstrap" class="element ajax clickable class">
+<h1>xBootstrap<a href="../classes/xBootstrap.html">¶</a>
+</h1>
+<p class="short_description">This class creates the application context and launches the router.</p>
+<div class="details collapse"></div>
+<a href="../classes/xBootstrap.html" class="more">« More »</a>
+</div>
+<div id="xConfig" class="element ajax clickable class">
+<h1>xConfig<a href="../classes/xConfig.html">¶</a>
+</h1>
+<p class="short_description">This class reads and parses .ini config file.</p>
+<div class="details collapse"></div>
+<a href="../classes/xConfig.html" class="more">« More »</a>
+</div>
+<div id="xContext" class="element ajax clickable class">
+<h1>xContext<a href="../classes/xContext.html">¶</a>
+</h1>
+<p class="short_description">This class contains the application context.</p>
+<div class="details collapse"></div>
+<a href="../classes/xContext.html" class="more">« More »</a>
+</div>
+<div id="xController" class="element ajax clickable class">
+<h1>xController<a href="../classes/xController.html">¶</a>
+</h1>
+<p class="short_description">Base controller class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xController.html" class="more">« More »</a>
+</div>
+<div id="xDummyLogger" class="element ajax clickable class">
+<h1>xDummyLogger<a href="../classes/xDummyLogger.html">¶</a>
+</h1>
+<p class="short_description">This class is a dummy logger.</p>
+<div class="details collapse"></div>
+<a href="../classes/xDummyLogger.html" class="more">« More »</a>
+</div>
+<div id="xElement" class="element ajax clickable class">
+<h1>xElement<a href="../classes/xElement.html">¶</a>
+</h1>
+<p class="short_description">Famework elements base class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xElement.html" class="more">« More »</a>
+</div>
+<div id="xException" class="element ajax clickable class">
+<h1>xException<a href="../classes/xException.html">¶</a>
+</h1>
+<p class="short_description">This class enhances the native PHP Exception with xFreemwork specific information.</p>
+<div class="details collapse"></div>
+<a href="../classes/xException.html" class="more">« More »</a>
+</div>
+<div id="xFront" class="element ajax clickable class">
+<h1>xFront<a href="../classes/xFront.html">¶</a>
+</h1>
+<p class="short_description">Front controller base class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xFront.html" class="more">« More »</a>
+</div>
+<div id="xJsFront" class="element ajax clickable class">
+<h1>xJsFront<a href="../classes/xJsFront.html">¶</a>
+</h1>
+<p class="short_description">Front controller for fetching views js files and js context object.</p>
+<div class="details collapse"></div>
+<a href="../classes/xJsFront.html" class="more">« More »</a>
+</div>
+<div id="xLogger" class="element ajax clickable class">
+<h1>xLogger<a href="../classes/xLogger.html">¶</a>
+</h1>
+<p class="short_description">This class is used for logging information into the text log file.</p>
+<div class="details collapse"></div>
+<a href="../classes/xLogger.html" class="more">« More »</a>
+</div>
+<div id="xModel" class="element ajax clickable class">
+<h1>xModel<a href="../classes/xModel.html">¶</a>
+</h1>
+<p class="short_description">Model base class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xModel.html" class="more">« More »</a>
+</div>
+<div id="xModelFront" class="element ajax clickable class">
+<h1>xModelFront<a href="../classes/xModelFront.html">¶</a>
+</h1>
+<p class="short_description">Front controller class, rest flavour.</p>
+<div class="details collapse"></div>
+<a href="../classes/xModelFront.html" class="more">« More »</a>
+</div>
+<div id="xModelMysql" class="element ajax clickable class">
+<h1>xModelMysql<a href="../classes/xModelMysql.html">¶</a>
+</h1>
+<p class="short_description">Model class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xModelMysql.html" class="more">« More »</a>
+</div>
+<div id="xModelPostgres" class="element ajax clickable class">
+<h1>xModelPostgres<a href="../classes/xModelPostgres.html">¶</a>
+</h1>
+<p class="short_description">Model class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xModelPostgres.html" class="more">« More »</a>
+</div>
+<div id="xRestElement" class="element ajax clickable class">
+<h1>xRestElement<a href="../classes/xRestElement.html">¶</a>
+</h1>
+<p class="short_description">Framework RESTful elements base class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xRestElement.html" class="more">« More »</a>
+</div>
+<div id="xRestFront" class="element ajax clickable class">
+<h1>xRestFront<a href="../classes/xRestFront.html">¶</a>
+</h1>
+<p class="short_description">Front controller class, rest flavour.</p>
+<div class="details collapse"></div>
+<a href="../classes/xRestFront.html" class="more">« More »</a>
+</div>
+<div id="xRouter" class="element ajax clickable class">
+<h1>xRouter<a href="../classes/xRouter.html">¶</a>
+</h1>
+<p class="short_description">Manages HTTP Requests routing.</p>
+<div class="details collapse"></div>
+<a href="../classes/xRouter.html" class="more">« More »</a>
+</div>
+<div id="xRssFront" class="element ajax clickable class">
+<h1>xRssFront<a href="../classes/xRssFront.html">¶</a>
+</h1>
+<p class="short_description">Front controller class for RSS feed.</p>
+<div class="details collapse"></div>
+<a href="../classes/xRssFront.html" class="more">« More »</a>
+</div>
+<div id="xScript" class="element ajax clickable class">
+<h1>xScript<a href="../classes/xScript.html">¶</a>
+</h1>
+<p class="short_description">This class is used to create command line scripts</p>
+<div class="details collapse"></div>
+<a href="../classes/xScript.html" class="more">« More »</a>
+</div>
+<div id="xTransaction" class="element ajax clickable class">
+<h1>xTransaction<a href="../classes/xTransaction.html">¶</a>
+</h1>
+<p class="short_description">SQL Transaction controller class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xTransaction.html" class="more">« More »</a>
+</div>
+<div id="xUtil" class="element ajax clickable class">
+<h1>xUtil<a href="../classes/xUtil.html">¶</a>
+</h1>
+<p class="short_description">This class contains utility functions.</p>
+<div class="details collapse"></div>
+<a href="../classes/xUtil.html" class="more">« More »</a>
+</div>
+<div id="xView" class="element ajax clickable class">
+<h1>xView<a href="../classes/xView.html">¶</a>
+</h1>
+<p class="short_description">Base view class.</p>
+<div class="details collapse"></div>
+<a href="../classes/xView.html" class="more">« More »</a>
+</div>
+<div id="xWebController" class="element ajax clickable class">
+<h1>xWebController<a href="../classes/xWebController.html">¶</a>
+</h1>
+<p class="short_description">Base controller class with web niceties.</p>
+<div class="details collapse"></div>
+<a href="../classes/xWebController.html" class="more">« More »</a>
+</div>
+<div id="xWebFront" class="element ajax clickable class">
+<h1>xWebFront<a href="../classes/xWebFront.html">¶</a>
+</h1>
+<p class="short_description">Front controller class, web flavour.</p>
+<div class="details collapse"></div>
+<a href="../classes/xWebFront.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xTransaction</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_autocommit" title="autocommit :: "><span class="description">autocommit()
+        </span><pre>autocommit()</pre></a></li>
+<li class="method public "><a href="#method_commit" title="commit :: "><span class="description">commit()
+        </span><pre>commit()</pre></a></li>
+<li class="method public "><a href="#method_end" title="end :: Ends the current transaction (COMMIT or ROLLBACK according errors)."><span class="description">Ends the current transaction (COMMIT or ROLLBACK according errors).</span><pre>end()</pre></a></li>
+<li class="method public "><a href="#method_execute" title="execute :: Shorthand for execute_model()"><span class="description">Shorthand for execute_model()</span><pre>execute()</pre></a></li>
+<li class="method public "><a href="#method_execute_model" title="execute_model :: "><span class="description">execute_model()
+        </span><pre>execute_model()</pre></a></li>
+<li class="method public "><a href="#method_execute_sql" title="execute_sql :: "><span class="description">execute_sql()
+        </span><pre>execute_sql()</pre></a></li>
+<li class="method public "><a href="#method_insertid" title="insertid :: Returns the last execute() insert id."><span class="description">Returns the last execute() insert id.</span><pre>insertid()</pre></a></li>
+<li class="method public "><a href="#method_q" title="q :: "><span class="description">q()
+        </span><pre>q()</pre></a></li>
+<li class="method public "><a href="#method_restore_autocommit_state" title="restore_autocommit_state :: "><span class="description">restore_autocommit_state()
+        </span><pre>restore_autocommit_state()</pre></a></li>
+<li class="method public "><a href="#method_rollback" title="rollback :: "><span class="description">rollback()
+        </span><pre>rollback()</pre></a></li>
+<li class="method public "><a href="#method_start" title="start :: Starts a new transaction if no transaction already started."><span class="description">Starts a new transaction if no transaction already started.</span><pre>start()</pre></a></li>
+<li class="method public "><a href="#method_summary" title="summary :: "><span class="description">summary()
+        </span><pre>summary()</pre></a></li>
+<li class="method public "><a href="#method_throw_exception" title="throw_exception :: "><span class="description">throw_exception()
+        </span><pre>throw_exception()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_autocommit_state_backup" title="$autocommit_state_backup :: "><span class="description"></span><pre>$autocommit_state_backup</pre></a></li>
+<li class="property public "><a href="#property_exceptions" title="$exceptions :: "><span class="description"></span><pre>$exceptions</pre></a></li>
+<li class="property public "><a href="#property_last_insert_id" title="$last_insert_id :: "><span class="description"></span><pre>$last_insert_id</pre></a></li>
+<li class="property public "><a href="#property_results" title="$results :: "><span class="description"></span><pre>$results</pre></a></li>
+<li class="property public "><a href="#property_started_transactions_count" title="$started_transactions_count :: "><span class="description"></span><pre>$started_transactions_count</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xTransaction"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xTransaction.html">xTransaction</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">SQL Transaction controller class.</p>
+<div class="details">
+<div class="long_description"><p>This class is intended simulate nested transactions using a single transaction.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_autocommit"></a><div class="element clickable method public method_autocommit" data-toggle="collapse" data-target=".method_autocommit .collapse">
+<h2>autocommit()
+        </h2>
+<pre>autocommit($value) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_commit"></a><div class="element clickable method public method_commit" data-toggle="collapse" data-target=".method_commit .collapse">
+<h2>commit()
+        </h2>
+<pre>commit() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_end"></a><div class="element clickable method public method_end" data-toggle="collapse" data-target=".method_end .collapse">
+<h2>Ends the current transaction (COMMIT or ROLLBACK according errors).</h2>
+<pre>end() : \Transaction</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If nested, the transaction is not COMMITed until the last top-level transaction is ended.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Transaction</code>summary (xModel compatible)</div>
+</div></div>
+</div>
+<a id="method_execute"></a><div class="element clickable method public method_execute" data-toggle="collapse" data-target=".method_execute .collapse">
+<h2>Shorthand for execute_model()</h2>
+<pre>execute($model_instance, $method_name, $method_args) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\execute_model()</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$model_instance</h4></div>
+<div class="subelement argument"><h4>$method_name</h4></div>
+<div class="subelement argument"><h4>$method_args</h4></div>
+</div></div>
+</div>
+<a id="method_execute_model"></a><div class="element clickable method public method_execute_model" data-toggle="collapse" data-target=".method_execute_model .collapse">
+<h2>execute_model()
+        </h2>
+<pre>execute_model($model_instance, $method_name, $method_args) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$model_instance</h4></div>
+<div class="subelement argument"><h4>$method_name</h4></div>
+<div class="subelement argument"><h4>$method_args</h4></div>
+</div></div>
+</div>
+<a id="method_execute_sql"></a><div class="element clickable method public method_execute_sql" data-toggle="collapse" data-target=".method_execute_sql .collapse">
+<h2>execute_sql()
+        </h2>
+<pre>execute_sql($sql) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$sql</h4></div>
+</div></div>
+</div>
+<a id="method_insertid"></a><div class="element clickable method public method_insertid" data-toggle="collapse" data-target=".method_insertid .collapse">
+<h2>Returns the last execute() insert id.</h2>
+<pre>insertid() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Returns null if no last insert id available.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The insert id of the last execute().</div>
+</div></div>
+</div>
+<a id="method_q"></a><div class="element clickable method public method_q" data-toggle="collapse" data-target=".method_q .collapse">
+<h2>q()
+        </h2>
+<pre>q($sql) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$sql</h4></div>
+</div></div>
+</div>
+<a id="method_restore_autocommit_state"></a><div class="element clickable method public method_restore_autocommit_state" data-toggle="collapse" data-target=".method_restore_autocommit_state .collapse">
+<h2>restore_autocommit_state()
+        </h2>
+<pre>restore_autocommit_state() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_rollback"></a><div class="element clickable method public method_rollback" data-toggle="collapse" data-target=".method_rollback .collapse">
+<h2>rollback()
+        </h2>
+<pre>rollback() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_start"></a><div class="element clickable method public method_start" data-toggle="collapse" data-target=".method_start .collapse">
+<h2>Starts a new transaction if no transaction already started.</h2>
+<pre>start() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Otherwise, simulates a nested transaction through a single transaction.</p></div></div></div>
+</div>
+<a id="method_summary"></a><div class="element clickable method public method_summary" data-toggle="collapse" data-target=".method_summary .collapse">
+<h2>summary()
+        </h2>
+<pre>summary() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_throw_exception"></a><div class="element clickable method public method_throw_exception" data-toggle="collapse" data-target=".method_throw_exception .collapse">
+<h2>throw_exception()
+        </h2>
+<pre>throw_exception() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_autocommit_state_backup"> </a><div class="element clickable property public property_autocommit_state_backup" data-toggle="collapse" data-target=".property_autocommit_state_backup .collapse">
+<h2></h2>
+<pre>$autocommit_state_backup </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_exceptions"> </a><div class="element clickable property public property_exceptions" data-toggle="collapse" data-target=".property_exceptions .collapse">
+<h2></h2>
+<pre>$exceptions </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_last_insert_id"> </a><div class="element clickable property public property_last_insert_id" data-toggle="collapse" data-target=".property_last_insert_id .collapse">
+<h2></h2>
+<pre>$last_insert_id </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_results"> </a><div class="element clickable property public property_results" data-toggle="collapse" data-target=".property_results .collapse">
+<h2></h2>
+<pre>$results </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_started_transactions_count"> </a><div class="element clickable property public property_started_transactions_count" data-toggle="collapse" data-target=".property_started_transactions_count .collapse">
+<h2></h2>
+<pre>$started_transactions_count </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

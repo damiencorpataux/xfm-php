@@ -1,0 +1,799 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xUtil</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_array_clone" title="array_clone :: Returns a deep clone of the given array."><span class="description">Returns a deep clone of the given array.</span><pre>array_clone()</pre></a></li>
+<li class="method public "><a href="#method_array_merge" title="array_merge :: Merges arrays recursively, replacing existing keys."><span class="description">Merges arrays recursively, replacing existing keys.</span><pre>array_merge()</pre></a></li>
+<li class="method public "><a href="#method_arrize" title="arrize :: Make sure the given value is an array by returning an array of the given value."><span class="description">Make sure the given value is an array by returning an array of the given value.</span><pre>arrize()</pre></a></li>
+<li class="method public "><a href="#method_cascade_dir" title="cascade_dir :: Filesystem: Returns all absolute file names with the given $extension
+contained in the given $dir (recursive lookup)."><span class="description">Filesystem: Returns all absolute file names with the given $extension
+contained in the given $dir (recursive lookup).</span><pre>cascade_dir()</pre></a></li>
+<li class="method public "><a href="#method_copy" title="copy :: Filesystem: copies the given source to the given destination, using the given options."><span class="description">Filesystem: copies the given source to the given destination, using the given options.</span><pre>copy()</pre></a></li>
+<li class="method public "><a href="#method_current_url" title="current_url :: Returns the current full url."><span class="description">Returns the current full url.</span><pre>current_url()</pre></a></li>
+<li class="method public "><a href="#method_date" title="date :: Returns a formatted date from the given timestamp or ISO/US date."><span class="description">Returns a formatted date from the given timestamp or ISO/US date.</span><pre>date()</pre></a></li>
+<li class="method public "><a href="#method_dateparts" title="dateparts :: Returns an array containing date components from a ISO/US date."><span class="description">Returns an array containing date components from a ISO/US date.</span><pre>dateparts()</pre></a></li>
+<li class="method public "><a href="#method_datetime" title="datetime :: Returns a formatted date and time from the given timestamp or ISO/US date."><span class="description">Returns a formatted date and time from the given timestamp or ISO/US date.</span><pre>datetime()</pre></a></li>
+<li class="method public "><a href="#method_distance" title="distance :: Returns distance in meters between two points"><span class="description">Returns distance in meters between two points</span><pre>distance()</pre></a></li>
+<li class="method public "><a href="#method_extension" title="extension :: Returns the extension of the given file."><span class="description">Returns the extension of the given file.</span><pre>extension()</pre></a></li>
+<li class="method public "><a href="#method_filter_keys" title="filter_keys :: Filters and returns the given array, keeping only the given keys."><span class="description">Filters and returns the given array, keeping only the given keys.</span><pre>filter_keys()</pre></a></li>
+<li class="method public "><a href="#method_format_money" title="format_money :: "><span class="description">format_money()
+        </span><pre>format_money()</pre></a></li>
+<li class="method public "><a href="#method_format_phone" title="format_phone :: "><span class="description">format_phone()
+        </span><pre>format_phone()</pre></a></li>
+<li class="method public "><a href="#method_generatePsw" title="generatePsw :: "><span class="description">generatePsw()
+        </span><pre>generatePsw()</pre></a></li>
+<li class="method public "><a href="#method_get_calling_class" title="get_calling_class :: Returns the last class called, null if last call is not a class."><span class="description">Returns the last class called, null if last call is not a class.</span><pre>get_calling_class()</pre></a></li>
+<li class="method public "><a href="#method_get_calling_function" title="get_calling_function :: Returns the last function called, null if last call is not a function."><span class="description">Returns the last function called, null if last call is not a function.</span><pre>get_calling_function()</pre></a></li>
+<li class="method public "><a href="#method_in_array" title="in_array :: Returns true if the given needle(s) exist in the given haystack."><span class="description">Returns true if the given needle(s) exist in the given haystack.</span><pre>in_array()</pre></a></li>
+<li class="method public "><a href="#method_mail" title="mail :: Redefines the mail php function with encoding."><span class="description">Redefines the mail php function with encoding.</span><pre>mail()</pre></a></li>
+<li class="method public "><a href="#method_pre" title="pre :: "><span class="description">pre()
+        </span><pre>pre()</pre></a></li>
+<li class="method public "><a href="#method_redirect" title="redirect :: Issues cross-browser header for page redirection."><span class="description">Issues cross-browser header for page redirection.</span><pre>redirect()</pre></a></li>
+<li class="method public "><a href="#method_remove" title="remove :: Filesystem: removes the given location
+Useful for non-empty directory removal."><span class="description">Filesystem: removes the given location
+Useful for non-empty directory removal.</span><pre>remove()</pre></a></li>
+<li class="method public "><a href="#method_round_money" title="round_money :: "><span class="description">round_money()
+        </span><pre>round_money()</pre></a></li>
+<li class="method public "><a href="#method_strip_tags" title="strip_tags :: Returns the given $string with HTML tags stripped,
+preserving null value for $string."><span class="description">Returns the given $string with HTML tags stripped,
+preserving null value for $string.</span><pre>strip_tags()</pre></a></li>
+<li class="method public "><a href="#method_time" title="time :: Returns a formatted time from the given timestamp or ISO/US date."><span class="description">Returns a formatted time from the given timestamp or ISO/US date.</span><pre>time()</pre></a></li>
+<li class="method public "><a href="#method_timeago" title="timeago :: Returns the timespan between the given timestamp and now."><span class="description">Returns the timespan between the given timestamp and now.</span><pre>timeago()</pre></a></li>
+<li class="method public "><a href="#method_timestamp" title="timestamp :: Returns a timestamp from a ISO/US date."><span class="description">Returns a timestamp from a ISO/US date.</span><pre>timestamp()</pre></a></li>
+<li class="method public "><a href="#method_trim_text" title="trim_text :: Returns the given $text trimmed to $max_characters,
+taking care not to truncate words."><span class="description">Returns the given $text trimmed to $max_characters,
+taking care not to truncate words.</span><pre>trim_text()</pre></a></li>
+<li class="method public "><a href="#method_url" title="url :: Returns document root relative url with the given url suffix."><span class="description">Returns document root relative url with the given url suffix.</span><pre>url()</pre></a></li>
+<li class="method public "><a href="#method_ustime" title="ustime :: Returns a ISO/US formatted date from a unix timestamp."><span class="description">Returns a ISO/US formatted date from a unix timestamp.</span><pre>ustime()</pre></a></li>
+<li class="method public "><a href="#method_valid_email" title="valid_email :: "><span class="description">valid_email()
+        </span><pre>valid_email()</pre></a></li>
+<li class="method public "><a href="#method_valid_integer" title="valid_integer :: "><span class="description">valid_integer()
+        </span><pre>valid_integer()</pre></a></li>
+<li class="method public "><a href="#method_valid_length" title="valid_length :: "><span class="description">valid_length()
+        </span><pre>valid_length()</pre></a></li>
+<li class="method public "><a href="#method_valid_phone" title="valid_phone :: "><span class="description">valid_phone()
+        </span><pre>valid_phone()</pre></a></li>
+<li class="method public "><a href="#method_valid_url" title="valid_url :: "><span class="description">valid_url()
+        </span><pre>valid_url()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method___construct" title="__construct :: Prevents class instanciation."><span class="description">Prevents class instanciation.</span><pre>__construct()</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xUtil"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xUtil.html">xUtil</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">This class contains utility functions.</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_array_clone"></a><div class="element clickable method public method_array_clone" data-toggle="collapse" data-target=".method_array_clone .collapse">
+<h2>Returns a deep clone of the given array.</h2>
+<pre>array_clone(array $array) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>The array to clone.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>The clone of the given array.</div>
+</div></div>
+</div>
+<a id="method_array_merge"></a><div class="element clickable method public method_array_merge" data-toggle="collapse" data-target=".method_array_merge .collapse">
+<h2>Merges arrays recursively, replacing existing keys.</h2>
+<pre>array_merge() : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Priority is given to the last given array parameter.</p>
+
+<p>Careful: This algorythm differs from PHP array_merge_recursive
+in the sense that merging array with same-level-same-keyname
+will remain unique when using xUtil::array_merge().</p>
+
+<p>Merge example:</p>
+
+<pre><code>print_r(xUtil::array_merge(array(
+    'Index content',
+    'assoc' => array(
+        'a_key' => 'a_content',
+        'b_key' => 'b_content',
+        '2nd level index content'
+    ),
+    array(
+        'key' => 'value'
+    ),
+    'this-key' => 'remains-unique',
+), array(
+    'assoc' => array(
+        'a_key' => 'a_content_modified',
+        'c_key' => 'c_content',
+    ),
+    array(
+        'key' => 'value'
+    ),
+    'Index content 2',
+    'this-key' => 'remains-unique'
+)));
+</code></pre>
+
+<p>will output:</p>
+
+<pre><code>Array
+(
+    [0] => Index content
+    [assoc] => Array
+        (
+            [a_key] => a_content_modified
+            [b_key] => b_content
+            [0] => 2nd level index content
+            [c_key] => c_content
+        )
+
+    [1] => Array
+        (
+            [key] => value
+        )
+
+    [2] => Array
+        (
+            [key] => value
+        )
+
+   [3] => Index content 2
+   [this-key] => remains-unique
+)
+</code></pre></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Write unit tests (use the above example for one of the tests).</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Merged array.</div>
+</div></div>
+</div>
+<a id="method_arrize"></a><div class="element clickable method public method_arrize" data-toggle="collapse" data-target=".method_arrize .collapse">
+<h2>Make sure the given value is an array by returning an array of the given value.</h2>
+<pre>arrize(mixed $value) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If the given value is NULL, returns an empty array.
+If the given value is a scalar, returns an array containing the value.
+If the given value is already an array, returns the given value without transformation.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>The value</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_cascade_dir"></a><div class="element clickable method public method_cascade_dir" data-toggle="collapse" data-target=".method_cascade_dir .collapse">
+<h2>Filesystem: Returns all absolute file names with the given $extension
+contained in the given $dir (recursive lookup).</h2>
+<pre>cascade_dir(string $dir, string $extension) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code>string</code><p>The directory to cascade (e.g. /some/path).</p>
+</div>
+<div class="subelement argument">
+<h4>$extension</h4>
+<code>string</code><p>The extension of the file (e.g. php).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Array of absolute filenames.</div>
+</div></div>
+</div>
+<a id="method_copy"></a><div class="element clickable method public method_copy" data-toggle="collapse" data-target=".method_copy .collapse">
+<h2>Filesystem: copies the given source to the given destination, using the given options.</h2>
+<pre>copy(string $source, string $destination, string $options) : bool</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Useful for recursive file copy.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$source</h4>
+<code>string</code><p>The source file or directory.</p></div>
+<div class="subelement argument">
+<h4>$destination</h4>
+<code>string</code><p>The destination file or directory.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>string</code><p>Options (defaults to 'rf'), valid options are:
+              - r: recursive
+              - f: force</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>True if success, false otherwise.</div>
+</div></div>
+</div>
+<a id="method_current_url"></a><div class="element clickable method public method_current_url" data-toggle="collapse" data-target=".method_current_url .collapse">
+<h2>Returns the current full url.</h2>
+<pre>current_url(bool | array | string $query_string) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query_string</h4>
+<code>bool</code><code>array</code><code>string</code><p>If true (default), query string is appended to returned url.
+                  If false,no query string is appended to returned url.
+                  If an array, the given associative array is merged into the current query string.
+                  If a string, the given query string is used as is.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Current url.</div>
+</div></div>
+</div>
+<a id="method_date"></a><div class="element clickable method public method_date" data-toggle="collapse" data-target=".method_date .collapse">
+<h2>Returns a formatted date from the given timestamp or ISO/US date.</h2>
+<pre>date(int $timestamp, string $null) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$timestamp</h4>
+<code>int</code><p>Timestamp.</p></div>
+<div class="subelement argument">
+<h4>$null</h4>
+<code>string</code><p>Value to return if timestamp is null.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_dateparts"></a><div class="element clickable method public method_dateparts" data-toggle="collapse" data-target=".method_dateparts .collapse">
+<h2>Returns an array containing date components from a ISO/US date.</h2>
+<pre>dateparts(string $mysql_date) : int</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Useful for parsing mysql date fields values.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysql_date</h4>
+<code>string</code><p>ISO/US formatted date (yyyy-mm-dd hh:mm:ss).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The corresponding date components array.</div>
+</div></div>
+</div>
+<a id="method_datetime"></a><div class="element clickable method public method_datetime" data-toggle="collapse" data-target=".method_datetime .collapse">
+<h2>Returns a formatted date and time from the given timestamp or ISO/US date.</h2>
+<pre>datetime(int $timestamp, string $null) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$timestamp</h4>
+<code>int</code><p>Timestamp or ISO/US date.</p>
+</div>
+<div class="subelement argument">
+<h4>$null</h4>
+<code>string</code><p>Value to return if timestamp is null.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_distance"></a><div class="element clickable method public method_distance" data-toggle="collapse" data-target=".method_distance .collapse">
+<h2>Returns distance in meters between two points</h2>
+<pre>distance(float $lon1, float $lat1, float $lon2, float $lat2) : float</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lon1</h4>
+<code>float</code><p>Longitude 1, in degrees</p></div>
+<div class="subelement argument">
+<h4>$lat1</h4>
+<code>float</code><p>Lattitude 1, in degrees</p></div>
+<div class="subelement argument">
+<h4>$lon2</h4>
+<code>float</code><p>Longitude 2, in degrees</p></div>
+<div class="subelement argument">
+<h4>$lat2</h4>
+<code>float</code><p>Lattitude 2, in degrees</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>float</code></div>
+</div></div>
+</div>
+<a id="method_extension"></a><div class="element clickable method public method_extension" data-toggle="collapse" data-target=".method_extension .collapse">
+<h2>Returns the extension of the given file.</h2>
+<pre>extension(string $file) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$file</h4>
+<code>string</code><p>A filename.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The extension.</div>
+</div></div>
+</div>
+<a id="method_filter_keys"></a><div class="element clickable method public method_filter_keys" data-toggle="collapse" data-target=".method_filter_keys .collapse">
+<h2>Filters and returns the given array, keeping only the given keys.</h2>
+<pre>filter_keys(array $array, array | string $keys, bool $invert_filter) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>The array to filter.</p></div>
+<div class="subelement argument">
+<h4>$keys</h4>
+<code>array</code><code>string</code><p>The key(s) to keep.</p>
+</div>
+<div class="subelement argument">
+<h4>$invert_filter</h4>
+<code>bool</code><p>If true, the filter is inverted. Defaults to false.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>The filtered array</div>
+</div></div>
+</div>
+<a id="method_format_money"></a><div class="element clickable method public method_format_money" data-toggle="collapse" data-target=".method_format_money .collapse">
+<h2>format_money()
+        </h2>
+<pre>format_money($value) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_format_phone"></a><div class="element clickable method public method_format_phone" data-toggle="collapse" data-target=".method_format_phone .collapse">
+<h2>format_phone()
+        </h2>
+<pre>format_phone($number) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$number</h4></div>
+</div></div>
+</div>
+<a id="method_generatePsw"></a><div class="element clickable method public method_generatePsw" data-toggle="collapse" data-target=".method_generatePsw .collapse">
+<h2>generatePsw()
+        </h2>
+<pre>generatePsw($size) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$size</h4></div>
+</div></div>
+</div>
+<a id="method_get_calling_class"></a><div class="element clickable method public method_get_calling_class" data-toggle="collapse" data-target=".method_get_calling_class .collapse">
+<h2>Returns the last class called, null if last call is not a class.</h2>
+<pre>get_calling_class() : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The name of the last called class (null if not a class)</div>
+</div></div>
+</div>
+<a id="method_get_calling_function"></a><div class="element clickable method public method_get_calling_function" data-toggle="collapse" data-target=".method_get_calling_function .collapse">
+<h2>Returns the last function called, null if last call is not a function.</h2>
+<pre>get_calling_function() : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The name of the last called class (null if not a class)</div>
+</div></div>
+</div>
+<a id="method_in_array"></a><div class="element clickable method public method_in_array" data-toggle="collapse" data-target=".method_in_array .collapse">
+<h2>Returns true if the given needle(s) exist in the given haystack.</h2>
+<pre>in_array(array $needles, mixed $haystack, bool $and_search, bool $strict) : bool</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Note that multiple needles can be given.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$needles</h4>
+<code>array</code><p>Haystack.</p></div>
+<div class="subelement argument">
+<h4>$haystack</h4>
+<code>mixed</code><p>Needle(s). Multiple needles can be provided within a array.</p>
+</div>
+<div class="subelement argument">
+<h4>$and_search</h4>
+<code>bool</code><p>And search. False to perform an OR search (default), true to perform an AND search.</p>
+</div>
+<div class="subelement argument">
+<h4>$strict</h4>
+<code>bool</code><p>Strict. True to also check types.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_mail"></a><div class="element clickable method public method_mail" data-toggle="collapse" data-target=".method_mail .collapse">
+<h2>Redefines the mail php function with encoding.</h2>
+<pre>mail(string $to, string $subject, string $message, string $from, string $encoding) : bool</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$to</h4>
+<code>string</code><p>Recipient email address.</p></div>
+<div class="subelement argument">
+<h4>$subject</h4>
+<code>string</code><p>Mail subject.</p></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Mail body.</p></div>
+<div class="subelement argument">
+<h4>$from</h4>
+<code>string</code><p>Sender email address.</p></div>
+<div class="subelement argument">
+<h4>$encoding</h4>
+<code>string</code><p>Encoding (eg. UTF-8, iso-8859-1).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>The PHP mail function return value.</div>
+</div></div>
+</div>
+<a id="method_pre"></a><div class="element clickable method public method_pre" data-toggle="collapse" data-target=".method_pre .collapse">
+<h2>pre()
+        </h2>
+<pre>pre() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_redirect"></a><div class="element clickable method public method_redirect" data-toggle="collapse" data-target=".method_redirect .collapse">
+<h2>Issues cross-browser header for page redirection.</h2>
+<pre>redirect(string $url, $exit) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>url to redirect to.</p></div>
+<div class="subelement argument"><h4>$exit</h4></div>
+</div></div>
+</div>
+<a id="method_remove"></a><div class="element clickable method public method_remove" data-toggle="collapse" data-target=".method_remove .collapse">
+<h2>Filesystem: removes the given location
+Useful for non-empty directory removal.</h2>
+<pre>remove(string $location, string $options) : bool</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$location</h4>
+<code>string</code><p>The location (file or directory) to remove.</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>string</code><p>Options (defaults to 'rf'), valid options are:
+              - r: recursive
+              - f: force</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>True if success, false otherwise.</div>
+</div></div>
+</div>
+<a id="method_round_money"></a><div class="element clickable method public method_round_money" data-toggle="collapse" data-target=".method_round_money .collapse">
+<h2>round_money()
+        </h2>
+<pre>round_money($value) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_strip_tags"></a><div class="element clickable method public method_strip_tags" data-toggle="collapse" data-target=".method_strip_tags .collapse">
+<h2>Returns the given $string with HTML tags stripped,
+preserving null value for $string.</h2>
+<pre>strip_tags(string | array $string, string $allowable_tags) : string | array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><code>array</code><p>The string (or array of string) to strip.</p>
+</div>
+<div class="subelement argument">
+<h4>$allowable_tags</h4>
+<code>string</code><p>Allowable HTML tags (those will not be stripped).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>array</code>The stripped string (or array is $string is an array).</div>
+</div></div>
+</div>
+<a id="method_time"></a><div class="element clickable method public method_time" data-toggle="collapse" data-target=".method_time .collapse">
+<h2>Returns a formatted time from the given timestamp or ISO/US date.</h2>
+<pre>time(int $timestamp, string $null) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$timestamp</h4>
+<code>int</code><p>Timestamp or ISO/US date.</p>
+</div>
+<div class="subelement argument">
+<h4>$null</h4>
+<code>string</code><p>Value to return if timestamp is null.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_timeago"></a><div class="element clickable method public method_timeago" data-toggle="collapse" data-target=".method_timeago .collapse">
+<h2>Returns the timespan between the given timestamp and now.</h2>
+<pre>timeago(int $timestamp) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$timestamp</h4>
+<code>int</code><p>Timestamp (if not given, now is considered).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_timestamp"></a><div class="element clickable method public method_timestamp" data-toggle="collapse" data-target=".method_timestamp .collapse">
+<h2>Returns a timestamp from a ISO/US date.</h2>
+<pre>timestamp(string $mysql_date) : int</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Useful for parsing mysql date fields values.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mysql_date</h4>
+<code>string</code><p>ISO/US formatted date (yyyy-mm-dd hh:mm:ss).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The corresponding timestamp.</div>
+</div></div>
+</div>
+<a id="method_trim_text"></a><div class="element clickable method public method_trim_text" data-toggle="collapse" data-target=".method_trim_text .collapse">
+<h2>Returns the given $text trimmed to $max_characters,
+taking care not to truncate words.</h2>
+<pre>trim_text(string $text, int $max_characters, string $suffix) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$text</h4>
+<code>string</code><p>The text to be trimmed.</p></div>
+<div class="subelement argument">
+<h4>$max_characters</h4>
+<code>int</code><p>Max characters allowed.</p></div>
+<div class="subelement argument">
+<h4>$suffix</h4>
+<code>string</code><p>Optionnal suffix to append if text was trimmed.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The trimmed text.</div>
+</div></div>
+</div>
+<a id="method_url"></a><div class="element clickable method public method_url" data-toggle="collapse" data-target=".method_url .collapse">
+<h2>Returns document root relative url with the given url suffix.</h2>
+<pre>url(string $suffix, bool $full) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Example: the following code returns
+'/path/to/site/some_controller/some_action'</p>
+
+<pre><code>print url('some_controller/some_action');
+</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$suffix</h4>
+<code>string</code><p>Suffix of the url.</p></div>
+<div class="subelement argument">
+<h4>$full</h4>
+<code>bool</code><p>If true, prepends protocol and hostname to the url</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Asbolute path url</div>
+</div></div>
+</div>
+<a id="method_ustime"></a><div class="element clickable method public method_ustime" data-toggle="collapse" data-target=".method_ustime .collapse">
+<h2>Returns a ISO/US formatted date from a unix timestamp.</h2>
+<pre>ustime(string $timestamp) : int</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Useful for mysql inserts.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$timestamp</h4>
+<code>string</code><p>A unix timestamp.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The corresponding ISO/US date (yyyy-mm-dd hh:mm:ss).</div>
+</div></div>
+</div>
+<a id="method_valid_email"></a><div class="element clickable method public method_valid_email" data-toggle="collapse" data-target=".method_valid_email .collapse">
+<h2>valid_email()
+        </h2>
+<pre>valid_email($value) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_valid_integer"></a><div class="element clickable method public method_valid_integer" data-toggle="collapse" data-target=".method_valid_integer .collapse">
+<h2>valid_integer()
+        </h2>
+<pre>valid_integer($value) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_valid_length"></a><div class="element clickable method public method_valid_length" data-toggle="collapse" data-target=".method_valid_length .collapse">
+<h2>valid_length()
+        </h2>
+<pre>valid_length($value, $min_length, $max_length) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+<div class="subelement argument"><h4>$min_length</h4></div>
+<div class="subelement argument"><h4>$max_length</h4></div>
+</div></div>
+</div>
+<a id="method_valid_phone"></a><div class="element clickable method public method_valid_phone" data-toggle="collapse" data-target=".method_valid_phone .collapse">
+<h2>valid_phone()
+        </h2>
+<pre>valid_phone($value) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method_valid_url"></a><div class="element clickable method public method_valid_url" data-toggle="collapse" data-target=".method_valid_url .collapse">
+<h2>valid_url()
+        </h2>
+<pre>valid_url($value) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$value</h4></div>
+</div></div>
+</div>
+<a id="method___construct"></a><div class="element clickable method private method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Prevents class instanciation.</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

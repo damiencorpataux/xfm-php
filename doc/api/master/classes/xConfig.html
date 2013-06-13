@@ -1,0 +1,1103 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xConfig</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public inherited"><a href="#method___clone" title="__clone :: Deep clone of this instance to ensure that nested xZend_Configs
+are also cloned."><span class="description">Deep clone of this instance to ensure that nested xZend_Configs
+are also cloned.</span><pre>__clone()</pre></a></li>
+<li class="method public inherited"><a href="#method___construct" title="__construct :: Loads the section $section from the config file $filename for
+access facilitated by nested object properties."><span class="description">Loads the section $section from the config file $filename for
+access facilitated by nested object properties.</span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method___get" title="__get :: Magic function so that $obj-&gt;value will work."><span class="description">Magic function so that $obj-&gt;value will work.</span><pre>__get()</pre></a></li>
+<li class="method public inherited"><a href="#method___isset" title="__isset :: Support isset() overloading on PHP 5.1"><span class="description">Support isset() overloading on PHP 5.1</span><pre>__isset()</pre></a></li>
+<li class="method public inherited"><a href="#method___set" title="__set :: Only allow setting of a property if $allowModifications
+was set to true on construction."><span class="description">Only allow setting of a property if $allowModifications
+was set to true on construction.</span><pre>__set()</pre></a></li>
+<li class="method public inherited"><a href="#method___unset" title="__unset :: Support unset() overloading on PHP 5.1"><span class="description">Support unset() overloading on PHP 5.1</span><pre>__unset()</pre></a></li>
+<li class="method public inherited"><a href="#method_areAllSectionsLoaded" title="areAllSectionsLoaded :: Returns true if all sections were loaded"><span class="description">Returns true if all sections were loaded</span><pre>areAllSectionsLoaded()</pre></a></li>
+<li class="method public inherited"><a href="#method_count" title="count :: Defined by Countable interface"><span class="description">Defined by Countable interface</span><pre>count()</pre></a></li>
+<li class="method public inherited"><a href="#method_current" title="current :: Defined by Iterator interface"><span class="description">Defined by Iterator interface</span><pre>current()</pre></a></li>
+<li class="method public inherited"><a href="#method_get" title="get :: Retrieve a value and return $default if there is no element set."><span class="description">Retrieve a value and return $default if there is no element set.</span><pre>get()</pre></a></li>
+<li class="method public inherited"><a href="#method_getExtends" title="getExtends :: Get the current extends"><span class="description">Get the current extends</span><pre>getExtends()</pre></a></li>
+<li class="method public inherited"><a href="#method_getSectionName" title="getSectionName :: Returns the section name(s) loaded."><span class="description">Returns the section name(s) loaded.</span><pre>getSectionName()</pre></a></li>
+<li class="method public inherited"><a href="#method_key" title="key :: Defined by Iterator interface"><span class="description">Defined by Iterator interface</span><pre>key()</pre></a></li>
+<li class="method public inherited"><a href="#method_merge" title="merge :: Merge another xZend_Config with this one."><span class="description">Merge another xZend_Config with this one.</span><pre>merge()</pre></a></li>
+<li class="method public inherited"><a href="#method_next" title="next :: Defined by Iterator interface"><span class="description">Defined by Iterator interface</span><pre>next()</pre></a></li>
+<li class="method public inherited"><a href="#method_readOnly" title="readOnly :: Returns if this xZend_Config object is read only or not."><span class="description">Returns if this xZend_Config object is read only or not.</span><pre>readOnly()</pre></a></li>
+<li class="method public inherited"><a href="#method_rewind" title="rewind :: Defined by Iterator interface"><span class="description">Defined by Iterator interface</span><pre>rewind()</pre></a></li>
+<li class="method public inherited"><a href="#method_setExtend" title="setExtend :: Set an extend for xZend_Config_Writer"><span class="description">Set an extend for xZend_Config_Writer</span><pre>setExtend()</pre></a></li>
+<li class="method public inherited"><a href="#method_setReadOnly" title="setReadOnly :: Prevent any more modifications being made to this instance."><span class="description">Prevent any more modifications being made to this instance.</span><pre>setReadOnly()</pre></a></li>
+<li class="method public inherited"><a href="#method_toArray" title="toArray :: Return an associative array of the stored data."><span class="description">Return an associative array of the stored data.</span><pre>toArray()</pre></a></li>
+<li class="method public inherited"><a href="#method_valid" title="valid :: Defined by Iterator interface"><span class="description">Defined by Iterator interface</span><pre>valid()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected inherited"><a href="#method__arrayMergeRecursive" title="_arrayMergeRecursive :: Merge two arrays recursively, overwriting keys of the same name
+in $firstArray with the value in $secondArray."><span class="description">Merge two arrays recursively, overwriting keys of the same name
+in $firstArray with the value in $secondArray.</span><pre>_arrayMergeRecursive()</pre></a></li>
+<li class="method protected inherited"><a href="#method__assertValidExtend" title="_assertValidExtend :: Throws an exception if $extendingSection may not extend $extendedSection,
+and tracks the section extension if it is valid."><span class="description">Throws an exception if $extendingSection may not extend $extendedSection,
+and tracks the section extension if it is valid.</span><pre>_assertValidExtend()</pre></a></li>
+<li class="method protected inherited"><a href="#method__loadFileErrorHandler" title="_loadFileErrorHandler :: Handle any errors from simplexml_load_file or parse_ini_file"><span class="description">Handle any errors from simplexml_load_file or parse_ini_file</span><pre>_loadFileErrorHandler()</pre></a></li>
+<li class="method protected inherited"><a href="#method__loadIniFile" title="_loadIniFile :: Load the ini file and preprocess the section separator (':' in the
+section name (that is used for section extension) so that the resultant
+array has the correct section names and the extension information is
+stored in a sub-key called ';extends'."><span class="description">Load the ini file and preprocess the section separator (':' in the
+section name (that is used for section extension) so that the resultant
+array has the correct section names and the extension information is
+stored in a sub-key called ';extends'.</span><pre>_loadIniFile()</pre></a></li>
+<li class="method protected inherited"><a href="#method__parseIniFile" title="_parseIniFile :: Load the INI file from disk using parse_ini_file()."><span class="description">Load the INI file from disk using parse_ini_file().</span><pre>_parseIniFile()</pre></a></li>
+<li class="method protected inherited"><a href="#method__processKey" title="_processKey :: Assign the key's value to the property list."><span class="description">Assign the key's value to the property list.</span><pre>_processKey()</pre></a></li>
+<li class="method protected inherited"><a href="#method__processSection" title='_processSection :: Process each element in the section and handle the ";extends" inheritance
+key.'><span class="description">Process each element in the section and handle the ";extends" inheritance
+key.</span><pre>_processSection()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected inherited"><a href="#property__allowModifications" title="$_allowModifications :: Whether in-memory modifications to configuration data are allowed"><span class="description"></span><pre>$_allowModifications</pre></a></li>
+<li class="property protected inherited"><a href="#property__count" title="$_count :: Number of elements in configuration data"><span class="description"></span><pre>$_count</pre></a></li>
+<li class="property protected inherited"><a href="#property__data" title="$_data :: Contains array of configuration data"><span class="description"></span><pre>$_data</pre></a></li>
+<li class="property protected inherited"><a href="#property__extends" title="$_extends :: This is used to track section inheritance."><span class="description"></span><pre>$_extends</pre></a></li>
+<li class="property protected inherited"><a href="#property__index" title="$_index :: Iteration index"><span class="description"></span><pre>$_index</pre></a></li>
+<li class="property protected inherited"><a href="#property__loadFileErrorStr" title="$_loadFileErrorStr :: Load file error string."><span class="description"></span><pre>$_loadFileErrorStr</pre></a></li>
+<li class="property protected inherited"><a href="#property__loadedSection" title="$_loadedSection :: Contains which config file sections were loaded."><span class="description"></span><pre>$_loadedSection</pre></a></li>
+<li class="property protected inherited"><a href="#property__nestSeparator" title="$_nestSeparator :: String that separates nesting levels of configuration data identifiers"><span class="description"></span><pre>$_nestSeparator</pre></a></li>
+<li class="property protected inherited"><a href="#property__sectionSeparator" title="$_sectionSeparator :: String that separates the parent section name"><span class="description"></span><pre>$_sectionSeparator</pre></a></li>
+<li class="property protected inherited"><a href="#property__skipExtends" title="$_skipExtends :: Whether to skip extends or not"><span class="description"></span><pre>$_skipExtends</pre></a></li>
+<li class="property protected inherited"><a href="#property__skipNextIteration" title="$_skipNextIteration :: Used when unsetting values during iteration to ensure we do not skip
+the next element"><span class="description"></span><pre>$_skipNextIteration</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xConfig"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xConfig.html">xConfig</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">This class reads and parses .ini config file.</p>
+<div class="details">
+<div class="long_description"><p>Taken from Zend Framework</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="">\global\http://framework.zend.com/manual/en/zend.config.adapters.ini.html</a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>$Id: Ini.php 23775 2011-03-01 17:25:24Z ralph $</td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___clone"></a><div class="element clickable method public method___clone" data-toggle="collapse" data-target=".method___clone .collapse">
+<h2>Deep clone of this instance to ensure that nested xZend_Configs
+are also cloned.</h2>
+<pre>__clone() : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::__clone()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::__clone()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Loads the section $section from the config file $filename for
+access facilitated by nested object properties.</h2>
+<pre>__construct(string $filename, string | null $section, boolean | array $options) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If the section name contains a ":" then the section name to the right
+is loaded and included into the properties. Note that the keys in
+this $section will override any keys of the same
+name in the sections that have been included via ":".</p>
+
+<p>If the $section is null, then all sections in the ini file are loaded.</p>
+
+<p>If any key includes a ".", then this will act as a separator to
+create a sub-property.</p>
+
+<p>example ini file:
+     [all]
+     db.connection = database
+     hostname = live</p>
+
+<pre><code> [staging : all]
+ hostname = staging
+</code></pre>
+
+<p>after calling $data = new xZend_Config_Ini($file, 'staging'); then
+     $data->hostname === "staging"
+     $data->db->connection === "database"</p>
+
+<p>The $options parameter may be provided as either a boolean or an array.
+If provided as a boolean, this sets the $allowModifications option of
+xZend_Config. If provided as an array, there are two configuration
+directives that may be set. For example:</p>
+
+<p>$options = array(
+    'allowModifications' => false,
+    'nestSeparator'      => '->'
+     );</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::__construct()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$section</h4>
+<code>string</code><code>null</code>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>boolean</code><code>array</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method___get"></a><div class="element clickable method public method___get" data-toggle="collapse" data-target=".method___get .collapse">
+<h2>Magic function so that $obj-&gt;value will work.</h2>
+<pre>__get(string $name) : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::__get()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::__get()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method___isset"></a><div class="element clickable method public method___isset" data-toggle="collapse" data-target=".method___isset .collapse">
+<h2>Support isset() overloading on PHP 5.1</h2>
+<pre>__isset(string $name) : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::__isset()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::__isset()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method___set"></a><div class="element clickable method public method___set" data-toggle="collapse" data-target=".method___set .collapse">
+<h2>Only allow setting of a property if $allowModifications
+was set to true on construction.</h2>
+<pre>__set(string $name, mixed $value) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Otherwise, throw an exception.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::__set()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::__set()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method___unset"></a><div class="element clickable method public method___unset" data-toggle="collapse" data-target=".method___unset .collapse">
+<h2>Support unset() overloading on PHP 5.1</h2>
+<pre>__unset(string $name) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::__unset()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::__unset()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_areAllSectionsLoaded"></a><div class="element clickable method public method_areAllSectionsLoaded" data-toggle="collapse" data-target=".method_areAllSectionsLoaded .collapse">
+<h2>Returns true if all sections were loaded</h2>
+<pre>areAllSectionsLoaded() : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::areAllSectionsLoaded()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::areAllSectionsLoaded()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method_count"></a><div class="element clickable method public method_count" data-toggle="collapse" data-target=".method_count .collapse">
+<h2>Defined by Countable interface</h2>
+<pre>count() : int</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::count()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::count()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_current"></a><div class="element clickable method public method_current" data-toggle="collapse" data-target=".method_current .collapse">
+<h2>Defined by Iterator interface</h2>
+<pre>current() : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::current()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::current()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Retrieve a value and return $default if there is no element set.</h2>
+<pre>get(string $name, mixed $default) : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::get()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::get()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$default</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getExtends"></a><div class="element clickable method public method_getExtends" data-toggle="collapse" data-target=".method_getExtends .collapse">
+<h2>Get the current extends</h2>
+<pre>getExtends() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::getExtends()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::getExtends()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getSectionName"></a><div class="element clickable method public method_getSectionName" data-toggle="collapse" data-target=".method_getSectionName .collapse">
+<h2>Returns the section name(s) loaded.</h2>
+<pre>getSectionName() : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::getSectionName()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::getSectionName()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_key"></a><div class="element clickable method public method_key" data-toggle="collapse" data-target=".method_key .collapse">
+<h2>Defined by Iterator interface</h2>
+<pre>key() : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::key()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::key()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_merge"></a><div class="element clickable method public method_merge" data-toggle="collapse" data-target=".method_merge .collapse">
+<h2>Merge another xZend_Config with this one.</h2>
+<pre>merge(\xZend_Config $merge) : <a href="../classes/xZend_Config.html">\xZend_Config</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The items
+in $merge will override the same named items in
+the current config.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::merge()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::merge()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$merge</h4>
+<code><a href="../classes/xZend_Config.html">\xZend_Config</a></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/xZend_Config.html">\xZend_Config</a></code></div>
+</div></div>
+</div>
+<a id="method_next"></a><div class="element clickable method public method_next" data-toggle="collapse" data-target=".method_next .collapse">
+<h2>Defined by Iterator interface</h2>
+<pre>next() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::next()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::next()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_readOnly"></a><div class="element clickable method public method_readOnly" data-toggle="collapse" data-target=".method_readOnly .collapse">
+<h2>Returns if this xZend_Config object is read only or not.</h2>
+<pre>readOnly() : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::readOnly()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::readOnly()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method_rewind"></a><div class="element clickable method public method_rewind" data-toggle="collapse" data-target=".method_rewind .collapse">
+<h2>Defined by Iterator interface</h2>
+<pre>rewind() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::rewind()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::rewind()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_setExtend"></a><div class="element clickable method public method_setExtend" data-toggle="collapse" data-target=".method_setExtend .collapse">
+<h2>Set an extend for xZend_Config_Writer</h2>
+<pre>setExtend(string $extendingSection, string $extendedSection) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::setExtend()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::setExtend()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$extendingSection</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$extendedSection</h4>
+<code>string</code>
+</div>
+</div></div>
+</div>
+<a id="method_setReadOnly"></a><div class="element clickable method public method_setReadOnly" data-toggle="collapse" data-target=".method_setReadOnly .collapse">
+<h2>Prevent any more modifications being made to this instance.</h2>
+<pre>setReadOnly() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Useful
+after merge() has been used to merge multiple xZend_Config objects
+into one object which should then not be modified again.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::setReadOnly()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::setReadOnly()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_toArray"></a><div class="element clickable method public method_toArray" data-toggle="collapse" data-target=".method_toArray .collapse">
+<h2>Return an associative array of the stored data.</h2>
+<pre>toArray() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::toArray()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::toArray()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_valid"></a><div class="element clickable method public method_valid" data-toggle="collapse" data-target=".method_valid .collapse">
+<h2>Defined by Iterator interface</h2>
+<pre>valid() : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::valid()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::valid()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method__arrayMergeRecursive"></a><div class="element clickable method protected method__arrayMergeRecursive" data-toggle="collapse" data-target=".method__arrayMergeRecursive .collapse">
+<h2>Merge two arrays recursively, overwriting keys of the same name
+in $firstArray with the value in $secondArray.</h2>
+<pre>_arrayMergeRecursive(mixed $firstArray, mixed $secondArray) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::_arrayMergeRecursive()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::_arrayMergeRecursive()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$firstArray</h4>
+<code>mixed</code><p>First array</p></div>
+<div class="subelement argument">
+<h4>$secondArray</h4>
+<code>mixed</code><p>Second array to merge into first array</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method__assertValidExtend"></a><div class="element clickable method protected method__assertValidExtend" data-toggle="collapse" data-target=".method__assertValidExtend .collapse">
+<h2>Throws an exception if $extendingSection may not extend $extendedSection,
+and tracks the section extension if it is valid.</h2>
+<pre>_assertValidExtend(string $extendingSection, string $extendedSection) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::_assertValidExtend()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::_assertValidExtend()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$extendingSection</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$extendedSection</h4>
+<code>string</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method__loadFileErrorHandler"></a><div class="element clickable method protected method__loadFileErrorHandler" data-toggle="collapse" data-target=".method__loadFileErrorHandler .collapse">
+<h2>Handle any errors from simplexml_load_file or parse_ini_file</h2>
+<pre>_loadFileErrorHandler(integer $errno, string $errstr, string $errfile, integer $errline) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::_loadFileErrorHandler()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::_loadFileErrorHandler()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$errno</h4>
+<code>integer</code>
+</div>
+<div class="subelement argument">
+<h4>$errstr</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$errfile</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$errline</h4>
+<code>integer</code>
+</div>
+</div></div>
+</div>
+<a id="method__loadIniFile"></a><div class="element clickable method protected method__loadIniFile" data-toggle="collapse" data-target=".method__loadIniFile .collapse">
+<h2>Load the ini file and preprocess the section separator (':' in the
+section name (that is used for section extension) so that the resultant
+array has the correct section names and the extension information is
+stored in a sub-key called ';extends'.</h2>
+<pre>_loadIniFile(string $filename) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>We use ';extends' as this can
+never be a valid key name in an INI file that has been loaded using
+parse_ini_file().</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::_loadIniFile()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method__parseIniFile"></a><div class="element clickable method protected method__parseIniFile" data-toggle="collapse" data-target=".method__parseIniFile .collapse">
+<h2>Load the INI file from disk using parse_ini_file().</h2>
+<pre>_parseIniFile(string $filename) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Use a private error
+handler to convert any loading errors into a xException</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::_parseIniFile()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method__processKey"></a><div class="element clickable method protected method__processKey" data-toggle="collapse" data-target=".method__processKey .collapse">
+<h2>Assign the key's value to the property list.</h2>
+<pre>_processKey(array $config, string $key, string $value) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Handles the
+nest separator for sub-properties.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::_processKey()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$config</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method__processSection"></a><div class="element clickable method protected method__processSection" data-toggle="collapse" data-target=".method__processSection .collapse">
+<h2>Process each element in the section and handle the ";extends" inheritance
+key.</h2>
+<pre>_processSection(array $iniArray, string $section, array $config) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Passes control to _processKey() to handle the nest separator
+sub-property syntax that may be used within the key name.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::_processSection()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$iniArray</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$section</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$config</h4>
+<code>array</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__allowModifications"> </a><div class="element clickable property protected property__allowModifications" data-toggle="collapse" data-target=".property__allowModifications .collapse">
+<h2></h2>
+<pre>$_allowModifications : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_allowModifications</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_allowModifications</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__count"> </a><div class="element clickable property protected property__count" data-toggle="collapse" data-target=".property__count .collapse">
+<h2></h2>
+<pre>$_count : integer</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_count</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_count</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__data"> </a><div class="element clickable property protected property__data" data-toggle="collapse" data-target=".property__data .collapse">
+<h2></h2>
+<pre>$_data : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_data</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_data</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__extends"> </a><div class="element clickable property protected property__extends" data-toggle="collapse" data-target=".property__extends .collapse">
+<h2></h2>
+<pre>$_extends : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The keys are names of sections that
+extend other sections, and the values are the extended sections.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_extends</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_extends</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__index"> </a><div class="element clickable property protected property__index" data-toggle="collapse" data-target=".property__index .collapse">
+<h2></h2>
+<pre>$_index : integer</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_index</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_index</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__loadFileErrorStr"> </a><div class="element clickable property protected property__loadFileErrorStr" data-toggle="collapse" data-target=".property__loadFileErrorStr .collapse">
+<h2></h2>
+<pre>$_loadFileErrorStr : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Is null if there was no error while file loading</p></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_loadFileErrorStr</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_loadFileErrorStr</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__loadedSection"> </a><div class="element clickable property protected property__loadedSection" data-toggle="collapse" data-target=".property__loadedSection .collapse">
+<h2></h2>
+<pre>$_loadedSection : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This is null
+if all sections were loaded, a string name if one section is loaded
+and an array of string names if multiple sections were loaded.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_loadedSection</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_loadedSection</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property__nestSeparator"> </a><div class="element clickable property protected property__nestSeparator" data-toggle="collapse" data-target=".property__nestSeparator .collapse">
+<h2></h2>
+<pre>$_nestSeparator : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_nestSeparator</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property__sectionSeparator"> </a><div class="element clickable property protected property__sectionSeparator" data-toggle="collapse" data-target=".property__sectionSeparator .collapse">
+<h2></h2>
+<pre>$_sectionSeparator : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_sectionSeparator</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property__skipExtends"> </a><div class="element clickable property protected property__skipExtends" data-toggle="collapse" data-target=".property__skipExtends .collapse">
+<h2></h2>
+<pre>$_skipExtends : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_skipExtends</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property__skipNextIteration"> </a><div class="element clickable property protected property__skipNextIteration" data-toggle="collapse" data-target=".property__skipNextIteration .collapse">
+<h2></h2>
+<pre>$_skipNextIteration : boolean</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config::$$_skipNextIteration</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xZend_Config_Ini::$$_skipNextIteration</td>
+</tr>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

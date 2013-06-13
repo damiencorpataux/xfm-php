@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xBootstrap</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_create_db" title="create_db :: "><span class="description">create_db()
+        </span><pre>create_db()</pre></a></li>
+<li class="method public "><a href="#method_create_db_mysql" title="create_db_mysql :: "><span class="description">create_db_mysql()
+        </span><pre>create_db_mysql()</pre></a></li>
+<li class="method public "><a href="#method_create_db_postgres" title="create_db_postgres :: "><span class="description">create_db_postgres()
+        </span><pre>create_db_postgres()</pre></a></li>
+<li class="method public "><a href="#method_handle_exception" title="handle_exception :: Called when an exception is catched by the bootstrap."><span class="description">Called when an exception is catched by the bootstrap.</span><pre>handle_exception()</pre></a></li>
+<li class="method public "><a href="#method_run" title="run :: Runs the application and outputs the HTTP response body."><span class="description">Runs the application and outputs the HTTP response body.</span><pre>run()</pre></a></li>
+<li class="method public "><a href="#method_setup" title="setup :: Setups the application context."><span class="description">Setups the application context.</span><pre>setup()</pre></a></li>
+<li class="method public "><a href="#method_setup_addons" title="setup_addons :: "><span class="description">setup_addons()
+        </span><pre>setup_addons()</pre></a></li>
+<li class="method public "><a href="#method_setup_auth" title="setup_auth :: "><span class="description">setup_auth()
+        </span><pre>setup_auth()</pre></a></li>
+<li class="method public "><a href="#method_setup_config" title="setup_config :: "><span class="description">setup_config()
+        </span><pre>setup_config()</pre></a></li>
+<li class="method public "><a href="#method_setup_db" title="setup_db :: "><span class="description">setup_db()
+        </span><pre>setup_db()</pre></a></li>
+<li class="method public "><a href="#method_setup_dummy_log" title="setup_dummy_log :: "><span class="description">setup_dummy_log()
+        </span><pre>setup_dummy_log()</pre></a></li>
+<li class="method public "><a href="#method_setup_error_handler" title="setup_error_handler :: "><span class="description">setup_error_handler()
+        </span><pre>setup_error_handler()</pre></a></li>
+<li class="method public "><a href="#method_setup_error_reporting" title="setup_error_reporting :: "><span class="description">setup_error_reporting()
+        </span><pre>setup_error_reporting()</pre></a></li>
+<li class="method public "><a href="#method_setup_i18n" title="setup_i18n :: Sets up the default language."><span class="description">Sets up the default language.</span><pre>setup_i18n()</pre></a></li>
+<li class="method public "><a href="#method_setup_includes" title="setup_includes :: "><span class="description">setup_includes()
+        </span><pre>setup_includes()</pre></a></li>
+<li class="method public "><a href="#method_setup_includes_externals" title="setup_includes_externals :: "><span class="description">setup_includes_externals()
+        </span><pre>setup_includes_externals()</pre></a></li>
+<li class="method public "><a href="#method_setup_log" title="setup_log :: "><span class="description">setup_log()
+        </span><pre>setup_log()</pre></a></li>
+<li class="method public "><a href="#method_setup_router" title="setup_router :: "><span class="description">setup_router()
+        </span><pre>setup_router()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="method protected "><a href="#method_get_config_files" title="get_config_files :: Returns an array containing the existing additional configuration files,
+in alphabetical order."><span class="description">Returns an array containing the existing additional configuration files,
+in alphabetical order.</span><pre>get_config_files()</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xBootstrap"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xBootstrap.html">xBootstrap</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">This class creates the application context and launches the router.</p>
+<div class="details">
+<div class="long_description"><p>Responsibilities
+- create application context (environment variables, configuration, database, etc)
+- launch the router and output the HTTP response body</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_create_db"></a><div class="element clickable method public method_create_db" data-toggle="collapse" data-target=".method_create_db .collapse">
+<h2>create_db()
+        </h2>
+<pre>create_db() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_create_db_mysql"></a><div class="element clickable method public method_create_db_mysql" data-toggle="collapse" data-target=".method_create_db_mysql .collapse">
+<h2>create_db_mysql()
+        </h2>
+<pre>create_db_mysql() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_create_db_postgres"></a><div class="element clickable method public method_create_db_postgres" data-toggle="collapse" data-target=".method_create_db_postgres .collapse">
+<h2>create_db_postgres()
+        </h2>
+<pre>create_db_postgres() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_handle_exception"></a><div class="element clickable method public method_handle_exception" data-toggle="collapse" data-target=".method_handle_exception .collapse">
+<h2>Called when an exception is catched by the bootstrap.</h2>
+<pre>handle_exception(<a href="http://php.net/manual/en/class.exception.php">\Exception</a> $exception) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method handles exceptions
+and outputs the HTTP response body.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$exception</h4>
+<code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code><p>The catched exception.</p></div>
+</div></div>
+</div>
+<a id="method_run"></a><div class="element clickable method public method_run" data-toggle="collapse" data-target=".method_run .collapse">
+<h2>Runs the application and outputs the HTTP response body.</h2>
+<pre>run() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup"></a><div class="element clickable method public method_setup" data-toggle="collapse" data-target=".method_setup .collapse">
+<h2>Setups the application context.</h2>
+<pre>setup() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_addons"></a><div class="element clickable method public method_setup_addons" data-toggle="collapse" data-target=".method_setup_addons .collapse">
+<h2>setup_addons()
+        </h2>
+<pre>setup_addons() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_auth"></a><div class="element clickable method public method_setup_auth" data-toggle="collapse" data-target=".method_setup_auth .collapse">
+<h2>setup_auth()
+        </h2>
+<pre>setup_auth() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_config"></a><div class="element clickable method public method_setup_config" data-toggle="collapse" data-target=".method_setup_config .collapse">
+<h2>setup_config()
+        </h2>
+<pre>setup_config() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_db"></a><div class="element clickable method public method_setup_db" data-toggle="collapse" data-target=".method_setup_db .collapse">
+<h2>setup_db()
+        </h2>
+<pre>setup_db() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_dummy_log"></a><div class="element clickable method public method_setup_dummy_log" data-toggle="collapse" data-target=".method_setup_dummy_log .collapse">
+<h2>setup_dummy_log()
+        </h2>
+<pre>setup_dummy_log() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_error_handler"></a><div class="element clickable method public method_setup_error_handler" data-toggle="collapse" data-target=".method_setup_error_handler .collapse">
+<h2>setup_error_handler()
+        </h2>
+<pre>setup_error_handler() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_error_reporting"></a><div class="element clickable method public method_setup_error_reporting" data-toggle="collapse" data-target=".method_setup_error_reporting .collapse">
+<h2>setup_error_reporting()
+        </h2>
+<pre>setup_error_reporting() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_i18n"></a><div class="element clickable method public method_setup_i18n" data-toggle="collapse" data-target=".method_setup_i18n .collapse">
+<h2>Sets up the default language.</h2>
+<pre>setup_i18n() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Persistant language selection and gettext setup is done xWebFront controller.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Front.Front.html#%5CxFront::setup_i18n()">\xFront::setup_i18n()</a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setup_includes"></a><div class="element clickable method public method_setup_includes" data-toggle="collapse" data-target=".method_setup_includes .collapse">
+<h2>setup_includes()
+        </h2>
+<pre>setup_includes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_includes_externals"></a><div class="element clickable method public method_setup_includes_externals" data-toggle="collapse" data-target=".method_setup_includes_externals .collapse">
+<h2>setup_includes_externals()
+        </h2>
+<pre>setup_includes_externals() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_log"></a><div class="element clickable method public method_setup_log" data-toggle="collapse" data-target=".method_setup_log .collapse">
+<h2>setup_log()
+        </h2>
+<pre>setup_log() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_router"></a><div class="element clickable method public method_setup_router" data-toggle="collapse" data-target=".method_setup_router .collapse">
+<h2>setup_router()
+        </h2>
+<pre>setup_router() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_get_config_files"></a><div class="element clickable method protected method_get_config_files" data-toggle="collapse" data-target=".method_get_config_files .collapse">
+<h2>Returns an array containing the existing additional configuration files,
+in alphabetical order.</h2>
+<pre>get_config_files(string | array $paths) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$paths</h4>
+<code>string</code><code>array</code><p>The path(s) to process, relative to config/ directory.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

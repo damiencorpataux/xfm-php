@@ -1,0 +1,1230 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xModelMysql</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_count" title="count :: Issues a COUNT and returns the result"><span class="description">Issues a COUNT and returns the result</span><pre>count()</pre></a></li>
+<li class="method public inherited"><a href="#method_dbfield" title="dbfield :: Returns the database field name from the given model field name."><span class="description">Returns the database field name from the given model field name.</span><pre>dbfield()</pre></a></li>
+<li class="method public "><a href="#method_delete" title="delete :: Implements the REST delete method to access data."><span class="description">Implements the REST delete method to access data.</span><pre>delete()</pre></a></li>
+<li class="method public "><a href="#method_escape" title="escape :: Returns the given value, escaped and quoted."><span class="description">Returns the given value, escaped and quoted.</span><pre>escape()</pre></a></li>
+<li class="method public inherited"><a href="#method_fields_values" title="fields_values :: Returns an associative array contanining params values
+with translated keys (e.g."><span class="description">Returns an associative array contanining params values
+with translated keys (e.g.</span><pre>fields_values()</pre></a></li>
+<li class="method public inherited"><a href="#method_foreign_fields_values" title="foreign_fields_values :: Returns an array of modelfield =&gt; value containing the subset of fields that belong to the given foreign model name."><span class="description">Returns an array of modelfield =&gt; value containing the subset of fields that belong to the given foreign model name.</span><pre>foreign_fields_values()</pre></a></li>
+<li class="method public inherited"><a href="#method_foreign_mapping" title="foreign_mapping :: Returns the foreign models mapping according the xjoin defined in parameters."><span class="description">Returns the foreign models mapping according the xjoin defined in parameters.</span><pre>foreign_mapping()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get :: Implements the REST get method to access data."><span class="description">Implements the REST get method to access data.</span><pre>get()</pre></a></li>
+<li class="method public inherited"><a href="#method_invalids" title="invalids :: Checks given params values and returns an array containing
+the invalid params (fields) as key, and true as value."><span class="description">Checks given params values and returns an array containing
+the invalid params (fields) as key, and true as value.</span><pre>invalids()</pre></a></li>
+<li class="method public inherited"><a href="#method_joins" title="joins :: Returns an array of active joins."><span class="description">Returns an array of active joins.</span><pre>joins()</pre></a></li>
+<li class="method public inherited"><a href="#method_load" title="load :: Loads and returns the model specified object."><span class="description">Loads and returns the model specified object.</span><pre>load()</pre></a></li>
+<li class="method public inherited"><a href="#method_modelfield" title="modelfield :: Returns the model field name from the given database field name."><span class="description">Returns the model field name from the given database field name.</span><pre>modelfield()</pre></a></li>
+<li class="method public "><a href="#method_post" title="post :: Implements the REST post method to access data."><span class="description">Implements the REST post method to access data.</span><pre>post()</pre></a></li>
+<li class="method public inherited"><a href="#method_primary" title="primary :: Returns the primary key model field name"><span class="description">Returns the primary key model field name</span><pre>primary()</pre></a></li>
+<li class="method public "><a href="#method_put" title="put :: Implements the REST put method to access data."><span class="description">Implements the REST put method to access data.</span><pre>put()</pre></a></li>
+<li class="method public "><a href="#method_q" title="q :: Executes the given sql and returns the raw result resource, or throws an exception on error."><span class="description">Executes the given sql and returns the raw result resource, or throws an exception on error.</span><pre>q()</pre></a></li>
+<li class="method public "><a href="#method_query" title="query :: Exectues the given sql and returns its query result."><span class="description">Exectues the given sql and returns its query result.</span><pre>query()</pre></a></li>
+<li class="method public inherited"><a href="#method_scan" title="scan :: Scans and returns available models."><span class="description">Scans and returns available models.</span><pre>scan()</pre></a></li>
+<li class="method public "><a href="#method_sql_constants" title="sql_constants :: Returns the allowed SQL constants (eg."><span class="description">Returns the allowed SQL constants (eg.</span><pre>sql_constants()</pre></a></li>
+<li class="method public "><a href="#method_sql_from" title="sql_from :: Returns a default SQL FROM clause."><span class="description">Returns a default SQL FROM clause.</span><pre>sql_from()</pre></a></li>
+<li class="method public "><a href="#method_sql_group" title="sql_group :: TODO: allow to group_by foreign fields"><span class="description">TODO: allow to group_by foreign fields</span><pre>sql_group()</pre></a></li>
+<li class="method public "><a href="#method_sql_join" title="sql_join :: Returns a default SQL JOIN clause to be used as a join."><span class="description">Returns a default SQL JOIN clause to be used as a join.</span><pre>sql_join()</pre></a></li>
+<li class="method public "><a href="#method_sql_limit" title="sql_limit :: Returns default SQL LIMIT and/or OFFSET clause(s)."><span class="description">Returns default SQL LIMIT and/or OFFSET clause(s).</span><pre>sql_limit()</pre></a></li>
+<li class="method public "><a href="#method_sql_order" title="sql_order :: TODO: allow to order_by foreign fields"><span class="description">TODO: allow to order_by foreign fields</span><pre>sql_order()</pre></a></li>
+<li class="method public "><a href="#method_sql_select" title="sql_select :: Returns a default SQL SELECT clause."><span class="description">Returns a default SQL SELECT clause.</span><pre>sql_select()</pre></a></li>
+<li class="method public "><a href="#method_sql_where" title="sql_where :: Returns a default SQL WHERE clause."><span class="description">Returns a default SQL WHERE clause.</span><pre>sql_where()</pre></a></li>
+<li class="method public "><a href="#method_sql_where_from_template" title="sql_where_from_template :: "><span class="description">sql_where_from_template()
+        </span><pre>sql_where_from_template()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected inherited"><a href="#method___construct" title="__construct :: Model classes should only be instanciated through the Model::load() method."><span class="description">Model classes should only be instanciated through the Model::load() method.</span><pre>__construct()</pre></a></li>
+<li class="method protected inherited"><a href="#method_load_plugin" title="load_plugin :: Loads and stores and activates an instance of the specified plugin with the given params."><span class="description">Loads and stores and activates an instance of the specified plugin with the given params.</span><pre>load_plugin()</pre></a></li>
+<li class="method protected inherited"><a href="#method_load_these" title="load_these :: Helper method for loading and instanciating an xElement."><span class="description">Helper method for loading and instanciating an xElement.</span><pre>load_these()</pre></a></li>
+<li class="method protected inherited"><a href="#method_sql_where_prepare" title="sql_where_prepare :: Creates a structured where clause content array."><span class="description">Creates a structured where clause content array.</span><pre>sql_where_prepare()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public inherited"><a href="#property_allow_html" title="$allow_html :: Specifies which of the fields accept HTML."><span class="description"></span><pre>$allow_html</pre></a></li>
+<li class="property public inherited"><a href="#property_constants" title="$constants :: Fields (model) that accept sql constants (e.g."><span class="description"></span><pre>$constants</pre></a></li>
+<li class="property public inherited"><a href="#property_delete" title="$delete :: Mandatory params for delete operations (model fields names)"><span class="description"></span><pre>$delete</pre></a></li>
+<li class="property public inherited"><a href="#property_get" title="$get :: Mandatory params for get operations (model fields names)"><span class="description"></span><pre>$get</pre></a></li>
+<li class="property public inherited"><a href="#property_group_by" title="$group_by :: Result group by."><span class="description"></span><pre>$group_by</pre></a></li>
+<li class="property public inherited"><a href="#property_join" title="$join :: Enabled SQL joins."><span class="description"></span><pre>$join</pre></a></li>
+<li class="property public inherited"><a href="#property_joins" title="$joins :: Available SQL joins."><span class="description"></span><pre>$joins</pre></a></li>
+<li class="property public inherited"><a href="#property_maintable" title="$maintable :: This property is set in the constructor."><span class="description"></span><pre>$maintable</pre></a></li>
+<li class="property public inherited"><a href="#property_mapping" title="$mapping :: Params to fields mapping."><span class="description"></span><pre>$mapping</pre></a></li>
+<li class="property public inherited"><a href="#property_name" title="$name :: This property is set in the constructor."><span class="description"></span><pre>$name</pre></a></li>
+<li class="property public inherited"><a href="#property_order" title="$order :: Result sorting order."><span class="description"></span><pre>$order</pre></a></li>
+<li class="property public inherited"><a href="#property_order_by" title="$order_by :: Result sorting fields (model fields names)."><span class="description"></span><pre>$order_by</pre></a></li>
+<li class="property public inherited"><a href="#property_params" title="$params :: Instance parameters (associative array)."><span class="description"></span><pre>$params</pre></a></li>
+<li class="property public inherited"><a href="#property_plugins" title="$plugins :: Plugins instances."><span class="description"></span><pre>$plugins</pre></a></li>
+<li class="property public inherited"><a href="#property_post" title="$post :: Mandatory params for post operations (model fields names)"><span class="description"></span><pre>$post</pre></a></li>
+<li class="property public inherited"><a href="#property_primary" title="$primary :: The primary key field names (model field names, defaults to 'id')."><span class="description"></span><pre>$primary</pre></a></li>
+<li class="property public inherited"><a href="#property_put" title="$put :: Mandatory params for put operations (model fields names)"><span class="description"></span><pre>$put</pre></a></li>
+<li class="property public inherited"><a href="#property_return" title="$return :: Fields to return (model fields names)."><span class="description"></span><pre>$return</pre></a></li>
+<li class="property public inherited"><a href="#property_table" title="$table :: "><span class="description"></span><pre>$table</pre></a></li>
+<li class="property public inherited"><a href="#property_validation" title="$validation :: Fields validation definitions."><span class="description"></span><pre>$validation</pre></a></li>
+<li class="property public inherited"><a href="#property_where" title="$where :: Enabled SQL where template."><span class="description"></span><pre>$where</pre></a></li>
+<li class="property public inherited"><a href="#property_wheres" title="$wheres :: Available SQL where templates."><span class="description"></span><pre>$wheres</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xModelMysql"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xModelMysql.html">xModelMysql</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Model class.</p>
+<div class="details">
+<div class="long_description"><p>Deals with database transactions.</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_count"></a><div class="element clickable method public method_count" data-toggle="collapse" data-target=".method_count .collapse">
+<h2>Issues a COUNT and returns the result</h2>
+<pre>count() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::count()">\xModel::count()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_dbfield"></a><div class="element clickable method public method_dbfield" data-toggle="collapse" data-target=".method_dbfield .collapse">
+<h2>Returns the database field name from the given model field name.</h2>
+<pre>dbfield(string $modelfield) : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If the database field is not mapped, returns the given database field name.
+FIXME: foreign models fieldnames are not translated.
+       This might cause problems in eg. sql_where()?</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::dbfield()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$modelfield</h4>
+<code>string</code><p>The model field name, or the database field name if not mapped.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The databse field name.</div>
+</div></div>
+</div>
+<a id="method_delete"></a><div class="element clickable method public method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
+<h2>Implements the REST delete method to access data.</h2>
+<pre>delete() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Issues a DELETE and returns the result
+as an associative array.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::delete()">\xModel::delete()</a></td>
+</tr></table>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_escape"></a><div class="element clickable method public method_escape" data-toggle="collapse" data-target=".method_escape .collapse">
+<h2>Returns the given value, escaped and quoted.</h2>
+<pre>escape(mixed $value, string $field, bool $allow_constants) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If the field name (modelfield) is given and the
+field is listed in self::constants array,
+and the value is a sql constant,
+returns the value unquoted and unescaped.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::escape()">\xModel::escape()</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>The value to escape.</p></div>
+<div class="subelement argument">
+<h4>$field</h4>
+<code>string</code><p>The model field name related to the given value.</p></div>
+<div class="subelement argument">
+<h4>$allow_constants</h4>
+<code>bool</code><p>True to allow SQL constants.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_fields_values"></a><div class="element clickable method public method_fields_values" data-toggle="collapse" data-target=".method_fields_values .collapse">
+<h2>Returns an associative array contanining params values
+with translated keys (e.g.</h2>
+<pre>fields_values(bool $no_primary) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>keys reflect the db fields names).
+Return array structure:</p>
+
+<pre><code>array(
+    'db_fieldname_1' => array(
+        'value' => 'some value',
+        'wildcard' => false
+     ),
+     'db_fieldname_2' => array(
+        'value' => '%some value%',
+        'wildcard' => true
+     ),
+     ...
+)
+</code></pre>
+
+<ul>
+<li>Only mapped fields are taken into account.</li>
+<li>Wildcard filters patterns are applied to params values if applicable.</li>
+</ul></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::fields_values()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$no_primary</h4>
+<code>bool</code><p>If true, applies the filters pattern be applied to value</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_foreign_fields_values"></a><div class="element clickable method public method_foreign_fields_values" data-toggle="collapse" data-target=".method_foreign_fields_values .collapse">
+<h2>Returns an array of modelfield =&gt; value containing the subset of fields that belong to the given foreign model name.</h2>
+<pre>foreign_fields_values(string | array $foreign_models_names) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>FIXME: are the fieldnames translated (eg. reflect the db field names?)
+       To be consistent with fields_values, they should be translated.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::foreign_fields_values()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$foreign_models_names</h4>
+<code>string</code><code>array</code><p>The foreign model(s) name(s). If not given, uses the current $join property value.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_foreign_mapping"></a><div class="element clickable method public method_foreign_mapping" data-toggle="collapse" data-target=".method_foreign_mapping .collapse">
+<h2>Returns the foreign models mapping according the xjoin defined in parameters.</h2>
+<pre>foreign_mapping(array $foreign_models_names) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::foreign_mapping()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$foreign_models_names</h4>
+<code>array</code><p>If defined, the returned mapping is limited to specified models.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Implements the REST get method to access data.</h2>
+<pre>get($rownum) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Issues a SELECT and returns the result
+as an associative array.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::get()">\xModel::get()</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$rownum</h4></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_invalids"></a><div class="element clickable method public method_invalids" data-toggle="collapse" data-target=".method_invalids .collapse">
+<h2>Checks given params values and returns an array containing
+the invalid params (fields) as key, and true as value.</h2>
+<pre>invalids(array $fields) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::invalids()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$fields</h4>
+<code>array</code><p>If given, limits validation to the given $fields.
+             {@see xValidatorStore::invalids()}</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_joins"></a><div class="element clickable method public method_joins" data-toggle="collapse" data-target=".method_joins .collapse">
+<h2>Returns an array of active joins.</h2>
+<pre>joins(string | array $join) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::%24join">\xModel::$join</a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::%24joins">\xModel::$joins</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::joins()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$join</h4>
+<code>string</code><code>array</code><p>Joins to use. If not given, uses the current $join property value.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_load"></a><div class="element clickable method public method_load" data-toggle="collapse" data-target=".method_load .collapse">
+<h2>Loads and returns the model specified object.</h2>
+<pre>load(string $name, $params, $options) : <a href="../classes/xModel.html">\xModel</a></pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::load()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The model to load.
+       e.g. item will load the models/item.php file
+       and return an instance of the ItemModel class.</p>
+</div>
+<div class="subelement argument"><h4>$params</h4></div>
+<div class="subelement argument"><h4>$options</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/xModel.html">\xModel</a></code></div>
+</div></div>
+</div>
+<a id="method_modelfield"></a><div class="element clickable method public method_modelfield" data-toggle="collapse" data-target=".method_modelfield .collapse">
+<h2>Returns the model field name from the given database field name.</h2>
+<pre>modelfield(string $dbfield) : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>FIXME: foreign models fieldnames are not translated.
+       This might cause problems in eg. sql_where()?</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::modelfield()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dbfield</h4>
+<code>string</code><p>The model field name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The databse field name.</div>
+</div></div>
+</div>
+<a id="method_post"></a><div class="element clickable method public method_post" data-toggle="collapse" data-target=".method_post .collapse">
+<h2>Implements the REST post method to access data.</h2>
+<pre>post() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Issues a UPDATE and returns the result
+as an associative array.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::post()">\xModel::post()</a></td>
+</tr></table>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_primary"></a><div class="element clickable method public method_primary" data-toggle="collapse" data-target=".method_primary .collapse">
+<h2>Returns the primary key model field name</h2>
+<pre>primary() : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::primary()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Name of the model id field.</div>
+</div></div>
+</div>
+<a id="method_put"></a><div class="element clickable method public method_put" data-toggle="collapse" data-target=".method_put .collapse">
+<h2>Implements the REST put method to access data.</h2>
+<pre>put() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Issues a INSERT and returns the result
+as an associative array.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::put()">\xModel::put()</a></td>
+</tr></table>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/xException.html">\xException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_q"></a><div class="element clickable method public method_q" data-toggle="collapse" data-target=".method_q .collapse">
+<h2>Executes the given sql and returns the raw result resource, or throws an exception on error.</h2>
+<pre>q($sql) : resource</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\www.php.net/manual/function.mysql-query.php</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$sql</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>resource</code></div>
+</div></div>
+</div>
+<a id="method_query"></a><div class="element clickable method public method_query" data-toggle="collapse" data-target=".method_query .collapse">
+<h2>Exectues the given sql and returns its query result.</h2>
+<pre>query(string $sql) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><ul>
+<li>If the result is empty, an empty array is returned.
+
+<ul>
+<li>If the result is not empty, an 2 dimensional associative array
+with mapped array keys containing the result rows is returned.</li>
+<li>If the query didn't return row results
+(e.g. insert, update and delete queries),
+an informational array is returned, containg</li>
+<li>the last insert id,</li>
+<li>the number of affected rows,</li>
+<li>additional mysql information,</li>
+<li>and the raw mysql result.</li>
+</ul></li>
+</ul></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::query()">\xModel::query()</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The SQL statement to execute.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_scan"></a><div class="element clickable method public method_scan" data-toggle="collapse" data-target=".method_scan .collapse">
+<h2>Scans and returns available models.</h2>
+<pre>scan() : array</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::scan()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array of available models (filename => modelname).</div>
+</div></div>
+</div>
+<a id="method_sql_constants"></a><div class="element clickable method public method_sql_constants" data-toggle="collapse" data-target=".method_sql_constants .collapse">
+<h2>Returns the allowed SQL constants (eg.</h2>
+<pre>sql_constants() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>CURRENT_TIMESTAMP).</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_sql_from"></a><div class="element clickable method public method_sql_from" data-toggle="collapse" data-target=".method_sql_from .collapse">
+<h2>Returns a default SQL FROM clause.</h2>
+<pre>sql_from() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_from()">\xModel::sql_from()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_group"></a><div class="element clickable method public method_sql_group" data-toggle="collapse" data-target=".method_sql_group .collapse">
+<h2>TODO: allow to group_by foreign fields</h2>
+<pre>sql_group() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_group()">\xModel::sql_group()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_join"></a><div class="element clickable method public method_sql_join" data-toggle="collapse" data-target=".method_sql_join .collapse">
+<h2>Returns a default SQL JOIN clause to be used as a join.</h2>
+<pre>sql_join() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_join()">\xModel::sql_join()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_limit"></a><div class="element clickable method public method_sql_limit" data-toggle="collapse" data-target=".method_sql_limit .collapse">
+<h2>Returns default SQL LIMIT and/or OFFSET clause(s).</h2>
+<pre>sql_limit() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_limit()">\xModel::sql_limit()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_order"></a><div class="element clickable method public method_sql_order" data-toggle="collapse" data-target=".method_sql_order .collapse">
+<h2>TODO: allow to order_by foreign fields</h2>
+<pre>sql_order() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_select"></a><div class="element clickable method public method_sql_select" data-toggle="collapse" data-target=".method_sql_select .collapse">
+<h2>Returns a default SQL SELECT clause.</h2>
+<pre>sql_select() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_select()">\xModel::sql_select()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_where"></a><div class="element clickable method public method_sql_where" data-toggle="collapse" data-target=".method_sql_where .collapse">
+<h2>Returns a default SQL WHERE clause.</h2>
+<pre>sql_where(bool $primary_only, bool $local_only) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$primary_only</h4>
+<code>bool</code><p>True to consider primary key field(s) only</p>
+</div>
+<div class="subelement argument">
+<h4>$local_only</h4>
+<code>bool</code><p>True to consider local fields only (ignoring foreign tables fields)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_sql_where_from_template"></a><div class="element clickable method public method_sql_where_from_template" data-toggle="collapse" data-target=".method_sql_where_from_template .collapse">
+<h2>sql_where_from_template()
+        </h2>
+<pre>sql_where_from_template($primary_only, $local_only) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$primary_only</h4></div>
+<div class="subelement argument"><h4>$local_only</h4></div>
+</div></div>
+</div>
+<a id="method___construct"></a><div class="element clickable method protected method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Model classes should only be instanciated through the Model::load() method.</h2>
+<pre>__construct($params) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Classes must be instanciated using xElement::load().</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="">\Model::load()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::__construct()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$params</h4></div>
+</div></div>
+</div>
+<a id="method_load_plugin"></a><div class="element clickable method protected method_load_plugin" data-toggle="collapse" data-target=".method_load_plugin .collapse">
+<h2>Loads and stores and activates an instance of the specified plugin with the given params.</h2>
+<pre>load_plugin($name, $params) : \xPlugin</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><pre><code>$this->loadplugin('test', array('text' => 'Sample text.'));
+</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xElement::load_plugin()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xRestElement::load_plugin()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::load_plugin()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument"><h4>$params</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\xPlugin</code>The stored plugin instance</div>
+</div></div>
+</div>
+<a id="method_load_these"></a><div class="element clickable method protected method_load_these" data-toggle="collapse" data-target=".method_load_these .collapse">
+<h2>Helper method for loading and instanciating an xElement.</h2>
+<pre>load_these(array $items, array $params) : <a href="../classes/xElement.html">\xElement</a></pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method takes an associative array of classname => filename.
+The method will try to load and instanciate each of the
+given set of classname => filename. The first set to load
+and instanciate successfully will be returned.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xElement::load_these()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xRestElement::load_these()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::load_these()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$items</h4>
+<code>array</code><p>Array of classname => filename to load.</p>
+</div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Array of parrameters to pass to the created xEelement instance.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/xElement.html">\xElement</a></code>An xElement instance with the given parameters set.</div>
+</div></div>
+</div>
+<a id="method_sql_where_prepare"></a><div class="element clickable method protected method_sql_where_prepare" data-toggle="collapse" data-target=".method_sql_where_prepare .collapse">
+<h2>Creates a structured where clause content array.</h2>
+<pre>sql_where_prepare(bool $primary_only, bool $local_only) : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><pre><code>array(
+    array(
+        'operator' => 'AND',
+        'comparator' => '=',
+        'table' => 'tablename',
+        'field' => 'fieldname',
+        'value' => 'somevalue', // or array('value1', 'value2', ...)
+    )
+);
+</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::sql_where_prepare()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$primary_only</h4>
+<code>bool</code><p>True to consider primary key field(s) only</p>
+</div>
+<div class="subelement argument">
+<h4>$local_only</h4>
+<code>bool</code><p>True to consider local fields only (ignoring foreign tables fields)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_allow_html"> </a><div class="element clickable property public property_allow_html" data-toggle="collapse" data-target=".property_allow_html .collapse">
+<h2></h2>
+<pre>$allow_html : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Example:</p>
+
+<pre><code>array(
+    'field-1' => null,         // Allows all HTML tags
+    'field-2' => '<p><b><br/>' // Allows a set of tags, strips others
+)
+</code></pre></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$allow_html</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_constants"> </a><div class="element clickable property public property_constants" data-toggle="collapse" data-target=".property_constants .collapse">
+<h2></h2>
+<pre>$constants : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>CURRENT_TIMESTAMP).
+These fields value, when provided with a mysql constant or function,
+will not be escaped and enquoted.
+If empty, any field will accept sql constants.
+Example array:</p>
+
+<pre><code>array('mapping_name')
+</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::fields_values()">\xModel::fields_values()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$constants</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_delete"> </a><div class="element clickable property public property_delete" data-toggle="collapse" data-target=".property_delete .collapse">
+<h2></h2>
+<pre>$delete : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$delete</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_get"> </a><div class="element clickable property public property_get" data-toggle="collapse" data-target=".property_get .collapse">
+<h2></h2>
+<pre>$get : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$get</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_group_by"> </a><div class="element clickable property public property_group_by" data-toggle="collapse" data-target=".property_group_by .collapse">
+<h2></h2>
+<pre>$group_by : string | array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Contains model fields name(s).
+This property will be overridden with the xgroup_by parameter value.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_group()">\xModel::sql_group()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$group_by</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_join"> </a><div class="element clickable property public property_join" data-toggle="collapse" data-target=".property_join .collapse">
+<h2></h2>
+<pre>$join : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Contains model name(s).
+This property will be overridden with the xjoin parameter value.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::joins">\xModel::joins</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$join</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_joins"> </a><div class="element clickable property public property_joins" data-toggle="collapse" data-target=".property_joins .collapse">
+<h2></h2>
+<pre>$joins : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Joins MUST must match 0..1 tuple at most.
+Array example:</p>
+
+<pre><code>array(
+   'foreign_model_name' => 'LEFT JOIN foreign_table_name ON this_table_id = foreign_table_id'
+)
+</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_join()">\xModel::sql_join()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$joins</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_maintable"> </a><div class="element clickable property public property_maintable" data-toggle="collapse" data-target=".property_maintable .collapse">
+<h2></h2>
+<pre>$maintable : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Name of the main table:
+i.e. the table affected by the default put(),post(),delete() methods (if not overriden).</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$maintable</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_mapping"> </a><div class="element clickable property public property_mapping" data-toggle="collapse" data-target=".property_mapping .collapse">
+<h2></h2>
+<pre>$mapping : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This mapping purpose is to abstract table fields names.</p>
+
+<pre><code>array(
+    'id' => 'id',
+    'name' => 'name',
+    'example_name' => 'another_name_in_table',
+    'shortname' => 'name_in_table'
+)
+</code></pre></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$mapping</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_name"> </a><div class="element clickable property public property_name" data-toggle="collapse" data-target=".property_name .collapse">
+<h2></h2>
+<pre>$name : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Name of the model (eg. a class name 'SomeModel' becomes 'my').</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$name</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_order"> </a><div class="element clickable property public property_order" data-toggle="collapse" data-target=".property_order .collapse">
+<h2></h2>
+<pre>$order : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Accepted values: 'ASC' or 'DESC'.
+This property will be overridden with the xorder parameter value.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$order</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_order_by"> </a><div class="element clickable property public property_order_by" data-toggle="collapse" data-target=".property_order_by .collapse">
+<h2></h2>
+<pre>$order_by : string | array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Contains model fields name(s).
+This property will be overridden with the xorder_by parameter value.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$order_by</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_params"> </a><div class="element clickable property public property_params" data-toggle="collapse" data-target=".property_params .collapse">
+<h2></h2>
+<pre>$params : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\xElement::$$params</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xRestElement::$$params</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$params</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_plugins"> </a><div class="element clickable property public property_plugins" data-toggle="collapse" data-target=".property_plugins .collapse">
+<h2></h2>
+<pre>$plugins : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="">\xPlugin</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xElement::$$plugins</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xRestElement::$$plugins</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$plugins</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_post"> </a><div class="element clickable property public property_post" data-toggle="collapse" data-target=".property_post .collapse">
+<h2></h2>
+<pre>$post : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$post</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_primary"> </a><div class="element clickable property public property_primary" data-toggle="collapse" data-target=".property_primary .collapse">
+<h2></h2>
+<pre>$primary : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$primary</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_put"> </a><div class="element clickable property public property_put" data-toggle="collapse" data-target=".property_put .collapse">
+<h2></h2>
+<pre>$put : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$put</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_return"> </a><div class="element clickable property public property_return" data-toggle="collapse" data-target=".property_return .collapse">
+<h2></h2>
+<pre>$return : string | array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Contains db fields name(s).
+This property will be overridden with the xreturn parameter value.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="">\Model::sql_select()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$return</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_table"> </a><div class="element clickable property public property_table" data-toggle="collapse" data-target=".property_table .collapse">
+<h2></h2>
+<pre>$table </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xModel::$$table</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_validation"> </a><div class="element clickable property public property_validation" data-toggle="collapse" data-target=".property_validation .collapse">
+<h2></h2>
+<pre>$validation : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This validation puropose is to use the xValidator classes
+to ease models validation code.
+Also, these can be reused in xForm validation definition.</p>
+
+<pre><code>array(
+    'name' => array(
+        'mandatory',
+        'string' => array(2, 50)
+    )
+);
+</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="">\invalids()</a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="Data.Validator.html#%5CxValidatorStore">\xValidatorStore</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$validation</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_where"> </a><div class="element clickable property public property_where" data-toggle="collapse" data-target=".property_where .collapse">
+<h2></h2>
+<pre>$where : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Contains where template name(s).
+This property will be overridden with the xwhere parameter value.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::joins()">\xModel::joins()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$where</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_wheres"> </a><div class="element clickable property public property_wheres" data-toggle="collapse" data-target=".property_wheres .collapse">
+<h2></h2>
+<pre>$wheres : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Conventions:
+ - {modelfield} substitutes the value given for this field
+ - [modelfield] substitutes database field name corresponding to modelfield
+Array example:</p>
+
+<pre><code>array(
+   'where_name1' => "dbfield1 = {modelfield1} AND (dbfield3 > {modelfield3} OR dbfield4 IN {modelfield4})",
+   'where_name2' => "{{field1}} = {field1} AND {{field2}} = {field2} OR {{field3}} LIKE {field3})",
+   'where_name3' => "{{foreign_id}} = {foreign_id} AND (0=1 [OR {{*}} LIKE {*}])"
+)
+</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xModel::$$wheres</td>
+</tr>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

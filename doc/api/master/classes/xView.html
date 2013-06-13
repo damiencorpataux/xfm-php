@@ -1,0 +1,398 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xView</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___toString" title="__toString :: Allows to echo() or print() a xView instance."><span class="description">Allows to echo() or print() a xView instance.</span><pre>__toString()</pre></a></li>
+<li class="method public "><a href="#method_add_data" title="add_data :: Convenience method for merging this instance data
+with additional data."><span class="description">Convenience method for merging this instance data
+with additional data.</span><pre>add_data()</pre></a></li>
+<li class="method public "><a href="#method_add_meta" title="add_meta :: Convenience method for merging this instance metadata
+with additional metadata."><span class="description">Convenience method for merging this instance metadata
+with additional metadata.</span><pre>add_meta()</pre></a></li>
+<li class="method public "><a href="#method_apply" title="apply :: Renders the given template with the given data."><span class="description">Renders the given template with the given data.</span><pre>apply()</pre></a></li>
+<li class="method public "><a href="#method_b" title="b :: Shorthand method for {@link buffer()}."><span class="description">Shorthand method for {@link buffer()}.</span><pre>b()</pre></a></li>
+<li class="method public "><a href="#method_buffer" title="buffer :: Buffers the given string in the view buffer."><span class="description">Buffers the given string in the view buffer.</span><pre>buffer()</pre></a></li>
+<li class="method public "><a href="#method_load" title="load :: Loads and returns the view specified object."><span class="description">Loads and returns the view specified object.</span><pre>load()</pre></a></li>
+<li class="method public "><a href="#method_render" title="render :: Retrun rendered view."><span class="description">Retrun rendered view.</span><pre>render()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method___construct" title="__construct :: View classes can only be instanciated through the View::load() method."><span class="description">View classes can only be instanciated through the View::load() method.</span><pre>__construct()</pre></a></li>
+<li class="method protected "><a href="#method_init" title="init :: Hook for subclass initialization logic"><span class="description">Hook for subclass initialization logic</span><pre>init()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_buffer" title="$buffer :: A buffer for buffering view output."><span class="description"></span><pre>$buffer</pre></a></li>
+<li class="property public "><a href="#property_container" title="$container :: An optionnal view to be used to embed this view."><span class="description"></span><pre>$container</pre></a></li>
+<li class="property public "><a href="#property_data" title="$data :: Template data (associative array)."><span class="description"></span><pre>$data</pre></a></li>
+<li class="property public "><a href="#property_default_tpl" title="$default_tpl :: Computed view tpl name, used for rendering
+the default template if view PHP class does not exist."><span class="description"></span><pre>$default_tpl</pre></a></li>
+<li class="property public "><a href="#property_meta" title="$meta :: Metadata for the view (associative array)."><span class="description"></span><pre>$meta</pre></a></li>
+<li class="property public "><a href="#property_path" title="$path :: The View subclass directory."><span class="description"></span><pre>$path</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xView"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xView.html">xView</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Base view class.</p>
+<div class="details">
+<div class="long_description"><p>Responsibilities
+- deals with rendering and internationalization (i18n)</p></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
+<h2>Allows to echo() or print() a xView instance.</h2>
+<pre>__toString() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="View.View.html#%5CxView::render()">\xView::render()</a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_add_data"></a><div class="element clickable method public method_add_data" data-toggle="collapse" data-target=".method_add_data .collapse">
+<h2>Convenience method for merging this instance data
+with additional data.</h2>
+<pre>add_data(array $data) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The given data will erase this instance data.
+The merged data array replaces this instance data
+and is also returned.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>data array.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Merged data array.</div>
+</div></div>
+</div>
+<a id="method_add_meta"></a><div class="element clickable method public method_add_meta" data-toggle="collapse" data-target=".method_add_meta .collapse">
+<h2>Convenience method for merging this instance metadata
+with additional metadata.</h2>
+<pre>add_meta(array $meta) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The given metadata will erase this instance metadata.
+The merged metadata array replaces this instance metadata
+and is also returned.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$meta</h4>
+<code>array</code><p>Metadata array.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Merged metadata array.</div>
+</div></div>
+</div>
+<a id="method_apply"></a><div class="element clickable method public method_apply" data-toggle="collapse" data-target=".method_apply .collapse">
+<h2>Renders the given template with the given data.</h2>
+<pre>apply(string $template, mixed $data, $meta) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$template</h4>
+<code>string</code><p>The filename of the template to use
+(e.g. tplfile.tpl).</p>
+</div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>mixed</code><p>The data to be used within the template context.
+(defaults to instance data property).</p>
+</div>
+<div class="subelement argument"><h4>$meta</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_b"></a><div class="element clickable method public method_b" data-toggle="collapse" data-target=".method_b .collapse">
+<h2>Shorthand method for {@link buffer()}.</h2>
+<pre>b(string | \ignored $string) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><code>\ignored</code><p>The string to buffer.</p></div>
+</div></div>
+</div>
+<a id="method_buffer"></a><div class="element clickable method public method_buffer" data-toggle="collapse" data-target=".method_buffer .collapse">
+<h2>Buffers the given string in the view buffer.</h2>
+<pre>buffer(string | \ignored $string) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="View.View.html#%5CxView::buffer">\xView::buffer</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><code>\ignored</code><p>The string to buffer.</p></div>
+</div></div>
+</div>
+<a id="method_load"></a><div class="element clickable method public method_load" data-toggle="collapse" data-target=".method_load .collapse">
+<h2>Loads and returns the view specified object.</h2>
+<pre>load(string $name, array $data, array $meta_return) : <a href="../classes/xView.html">\xView</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>For example, the following code will
+load the views/entry/item.php file.
+and return an instance of the EntryItemView class:</p>
+
+<pre><code>xView::load('entry/item');
+</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The view to load.</p></div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>An array of data to be merged to the view instance</p></div>
+<div class="subelement argument">
+<h4>$meta_return</h4>
+<code>array</code><p>An array of metadata on which the view metadata will be merged</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/xView.html">\xView</a></code></div>
+</div></div>
+</div>
+<a id="method_render"></a><div class="element clickable method public method_render" data-toggle="collapse" data-target=".method_render .collapse">
+<h2>Retrun rendered view.</h2>
+<pre>render() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method should be overridden in subclasses to
+override the default tpl rendering.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method___construct"></a><div class="element clickable method protected method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>View classes can only be instanciated through the View::load() method.</h2>
+<pre>__construct(array $data) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\View::load()</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>An array of data to be merged to the view instance</p></div>
+</div></div>
+</div>
+<a id="method_init"></a><div class="element clickable method protected method_init" data-toggle="collapse" data-target=".method_init .collapse">
+<h2>Hook for subclass initialization logic</h2>
+<pre>init() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_buffer"> </a><div class="element clickable property public property_buffer" data-toggle="collapse" data-target=".property_buffer .collapse">
+<h2></h2>
+<pre>$buffer : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_container"> </a><div class="element clickable property public property_container" data-toggle="collapse" data-target=".property_container .collapse">
+<h2></h2>
+<pre>$container : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Must the name of a view (as defined in @see xView::load()).</p></div></div></div>
+</div>
+<a id="property_data"> </a><div class="element clickable property public property_data" data-toggle="collapse" data-target=".property_data .collapse">
+<h2></h2>
+<pre>$data : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>This data will be made available inside the template file.
+The conventional array structure is as follows:</p>
+
+<pre><code>array(
+    items => array(
+        array(id => '0', what => 'Items cell contains the associative array'),
+        array(id => '1', what => 'of data to display, usually retrieved'),
+        array(id => '2', what => 'from the database.')
+    )
+    html => array(
+        // Arbitrary HTML code to insert in the view
+        myview => 'HTML code generated by some other view, i.e. myview'
+    ),
+    messages => array(
+        'failed' => true
+    ),
+    form => array(
+        // Typically: form data to latch, i.e. the value of the name input of the posted form
+        name => 'The value for the `name` field of the form inside the view',
+        user => 'The value for the `user` field of the form inside the view'
+    ),
+    invalids => array(
+        // Typically: to be displayed form validation error message for each invalid form field
+        name => 'The error message for the `name`field, e.g. The name is too short',
+        user => 'e.g. This username is already taken'
+    ),
+    paging => array(
+        // Paging context informations
+        current => 'The current page of the paging context',
+        first => 'The first page number of the paging context',
+        last => 'The last page number of the paging context',
+        total => 'The total number of results of the paging context'
+    ),
+    misc => array(
+        // Whatever miscellaneous, view specific information
+        somekey => 'some value'
+    )
+)
+</code></pre></div></div></div>
+</div>
+<a id="property_default_tpl"> </a><div class="element clickable property public property_default_tpl" data-toggle="collapse" data-target=".property_default_tpl .collapse">
+<h2></h2>
+<pre>$default_tpl : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="View.View.html#%5CxView::render()">\xView::render()</a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_meta"> </a><div class="element clickable property public property_meta" data-toggle="collapse" data-target=".property_meta .collapse">
+<h2></h2>
+<pre>$meta : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Used for building html head metadata and links (css and javascript).
+The conventional array structure is as follows:</p>
+
+<pre><code>array(
+    title => 'Some title',
+    keywords => 'html,meta,keywords,comma,separated',
+    css => array(
+        'css/main.css',
+        array('css/print.css', 'print')
+    ),
+    js => array(
+        'js/file.js'
+    ),
+    related => array(
+        content_id_1 => 'Some HTML content to be displayed in the layout'
+    ),
+    navigation => array(
+        highlight => 'Id of the main navigation item to highligh'
+    )
+)
+</code></pre></div></div></div>
+</div>
+<a id="property_path"> </a><div class="element clickable property public property_path" data-toggle="collapse" data-target=".property_path .collapse">
+<h2></h2>
+<pre>$path : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Necessary because PHP is not yet able to provide with the directory
+of a subclass within the parent class code.</p></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>

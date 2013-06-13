@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>xfm API Documentation (master, 13-Jun-2013) » \xScript</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
+<li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
+<li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
+<li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
+<li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
+<li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">23</span>
+</li>
+<li>fixme 
+                <span class="label label-info">1</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Setups script components."><span class="description">Setups script components.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_autorun" title="autorun :: "><span class="description">autorun()
+        </span><pre>autorun()</pre></a></li>
+<li class="method public "><a href="#method_confirm" title="confirm :: "><span class="description">confirm()
+        </span><pre>confirm()</pre></a></li>
+<li class="method public "><a href="#method_display_help" title="display_help :: "><span class="description">display_help()
+        </span><pre>display_help()</pre></a></li>
+<li class="method public "><a href="#method_help" title="help :: "><span class="description">help()
+        </span><pre>help()</pre></a></li>
+<li class="method public "><a href="#method_init" title="init :: Hook for initializing specific things."><span class="description">Hook for initializing specific things.</span><pre>init()</pre></a></li>
+<li class="method public "><a href="#method_log" title="log :: Outputs a string on stdout, optionally indenting it"><span class="description">Outputs a string on stdout, optionally indenting it</span><pre>log()</pre></a></li>
+<li class="method public "><a href="#method_opt" title="opt :: Returns information about the given option:
+- false: option is not found
+- true: option is found with no value
+- mixed: option is found with the given value"><span class="description">Returns information about the given option:
+- false: option is not found
+- true: option is found with no value
+- mixed: option is found with the given value</span><pre>opt()</pre></a></li>
+<li class="method public "><a href="#method_print_profile_information" title="print_profile_information :: "><span class="description">print_profile_information()
+        </span><pre>print_profile_information()</pre></a></li>
+<li class="method public "><a href="#method_prompt" title="prompt :: "><span class="description">prompt()
+        </span><pre>prompt()</pre></a></li>
+<li class="method public "><a href="#method_run" title="run :: The actual user script logic."><span class="description">The actual user script logic.</span><pre>run()</pre></a></li>
+<li class="method public "><a href="#method_setup" title="setup :: "><span class="description">setup()
+        </span><pre>setup()</pre></a></li>
+<li class="method public "><a href="#method_setup_bootstrap" title="setup_bootstrap :: Setups Bootstrap."><span class="description">Setups Bootstrap.</span><pre>setup_bootstrap()</pre></a></li>
+<li class="method public "><a href="#method_timer_lapse" title="timer_lapse :: "><span class="description">timer_lapse()
+        </span><pre>timer_lapse()</pre></a></li>
+<li class="method public "><a href="#method_timer_start" title="timer_start :: "><span class="description">timer_start()
+        </span><pre>timer_start()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul><li class="property public "><a href="#property_timer_start" title="$timer_start :: "><span class="description"></span><pre>$timer_start</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\xScript"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/xScript.html">xScript</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">This class is used to create command line scripts</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/xFreemwork.html">xFreemwork</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Setups script components.</h2>
+<pre>__construct(bool $autorun) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$autorun</h4>
+<code>bool</code><p>If true, calls the run() method automatically from constructor.</p>
+</div>
+</div></div>
+</div>
+<a id="method_autorun"></a><div class="element clickable method public method_autorun" data-toggle="collapse" data-target=".method_autorun .collapse">
+<h2>autorun()
+        </h2>
+<pre>autorun() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_confirm"></a><div class="element clickable method public method_confirm" data-toggle="collapse" data-target=".method_confirm .collapse">
+<h2>confirm()
+        </h2>
+<pre>confirm($msg, $indent_level) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$msg</h4></div>
+<div class="subelement argument"><h4>$indent_level</h4></div>
+</div></div>
+</div>
+<a id="method_display_help"></a><div class="element clickable method public method_display_help" data-toggle="collapse" data-target=".method_display_help .collapse">
+<h2>display_help()
+        </h2>
+<pre>display_help() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_help"></a><div class="element clickable method public method_help" data-toggle="collapse" data-target=".method_help .collapse">
+<h2>help()
+        </h2>
+<pre>help() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_init"></a><div class="element clickable method public method_init" data-toggle="collapse" data-target=".method_init .collapse">
+<h2>Hook for initializing specific things.</h2>
+<pre>init() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_log"></a><div class="element clickable method public method_log" data-toggle="collapse" data-target=".method_log .collapse">
+<h2>Outputs a string on stdout, optionally indenting it</h2>
+<pre>log(string $msg, int $indent_level, string $indent_symbol, $newline) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$msg</h4>
+<code>string</code><p>The string to output</p></div>
+<div class="subelement argument">
+<h4>$indent_level</h4>
+<code>int</code><p>The indentation level</p></div>
+<div class="subelement argument">
+<h4>$indent_symbol</h4>
+<code>string</code><p>The indentation symbol to use</p></div>
+<div class="subelement argument"><h4>$newline</h4></div>
+</div></div>
+</div>
+<a id="method_opt"></a><div class="element clickable method public method_opt" data-toggle="collapse" data-target=".method_opt .collapse">
+<h2>Returns information about the given option:
+- false: option is not found
+- true: option is found with no value
+- mixed: option is found with the given value</h2>
+<pre>opt(string $name) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="">\http://php.net/manual/en/function.getopt.php</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Options string as defined in PHP getopt()</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Information about the given option</div>
+</div></div>
+</div>
+<a id="method_print_profile_information"></a><div class="element clickable method public method_print_profile_information" data-toggle="collapse" data-target=".method_print_profile_information .collapse">
+<h2>print_profile_information()
+        </h2>
+<pre>print_profile_information() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_prompt"></a><div class="element clickable method public method_prompt" data-toggle="collapse" data-target=".method_prompt .collapse">
+<h2>prompt()
+        </h2>
+<pre>prompt($msg, $indent_level, $indent_symbol, $newline) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$msg</h4></div>
+<div class="subelement argument"><h4>$indent_level</h4></div>
+<div class="subelement argument"><h4>$indent_symbol</h4></div>
+<div class="subelement argument"><h4>$newline</h4></div>
+</div></div>
+</div>
+<a id="method_run"></a><div class="element clickable method public method_run" data-toggle="collapse" data-target=".method_run .collapse">
+<h2>The actual user script logic.</h2>
+<pre>run() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>This method is to be defined in child class.</p></div></div></div>
+</div>
+<a id="method_setup"></a><div class="element clickable method public method_setup" data-toggle="collapse" data-target=".method_setup .collapse">
+<h2>setup()
+        </h2>
+<pre>setup() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setup_bootstrap"></a><div class="element clickable method public method_setup_bootstrap" data-toggle="collapse" data-target=".method_setup_bootstrap .collapse">
+<h2>Setups Bootstrap.</h2>
+<pre>setup_bootstrap() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>You might want to refine this method if you are using a custom bootstrap.</p></div></div></div>
+</div>
+<a id="method_timer_lapse"></a><div class="element clickable method public method_timer_lapse" data-toggle="collapse" data-target=".method_timer_lapse .collapse">
+<h2>timer_lapse()
+        </h2>
+<pre>timer_lapse() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_timer_start"></a><div class="element clickable method public method_timer_start" data-toggle="collapse" data-target=".method_timer_start .collapse">
+<h2>timer_start()
+        </h2>
+<pre>timer_start() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_timer_start"> </a><div class="element clickable property public property_timer_start" data-toggle="collapse" data-target=".property_timer_start .collapse">
+<h2></h2>
+<pre>$timer_start </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+</div>
+</body>
+</html>
