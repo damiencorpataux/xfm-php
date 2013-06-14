@@ -1,33 +1,10 @@
 #!/bin/sh
 
-###############################################################################
-# Configuration
-#
+# FIXME: update this script for doc-autogeneration using phpdoc2:
+# 0. check that phpdoc2 is installed, if not: output an error message with link to officially recommended install instructions
+# 1. clone xfm in the directory given as agrumant (default: /tmp)
+# 2. switch to the branch given as argument (default: master)
+# 2. generate documentation in the directory given as argument (default: /tmp/xfm-api-dpc-{branch})
+# 3. wipe the xfm clone
 
-# Directories
-phpdoc_dir=PhpDocumentor
-base_dir=../..
-source_dir=$base_dir/lib
-output_dir=$base_dir/docs/api/trunk
-
-# Title
-svn_revision=`svn info $base_dir | grep Revision | cut -b11-`
-svn_date=`svn info $base_dir | grep Date | cut -b20-38`
-title="xFreemwork API Documentation<br/>(trunk, revision $svn_revision, $svn_date)"
-
-###############################################################################
-# Processing
-#
-
-# Empties output directory
-rm -rf $output_dir/*
-
-# Generates HTML Documentation
-php $phpdoc_dir/phpdoc -o HTML:frames:earthli -d $source_dir -t $output_dir -dn xFreemwork -s -ti "$title" > /dev/null
-
-# Renames files (PhpDocumentor bug?)
-# - *.cs -> *.css
-# - *.pn -> *.png
-find $output_dir/media -iname *.cs -exec mv {} {}s \;
-find $output_dir/media -iname *.pn -exec mv {} {}g \;
-
+# TODO: create another script (using the one above) to automatically update http://damiencorpataux.github.io/xfm-php/doc/api/master
