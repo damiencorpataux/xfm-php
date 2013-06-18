@@ -154,7 +154,8 @@ abstract class xModel extends xRestElement {
      * your project/views/ directory.
      * Templates are given a data array ($d) with two items:
      * - 'model' contains the model instance
-     * - 'where' constains the parsed fields values
+     * - 'where' contains the parsed fields values
+     * - 'params' contains the model instance parameters
      * Array example:
      * <code>
      * array(
