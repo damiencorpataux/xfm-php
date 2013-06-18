@@ -288,7 +288,8 @@ abstract class xModelMysql extends xModel {
         if (!$tpl) throw new xException("Where template not found or empty ('{$this->where}')");
         return xView::load($tpl, array(
             'model' => $this,
-            'where' => $where
+            'where' => $where,
+            'params' => $this->params
         ))->render();
     }
 
