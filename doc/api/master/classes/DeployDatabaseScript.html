@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>xfm API Documentation (master, 26-Jun-2013) » \xScript</title>
+<title>xfm API Documentation (master, 26-Jun-2013) » \DeployDatabaseScript</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -71,56 +71,60 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public "><a href="#method___construct" title="__construct :: Setups script components."><span class="description">Setups script components.</span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#method_autorun" title="autorun :: "><span class="description">autorun()
+<li class="method public inherited"><a href="#method___construct" title="__construct :: Setups script components."><span class="description">Setups script components.</span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method_autorun" title="autorun :: "><span class="description">autorun()
         </span><pre>autorun()</pre></a></li>
-<li class="method public "><a href="#method_confirm" title="confirm :: "><span class="description">confirm()
+<li class="method public inherited"><a href="#method_confirm" title="confirm :: "><span class="description">confirm()
         </span><pre>confirm()</pre></a></li>
-<li class="method public "><a href="#method_display_help" title="display_help :: "><span class="description">display_help()
+<li class="method public inherited"><a href="#method_display_help" title="display_help :: "><span class="description">display_help()
         </span><pre>display_help()</pre></a></li>
+<li class="method public "><a href="#method_get_files_to_execute" title="get_files_to_execute :: Returns an array containing the files to be parsed"><span class="description">Returns an array containing the files to be parsed</span><pre>get_files_to_execute()</pre></a></li>
 <li class="method public "><a href="#method_help" title="help :: "><span class="description">help()
         </span><pre>help()</pre></a></li>
 <li class="method public "><a href="#method_init" title="init :: Hook for initializing specific things."><span class="description">Hook for initializing specific things.</span><pre>init()</pre></a></li>
-<li class="method public "><a href="#method_log" title="log :: Outputs a string on stdout, optionally indenting it"><span class="description">Outputs a string on stdout, optionally indenting it</span><pre>log()</pre></a></li>
-<li class="method public "><a href="#method_opt" title="opt :: Returns information about the given option:
+<li class="method public inherited"><a href="#method_log" title="log :: Outputs a string on stdout, optionally indenting it"><span class="description">Outputs a string on stdout, optionally indenting it</span><pre>log()</pre></a></li>
+<li class="method public inherited"><a href="#method_opt" title="opt :: Returns information about the given option:
 - false: option is not found
 - true: option is found with no value
 - mixed: option is found with the given value"><span class="description">Returns information about the given option:
 - false: option is not found
 - true: option is found with no value
 - mixed: option is found with the given value</span><pre>opt()</pre></a></li>
-<li class="method public "><a href="#method_print_profile_information" title="print_profile_information :: "><span class="description">print_profile_information()
+<li class="method public inherited"><a href="#method_print_profile_information" title="print_profile_information :: "><span class="description">print_profile_information()
         </span><pre>print_profile_information()</pre></a></li>
-<li class="method public "><a href="#method_prompt" title="prompt :: "><span class="description">prompt()
+<li class="method public inherited"><a href="#method_prompt" title="prompt :: "><span class="description">prompt()
         </span><pre>prompt()</pre></a></li>
 <li class="method public "><a href="#method_run" title="run :: The actual user script logic."><span class="description">The actual user script logic.</span><pre>run()</pre></a></li>
-<li class="method public "><a href="#method_setup" title="setup :: "><span class="description">setup()
+<li class="method public inherited"><a href="#method_setup" title="setup :: "><span class="description">setup()
         </span><pre>setup()</pre></a></li>
-<li class="method public "><a href="#method_setup_bootstrap" title="setup_bootstrap :: Setups Bootstrap."><span class="description">Setups Bootstrap.</span><pre>setup_bootstrap()</pre></a></li>
-<li class="method public "><a href="#method_timer_lapse" title="timer_lapse :: "><span class="description">timer_lapse()
+<li class="method public "><a href="#method_setup_bootstrap" title="setup_bootstrap :: Setups Bootstrap with database selection fault tolerance."><span class="description">Setups Bootstrap with database selection fault tolerance.</span><pre>setup_bootstrap()</pre></a></li>
+<li class="method public inherited"><a href="#method_timer_lapse" title="timer_lapse :: "><span class="description">timer_lapse()
         </span><pre>timer_lapse()</pre></a></li>
-<li class="method public "><a href="#method_timer_start" title="timer_start :: "><span class="description">timer_start()
+<li class="method public inherited"><a href="#method_timer_start" title="timer_start :: "><span class="description">timer_start()
         </span><pre>timer_start()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
-                    <ul><li class="property public "><a href="#property_timer_start" title="$timer_start :: "><span class="description"></span><pre>$timer_start</pre></a></li></ul>
+                    <ul>
+<li class="property public "><a href="#property_sql_path" title="$sql_path :: "><span class="description"></span><pre>$sql_path</pre></a></li>
+<li class="property public inherited"><a href="#property_timer_start" title="$timer_start :: "><span class="description"></span><pre>$timer_start</pre></a></li>
+</ul>
 </li>
 </ul>
 </div>
 <div class="span8">
-<a id="\xScript"></a><ul class="breadcrumb">
+<a id="\DeployDatabaseScript"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/xScript.html">xScript</a>
+<span class="divider">\</span><a href="../classes/DeployDatabaseScript.html">DeployDatabaseScript</a>
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">This class is used to create command line scripts</p>
+<p class="short_description">Executes .sql files present in the sql/ directory (alphabetical order).</p>
 <div class="details">
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
@@ -132,9 +136,13 @@
 <a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
 <h2>Setups script components.</h2>
 <pre>__construct(bool $autorun) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::__construct()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$autorun</h4>
@@ -146,16 +154,26 @@
 <h2>autorun()
         </h2>
 <pre>autorun() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::autorun()</td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_confirm"></a><div class="element clickable method public method_confirm" data-toggle="collapse" data-target=".method_confirm .collapse">
 <h2>confirm()
         </h2>
 <pre>confirm($msg, $indent_level) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::confirm()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$msg</h4></div>
 <div class="subelement argument"><h4>$indent_level</h4></div>
@@ -165,8 +183,24 @@
 <h2>display_help()
         </h2>
 <pre>display_help() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::display_help()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_get_files_to_execute"></a><div class="element clickable method public method_get_files_to_execute" data-toggle="collapse" data-target=".method_get_files_to_execute .collapse">
+<h2>Returns an array containing the files to be parsed</h2>
+<pre>get_files_to_execute() : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
 </div>
 <a id="method_help"></a><div class="element clickable method public method_help" data-toggle="collapse" data-target=".method_help .collapse">
 <h2>help()
@@ -184,9 +218,13 @@
 <a id="method_log"></a><div class="element clickable method public method_log" data-toggle="collapse" data-target=".method_log .collapse">
 <h2>Outputs a string on stdout, optionally indenting it</h2>
 <pre>log(string $msg, int $indent_level, string $indent_symbol, $newline) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::log()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$msg</h4>
@@ -206,13 +244,19 @@
 - true: option is found with no value
 - mixed: option is found with the given value</h2>
 <pre>opt(string $name) : array</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>see</th>
 <td><a href="">\http://php.net/manual/en/function.getopt.php</a></td>
-</tr></table>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\xScript::opt()</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$name</h4>
@@ -227,16 +271,26 @@
 <h2>print_profile_information()
         </h2>
 <pre>print_profile_information() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::print_profile_information()</td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_prompt"></a><div class="element clickable method public method_prompt" data-toggle="collapse" data-target=".method_prompt .collapse">
 <h2>prompt()
         </h2>
 <pre>prompt($msg, $indent_level, $indent_symbol, $newline) </pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::prompt()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$msg</h4></div>
 <div class="subelement argument"><h4>$indent_level</h4></div>
@@ -254,36 +308,72 @@
 <h2>setup()
         </h2>
 <pre>setup() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::setup()</td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_setup_bootstrap"></a><div class="element clickable method public method_setup_bootstrap" data-toggle="collapse" data-target=".method_setup_bootstrap .collapse">
-<h2>Setups Bootstrap.</h2>
+<h2>Setups Bootstrap with database selection fault tolerance.</h2>
 <pre>setup_bootstrap() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"><p>You might want to refine this method if you are using a custom bootstrap.</p></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>You might want to refine this method if you are using a custom bootstrap.</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="lib.Util.Script.html#%5CxScript::setup_bootstrap()">\xScript::setup_bootstrap()</a></td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_timer_lapse"></a><div class="element clickable method public method_timer_lapse" data-toggle="collapse" data-target=".method_timer_lapse .collapse">
 <h2>timer_lapse()
         </h2>
 <pre>timer_lapse() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::timer_lapse()</td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_timer_start"></a><div class="element clickable method public method_timer_start" data-toggle="collapse" data-target=".method_timer_start .collapse">
 <h2>timer_start()
         </h2>
 <pre>timer_start() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::timer_start()</td>
+</tr></table>
+</div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_sql_path"> </a><div class="element clickable property public property_sql_path" data-toggle="collapse" data-target=".property_sql_path .collapse">
+<h2></h2>
+<pre>$sql_path </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="property_timer_start"> </a><div class="element clickable property public property_timer_start" data-toggle="collapse" data-target=".property_timer_start .collapse">
 <h2></h2>
 <pre>$timer_start </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\xScript::$$timer_start</td>
+</tr></table>
+</div></div>
 </div>
 </div>
 </div>
