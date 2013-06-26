@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>xfm API Documentation (master, 13-Jun-2013) » Default</title>
+<title>xfm API Documentation (master, 26-Jun-2013) » Default</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -15,18 +15,20 @@
 <body>
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner"><div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 26-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
 <li class="dropdown">
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/unittests.html"><i class="icon-folder-open"></i> unittests</a></li>
 <li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
 <li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
 <li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
 <li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
 <li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
 <li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+<li><a href="../packages/xfreemwork.html"><i class="icon-folder-open"></i> xfreemwork</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -37,11 +39,11 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">339</span></a></li>
+                <span class="label label-info">363</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
-                <span class="label label-info">23</span>
+                <span class="label label-info">26</span>
 </li>
 <li>fixme 
                 <span class="label label-info">1</span>
@@ -75,10 +77,19 @@
 <i class="icon-custom icon-function"></i> Functions</li>
 <li class="function  "><a href="#function__" title="_ :: "><span class="description">_()
         </span><pre>_</pre></a></li>
+<li class="function  "><a href="#function_get_env_file" title="get_env_file :: "><span class="description">get_env_file()
+        </span><pre>get_env_file</pre></a></li>
+<li class="function  "><a href="#function_get_files" title="get_files :: Returns an array containing the .in files to be processed"><span class="description">Returns an array containing the .in files to be processed</span><pre>get_files</pre></a></li>
+<li class="function  "><a href="#function_init" title="init :: Sets up script useful information"><span class="description">Sets up script useful information</span><pre>init</pre></a></li>
 <li class="function  "><a href="#function_myErrorHandler" title="myErrorHandler :: "><span class="description">myErrorHandler()
         </span><pre>myErrorHandler</pre></a></li>
+<li class="function  "><a href="#function_o" title="o :: Outputs a string on stdout, optionally indenting it"><span class="description">Outputs a string on stdout, optionally indenting it</span><pre>o</pre></a></li>
+<li class="function  "><a href="#function_process" title="process :: Processes .in files"><span class="description">Processes .in files</span><pre>process</pre></a></li>
 <li class="function  "><a href="#function_u" title="u :: "><span class="description">u()
         </span><pre>u</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#Dummy" title="Tests nothing, just used to test that the unit-testing infrastructure works.">Dummy</a></li>
 </ul>
 </div>
 <div class="span8 package-contents">
@@ -99,6 +110,29 @@
 <div class="subelement argument"><h4>$str</h4></div>
 </div></div>
 </div>
+<a id="function_get_env_file"></a><div class="element clickable function  function_get_env_file" data-toggle="collapse" data-target=".function_get_env_file .collapse">
+<h2>get_env_file()
+        </h2>
+<pre>get_env_file() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_get_files"></a><div class="element clickable function  function_get_files" data-toggle="collapse" data-target=".function_get_files .collapse">
+<h2>Returns an array containing the .in files to be processed</h2>
+<pre>get_files() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_init"></a><div class="element clickable function  function_init" data-toggle="collapse" data-target=".function_init .collapse">
+<h2>Sets up script useful information</h2>
+<pre>init() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="function_myErrorHandler"></a><div class="element clickable function  function_myErrorHandler" data-toggle="collapse" data-target=".function_myErrorHandler .collapse">
 <h2>myErrorHandler()
         </h2>
@@ -113,6 +147,27 @@
 <div class="subelement argument"><h4>$errline</h4></div>
 </div></div>
 </div>
+<a id="function_o"></a><div class="element clickable function  function_o" data-toggle="collapse" data-target=".function_o .collapse">
+<h2>Outputs a string on stdout, optionally indenting it</h2>
+<pre>o(string $msg, int $indent_level) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$msg</h4>
+<code>string</code><p>The string to output</p></div>
+<div class="subelement argument">
+<h4>$indent_level</h4>
+<code>int</code><p>The indentation level</p></div>
+</div></div>
+</div>
+<a id="function_process"></a><div class="element clickable function  function_process" data-toggle="collapse" data-target=".function_process .collapse">
+<h2>Processes .in files</h2>
+<pre>process() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="function_u"></a><div class="element clickable function  function_u" data-toggle="collapse" data-target=".function_u .collapse">
 <h2>u()
         </h2>
@@ -125,13 +180,22 @@
 <div class="subelement argument"><h4>$full</h4></div>
 </div></div>
 </div>
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="Dummy" class="element ajax clickable class">
+<h1>Dummy<a href="../classes/Dummy.html">¶</a>
+</h1>
+<p class="short_description">Tests nothing, just used to test that the unit-testing infrastructure works.</p>
+<div class="details collapse"></div>
+<a href="../classes/Dummy.html" class="more">« More »</a>
+</div>
 </div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+            generated on 2013-06-26T13:52:39+02:00.<br></footer></div>
 </div>
 </body>
 </html>

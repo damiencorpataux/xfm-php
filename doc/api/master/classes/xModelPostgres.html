@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>xfm API Documentation (master, 13-Jun-2013) » \xModelPostgres</title>
+<title>xfm API Documentation (master, 26-Jun-2013) » \xModelPostgres</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -15,18 +15,20 @@
 <body>
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner"><div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">xfm API Documentation (master, 26-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
 <li class="dropdown">
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/unittests.html"><i class="icon-folder-open"></i> unittests</a></li>
 <li><a href="../packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
 <li><a href="../packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
 <li><a href="../packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
 <li><a href="../packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
 <li><a href="../packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
 <li><a href="../packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+<li><a href="../packages/xfreemwork.html"><i class="icon-folder-open"></i> xfreemwork</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -37,11 +39,11 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">339</span></a></li>
+                <span class="label label-info">363</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
-                <span class="label label-info">23</span>
+                <span class="label label-info">26</span>
 </li>
 <li>fixme 
                 <span class="label label-info">1</span>
@@ -166,7 +168,7 @@ the invalid params (fields) as key, and true as value.</span><pre>invalids()</pr
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::count()">\xModel::count()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::count()">\xModel::count()</a></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>int</code></div>
@@ -202,7 +204,7 @@ FIXME: foreign models fieldnames are not translated.
 as an associative array.</p></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::delete()">\xModel::delete()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::delete()">\xModel::delete()</a></td>
 </tr></table>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
@@ -224,7 +226,7 @@ and the value is a sql constant,
 returns the value unquoted and unescaped.</p></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::escape()">\xModel::escape()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::escape()">\xModel::escape()</a></td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -323,7 +325,7 @@ Return array structure:</p>
 as an associative array.</p></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::get()">\xModel::get()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::get()">\xModel::get()</a></td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$rownum</h4></div>
@@ -366,11 +368,11 @@ the invalid params (fields) as key, and true as value.</h2>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::%24join">\xModel::$join</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::%24join">\xModel::$join</a></td>
 </tr>
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::%24joins">\xModel::$joins</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::%24joins">\xModel::$joins</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -440,7 +442,7 @@ the invalid params (fields) as key, and true as value.</h2>
 as an associative array.</p></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::post()">\xModel::post()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::post()">\xModel::post()</a></td>
 </tr></table>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
@@ -475,7 +477,7 @@ as an associative array.</p></div>
 as an associative array.</p></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::put()">\xModel::put()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::put()">\xModel::put()</a></td>
 </tr></table>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
@@ -524,7 +526,7 @@ an informational array is returned, containg</li>
 </ul></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::query()">\xModel::query()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::query()">\xModel::query()</a></td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -569,7 +571,7 @@ an informational array is returned, containg</li>
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_from()">\xModel::sql_from()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_from()">\xModel::sql_from()</a></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
@@ -583,7 +585,7 @@ an informational array is returned, containg</li>
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_group()">\xModel::sql_group()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_group()">\xModel::sql_group()</a></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
@@ -597,7 +599,7 @@ an informational array is returned, containg</li>
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_join()">\xModel::sql_join()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_join()">\xModel::sql_join()</a></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
@@ -611,7 +613,7 @@ an informational array is returned, containg</li>
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_limit()">\xModel::sql_limit()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_limit()">\xModel::sql_limit()</a></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
@@ -625,7 +627,7 @@ an informational array is returned, containg</li>
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
@@ -639,7 +641,7 @@ an informational array is returned, containg</li>
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_select()">\xModel::sql_select()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_select()">\xModel::sql_select()</a></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
@@ -653,7 +655,7 @@ an informational array is returned, containg</li>
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$primary_only</h4></div>
@@ -766,7 +768,7 @@ and instanciate successfully will be returned.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -822,7 +824,7 @@ Example array:</p>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::fields_values()">\xModel::fields_values()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::fields_values()">\xModel::fields_values()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -865,7 +867,7 @@ This property will be overridden with the xgroup_by parameter value.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_group()">\xModel::sql_group()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_group()">\xModel::sql_group()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -884,7 +886,7 @@ This property will be overridden with the xjoin parameter value.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::joins">\xModel::joins</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::joins">\xModel::joins</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -908,7 +910,7 @@ Array example:</p>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_join()">\xModel::sql_join()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_join()">\xModel::sql_join()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -972,7 +974,7 @@ This property will be overridden with the xorder parameter value.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -991,7 +993,7 @@ This property will be overridden with the xorder_by parameter value.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_order()">\xModel::sql_order()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -1138,7 +1140,7 @@ Also, these can be reused in xForm validation definition.</p>
 </tr>
 <tr>
 <th>see</th>
-<td><a href="Data.Validator.html#%5CxValidatorStore">\xValidatorStore</a></td>
+<td><a href="lib.Data.Validator.html#%5CxValidatorStore">\xValidatorStore</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -1157,7 +1159,7 @@ This property will be overridden with the xwhere parameter value.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::joins()">\xModel::joins()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::joins()">\xModel::joins()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -1171,21 +1173,28 @@ This property will be overridden with the xwhere parameter value.</p></div>
 <pre>$wheres : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Conventions:
- - {modelfield} substitutes the value given for this field
- - [modelfield] substitutes database field name corresponding to modelfield
+<div class="long_description"><p>Associates template files to xwhere label.
+When requested using the 'xwhere' parameter, the SQL WHERE clause
+is generated by applying the given xwhere template (eg. query-or).
+Template files are looked for from the views root directory,
+your project/views/ directory.
+Templates are given a data array ($d) with two items:
+- 'model' contains the model instance
+- 'where' contains the parsed fields values
+- 'params' contains the model instance parameters
 Array example:</p>
 
 <pre><code>array(
-   'where_name1' => "dbfield1 = {modelfield1} AND (dbfield3 > {modelfield3} OR dbfield4 IN {modelfield4})",
-   'where_name2' => "{{field1}} = {field1} AND {{field2}} = {field2} OR {{field3}} LIKE {field3})",
-   'where_name3' => "{{foreign_id}} = {foreign_id} AND (0=1 [OR {{*}} LIKE {*}])"
+   // This targets project/views/xmodel/query-or.tpl, etc.
+   'query-or' => 'xmodel/query-or',
+   'query-and' => 'xmodel/query-and',
+   'query-like' => 'xmodel/query-like'
 )
 </code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>see</th>
-<td><a href="Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
+<td><a href="lib.Data.Model.html#%5CxModel::sql_where()">\xModel::sql_where()</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -1201,7 +1210,7 @@ Array example:</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+            generated on 2013-06-26T13:52:39+02:00.<br></footer></div>
 </div>
 </body>
 </html>

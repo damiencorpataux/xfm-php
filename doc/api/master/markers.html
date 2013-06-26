@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>xfm API Documentation (master, 13-Jun-2013)</title>
+<title>xfm API Documentation (master, 26-Jun-2013)</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="css/template.css" rel="stylesheet" media="all">
@@ -15,18 +15,20 @@
 <body>
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner"><div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">xfm API Documentation (master, 13-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">xfm API Documentation (master, 26-Jun-2013)</a><div class="nav-collapse"><ul class="nav">
 <li class="dropdown">
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="packages/unittests.html"><i class="icon-folder-open"></i> unittests</a></li>
 <li><a href="packages/xForm.html"><i class="icon-folder-open"></i> xForm</a></li>
 <li><a href="packages/xFreemwork.html"><i class="icon-folder-open"></i> xFreemwork</a></li>
 <li><a href="packages/xHelper.html"><i class="icon-folder-open"></i> xHelper</a></li>
 <li><a href="packages/xReusable.html"><i class="icon-folder-open"></i> xReusable</a></li>
 <li><a href="packages/xValidator.html"><i class="icon-folder-open"></i> xValidator</a></li>
 <li><a href="packages/xZend.html"><i class="icon-folder-open"></i> xZend</a></li>
+<li><a href="packages/xfreemwork.html"><i class="icon-folder-open"></i> xfreemwork</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -37,11 +39,11 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">339</span></a></li>
+                <span class="label label-info">363</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
-                <span class="label label-info">23</span>
+                <span class="label label-info">26</span>
 </li>
 <li>fixme 
                 <span class="label label-info">1</span>
@@ -63,20 +65,23 @@
 <div class="row">
 <div class="span4"><ul class="side-nav nav nav-list">
 <li class="nav-header">Navigation</li>
-<li><a href="#Data/ModelPostgres.php"><i class="icon-file"></i>Data/ModelPostgres.php</a></li>
-<li><a href="#Data/ModelMysql.php"><i class="icon-file"></i>Data/ModelMysql.php</a></li>
-<li><a href="#Front/JsFront.php"><i class="icon-file"></i>Front/JsFront.php</a></li>
-<li><a href="#Front/ApiFront.php"><i class="icon-file"></i>Front/ApiFront.php</a></li>
-<li><a href="#Front/RestFront.php"><i class="icon-file"></i>Front/RestFront.php</a></li>
-<li><a href="#Core/Util.php"><i class="icon-file"></i>Core/Util.php</a></li>
-<li><a href="#Core/WebController.php"><i class="icon-file"></i>Core/WebController.php</a></li>
-<li><a href="#Core/Element.php"><i class="icon-file"></i>Core/Element.php</a></li>
-<li><a href="#Core/Bootstrap.php"><i class="icon-file"></i>Core/Bootstrap.php</a></li>
-<li><a href="#Core/Exception.php"><i class="icon-file"></i>Core/Exception.php</a></li>
-<li><a href="#Util/Router.php"><i class="icon-file"></i>Util/Router.php</a></li>
-<li><a href="#Misc/Reusables/Sitemap/Sitemap.php"><i class="icon-file"></i>Misc/Reusables/Sitemap/Sitemap.php</a></li>
-<li><a href="#Misc/Helpers/FormHelper.php"><i class="icon-file"></i>Misc/Helpers/FormHelper.php</a></li>
-<li><a href="#View/View.php"><i class="icon-file"></i>View/View.php</a></li>
+<li><a href="#scripts/i18n/po_update.php"><i class="icon-file"></i>scripts/i18n/po_update.php</a></li>
+<li><a href="#scripts/deploy/database.php"><i class="icon-file"></i>scripts/deploy/database.php</a></li>
+<li><a href="#scripts/deploy/process_in.php"><i class="icon-file"></i>scripts/deploy/process_in.php</a></li>
+<li><a href="#lib/Data/ModelPostgres.php"><i class="icon-file"></i>lib/Data/ModelPostgres.php</a></li>
+<li><a href="#lib/Data/ModelMysql.php"><i class="icon-file"></i>lib/Data/ModelMysql.php</a></li>
+<li><a href="#lib/Front/JsFront.php"><i class="icon-file"></i>lib/Front/JsFront.php</a></li>
+<li><a href="#lib/Front/ApiFront.php"><i class="icon-file"></i>lib/Front/ApiFront.php</a></li>
+<li><a href="#lib/Front/RestFront.php"><i class="icon-file"></i>lib/Front/RestFront.php</a></li>
+<li><a href="#lib/Core/Util.php"><i class="icon-file"></i>lib/Core/Util.php</a></li>
+<li><a href="#lib/Core/WebController.php"><i class="icon-file"></i>lib/Core/WebController.php</a></li>
+<li><a href="#lib/Core/Element.php"><i class="icon-file"></i>lib/Core/Element.php</a></li>
+<li><a href="#lib/Core/Bootstrap.php"><i class="icon-file"></i>lib/Core/Bootstrap.php</a></li>
+<li><a href="#lib/Core/Exception.php"><i class="icon-file"></i>lib/Core/Exception.php</a></li>
+<li><a href="#lib/Util/Router.php"><i class="icon-file"></i>lib/Util/Router.php</a></li>
+<li><a href="#lib/Misc/Reusables/Sitemap/Sitemap.php"><i class="icon-file"></i>lib/Misc/Reusables/Sitemap/Sitemap.php</a></li>
+<li><a href="#lib/Misc/Helpers/FormHelper.php"><i class="icon-file"></i>lib/Misc/Helpers/FormHelper.php</a></li>
+<li><a href="#lib/View/View.php"><i class="icon-file"></i>lib/View/View.php</a></li>
 </ul></div>
 <div class="span8">
 <ul class="breadcrumb">
@@ -89,7 +94,7 @@
                         The following markers were found:
                         <ul>
 <li>todo 
-                <span class="label label-info">23</span>
+                <span class="label label-info">26</span>
 </li>
 <li>fixme 
                 <span class="label label-info">1</span>
@@ -98,8 +103,59 @@
 </div>
 <div id="marker-accordion">
 <div class="package-contents">
-<a name="Data/ModelPostgres.php" id="Data/ModelPostgres.php"></a><h3>
-<i class="icon-file"></i>Data/ModelPostgres.php<small style="float: right;padding-right: 10px;">5</small>
+<a name="scripts/i18n/po_update.php" id="scripts/i18n/po_update.php"></a><h3>
+<i class="icon-file"></i>scripts/i18n/po_update.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>31</td>
+<td>refactor: $po_file = "{$this->po_path}/{$lang}.po";</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="scripts/deploy/database.php" id="scripts/deploy/database.php"></a><h3>
+<i class="icon-file"></i>scripts/deploy/database.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>60</td>
+<td>ensure splitting by ";\n" will never split inside an sql statement</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="scripts/deploy/process_in.php" id="scripts/deploy/process_in.php"></a><h3>
+<i class="icon-file"></i>scripts/deploy/process_in.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>42</td>
+<td>populate this from ?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="lib/Data/ModelPostgres.php" id="lib/Data/ModelPostgres.php"></a><h3>
+<i class="icon-file"></i>lib/Data/ModelPostgres.php<small style="float: right;padding-right: 10px;">5</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -135,8 +191,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Data/ModelMysql.php" id="Data/ModelMysql.php"></a><h3>
-<i class="icon-file"></i>Data/ModelMysql.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Data/ModelMysql.php" id="lib/Data/ModelMysql.php"></a><h3>
+<i class="icon-file"></i>lib/Data/ModelMysql.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -152,8 +208,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Front/JsFront.php" id="Front/JsFront.php"></a><h3>
-<i class="icon-file"></i>Front/JsFront.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Front/JsFront.php" id="lib/Front/JsFront.php"></a><h3>
+<i class="icon-file"></i>lib/Front/JsFront.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -170,8 +226,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Front/ApiFront.php" id="Front/ApiFront.php"></a><h3>
-<i class="icon-file"></i>Front/ApiFront.php<small style="float: right;padding-right: 10px;">3</small>
+<a name="lib/Front/ApiFront.php" id="lib/Front/ApiFront.php"></a><h3>
+<i class="icon-file"></i>lib/Front/ApiFront.php<small style="float: right;padding-right: 10px;">3</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -197,8 +253,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Front/RestFront.php" id="Front/RestFront.php"></a><h3>
-<i class="icon-file"></i>Front/RestFront.php<small style="float: right;padding-right: 10px;">3</small>
+<a name="lib/Front/RestFront.php" id="lib/Front/RestFront.php"></a><h3>
+<i class="icon-file"></i>lib/Front/RestFront.php<small style="float: right;padding-right: 10px;">3</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -224,8 +280,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Core/Util.php" id="Core/Util.php"></a><h3>
-<i class="icon-file"></i>Core/Util.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Core/Util.php" id="lib/Core/Util.php"></a><h3>
+<i class="icon-file"></i>lib/Core/Util.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -241,8 +297,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Core/WebController.php" id="Core/WebController.php"></a><h3>
-<i class="icon-file"></i>Core/WebController.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Core/WebController.php" id="lib/Core/WebController.php"></a><h3>
+<i class="icon-file"></i>lib/Core/WebController.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -258,8 +314,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Core/Element.php" id="Core/Element.php"></a><h3>
-<i class="icon-file"></i>Core/Element.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Core/Element.php" id="lib/Core/Element.php"></a><h3>
+<i class="icon-file"></i>lib/Core/Element.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -275,8 +331,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Core/Bootstrap.php" id="Core/Bootstrap.php"></a><h3>
-<i class="icon-file"></i>Core/Bootstrap.php<small style="float: right;padding-right: 10px;">2</small>
+<a name="lib/Core/Bootstrap.php" id="lib/Core/Bootstrap.php"></a><h3>
+<i class="icon-file"></i>lib/Core/Bootstrap.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -297,8 +353,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Core/Exception.php" id="Core/Exception.php"></a><h3>
-<i class="icon-file"></i>Core/Exception.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Core/Exception.php" id="lib/Core/Exception.php"></a><h3>
+<i class="icon-file"></i>lib/Core/Exception.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -314,8 +370,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Util/Router.php" id="Util/Router.php"></a><h3>
-<i class="icon-file"></i>Util/Router.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Util/Router.php" id="lib/Util/Router.php"></a><h3>
+<i class="icon-file"></i>lib/Util/Router.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -331,8 +387,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Misc/Reusables/Sitemap/Sitemap.php" id="Misc/Reusables/Sitemap/Sitemap.php"></a><h3>
-<i class="icon-file"></i>Misc/Reusables/Sitemap/Sitemap.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/Misc/Reusables/Sitemap/Sitemap.php" id="lib/Misc/Reusables/Sitemap/Sitemap.php"></a><h3>
+<i class="icon-file"></i>lib/Misc/Reusables/Sitemap/Sitemap.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -348,8 +404,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="Misc/Helpers/FormHelper.php" id="Misc/Helpers/FormHelper.php"></a><h3>
-<i class="icon-file"></i>Misc/Helpers/FormHelper.php<small style="float: right;padding-right: 10px;">2</small>
+<a name="lib/Misc/Helpers/FormHelper.php" id="lib/Misc/Helpers/FormHelper.php"></a><h3>
+<i class="icon-file"></i>lib/Misc/Helpers/FormHelper.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -370,8 +426,8 @@
 </table></div>
 </div>
 <div class="package-contents">
-<a name="View/View.php" id="View/View.php"></a><h3>
-<i class="icon-file"></i>View/View.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="lib/View/View.php" id="lib/View/View.php"></a><h3>
+<i class="icon-file"></i>lib/View/View.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <tr>
@@ -392,7 +448,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-06-13T14:01:38+02:00.<br></footer></div>
+            generated on 2013-06-26T13:52:40+02:00.<br></footer></div>
 </div>
 </body>
 </html>
