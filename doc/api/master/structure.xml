@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project version="2.0.0a12" title="xfm API Documentation (master, 26-Jun-2013)">
+<project version="2.0.0a12" title="xfm API Documentation (master, 27-Jun-2013)">
   <file path="unittests/phpunit.php" hash="497886cff3e8ee996dcaf3af680298b2" package="Default">
     <include line="60" type="Require Once" package="Default">
       <name>PHPUnit/Autoload.php</name>
