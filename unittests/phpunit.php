@@ -9,7 +9,7 @@
 
 /**
  * PHPUnit tests CLI runner.
- * @package xfreemwork
+ * @package xFreemwork
  */
 class xPhpUnit {
 
