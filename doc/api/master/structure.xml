@@ -131,18 +131,18 @@ is correctly installed.</description>
     </docblock>
     <source>eJyVVNtu2kAQffdXTKxUNQnLJRItJYSUUpREhSQKtE9IkbHHsK29a+0uubTKv3fWmHKJm7QgIXZ2zpnbmW2fpvPUcaoHB+DAAQy4MTGCDhRPDRgJBrUBHsH1+TU7Q2PwwWSOXEMglcLAxI/AhTZ+HGNYoSt7O57TfU6iFqIMPpFZm+EJlkEKAklB0cTiYQmpOs7+sHtxCSfgaj9JY3SPnf3BVa876FtbpG5755WFiZpr++11d3xuL6smScns6EdtMPHc5EfIFbAUNh2r+aE66N0O+6NR96w/csuwj0pJVTp2qEgvP8AvB+iDwVyCm5laECj0Db7KCJGMQ1QQ+Zz6AXsTQYlZspCjR1GeqM5U2qQTPeMhTFz6ChcqmRNkZm3Uc/vEvVbyO/WbXYTsGyrNpWjBZCKe+12NWc9mSx7sMyXdgqNarcFq79lRHeq1Vq1xWKNPMZbd4B3Xu9B3rN6AeqPVaB7W6sXQga8NGytf6Ng3tmNDn0aOC/gklZA/oZ0sz5Vpdv4Y0JSNtL+VQCadYkoxW/gzZGP0k+JihxfD/rod9Uphaj0pDArK7jGliqyGq2nsc3EMwdxXGs3JxeiKNZuND6z+It5WF6FifRHIkItZC5pTbp5DVrPd3BpSv5BmvSsb+7P3Nw3s4K++lOEe4xhCKdCirOj3I1KaFdS2NO0yVVLpHhNhpu29zPF27osw849kisLLjGX33i2R6mFX9kC694VNO5d/FivDEPGWrldRonvFDXqbwWjJUlnI/4c+A9n35sUAURBLvc1dyupbb76eRYkBJl9d1LxDicyj/fdLsHylLEG+6/fczGmoSUKJQZ5I0f5betJcTNqP0aOUuoNBeZVvCfZO1v8Loq+Rpe1H5gkw1phD0gUJ9s5zB93Ls5Oczi3lHd28/Eq92HDI7qdchFZyoUxoSbysUeWthq6Ydr1yglRxYSLPbacKO+1p541uV6eddtUeKdcyzJaa9v55QUietnerMasEWHRTOOP/H6cv3hoIMUarQEzSTIO6aHSnnd/oNxaC</source>
   </file>
-  <file path="scripts/i18n/po2mo.php" hash="61e7243d8be3d98b24f2d58ac13e0854" package="Default">
+  <file path="scripts/i18n/po2mo.php" hash="39973b1e2ee70e86544a37c0339e6dd3" package="Default">
     <include line="11" type="Require Once" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="global" line="17" package="xFreemwork">
+    <class final="false" abstract="false" namespace="global" line="17" package="scripts">
       <extends>\xScript</extends>
       <name>Po2MoScript</name>
       <full_name>\Po2MoScript</full_name>
       <docblock line="13">
         <description>Compiles po files to mo files</description>
         <long-description></long-description>
-        <tag line="13" name="package" description="xFreemwork"/>
+        <tag line="13" name="package" description="scripts"/>
       </docblock>
       <property final="false" static="false" visibility="public" line="19" namespace="global" package="Default">
         <name>$po_path</name>
@@ -152,15 +152,15 @@ is correctly installed.</description>
         <name>$mo_path</name>
         <default></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="scripts">
         <name>init</name>
         <full_name>init</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="27" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="27" package="scripts">
         <name>run</name>
         <full_name>run</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="52" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="52" package="scripts">
         <name>get_configured_locales</name>
         <full_name>get_configured_locales</full_name>
         <docblock line="48">
@@ -171,7 +171,7 @@ is correctly installed.</description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="scripts">
         <name>compile</name>
         <full_name>compile</full_name>
         <docblock line="61">
@@ -191,7 +191,7 @@ is correctly installed.</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="79" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="79" package="scripts">
         <name>help</name>
         <full_name>help</full_name>
       </method>
@@ -204,34 +204,34 @@ is correctly installed.</description>
       <error line="27" code="50010">No DocBlock was found for method run()</error>
       <error line="79" code="50010">No DocBlock was found for method help()</error>
     </parse_markers>
-    <source>eJyNVltv4jgUfudXnEVIBARJy2g0K9gyrWinGqlTVcvMwz4h4xhiNbazjlOoKv77HhsHkgCjRX1wj8/lO7fP+etrlmStqN+CPgS0B6Or6xHcE8GZhJnSGTGk2OKlvX/6Pnt4nj/Y48+E55DypSb6HdyRMpmzGAoZMw0mYfD4/AseX57g7VN4Vd4PrC2hlOU5X6YMiIHEmGwcRZvNJlzLIlR6HXnlPFpn6RCtw8SI1GLo96NWS7N/C67ZQknKgphrSQQLFosVT9li0Qu7URjaPwQX/TI8jeZU88yEmGa3N2lhqi6XmRIZWuSQKVi5g1Eg/Nkq3GaEvpI1g+03zZjYKP3q4tOU5Dm8qNEPtfcMbGuYjHPY+v8/Wi3AX1YsMRHoZGqBVUwmNaEohU66KiQ1XEngkpughx7A/zoGCz2ceh9wA9uZkgYjjsedJcmZlWLK/PpPGWWqO2kaiv9jKErDXQOOLmQdDUk52ubozvtfM7OgSq74utAsXqSKEqxf0DsCiaJjrRmhCRzVwbmD0LcAs8cehEIdbFdKO5PgEBjVOymRa7iZ4sFFqwJ0ILFYzt0NtD/q9dtFH856hyHbk7rVXjFV66D9opWbUAzjoY3ho3S7aw/gulc35isI3PyxLc9NHpS6vSY2F0mc4hMNfNHTbPHjYT6/e3yYHzCLJuYKbrov8SHy4BCmAXUHLM3ZOViVAnyz8GKF9ZbKzjcm1ajAqOn2UjErervqTNzBSiPHxOk7aCa4Y40lo6RAcBsGlGhkh6UqjOMSlOrmaFvv3XslWdjtncx9I3TV5B9VQJ6oIo0xcm6INvCOIoL7ntjYS4z1ZjlMoSxDfDTB8rP8QpRuXsTKW4+oSUun3eOY+LVyzGN/ffibGc3fsL6VZbBNLpBwcMilhWYKLe3ZbwkOvN8uIFqT97D0dbtX3Uu9MKrv8aUtPSUal1Fl/s/hC8NaxbGZv03nhD08FJz/2wop7YXDqWUkxIHWw6kzmJyln4avr03JcGrUna0IZjne16Y6EHZj/yhNerXsn9X5rqwUvm3d+vL70peOLrV7hjRmbOPA72lcPjW4BUqg3PPMoacZ0UQcqczuQK4KTdklTVHRjHECuSSu9aKm3piL37BGZTRcrar0Vj66B+UTnuugCnbpRPEy57oS2YlDG0aNws8KZP8SvmUfvDjHPOIVLwJ7O4CrL58/D8Dogp2lnVo8l7oNaP03/FYV57WyN2jw0wWj+9MOWEtx3pJtGQ3aIl+vhIGhqijWo3WQDrPC4EE3Rtnf1Aa5/aA1VpDWErUo9rrVWjbf/YSlWY0d/Jy3Dy+5/+CI+uHh+8m93v57AuWH12rXQveSbarfTLiK/wEEAhlw</source>
+    <source>eJyNVt9v4jgQfuevmENIBARJy2q1J7iyrShXndStqmP34Z6QcQyJNrZztlOoKv73GxsHkgCri3gw4/nxzXjms//4mid5K+q3oA8B7cHo5nYEj4SnTMBMqpwYUuxw0+4//zWbvyzmdvk9STVk6UoR9Q5uSZnQLIZCxEyBSRg8vfyAp9dnePsU3pT7A2tLKGVap6uMATGQGJOPo2i73YYbUYRSbSKvrKNNng3ROkwMzyyGfj9qtRT7t0gVW0pBWRCnShDOguVynWZsueyF3SgM7Q/BRT9MmkULqtLchJhmtzdpYaoul5nkOVpoyCWs3cJI4H5tFe5zQn+SDQPt7LULTjOiNbzK0Td5cAtsZ5iINez8/49WC/DLixVmAZ1cLrGEyaQm5KXQSdeFoCaVAlKRmqCHHsB/HYNVHk69D7iD3UwKgxHH486KaGalmG96+7uIctmdNA35/zHkpeG+AUcVoo6GZCnaanTn/W+YWVIp1ummUCxeZpISLF7QOwGJolOhGaEJnNTBuYPQ1x+zxwMIuTzarqVyJsExMKp3MiI2cDfFhYtWBehAYrGcuztof9Trt48+nPUeQ7YndauDYiY3QftVSdeeGMZDG8NH6XbfHsBtr26criFwzcd2qTY6KHV7TWwuEj/Hxxv4oufZ8tt8sXh4mi+OmHkTcwU3PZT4GHlwDNOAugeWaXYJVqUAf1p4scR6C2n7G5NqVGDUdHutmBW9fbUnHmCtkGDi7B0U46mjjBWjpEBwWwaUKKSGlSyMIxKUqmZrW+/dRylY2O2d9X0jdNXkH1mATmSRxRhZG6IMvKOI4LAnNvYKY71ZApMoyxEfTbD8TF+J0tVFLL31iJqsdNo9tYkfK0c79uvD38yo9A3rWxkGe8gFsg02ubDQTKGEXfspwYb30wVEKfIelr7uD6oHqRdG9Tm+NqXnROMyqvT/JXxhWKs4HuYv0zljDw8F+/++QkoH4XBqGQlxoPVw6gwmF+mn4etrUzKcGvlgK4JZjg+1qTaEndjfSpNeLfsXeflU1hIvtm59+H3pS0fXjnuGNGbswYGf07i8Z3AKJEe555njmeZEEX6iMjsDWhaKsmuavKIZYwemgrij5zX1Rl/8gjUqreFqVaW38sY9Kp/xXAdV8JTOFK9zriuR7Ti0YdRIfFMg+5fwLfvgxiXm4T9xI7C7A7j58vnzAIwq2EXaqcVzqduA1n/Db1VxUSt7gwY/XTF6PD8Ba8kvW7Ido0Gb682aGxjKimI9WgfpMC8MLlSjlf1OrZHbc6WwgrSWqEVx0K3WsnnvJyzLa+zg+7x9vMn9gyPqh8fHk7u9/XsC5cfbat9C94Jtq28mO4r/AXslGFg=</source>
   </file>
-  <file path="scripts/i18n/po_update.php" hash="2ca0010982ad4e99729b8a9588083f2a" package="Default">
+  <file path="scripts/i18n/po_update.php" hash="c160f2c82f3a5021b7821e1a3b7f1b4b" package="Default">
     <include line="11" type="Require Once" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="global" line="17" package="xFreemwork">
+    <class final="false" abstract="false" namespace="global" line="17" package="scripts">
       <extends>\xScript</extends>
       <name>PoUpdateScript</name>
       <full_name>\PoUpdateScript</full_name>
       <docblock line="13">
         <description>Updates po files with new strings id from controllers and views files</description>
         <long-description></long-description>
-        <tag line="13" name="package" description="xFreemwork"/>
+        <tag line="13" name="package" description="scripts"/>
       </docblock>
       <property final="false" static="false" visibility="public" line="19" namespace="global" package="Default">
         <name>$po_path</name>
         <default></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="scripts">
         <name>init</name>
         <full_name>init</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="25" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="25" package="scripts">
         <name>run</name>
         <full_name>run</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="67" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="67" package="scripts">
         <name>get_configured_langs</name>
         <full_name>get_configured_langs</full_name>
         <docblock line="63">
@@ -242,7 +242,7 @@ is correctly installed.</description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="scripts">
         <name>get_files_to_parse</name>
         <full_name>get_files_to_parse</full_name>
         <docblock line="74">
@@ -253,7 +253,7 @@ is correctly installed.</description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="94" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="94" package="scripts">
         <name>clean_po_references</name>
         <full_name>clean_po_references</full_name>
         <docblock line="90">
@@ -269,7 +269,7 @@ is correctly installed.</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="107" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="107" package="scripts">
         <name>parse</name>
         <full_name>parse</full_name>
         <docblock line="101">
@@ -296,7 +296,7 @@ is correctly installed.</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="124" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="124" package="scripts">
         <name>help</name>
         <full_name>help</full_name>
       </method>
@@ -311,30 +311,30 @@ is correctly installed.</description>
       <error line="25" code="50010">No DocBlock was found for method run()</error>
       <error line="124" code="50010">No DocBlock was found for method help()</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
-  <file path="scripts/deploy/database.php" hash="6dce3717240ebd343bd6b00d17714e02" package="Default">
+  <file path="scripts/deploy/database.php" hash="022919cc60fe82900027cb56ce612c49" package="Default">
     <include line="11" type="Require Once" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="global" line="17" package="xScript">
+    <class final="false" abstract="false" namespace="global" line="17" package="scripts">
       <extends>\xScript</extends>
       <name>DeployDatabaseScript</name>
       <full_name>\DeployDatabaseScript</full_name>
       <docblock line="13">
         <description>Executes .sql files present in the sql/ directory (alphabetical order).</description>
         <long-description></long-description>
-        <tag line="13" name="package" description="xScript"/>
+        <tag line="13" name="package" description="scripts"/>
       </docblock>
       <property final="false" static="false" visibility="public" line="19" namespace="global" package="Default">
         <name>$sql_path</name>
         <default></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="xScript">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="scripts">
         <name>init</name>
         <full_name>init</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="xScript">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="scripts">
         <name>setup_bootstrap</name>
         <full_name>setup_bootstrap</full_name>
         <docblock line="25">
@@ -343,11 +343,11 @@ is correctly installed.</description>
           <tag line="25" name="see" description="\xScript::setup_bootstrap()" refers="\xScript::setup_bootstrap()"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="47" package="xScript">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="47" package="scripts">
         <name>run</name>
         <full_name>run</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="80" package="xScript">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="80" package="scripts">
         <name>get_files_to_execute</name>
         <full_name>get_files_to_execute</full_name>
         <docblock line="76">
@@ -358,7 +358,7 @@ is correctly installed.</description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="88" package="xScript">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="88" package="scripts">
         <name>help</name>
         <full_name>help</full_name>
       </method>
@@ -373,7 +373,7 @@ is correctly installed.</description>
       <error line="47" code="50010">No DocBlock was found for method run()</error>
       <error line="88" code="50010">No DocBlock was found for method help()</error>
     </parse_markers>
-    <source>eJyVV21vm0gQ/u5fMeezDhzZ0OakSsWXXHtJWlVK2lyT3qdKaA1je3VrILtLYivyf78ZwBgDubuiVjLsvM8zz2x++z1bZQP/ZAAn4EZjOH31+hQuxVpiAhepzoQV+YYO+fz608XV57sr/nm/kgaUnGuht1D8jDAxGEOexKjBrhA+fv4GH2+v4fFX79X+fMK6IorQGDlXCMLCytos8P2npydvmeReqpd+JWz8ZaampO2t7FpxDCcn/mCg8SGXGsM0idCNpU7EGt0wXEiFYTj2HN/z+B8F53+zUvl3kZaZ9ShNZzwbUKpFLlcbjHKLBjzzoICVDWQaDSYWZFIkQAc+kAOMbEpZukJlKzFHKyOhINWU59hjU+8yEf0tlgib0lURZqSEMXCJmUq3l1TEuTBYHgNuLCax2YvD82AA9GT5nBKHEbkNqeyrWfl5kSeRlWlCUUnrjkkaqmdkqQnT8708nMHmIk0smQ+CEfvjr1QPEnBmhdauNFmUgJ8TuEObZwb+SFNrrBYZPEmyFFcBg0GFpfeFyJUFmyrUggrv7Q28M1gnHgSGzYXzvTV3XIn5x6l0xBpZWSr14a0ojNDUlR7js1psB5Gw0Qrcq02EWeFjhOOWHd+HW42P3OE0t1lurUyWMM8XC0KssUJbwi/1/jibfQ7V8y6dh9S9MFIokmYIlYcbkRAUDCS5UjCK50CYSnMdIcgFRGmykMtck5+6xHHK0qmFLTI0pLFHJknL/WmE0/Ml2hsaGzJO5To7A+cizVVcaJZdqk06Y4KvTp+oBJ3wqN+mCmN6Hs/p/z4Om5YxW1xnKY21VNu2MokIpciwzpOEa7epcdNfLMqfp/MYmX3ej+P8D2Eyx5HOfhQkVRZf0dA84wtleBQqxx+MpkqzAcfmtNWop6r1za9Kl+7wVqcFKVJRSy4iHD63Bnw3bCSzoBREtHIrGUJHwYAmtGmIJbeRM2FgxJ/bo9B0XTIhe34uZHfDCbzulu2W+KxJlwXG8uUKNn9JfGpLuwVQDORFSowpJXi87v685tABlx6VWkvBW6AuJVexhaBHMs74YSdBoFIRu9z8VnyF2PT8ZRrsFY+xYLXQZoq7yFn1oIUXmuHAj01wHc72lnQh1QO2es209bs0V2ncf7n8EgDtP6IJMJmSFU1tYTj7ngyJoGlIE6IxXZ4SUoyMaZUmvLCYx6jaNAp9tssnp0oL4qUlbsCfud/NeOS/LD398nVaqFxcf7r6fB/efLu+/xTe3b+/v7qh9ztwGxuclqyXoPXXIsmF8hfa36PfW28pvOlDjnrLYj+/ff3mzdtxn9/pdNr3+X2JqDV1TGaEmjrTYlgEMNLoM3dx0qcfSxMJHXMxCY522zDQER81jJ+B0Fpsebws9bh8WRO1OFbLtTMh0qYlH6M7nNHkMC7G4xYQ+KkGFtymbZ7P+nUMmxuyo4LgoSHUMvW/Nl2RQmPEPwgqSgxYT7pTjbpDEZ/2BNtQ7jnt3y67fvprXDa+EjfrxDBUiyoyA1shi1XCF66S+WjLzJH5nK6T9S1DF6qlWv+d4gUGbNAtnzLDcEs3fDUMgkgQJmIM6Zbntth2Ag5fnLqUSx08WKIG/lK/dlh2f0AOTT6nhXRQnRD8NP10++9sThNCh8pWZTgEcHSvq2uxQpV1c+e85brE6lGcQ+KV45E5gLyL48qJW8BuH9HwhLYHrY4Z7LrD96876kj68NZIv9n7VuA1vTbv5mrL15QCUd3LfSvRIVGH01m0DkGUroI0oNS2/V8AEk3Q0uZNNOm23LSz2A2oQwktsr6/B3jC/gHsvd+5</source>
+    <source>eJyVV21v2zYQ/u5fcfOMWQ5sqc2AArWXrF2SFgWSNmvSfSog0NLZJkZLCkklNgL/991RsixLyrYKLWCJ937PPcf89nu2ynrBSQ9OwItGcPrq9SlcirXEBC5SnQkr8g0d8vn1p4urz3dX/PN+JQ0oOddCb8H9jDAxGEOexKjBrhA+fv4GH2+v4fFX/9X+fMy6IorQGDlXCMLCytpsGgRPT0/+Msn9VC+DUtgEy0xNSNtf2bXiGE5Ogl5P40MuNYZpEqEXS52INXphuJAKw3DkDwPf538UXPDNShXcRVpm1qc0h6NZj1J1uVxtMMotGvDNgwJWNpBpNJhYkIlLgA4CIAcY2ZSy9ITKVmKOVkZCQaopz5HPpt5lIvpbLEnBeTIuzEgJY+ASM5VuL6mIc2GwiARwYzGJDWzK9+deD+jJ8jklDgNyG1LZV7Pi8yJPIivThKKS1huRNJTPwFITJud7eTiDzUWaWDI/nQ7YH3+lepDAcOa0doVJVwJ+TuAObZ4Z+CNNrbFaZPAkyVJcBgwGFRbeFyJXFmyqUAsqvL838M4g7jOZTg2bC+d7a96oFAuOU2mJ1bKyVOrDmyuM0NSVDuOzSmwHkbDRCryrTYSZ8zHAUcNOEMCtxkfucJrbLLdWJkuY54sFIdZYoS3hl3p/nM0+h/J5l85D6l4YKRRJPYTSw41ICAoGklwpGMRzIEyluY4Q5AKiNFnIZa7JT1XiOGXp1MIWGRrS2COTpOX9NMDJ+RLtDY0NGadynZ3B8CLNVew0iy5VJocjgq9On6gErfCo36YMY3Iez+n/Pg6bFjFbXGcpjbVU26YyiQilyLDOk4Rrt6lw010syp+n8xiZXd6P4/wPYTLHkc5+FCRlFl/R0DzjC2V4FCrHH4ymTLMGx/q0VainqnXNr0qXXv9Wp44UqagFFxEOnxsDvuvXkllQCiJaeaUMocMxoAltGmLBbeRMGBjw5+Yo1F0XTMien53srj+G1+2y3RKf1enSYSxfrmDzl8SnprTngGIgdykxppTg8br785pDB1z6VGotBW+BqpRcxQaCHsk444edTKcqFbHHzW/E58Qm5y/TYKd4jI7VQpsp7iJn1YEWXmiGAz82wXU421vSTqoDbNWaaeq3aa7UuP9y+WUKtP+IJsBkSpY0tYX+7HvSJ4KmIU2IxnRxSkgxMqZVmvDCYh6jatModNkunpwqLYiXlriBYOZ9N6NB8LL05MvXiVO5uP509fk+vPl2ff8pvLt/f391Q+934NU2OC1ZP0EbrEWSCxUsdLBHv7/eUniThxz1lsV+fvv6zZu3oy6/k8mk6/P7AlFr6pjMCDVVpm5YBDDS6DN3cdylH0sTCR1zMQmOdlsz0BIf1IyfgdBabHm8LPW4eFkTtQytluvhmEiblnyMXn9Gk8O4GI0aQOCnHFjw6rZ5PqvXEWxuyI6aTh9qQg1T/2vTuRRqI/5BUFFiwGrSh+WoDyni045ga8odp93bZddNf7XLxlfiZp0YhqqrIjOwFdKtEr5wFcxHW2aOzOd0naxuGdqpFmrdd4oXGLBGt3zKDMMt3fDVcDqNBGEixpBueV6Dbccw5ItTm3KpgwdL1MBfqtcWy+4PyKHJ57SQDqpjgp+mn173nW1Yh9ChsmUZDgEc3euqWqxQZe3cOW+5LrB6FGefeOV4ZA4gb+O4dOI52O0j6p/Q9qDVMYNde/j+dUcdSR/eaunXe98IvKLX+t1cbfma4hDVvtw3Eu0TdQxbi3ZIEKWrIA0otW3/F4BEM21o8yYat1tumlnsetShhBZZ198DPGH/ADa839Q=</source>
   </file>
   <file path="lib/Data/Transaction.php" hash="9b22a8ad8a00815f11edea2c4e5c50ed" package="Default">
     <class final="false" abstract="false" namespace="global" line="16" package="xFreemwork">
@@ -8341,12 +8341,12 @@ override the default tpl rendering.&lt;/p&gt;</long-description>
     <source>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</source>
   </file>
   <package name="Default" full_name="Default"/>
+  <package name="scripts" full_name="scripts"/>
   <package name="unittests" full_name="unittests"/>
   <package name="xForm" full_name="xForm"/>
   <package name="xFreemwork" full_name="xFreemwork"/>
   <package name="xHelper" full_name="xHelper"/>
   <package name="xReusable" full_name="xReusable"/>
-  <package name="xScript" full_name="xScript"/>
   <package name="xUnittesting" full_name="xUnittesting"/>
   <package name="xValidator" full_name="xValidator"/>
   <namespace name="global" full_name="global"/>
