@@ -3,7 +3,7 @@
 /**
  * Custom PHPUnit_Framework_TestCase.
  * Sets up custom authentication information with 'local-superuser' role.
- * @package unittests
+ * @package xUnittesting
  */
 
 class xPHPUnit_Framework_TestCase extends PHPUnit_Framework_TestCase {
