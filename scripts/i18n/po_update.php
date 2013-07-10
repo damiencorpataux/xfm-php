@@ -12,7 +12,7 @@ require_once(dirname(__file__).'/../../lib/Util/Script.php');
 
 /**
  * Updates po files with new strings id from controllers and views files
- * @package xFreemwork
+ * @package scripts
 **/
 class PoUpdateScript extends xScript {
 

@@ -12,7 +12,7 @@ require_once(dirname(__file__).'/../../lib/Util/Script.php');
 
 /**
  * Compiles po files to mo files
- * @package xFreemwork
+ * @package scripts
 **/
 class Po2MoScript extends xScript {
 

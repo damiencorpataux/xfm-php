@@ -12,7 +12,7 @@ require_once(dirname(__file__).'/../../lib/Util/Script.php');
 
 /**
  * Executes .sql files present in the sql/ directory (alphabetical order).
- * @package xScript
+ * @package scripts
 **/
 class DeployDatabaseScript extends xScript {
 
