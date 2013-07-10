@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project version="2.0.0a12" title="xfm API Documentation (master, 27-Jun-2013)">
-  <file path="unittests/phpunit.php" hash="497886cff3e8ee996dcaf3af680298b2" package="Default">
+<project version="2.0.0a12" title="xfm API Documentation (master, 10-Jul-2013)">
+  <file path="unittests/phpunit.php" hash="934ecc3bd38eb029e14ae183d06a17a0" package="Default">
     <include line="60" type="Require Once" package="Default">
       <name>PHPUnit/Autoload.php</name>
     </include>
     <include line="69" type="Require Once" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="global" line="14" package="xfreemwork">
+    <class final="false" abstract="false" namespace="global" line="14" package="xUnittesting">
       <extends/>
       <name>xPhpUnit</name>
       <full_name>\xPhpUnit</full_name>
       <docblock line="10">
         <description>PHPUnit tests CLI runner.</description>
         <long-description></long-description>
-        <tag line="10" name="package" description="xfreemwork"/>
+        <tag line="10" name="package" description="xUnittesting"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="16" package="xfreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="16" package="xUnittesting">
         <name>__construct</name>
         <full_name>__construct</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="28" package="xfreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="28" package="xUnittesting">
         <name>xfm_path</name>
         <full_name>xfm_path</full_name>
         <docblock line="24">
@@ -28,7 +28,7 @@
           <long-description>&lt;p&gt;Override this to suit your custom project structur, if needed.&lt;/p&gt;</long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="36" package="xfreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="36" package="xUnittesting">
         <name>phpunit_path</name>
         <full_name>phpunit_path</full_name>
         <docblock line="32">
@@ -37,7 +37,7 @@
           <tag line="32" name="see" description="\xfm_path()" refers="\xfm_path()"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="44" package="xfreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="44" package="xUnittesting">
         <name>setup_phpunit</name>
         <full_name>setup_phpunit</full_name>
         <docblock line="40">
@@ -46,7 +46,7 @@
           <tag line="40" name="see" description="\xfm_path()" refers="\xfm_path()"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="xfreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="xUnittesting">
         <name>setup_xfm</name>
         <full_name>setup_xfm</full_name>
         <docblock line="63">
@@ -54,7 +54,7 @@
           <long-description></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="76" package="xfreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="76" package="xUnittesting">
         <name>setup_custom</name>
         <full_name>setup_custom</full_name>
         <docblock line="72">
@@ -67,42 +67,43 @@
       <error line="0" code="50007">No page-level DocBlock was found in file unittests/phpunit.php</error>
       <error line="16" code="50010">No DocBlock was found for method __construct()</error>
     </parse_markers>
-    <source>eJytVdtu2zgQffdXDIwCsY1Y7LZvabNbI7vbBAgaI5dngaZGFtcSqeUlthHk3zuUJVkurNQFygfD4tzOnLnw819lVg7YZAATGIkxfHj/xwf4mxcSFVxpU3LH/YaEQX4rBSqLCXiVoAGXIXz99gRf57fw/DF6D/lOfh50uRBorVzkCNxB5lx5wdh6vY6WykfaLFmtbNmyzKdkHWWuyEOgyYQNCFAVcX49f1LSgUPrLFzd3oDxSqGJgvBLycWKLxE2qUEs1tqs6JoNRM6thc08Kyvbl8EA6KReCSe1gjgWWllnvHCjMUmhPu9cJu30T4vOlzGR4sl4NP50XL5Ji16Z8NbpAzFjbSbcO005tCKZwohk8cNsfnN5eXkmcnk2brTjR9y4p5v4ShcFV8nFRcGlahy/7vKqmApnAvcU3ihbFWbBLQJVLwOnG3cWnlEl2thKEDVmd89ojEwQQhJB3XoCutXewC4VKI3+D4WDHWvenAfYCjHBpPHCDkkmfuIQ5IBhU+GjAiTSxHF0xqLo7Dfn8sUidoIfB1cXtxdgXc29G4IaDKouZHXcXuQPSOBalFKJ3Cc1fKphc2FhRp2Qa578GvYf2rMDnprsHv/30mAbHhIsCS1XQtLlyFuploAbaV34Q6Go1ItCJz5HO943c5cfuGzoOGSt0/vhwpIeN4ZvR+19OMOXA2evrP5iw/Of6k1TmeNUOjScRuYkC6ETpB/qZ1oLJ1k4vUI1pb5GXpxmQBNJP0WZc3diCFngSfDD17TQYjXVizBulg1bmw7fqSawIoNRTTy3uxKMQ2/EdXvtqnQQcvmjdAwRzGeP1/HDP/PZ/ezx7p4uKlfHwh5rr1wuDDfbzvxUCrFWAmFYa7G20SnHYe/USKJ0C0HPhs6c2hKFTKWgRV4vw38NLzBseVqL1l3RUuhZPp0V3TMfofXr3faG+32LN1O5n4b9nH7qSf+ltXrtbA+ijL2R0FsUXWu9CtUP+VUD7MuDLW2dT9N2m4xwGTWS/oBQPZbt9B9nsnnQesisX4eTKgYik3nSRO26OyBv/0QEvort24y1q5g4U7hun36qzXdj0LA/</source>
+    <source>eJytVVlv2kAQfudXjFClAAreHm9p0xalRyJFDcrxbC3rAW+xd909AijKf++ssY2pcEql7oMl71zffHPsh09FWvTYqAcjGIghvH395i184blEBRfaFNxxvyZhkF9LgcpiAl4laMClCN9/PMD36TU8voteQ7aVnwZdLgRaK2cZAneQOlecMbZaraKF8pE2C1YpW7YosjFZR6nLsxBoNGI9AlRGnF5OH5R04NA6CxfXV2C8UmiiIPxccLHkC4R10AkqUi1IwHoi49bCepoWpfVTrwd05l4JJ7WCOBZaWWe8cIMhSaE6r1wq7fijReeLmGjxZDwYvj8sX8/zTpnw1uk9MWNNLtw7TVk0IjmHAcniu8n06vz8/ERk8mRYa8f3uHYPV/GFznOukrOznEtVO37e5lVyFc4Ibim8UbYszYxbBKpfCk7X7iw8okq0saUgqs1uHtEYmSCEJIK69QR0o72BbSpQGP0ThYMta96cBtgKMcGk9sL2SSZ+4hBkj2FT4qMCJNLEcXTCoujkP+fy2SK2gh8GVxW3E2BVzZ0bguqrJrOsituJ/A4JXINSKpH5pIJPNawvLEyoEzLNk3/D/kd7tsBTk93iLy8NNuEhwYLQciUkXQ68pREBXMtyVkIoKvUs14nP0A53zdzmB85rOvZZa/V+uLCkx43hm0FzH07/ac/ZM6v+WP/0r3rjucxwLB0aTiNzlIXQCdKH+pkWw1EWTi9RjamvkefHGdBE0icvMu6ODCFzPAp++BvnWizHehbGzbJ+Y9Pie64JrEhhUBHP7bYEw9AbcdVe2yrthVz8KR1CBNPJ/WV893U6uZ3c39zSRenqUNhD7ZXJmeFm05qfUiHWSiD0Ky3WNDrl2O+cGkmUbiDo2dCZY1ugkHMpaJFXy/Cb4TmutFnSWrTugpZCx/JpreiO+QitX+22F9zvWryeyt007Ob0fUf6T43Vc2t7EGXshYReouhS62WofsivHGBf7G1p6/x83myTAS6iWtIdEMrHspn+w0zWD1oHmdXrcFTFQKQyS+qobXd75O2eiMBXvnmZsWYVE2cKV83TH2rzGwFqsRU=</source>
   </file>
-  <file path="unittests/units/Dummy.php" hash="00db33d32dc56f7543a6016af1b078c4" package="Default">
-    <class final="false" abstract="false" namespace="global" line="6" package="Default">
+  <file path="unittests/units/Dummy.php" hash="8bf9e663679cf5997e0ca0c90f671aa3" package="Default">
+    <class final="false" abstract="false" namespace="global" line="7" package="unittests">
       <extends>\xPHPUnit_Framework_TestCase</extends>
       <name>Dummy</name>
       <full_name>\Dummy</full_name>
       <docblock line="3">
         <description>Tests nothing, just used to test that the unit-testing infrastructure works.</description>
         <long-description></long-description>
+        <tag line="3" name="package" description="unittests"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="8" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="9" package="unittests">
         <name>test</name>
         <full_name>test</full_name>
       </method>
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file unittests/units/Dummy.php</error>
-      <error line="8" code="50010">No DocBlock was found for method test()</error>
+      <error line="9" code="50010">No DocBlock was found for method test()</error>
     </parse_markers>
-    <source>eJwtTrsOwjAM3PMVNzBARekHgGAAIcZKwIyiYmiAJih2RBHqv+MgbrjhfA8vVs/2aUxVFAYFDsTC8EFa569T3BILEtMZEiB6g7Q2EyF5J2WW1AjnL9GyxNRIioRXiHeeaV9lmodlxiZ13RvUC/kzo6939VHjp220HWXzKe+uLRM+xkBxSb4RF/xvdDxRGX+M9DUul9pKUfaaH+ssTZF5Mv/ZBjOYL7AoRu0=</source>
+    <source>eJwtjrEKwkAQRPv7iikskqDmAxQVFLEMqLUccTVRcwm3exiR/Lt76hRTzL4dZr7sqs6YPMsMMhyIheFaqWp3HeMWWBCYzpAWojdIZaMRgqtlEiMFUbuLtyw+lBI84dn6O09j36qz5d1ef3ikWdPclA/LjE1omheoF3JnRl/siqNSp623DcWKU1yztkx4GwPVJbhS6tZ9pySpxvhrpIN5stBW8rLX/0TH0BjR09kXG8xgPmUBToA=</source>
   </file>
-  <file path="unittests/lib/PHPUnit_Framework_TestCase.php" hash="430729488bc69912c49117dfecb39f11" package="Default">
+  <file path="unittests/lib/PHPUnit_Framework_TestCase.php" hash="54be919a05d6b75a70450a830bf88bf1" package="Default">
     <include line="16" type="Require Once" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="global" line="9" package="unittests">
+    <class final="false" abstract="false" namespace="global" line="9" package="xUnittesting">
       <extends>\PHPUnit_Framework_TestCase</extends>
       <name>xPHPUnit_Framework_TestCase</name>
       <full_name>\xPHPUnit_Framework_TestCase</full_name>
       <docblock line="3">
         <description>Custom PHPUnit_Framework_TestCase.</description>
         <long-description>&lt;p&gt;Sets up custom authentication information with 'local-superuser' role.&lt;/p&gt;</long-description>
-        <tag line="3" name="package" description="unittests"/>
+        <tag line="3" name="package" description="xUnittesting"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="15" package="unittests">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="15" package="xUnittesting">
         <name>setup_bootstrap</name>
         <full_name>setup_bootstrap</full_name>
         <docblock line="11">
@@ -111,7 +112,7 @@ child class if your project uses a custom xBootstrap.</description>
           <long-description></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="20" package="unittests">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="20" package="xUnittesting">
         <name>setUp</name>
         <full_name>setUp</full_name>
       </method>
@@ -120,7 +121,7 @@ child class if your project uses a custom xBootstrap.</description>
       <error line="0" code="50007">No page-level DocBlock was found in file unittests/lib/PHPUnit_Framework_TestCase.php</error>
       <error line="20" code="50010">No DocBlock was found for method setUp()</error>
     </parse_markers>
-    <source>eJx9kd1qwzAMhe/zFLoYpA00eYCNdqwwdllYe21cR1m8prYnyWvH2LvPaZr9MFZhsLGlcz7JN4vQhiyriiKDApaRxe9h9bDaOCvqnvQeD552ao0sS81Y9lmPKAwxgBmydZQWnVijxXoH1jWe9sP5YKWFvPNGdzOOASkyUg7ku0HpNmiz008IMdlJ8uB0W2WZ6TQzHP/nADwKupovoMJ7lkGKU2t9FLD2sEXwr0hka+xRIZB/RiMzDmhsY80l01HGtLarYWC0Dbz5SKMOpAYZ9Dia4533wkI6lOfi6rQ30ZnTgBglBrUdsybTRA3nIHyJllB5Z3CiVG1JqTKvyrJfnd1WS09YfTukj8yn11/lDg8//Cfnl4/sD8Dmt+2VtJZn8z9kY31SWMw/AUGNt54=</source>
+    <source>eJx9kd1qwzAMhe/9FLoYpA00eYCNdqwwdllYe21cR2m8prYny2vG2LvPaZr9UFZhsEHSOZ/ku4VvvBBlngvIYRkDuwOsnlYba1g+kjrg0dFerjHwUgUs+qpn5ADRgx6qVeQGLRut2DgLxtaODsP7aLiBrHVatbMQPVIMSBmQawele6/0Xu0Qut6Pk4mxu5QohdCtCgG6/1EAO0ZbhSu08CEEpDhN10cOawdbBPeGRKbCnhY8uRfUPAsetamNvmY6yujGtBUMjKaGdxdp1IE0YwA1bqd7cI4Dk/LFubk83XW0+rSjgBy93I5Vk2mihnMQvkZDKJ3VOJGyMiRlkZVF0Z/WbMulIyx/HNJfZtPb73aLx1/+k3PmU1wAbP7a3nBjwmx+QTb2J4XFXHwBc5i4yw==</source>
   </file>
   <file path="scripts/i18n/testgettext.php" hash="5140c115d023794e99dded5cd71fd609" package="Default">
     <docblock line="3">
@@ -312,28 +313,28 @@ is correctly installed.</description>
     </parse_markers>
     <source>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</source>
   </file>
-  <file path="scripts/deploy/database.php" hash="17be9349c822645df61db9fe65c02029" package="Default">
+  <file path="scripts/deploy/database.php" hash="6dce3717240ebd343bd6b00d17714e02" package="Default">
     <include line="11" type="Require Once" package="Default">
       <name/>
     </include>
-    <class final="false" abstract="false" namespace="global" line="17" package="xFreemwork">
+    <class final="false" abstract="false" namespace="global" line="17" package="xScript">
       <extends>\xScript</extends>
       <name>DeployDatabaseScript</name>
       <full_name>\DeployDatabaseScript</full_name>
       <docblock line="13">
         <description>Executes .sql files present in the sql/ directory (alphabetical order).</description>
         <long-description></long-description>
-        <tag line="13" name="package" description="xFreemwork"/>
+        <tag line="13" name="package" description="xScript"/>
       </docblock>
       <property final="false" static="false" visibility="public" line="19" namespace="global" package="Default">
         <name>$sql_path</name>
         <default></default>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="xScript">
         <name>init</name>
         <full_name>init</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="xScript">
         <name>setup_bootstrap</name>
         <full_name>setup_bootstrap</full_name>
         <docblock line="25">
@@ -342,11 +343,11 @@ is correctly installed.</description>
           <tag line="25" name="see" description="\xScript::setup_bootstrap()" refers="\xScript::setup_bootstrap()"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="47" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="47" package="xScript">
         <name>run</name>
         <full_name>run</full_name>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="80" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="80" package="xScript">
         <name>get_files_to_execute</name>
         <full_name>get_files_to_execute</full_name>
         <docblock line="76">
@@ -357,7 +358,7 @@ is correctly installed.</description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="88" package="xFreemwork">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="88" package="xScript">
         <name>help</name>
         <full_name>help</full_name>
       </method>
@@ -372,88 +373,7 @@ is correctly installed.</description>
       <error line="47" code="50010">No DocBlock was found for method run()</error>
       <error line="88" code="50010">No DocBlock was found for method help()</error>
     </parse_markers>
-    <source>eJyVV21vm0gQ/u5fMeezDohsaHtSpeJLrndJWlVK2lyT3qdKaA1je9U1kN0ltlX5v98MYIwxubuiVjLsvM8zz2x++z1f5oPgbABn4MYevHrx8hVciZXEFC4znQsrig0d8vnNh8vrj/fX/PNhKQ0oOdNCb6H8GWNqMIEiTVCDXSK8//gF3t/dwNOv/ov9+Zh1RRyjMXKmEISFpbV5GATr9dpfpIWf6UVQC5tgkasJaftLu1Icw9lZMBhofCykxihLY3QTqVOxQjeK5lJhFHm+E/g+/6Pggi9WquA+1jK3PqXpeNMBpVrmcr3BuLBowDePCljZQK7RYGpBpmUCdBAAOcDYZpSlK1S+FDO0MhYKMk15ej6bepuL+JtYIGzeacTVOtPfykhjJYyBK8xVtr2iOs6EwSoYwI3FNDGwqd+/DwZAT17MKHcYkeeIKr+cVp/nRRpbmaUUmLSuR9JQPyNLfZhc7OXhHDaXWWrJfBiO2B9/pZKQgDMttXaVybIK/JzBPdoiN/BnllljtchhLclSUgcMBhVW3ueiUBZsplALqr2/N/DWIO4zCUPD5qLZ3prr1WLBcSonYq2sLFX78FYWRmhqTI/xaSO2g1jYeAnu9SbGvPQxQq9jJwjgTuMTNzkrbF5YK9MFzIr5nEBrrNCWIEztP85mn0P9vM1mEXUvihWKtB1C7eFWpIQGA2mhFIySGRCsskLHCHIOcZbO5aLQ5KcpcZKxdGZhiwwNaeyRSdJyfxrh5GKB9pYmh4xTuc7PwbnMCpWUmlWXGpOORwjW2ZpKcBIe9dvUYUwukhn938dhsypmi6s8o8mWattVJhGhFBnWRZpy7TYNbvqLRfnzgB4js8/7cZz/IUzmONLpj4KkzuIzGhppfKYMT0IV+IPR1Gm24Nietgb1VLW++VXZwh3e6azkRSpqRUeEw++dAd8NW8nMKQURL91ahtBRkqCJbBZhRW/kTBgY8efuKLRdV2TInr+XsrvhGF6elu2O+KzNmCXGisUSNn9LXHel3RIoBooyJcaUEjxe93/dcOiAC59KraXgRdCUkqvYQdATGWf8sJMwVJlIXG5+J75SbHLxPA32iidYslpkc8Vd5Kx60MI7zXDgxya4Dud7S7qU6gFbs2m6+qc0V2s8fLr6FAKtQKIJMLmSNU1tYTj9mg6JoGlIU6IxXZ0SUoxMaJumvLOYx6jaNAp9tqunoEoL4qUFbiCYul+NNwqel558+jwpVS5vPlx/fIhuv9w8fIjuH/54uL6l93twW0uc9qyfog1WIi2ECuY62KPfX20pvMljgXrLYj+/efn69Ruvz+9kMun7/EeFqBV1TOaEmibTclgEMNLoM3dx3KefSBMLnXAxCY522zJwIj5qGT8HobXY8nhZ6nH1siJqcayWK2dMpE1LPkF3OKXJYVx4XgcI/NQDC27bNs9n8+rB5pbsqDB8bAl1TP2vTVem0Brxd4KKkgA2k+7Uo+5QxK96gm0p95z2b5ddP/21LhufiZt1ahiqZRWZga2Q5SrhO1fFfLRlZsh8TjfK5pahS9VKrf9O8QwDtuiWT5lhuKUbvh2GYSwIEwlGdNFzO2w7BocvTqeUSx08WKIG/tK8nrDs/oAcmmJGC+mgOib4afrp9t/ZnDaEDpWty3AI4Ohe19RiiSo/zZ3zlqsKq0dxDolXjkfmAPJTHNdO3BJ2+4iGZ7Q9aHVMYXc6fP+6o46kD2+t9Nu97wTe0Gv7eq62fE0pEXV6v+8kOiTqcE4WrUMQpasgDSi1bf9HgEQTdrR5E41PW266WewG1KGUFlnf3wM8Yf8ATlXg9g==</source>
-  </file>
-  <file path="scripts/deploy/process_in.php" hash="351df17e2cf62de8190b9851345cd568" package="Default">
-    <include line="18" type="Require Once" package="Default">
-      <name/>
-      <docblock line="11">
-        <description>Create files from .in files, replacing environment variables.</description>
-        <long-description>&lt;p&gt;For example: default.ini will be created from default.ini.in&lt;/p&gt;
-
-&lt;p&gt;Note: This script is a draft and is not complete&lt;/p&gt;</long-description>
-      </docblock>
-    </include>
-    <include line="27" type="Require Once" package="Default">
-      <name/>
-    </include>
-    <function namespace="global" line="26" package="Default">
-      <name>init</name>
-      <full_name>\init</full_name>
-      <docblock line="23">
-        <description>Sets up script useful information</description>
-        <long-description></long-description>
-      </docblock>
-    </function>
-    <function namespace="global" line="34" package="Default">
-      <name>process</name>
-      <full_name>\process</full_name>
-      <docblock line="31">
-        <description>Processes .in files</description>
-        <long-description></long-description>
-      </docblock>
-    </function>
-    <function namespace="global" line="55" package="Default">
-      <name>get_files</name>
-      <full_name>\get_files</full_name>
-      <docblock line="51">
-        <description>Returns an array containing the .in files to be processed</description>
-        <long-description></long-description>
-        <tag line="51" name="return" description="" type="array">
-          <type by_reference="false">array</type>
-        </tag>
-      </docblock>
-    </function>
-    <function namespace="global" line="63" package="Default">
-      <name>get_env_file</name>
-      <full_name>\get_env_file</full_name>
-      <docblock line="59">
-        <description></description>
-        <long-description></long-description>
-      </docblock>
-    </function>
-    <function namespace="global" line="74" package="Default">
-      <name>o</name>
-      <full_name>\o</full_name>
-      <docblock line="69">
-        <description>Outputs a string on stdout, optionally indenting it</description>
-        <long-description></long-description>
-        <tag line="69" name="param" description="The string to output" type="string" variable="$msg">
-          <type by_reference="false">string</type>
-        </tag>
-        <tag line="69" name="param" description="The indentation level" type="int" variable="$indent_level">
-          <type by_reference="false">int</type>
-        </tag>
-      </docblock>
-      <argument line="74">
-        <name>$msg</name>
-        <default>''</default>
-        <type/>
-      </argument>
-      <argument line="74">
-        <name>$indent_level</name>
-        <default>0</default>
-        <type/>
-      </argument>
-    </function>
-    <markers>
-      <todo line="42">populate this from ?</todo>
-    </markers>
-    <parse_markers>
-      <error line="0" code="50007">No page-level DocBlock was found in file scripts/deploy/process_in.php</error>
-      <error line="59" code="50011">No short description for function \get_env_file()</error>
-    </parse_markers>
-    <source>eJyNVNtu2zAMfc9XEEUHO1lmZ9tbuqzDugsGDO2wy9sAQ7GZRJgsabKUpCjy7yPlS50+LXAAS+Q5OiSP9eba7uwkn01gBmk5hVeLl6/gg6glargxzgovwpGCHP/65ebj7Y+P/PpzJxtQcu2Eu4f4WqJusIKgK3Tgdwifb3/B529fYf86W/TxOWNFWWLTyLVCEB523ttlnh8Oh2yrQ2bcNu+Sm3xr1QtCZztfK9Ywm+UT0hrF3DgUHmEjFTawcaaGTOp2OQeHVolS6i2g3ktndI3aw144KejYJmOCT8YBHkVtFS6hwo0IyhOFhINUCtYIZTyhaslHCfTvGnJrPGFjL5rSSeu5FQIqJzYehK54qY2H0vApHtsCHP4N0mFhdIlpJZ0WNaZFwdKLYpoleZblwUuV0WSS6dVkQmf6lF6sM9w5fu278AN9A8H2x4cGN0GB1BvjauGlYaX5ZBN0yQtomeBhAvT7Hx300JTzXyQnf2+Mb7wTthfGJBoPcBwiadIK4ehpEPmt1U1zGkZ0LmsojJTRkIoq1DalQ4oQNSU6mRLhEDneGO3x6JfLuORYJTG2hSVR7SjKHaRb9LEaJhYNXEodl339/OO9ktnIHqsorWBUt9WkA+bqEfKYP0KP4q35kC3XUJJwTtyTOMjzn3cf7pZgjQ2KvevZONFd1wN6EH9Ow/L/4D2s3p7xj0t5oo3mUXSZ6cWzB0afnl3Mz+DzATCq7/RYCVfOVGFNbEMv5rCYwwvaUajThEYapzMUwD20YdzDFvTkqNPIIN/RB6epSt12CzhVkFnpA+arZLANeMNfZucXrBj8zkV0izz31dgAvedjLh6tokYX5PqRmy7XokG68XZzSLiqkYfb5wk13S2RPrJT6iTPgb8UGLLS2uz7G4RqGH3YsZ7p0IG74KlnfHlQX7lsAje+MoFmZCxzCaXopqXbVXuOSx9rt8KJusdc1s2WbiPs19QsE3lHqZLMcdnSFAr3qCKg3YgXBsTd82JNGqlXkCTzJ+gVLPredoGYdtV/iWRkuVpcUfDNGZB3nj+fDqCMULMOJjeQdvbqwtPzROgSreNyLh662OmBZZ5+6wue3PXbf5AaJP0=</source>
+    <source>eJyVV21vm0gQ/u5fMeezDhzZ0OakSsWXXHtJWlVK2lyT3qdKaA1je3VrILtLYivyf78ZwBgDubuiVjLsvM8zz2x++z1bZQP/ZAAn4EZjOH31+hQuxVpiAhepzoQV+YYO+fz608XV57sr/nm/kgaUnGuht1D8jDAxGEOexKjBrhA+fv4GH2+v4fFX79X+fMK6IorQGDlXCMLCytos8P2npydvmeReqpd+JWz8ZaampO2t7FpxDCcn/mCg8SGXGsM0idCNpU7EGt0wXEiFYTj2HN/z+B8F53+zUvl3kZaZ9ShNZzwbUKpFLlcbjHKLBjzzoICVDWQaDSYWZFIkQAc+kAOMbEpZukJlKzFHKyOhINWU59hjU+8yEf0tlgib0lURZqSEMXCJmUq3l1TEuTBYHgNuLCax2YvD82AA9GT5nBKHEbkNqeyrWfl5kSeRlWlCUUnrjkkaqmdkqQnT8708nMHmIk0smQ+CEfvjr1QPEnBmhdauNFmUgJ8TuEObZwb+SFNrrBYZPEmyFFcBg0GFpfeFyJUFmyrUggrv7Q28M1gnHgSGzYXzvTV3XIn5x6l0xBpZWSr14a0ojNDUlR7js1psB5Gw0Qrcq02EWeFjhOOWHd+HW42P3OE0t1lurUyWMM8XC0KssUJbwi/1/jibfQ7V8y6dh9S9MFIokmYIlYcbkRAUDCS5UjCK50CYSnMdIcgFRGmykMtck5+6xHHK0qmFLTI0pLFHJknL/WmE0/Ml2hsaGzJO5To7A+cizVVcaJZdqk06Y4KvTp+oBJ3wqN+mCmN6Hs/p/z4Om5YxW1xnKY21VNu2MokIpciwzpOEa7epcdNfLMqfp/MYmX3ej+P8D2Eyx5HOfhQkVRZf0dA84wtleBQqxx+MpkqzAcfmtNWop6r1za9Kl+7wVqcFKVJRSy4iHD63Bnw3bCSzoBREtHIrGUJHwYAmtGmIJbeRM2FgxJ/bo9B0XTIhe34uZHfDCbzulu2W+KxJlwXG8uUKNn9JfGpLuwVQDORFSowpJXi87v685tABlx6VWkvBW6AuJVexhaBHMs74YSdBoFIRu9z8VnyF2PT8ZRrsFY+xYLXQZoq7yFn1oIUXmuHAj01wHc72lnQh1QO2es209bs0V2ncf7n8EgDtP6IJMJmSFU1tYTj7ngyJoGlIE6IxXZ4SUoyMaZUmvLCYx6jaNAp9tssnp0oL4qUlbsCfud/NeOS/LD398nVaqFxcf7r6fB/efLu+/xTe3b+/v7qh9ztwGxuclqyXoPXXIsmF8hfa36PfW28pvOlDjnrLYj+/ff3mzdtxn9/pdNr3+X2JqDV1TGaEmjrTYlgEMNLoM3dx0qcfSxMJHXMxCY522zDQER81jJ+B0Fpsebws9bh8WRO1OFbLtTMh0qYlH6M7nNHkMC7G4xYQ+KkGFtymbZ7P+nUMmxuyo4LgoSHUMvW/Nl2RQmPEPwgqSgxYT7pTjbpDEZ/2BNtQ7jnt3y67fvprXDa+EjfrxDBUiyoyA1shi1XCF66S+WjLzJH5nK6T9S1DF6qlWv+d4gUGbNAtnzLDcEs3fDUMgkgQJmIM6Zbntth2Ag5fnLqUSx08WKIG/lK/dlh2f0AOTT6nhXRQnRD8NP10++9sThNCh8pWZTgEcHSvq2uxQpV1c+e85brE6lGcQ+KV45E5gLyL48qJW8BuH9HwhLYHrY4Z7LrD96876kj68NZIv9n7VuA1vTbv5mrL15QCUd3LfSvRIVGH01m0DkGUroI0oNS2/V8AEk3Q0uZNNOm23LSz2A2oQwktsr6/B3jC/gHsvd+5</source>
   </file>
   <file path="lib/Data/Transaction.php" hash="9b22a8ad8a00815f11edea2c4e5c50ed" package="Default">
     <class final="false" abstract="false" namespace="global" line="16" package="xFreemwork">
@@ -8427,13 +8347,14 @@ override the default tpl rendering.&lt;/p&gt;</long-description>
   <package name="xFreemwork" full_name="xFreemwork"/>
   <package name="xHelper" full_name="xHelper"/>
   <package name="xReusable" full_name="xReusable"/>
+  <package name="xScript" full_name="xScript"/>
+  <package name="xUnittesting" full_name="xUnittesting"/>
   <package name="xValidator" full_name="xValidator"/>
   <package name="xZend" full_name="xZend">
     <package name="Config" full_name="xZend\Config"/>
   </package>
-  <package name="xfreemwork" full_name="xfreemwork"/>
   <namespace name="global" full_name="global"/>
-  <marker count="26">todo</marker>
+  <marker count="25">todo</marker>
   <marker count="1">fixme</marker>
   <deprecated count="1"/>
 </project>
