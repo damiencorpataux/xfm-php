@@ -439,6 +439,7 @@ class xUtil {
      * @return int The corresponding timestamp.
      */
     static function timestamp($mysql_date) {
+        if (!$mysql_date) return null;
         $parts = self::dateparts($mysql_date);
         // Fixes date components towards a valid date
         if (!$parts['year']) $parts['year'] = 1970;
