@@ -231,6 +231,16 @@ abstract class xModel extends xRestElement {
         // Sets the model name
         $reflector = new ReflectionClass(get_class($this));
         $this->name = substr(basename($reflector->getFileName()), 0, -strlen('.php'));
+        // Automatic mapping generation if empty
+        if (!$this->mapping) {
+            try {
+                $r = xModel::q("SHOW COLUMNS FROM `{$this->table}`");
+                while ($column = mysql_fetch_assoc($r)) {
+                    $field = $column['Field'];
+                    $this->mapping[$field] = $field;
+                }
+            } catch (Exception $e) {}
+        }
         // Strip HTML tags from fields values
         foreach (array_intersect_key($this->params, $this->mapping) as $field => $value) {
             // Skips stripping if all html tags are allowed for this field
