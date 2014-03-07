@@ -194,7 +194,7 @@ abstract class xModelMysql extends xModel {
             // Creates SQL SELECT fragments
             $allfragments[] = "{$dbfield} AS `{$modelfield}`";
         }
-        $all = implode(",\n\t", $allfragments);
+        $all = implode(",\n\t", @$allfragments);
         // Replaces '*' with all-fields-SELECT
         $fragments = xUtil::arrize($this->return);
         foreach ($fragments as &$fragment) {
