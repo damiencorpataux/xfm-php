@@ -50,6 +50,15 @@ abstract class xController extends xRestElement {
     }
 
     /**
+     * Returns the controller name.
+     * @return string
+     */
+    function name() {
+        $reflector = new ReflectionClass(get_class($this));
+        return substr(basename($reflector->getFileName()), 0, -strlen('.php'));
+    }
+
+    /**
      * Calls a controller action and returns its output.
      * @return string
      */
