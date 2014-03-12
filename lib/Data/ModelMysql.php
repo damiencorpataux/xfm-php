@@ -15,6 +15,21 @@
 **/
 abstract class xModelMysql extends xModel {
 
+
+    function __construct($params = null) {
+        // Automatic mapping generation if empty
+        if (!$this->mapping) {
+            try {
+                $r = xModel::q("SHOW COLUMNS FROM `{$this->table}`");
+                while ($column = mysql_fetch_assoc($r)) {
+                    $field = $column['Field'];
+                    $this->mapping[$field] = $field;
+                }   
+            } catch (Exception $e) {}
+        }
+        parent::__construct($params);
+    }
+
     /**
      * @see xModel::get()
      * @return array
