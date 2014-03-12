@@ -347,9 +347,12 @@ class xUtil {
     static function url($suffix = null, $full = false) {
         $url = '';
         if ($full) {
-            $url =  @$_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
-            $url .= '://' . @$_SERVER['HTTP_HOST'];
-            $url .= @$_SERVER['SERVER_PORT'] == 80 ? '' : ':'.@$_SERVER['SERVER_PORT'];
+            $protocol = @$_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+            $host = @$_SERVER['HTTP_HOST'];
+            $port = $protocol == 'http' && @$_SERVER['SERVER_PORT'] == 80 ||
+                    $protocol == 'https' && @$_SERVER['SERVER_PORT'] == 443 ?
+                    '' : ':'.@$_SERVER['SERVER_PORT'];
+            $url = "{$protocol}://{$host}{$port}";
         }
         return $url . xContext::$baseuri."/{$suffix}";
     }
