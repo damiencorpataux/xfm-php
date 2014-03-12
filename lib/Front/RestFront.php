@@ -139,7 +139,7 @@ abstract class xRestFront extends xFront {
         $result = $this->encode_xml_nodes($data);
         if ($this->xml_root_node) {
             $open_tag = $this->xml_root_node;
-            $close_tag = array_shift(explode(' ', $this->xml_root_node));
+            $close_tag = @array_shift(explode(' ', $this->xml_root_node));
             $xml = "<{$open_tag}>{$result}</{$close_tag}>";
         } else {
             $xml = $result;
@@ -152,7 +152,7 @@ abstract class xRestFront extends xFront {
         foreach ($data as $tag => $value) {
             // Extracts tag:
             $open_tag = $tag;
-            $close_tag = array_shift(explode(' ', $tag));
+            $close_tag = @array_shift(explode(' ', $tag));
             if (is_array($value)) $value = $this->encode_xml_nodes($value);
             else $value = "<![CDATA[{$value}]]>";
             // Uses default node tag if array key is numeric
