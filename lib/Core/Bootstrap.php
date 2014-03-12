@@ -208,6 +208,8 @@ class xBootstrap {
             $path = "{$config_path}/{$path}";
             $f = xUtil::arrize(@scandir($path));
             foreach ($f as $file) {
+                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                if ($ext != 'ini') continue;
                 $file = "{$path}/$file";
                 if (is_file($file)) $files[] = $file;
             }
