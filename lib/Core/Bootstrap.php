@@ -27,10 +27,10 @@ class xDummyLogger {
 **/
 class xBootstrap {
 
-    function __construct() {
+    function __construct($profile='development') {
         try {
             // Setups application
-            $this->setup();
+            $this->setup($profile);
             // References bootstra instance in xContext
             xContext::$bootstrap = $this;
         } catch (Exception $e) {
@@ -61,7 +61,7 @@ class xBootstrap {
     /**
      * Setups the application context.
      */
-    function setup() {
+    function setup($profile) {
         $this->setup_includes();
         $this->setup_dummy_log();
         xContext::$basepath = substr(dirname(__file__), 0, strpos(dirname(__file__), '/lib'));
@@ -70,6 +70,7 @@ class xBootstrap {
         xContext::$baseuri = substr($_SERVER['SCRIPT_NAME'], 0, -strlen('/index.php'));
         xContext::$baseurl = xUtil::url(xContext::$baseuri, true);
         $this->setup_includes_externals();
+        xContext::$profile = $profile;
         $this->setup_config();
         $this->setup_error_reporting();
         $this->setup_error_handler();
@@ -147,17 +148,13 @@ class xBootstrap {
         if (xContext::$config instanceof xZend_Config_Ini) return;
         // Makes config_path variable local
         $config_path = xContext::$configpath;
-        // Sets default profile to 'development'
-        xContext::$profile = 'development';
         // Loads default configuration file
         // and create basic xZend_Config_Ini instance
         try {
             $config = new xZend_Config_Ini(
                 "{$config_path}/default.ini",
                 null,
-                array(
-                    'allowModifications' => true
-                )
+                array('allowModifications' => true)
             );
         } catch (Exception $e) {
             throw new xException(
@@ -177,13 +174,21 @@ class xBootstrap {
                 "{$config_path}/instances/{$instance_host}_{$instance_path}.ini"
             )
         );
-        foreach ($instance_files as $file) {
-            $config->merge(new xZend_Config_Ini($file));
+        if ($instance_files) {
+            $instance_config = new xZend_Config_Ini($instance_files[0],
+                null,
+                array('allowModifications' => true)
+            );
+            foreach ($instance_files as $file) {
+                $instance_config->merge(new xZend_Config_Ini($file));
+            }
+            $config->merge($instance_config);
+            // Sets up profile name according instance config
+            xContext::$profile = $instance_config->profile ?
+                $instance_config->profile : xContext::$profile;
         }
-        // Sets up profile name according instance config
-        xContext::$profile = $profile = $config->profile ?
-            $config->profile : xContext::$profile;
         // Merges profile-specific configuration files
+        $profile = xContext::$profile;
         foreach ($this->get_config_files('profiles') as $file) {
             // Skips filenames that do not begin with $profile
             $parts = explode('/', $file);
